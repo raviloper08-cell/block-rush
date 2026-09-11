@@ -2,10 +2,11 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
+
 <meta name="viewport"
-      content="width=device-width,initial-scale=1,
-      maximum-scale=1,user-scalable=no,
-      viewport-fit=cover">
+content="width=device-width,initial-scale=1,
+maximum-scale=1,user-scalable=no,
+viewport-fit=cover">
 
 <title>Block Rush</title>
 
@@ -17,6 +18,8 @@
 *{
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
+  -webkit-user-select:none;
+  user-select:none;
 }
 
 html,body{
@@ -25,18 +28,22 @@ html,body{
   width:100%;
   min-height:100%;
   background:#111;
-  color:white;
+  color:#fff;
   font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
 }
 
-button,
-input{
+button,input{
   font:inherit;
 }
 
 button{
   cursor:pointer;
+}
+
+input{
+  -webkit-user-select:text;
+  user-select:text;
 }
 
 /* =========================
@@ -47,7 +54,7 @@ button{
   position:fixed;
   inset:0;
   background:#111;
-  z-index:9999;
+  z-index:99999;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -56,26 +63,27 @@ button{
 }
 
 .loader-logo{
-  width:80px;
-  height:80px;
+  width:82px;
+  height:82px;
   border-radius:50%;
   border:4px solid #D4AF37;
   display:flex;
   align-items:center;
   justify-content:center;
   color:#D4AF37;
-  font-size:42px;
+  font-size:44px;
   font-weight:900;
   margin-bottom:20px;
+  box-shadow:0 0 35px rgba(212,175,55,.18);
 }
 
 .loader-title{
-  font-size:25px;
+  font-size:26px;
   font-weight:800;
 }
 
 .loader-text{
-  color:#aaa;
+  color:#999;
   margin-top:10px;
 }
 
@@ -90,7 +98,9 @@ button{
 }
 
 @keyframes spin{
-  to{transform:rotate(360deg)}
+  to{
+    transform:rotate(360deg);
+  }
 }
 
 /* =========================
@@ -100,7 +110,7 @@ button{
 .screen{
   display:none;
   min-height:100vh;
-  padding:25px 16px 110px;
+  padding:22px 16px 110px;
 }
 
 .screen.active{
@@ -118,7 +128,7 @@ button{
 ========================= */
 
 .menu{
-  min-height:100vh;
+  min-height:calc(100vh - 40px);
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -127,8 +137,8 @@ button{
 }
 
 .logo{
-  width:110px;
-  height:110px;
+  width:115px;
+  height:115px;
   border-radius:50%;
   background:#181818;
   border:3px solid #D4AF37;
@@ -136,24 +146,24 @@ button{
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:65px;
+  font-size:68px;
   font-weight:900;
-  box-shadow:0 0 35px rgba(212,175,55,.15);
+  box-shadow:0 0 40px rgba(212,175,55,.16);
 }
 
 .menu h1{
   margin:20px 0 5px;
-  font-size:42px;
+  font-size:43px;
 }
 
 .menu p{
   color:#999;
-  margin-bottom:35px;
+  margin:0 0 35px;
 }
 
 .menu-buttons{
   width:100%;
-  max-width:330px;
+  max-width:340px;
 }
 
 .main-btn{
@@ -169,8 +179,8 @@ button{
   transition:.2s;
 }
 
-.main-btn:hover{
-  transform:translateY(-2px);
+.main-btn:active{
+  transform:scale(.97);
 }
 
 .main-btn.secondary{
@@ -201,8 +211,12 @@ button{
   border-radius:13px;
   border:1px solid #333;
   background:#1c1c1c;
-  color:white;
-  font-size:22px;
+  color:#fff;
+  font-size:25px;
+}
+
+.back-btn:active{
+  transform:scale(.94);
 }
 
 /* =========================
@@ -232,7 +246,7 @@ button{
 .board-wrap{
   display:flex;
   justify-content:center;
-  margin:25px auto;
+  margin:22px auto;
 }
 
 .board{
@@ -246,6 +260,7 @@ button{
   border:2px solid #333;
   border-radius:16px;
   touch-action:none;
+  box-shadow:0 12px 40px rgba(0,0,0,.35);
 }
 
 .cell{
@@ -275,8 +290,8 @@ button{
 }
 
 .cell.preview{
-  opacity:.35;
-  transform:scale(.9);
+  opacity:.38;
+  transform:scale(.88);
 }
 
 .cell.clear{
@@ -288,10 +303,12 @@ button{
     transform:scale(1);
     opacity:1;
   }
+
   50%{
     transform:scale(1.3);
     opacity:.8;
   }
+
   100%{
     transform:scale(.1);
     opacity:0;
@@ -303,10 +320,21 @@ button{
 }
 
 @keyframes shake{
-  0%,100%{transform:translateX(0)}
-  25%{transform:translateX(-5px)}
-  50%{transform:translateX(5px)}
-  75%{transform:translateX(-3px)}
+  0%,100%{
+    transform:translateX(0);
+  }
+
+  25%{
+    transform:translateX(-5px);
+  }
+
+  50%{
+    transform:translateX(5px);
+  }
+
+  75%{
+    transform:translateX(-3px);
+  }
 }
 
 /* =========================
@@ -320,11 +348,11 @@ button{
 }
 
 .pieces{
-  min-height:120px;
+  min-height:125px;
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:25px;
+  gap:20px;
   padding:10px;
 }
 
@@ -332,13 +360,18 @@ button{
   display:grid;
   gap:4px;
   padding:10px;
-  min-width:75px;
-  min-height:75px;
+  min-width:78px;
+  min-height:78px;
   justify-content:center;
   align-content:center;
   cursor:grab;
   touch-action:none;
   animation:floatPiece 2s ease-in-out infinite;
+}
+
+.piece:active{
+  cursor:grabbing;
+  transform:scale(1.05);
 }
 
 .piece:nth-child(2){
@@ -350,8 +383,13 @@ button{
 }
 
 @keyframes floatPiece{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-4px)}
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-4px);
+  }
 }
 
 .piece-cell{
@@ -373,7 +411,7 @@ button{
   border:1px solid #555;
 }
 
-.piece.empty{
+.piece-cell.empty{
   visibility:hidden;
 }
 
@@ -390,9 +428,13 @@ button{
 .action-btn{
   background:#222;
   border:1px solid #444;
-  color:white;
+  color:#fff;
   border-radius:12px;
-  padding:12px 18px;
+  padding:12px 20px;
+}
+
+.action-btn:active{
+  transform:scale(.96);
 }
 
 .action-btn:hover{
@@ -416,7 +458,7 @@ button{
   border-radius:13px;
   border:1px solid #333;
   background:#1b1b1b;
-  color:white;
+  color:#fff;
   outline:none;
 }
 
@@ -425,7 +467,7 @@ button{
 }
 
 .search-btn{
-  width:50px;
+  width:52px;
   border:0;
   border-radius:13px;
   background:#D4AF37;
@@ -491,6 +533,7 @@ button{
   height:40px;
   border-radius:50%;
   font-weight:900;
+  flex-shrink:0;
 }
 
 .song-heart{
@@ -498,6 +541,7 @@ button{
   background:transparent;
   color:#777;
   font-size:23px;
+  flex-shrink:0;
 }
 
 .song-heart.active{
@@ -537,6 +581,7 @@ button{
   height:52px;
   border-radius:10px;
   object-fit:cover;
+  flex-shrink:0;
 }
 
 .player-main{
@@ -579,7 +624,7 @@ button{
   border-radius:50%;
   border:0;
   background:#292929;
-  color:white;
+  color:#fff;
 }
 
 .player-btn.main{
@@ -592,7 +637,7 @@ button{
 }
 
 /* =========================
-   GAME MINI PLAYER
+   MINI PLAYER
 ========================= */
 
 #miniPlayer{
@@ -619,7 +664,7 @@ button{
   border:0;
   border-radius:9px;
   background:#292929;
-  color:white;
+  color:#fff;
 }
 
 .mini-btn.main{
@@ -635,7 +680,7 @@ button{
   position:fixed;
   inset:0;
   z-index:800;
-  background:rgba(0,0,0,.8);
+  background:rgba(0,0,0,.82);
   display:none;
   align-items:center;
   justify-content:center;
@@ -654,6 +699,7 @@ button{
   border-radius:20px;
   padding:25px;
   text-align:center;
+  box-shadow:0 15px 60px rgba(0,0,0,.55);
 }
 
 .modal-box h2{
@@ -673,7 +719,7 @@ button{
 
 .modal-btn.dark{
   background:#292929;
-  color:white;
+  color:#fff;
 }
 
 /* =========================
@@ -704,17 +750,25 @@ button{
     font-size:34px;
   }
 
+  .logo{
+    width:100px;
+    height:100px;
+    font-size:58px;
+  }
+
   .board{
     gap:3px;
     padding:5px;
+    border-radius:13px;
   }
 
   .pieces{
-    gap:8px;
+    gap:6px;
   }
 
   .piece{
-    min-width:80px;
+    min-width:76px;
+    padding:7px;
   }
 
   .piece-cell{
@@ -772,29 +826,25 @@ button{
 
 
 <!-- =========================
-     MAIN MENU
+     MENU
 ========================= -->
 
 <section id="menuScreen" class="screen active">
 
   <div class="menu">
 
-    <div class="logo">
-      R
-    </div>
+    <div class="logo">R</div>
 
     <h1>Block Rush</h1>
 
-    <p>
-      Играй. Собирай. Побеждай.
-    </p>
+    <p>Играй. Собирай. Побеждай.</p>
 
     <div class="menu-buttons">
 
       <button
         class="main-btn"
         onclick="startGame()">
-        Начать игру
+        🎮 Начать игру
       </button>
 
       <button
@@ -811,7 +861,7 @@ button{
 
 
 <!-- =========================
-     GAME SCREEN
+     GAME
 ========================= -->
 
 <section id="gameScreen" class="screen">
@@ -832,9 +882,7 @@ button{
 
         <div class="score-box">
           🏆
-          <span id="score">
-            0
-          </span>
+          <span id="score">0</span>
         </div>
 
       </div>
@@ -847,7 +895,6 @@ button{
 
     </div>
 
-
     <div class="board-wrap">
 
       <div
@@ -857,7 +904,6 @@ button{
 
     </div>
 
-
     <div class="pieces-title">
       Перетащи фигуру на поле
     </div>
@@ -866,7 +912,6 @@ button{
       id="pieces"
       class="pieces">
     </div>
-
 
     <div class="game-actions">
 
@@ -884,7 +929,7 @@ button{
 
 
 <!-- =========================
-     MUSIC SCREEN
+     MUSIC
 ========================= -->
 
 <section id="musicScreen" class="screen">
@@ -905,7 +950,6 @@ button{
 
     </div>
 
-
     <div class="music-search">
 
       <input
@@ -922,7 +966,6 @@ button{
 
     </div>
 
-
     <h3 class="music-section-title">
       Рекомендации
     </h3>
@@ -936,7 +979,6 @@ button{
       </div>
 
     </div>
-
 
     <h3 class="music-section-title">
       ❤️ Избранное
@@ -1032,7 +1074,6 @@ button{
 
   </div>
 
-
   <div class="player-buttons">
 
     <button
@@ -1093,28 +1134,21 @@ button{
 </div>
 
 
-<!-- YOUTUBE PLAYER -->
-
 <div id="youtubePlayer"></div>
 
-
 <script src="https://www.youtube.com/iframe_api"></script>
-
 
 <script>
 
 /* =====================================================
    YOUTUBE API KEY
-
-   ВСТАВЬ СЮДА СВОЙ КЛЮЧ
 ===================================================== */
 
-const YOUTUBE_API_KEY =
-"AIzaSyDkpWmqoxikDY1VRL8B2TGRtNIt7SWgj04";
+const YOUTUBE_API_KEY = "YOUR_YOUTUBE_API_KEY";
 
 
 /* =====================================================
-   GAME SETTINGS
+   GAME
 ===================================================== */
 
 const SIZE = 8;
@@ -1131,13 +1165,9 @@ let dragPreview = [];
 
 let dragging = false;
 
-let dragX = 0;
-
-let dragY = 0;
-
 
 /* =====================================================
-   MUSIC SETTINGS
+   MUSIC
 ===================================================== */
 
 let songs = [];
@@ -1169,17 +1199,23 @@ setTimeout(() => {
   const loader =
     document.getElementById("loader");
 
+  if(!loader) return;
+
   loader.style.opacity = "0";
 
   setTimeout(() => {
-    loader.remove();
+
+    if(loader){
+      loader.remove();
+    }
+
   },400);
 
 },1200);
 
 
 /* =====================================================
-   SCREEN FUNCTIONS
+   SCREEN
 ===================================================== */
 
 function showScreen(id){
@@ -1192,14 +1228,15 @@ function showScreen(id){
 
     });
 
-  document
-    .getElementById(id)
-    .classList.add("active");
+  const screen =
+    document.getElementById(id);
+
+  if(screen){
+    screen.classList.add("active");
+  }
 
 }
 
-
-/* MENU */
 
 function openMenu(){
 
@@ -1209,8 +1246,6 @@ function openMenu(){
 
 }
 
-
-/* GAME */
 
 function startGame(){
 
@@ -1223,8 +1258,6 @@ function startGame(){
 }
 
 
-/* MUSIC */
-
 function openMusic(){
 
   showScreen("musicScreen");
@@ -1232,52 +1265,10 @@ function openMusic(){
   updatePlayerVisibility();
 
   if(!songs.length){
+
     loadRecommendations();
-  }
-
-}
-
-
-/* =====================================================
-   GAME
-===================================================== */
-
-function newGame(){
-
-  score = 0;
-
-  board =
-    Array.from(
-      {length:SIZE},
-      () => Array(SIZE).fill(null)
-    );
-
-  document
-    .getElementById("score")
-    .textContent = score;
-
-  createPieces();
-
-  renderBoard();
-
-  closeGameOver();
-
-}
-
-
-function createPieces(){
-
-  pieces = [];
-
-  for(let i=0;i<3;i++){
-
-    pieces.push(
-      randomPiece()
-    );
 
   }
-
-  renderPieces();
 
 }
 
@@ -1308,70 +1299,108 @@ const SHAPES = [
 
   [[1,1],[1,1]],
 
-  [[1,1,1],
-   [1,1,1]],
+  [
+    [1,1,1],
+    [1,1,1]
+  ],
 
-  [[1,1],
-   [1,1],
-   [1,1]],
+  [
+    [1,1],
+    [1,1],
+    [1,1]
+  ],
 
-  [[1,1,1],
-   [1,1,1],
-   [1,1,1]],
+  [
+    [1,1,1],
+    [1,1,1],
+    [1,1,1]
+  ],
 
-  [[1,0],
-   [1,1]],
+  [
+    [1,0],
+    [1,1]
+  ],
 
-  [[0,1],
-   [1,1]],
+  [
+    [0,1],
+    [1,1]
+  ],
 
-  [[1,1],
-   [1,0]],
+  [
+    [1,1],
+    [1,0]
+  ],
 
-  [[1,1],
-   [0,1]],
+  [
+    [1,1],
+    [0,1]
+  ],
 
-  [[1,0,0],
-   [1,1,1]],
+  [
+    [1,0,0],
+    [1,1,1]
+  ],
 
-  [[0,0,1],
-   [1,1,1]],
+  [
+    [0,0,1],
+    [1,1,1]
+  ],
 
-  [[1,1,1],
-   [1,0,0]],
+  [
+    [1,1,1],
+    [1,0,0]
+  ],
 
-  [[1,1,1],
-   [0,0,1]],
+  [
+    [1,1,1],
+    [0,0,1]
+  ],
 
-  [[1,0],
-   [1,0],
-   [1,1]],
+  [
+    [1,0],
+    [1,0],
+    [1,1]
+  ],
 
-  [[0,1],
-   [0,1],
-   [1,1]],
+  [
+    [0,1],
+    [0,1],
+    [1,1]
+  ],
 
-  [[1,1],
-   [1,0],
-   [1,0]],
+  [
+    [1,1],
+    [1,0],
+    [1,0]
+  ],
 
-  [[1,1],
-   [0,1],
-   [0,1]],
+  [
+    [1,1],
+    [0,1],
+    [0,1]
+  ],
 
-  [[1,1,1],
-   [0,1,0]],
+  [
+    [1,1,1],
+    [0,1,0]
+  ],
 
-  [[0,1,0],
-   [1,1,1]],
+  [
+    [0,1,0],
+    [1,1,1]
+  ],
 
-  [[1,0],
-   [1,1],
-   [1,0]],
+  [
+    [1,0],
+    [1,1],
+    [1,0]
+  ],
 
-  [[0,1],
-   [1,1],
-   [0,1]]
+  [
+    [0,1],
+    [1,1],
+    [0,1]
+  ]
 
 ];
 
@@ -1381,7 +1410,7 @@ function randomPiece(){
   const shape =
     SHAPES[
       Math.floor(
-        Math.random()*SHAPES.length
+        Math.random() * SHAPES.length
       )
     ];
 
@@ -1395,11 +1424,123 @@ function randomPiece(){
     color:
       colors[
         Math.floor(
-          Math.random()*colors.length
+          Math.random() * colors.length
         )
       ]
 
   };
+
+}
+
+
+/* =====================================================
+   NEW GAME
+===================================================== */
+
+function newGame(){
+
+  score = 0;
+
+  board =
+    Array.from(
+      {length:SIZE},
+      () => Array(SIZE).fill(null)
+    );
+
+  document
+    .getElementById("score")
+    .textContent = score;
+
+  createPieces();
+
+  renderBoard();
+
+  closeGameOver();
+
+}
+
+
+/* =====================================================
+   PIECES
+===================================================== */
+
+function createPieces(){
+
+  pieces = [];
+
+  for(let i=0;i<3;i++){
+
+    pieces.push(
+      randomPiece()
+    );
+
+  }
+
+  renderPieces();
+
+}
+
+
+function renderPieces(){
+
+  const container =
+    document.getElementById("pieces");
+
+  container.innerHTML = "";
+
+  pieces.forEach((piece,index)=>{
+
+    if(!piece) return;
+
+    const element =
+      document.createElement("div");
+
+    element.className = "piece";
+
+    element.dataset.index = index;
+
+    const rows =
+      piece.shape.length;
+
+    const cols =
+      piece.shape[0].length;
+
+    element.style.gridTemplateColumns =
+      `repeat(${cols},22px)`;
+
+    element.style.gridTemplateRows =
+      `repeat(${rows},22px)`;
+
+    for(let r=0;r<rows;r++){
+
+      for(let c=0;c<cols;c++){
+
+        const cell =
+          document.createElement("div");
+
+        if(piece.shape[r][c]){
+
+          cell.className =
+            `piece-cell ${piece.color}`;
+
+        }else{
+
+          cell.className =
+            "piece-cell empty";
+
+        }
+
+        element.appendChild(cell);
+
+      }
+
+    }
+
+    addDragEvents(element,index);
+
+    container.appendChild(element);
+
+  });
 
 }
 
@@ -1447,75 +1588,6 @@ function renderBoard(){
 
 
 /* =====================================================
-   PIECES DISPLAY
-===================================================== */
-
-function renderPieces(){
-
-  const container =
-    document.getElementById("pieces");
-
-  container.innerHTML = "";
-
-  pieces.forEach((piece,index)=>{
-
-    const element =
-      document.createElement("div");
-
-    element.className = "piece";
-
-    element.dataset.index = index;
-
-    const rows =
-      piece.shape.length;
-
-    const cols =
-      piece.shape[0].length;
-
-    element.style.gridTemplateColumns =
-      `repeat(${cols},22px)`;
-
-    element.style.gridTemplateRows =
-      `repeat(${rows},22px)`;
-
-    for(let r=0;r<rows;r++){
-
-      for(let c=0;c<cols;c++){
-
-        const cell =
-          document.createElement("div");
-
-        if(piece.shape[r][c]){
-
-          cell.className =
-            `piece-cell ${piece.color}`;
-
-        }else{
-
-          cell.className =
-            "piece-cell empty";
-
-        }
-
-        element.appendChild(cell);
-
-      }
-
-    }
-
-    addDragEvents(
-      element,
-      index
-    );
-
-    container.appendChild(element);
-
-  });
-
-}
-
-
-/* =====================================================
    DRAG
 ===================================================== */
 
@@ -1531,6 +1603,40 @@ function addDragEvents(element,index){
     e => startDrag(e,index),
     {passive:false}
   );
+
+}
+
+
+function getPointer(e){
+
+  if(
+    e.touches &&
+    e.touches.length
+  ){
+
+    return {
+      x:e.touches[0].clientX,
+      y:e.touches[0].clientY
+    };
+
+  }
+
+  if(
+    e.changedTouches &&
+    e.changedTouches.length
+  ){
+
+    return {
+      x:e.changedTouches[0].clientX,
+      y:e.changedTouches[0].clientY
+    };
+
+  }
+
+  return {
+    x:e.clientX,
+    y:e.clientY
+  };
 
 }
 
@@ -1571,25 +1677,6 @@ function startDrag(e,index){
 }
 
 
-function getPointer(e){
-
-  if(e.touches && e.touches.length){
-
-    return {
-      x:e.touches[0].clientX,
-      y:e.touches[0].clientY
-    };
-
-  }
-
-  return {
-    x:e.clientX,
-    y:e.clientY
-  };
-
-}
-
-
 function moveDrag(e){
 
   if(!dragging) return;
@@ -1598,10 +1685,6 @@ function moveDrag(e){
 
   const p =
     getPointer(e);
-
-  dragX = p.x;
-
-  dragY = p.y;
 
   const boardElement =
     document.getElementById("board");
@@ -1615,6 +1698,8 @@ function moveDrag(e){
   const piece =
     pieces[selectedPiece];
 
+  if(!piece) return;
+
   const cols =
     piece.shape[0].length;
 
@@ -1622,23 +1707,23 @@ function moveDrag(e){
     piece.shape.length;
 
   const centerX =
-    dragX -
+    p.x -
     rect.left -
-    cellSize*cols/2;
+    cellSize * cols / 2;
 
   const centerY =
-    dragY -
+    p.y -
     rect.top -
-    cellSize*rows/2;
+    cellSize * rows / 2;
 
   const col =
     Math.floor(
-      centerX/cellSize
+      centerX / cellSize
     );
 
   const row =
     Math.floor(
-      centerY/cellSize
+      centerY / cellSize
     );
 
   showPreview(
@@ -1693,14 +1778,16 @@ function endDrag(){
 
     if(valid){
 
+      const piece =
+        pieces[selectedPiece];
+
       placePiece(
-        pieces[selectedPiece],
+        piece,
         preview[0].row,
         preview[0].col
       );
 
-      pieces[selectedPiece] =
-        null;
+      pieces[selectedPiece] = null;
 
       checkPiecesFinished();
 
@@ -1727,8 +1814,6 @@ function showPreview(
 
   dragPreview = [];
 
-  let valid = true;
-
   for(
     let r=0;
     r<piece.shape.length;
@@ -1744,27 +1829,29 @@ function showPreview(
       if(!piece.shape[r][c])
         continue;
 
-      const rr = row+r;
+      const rr = row + r;
 
-      const cc = col+c;
+      const cc = col + c;
 
       const inside =
-        rr>=0 &&
-        rr<SIZE &&
-        cc>=0 &&
-        cc<SIZE;
+        rr >= 0 &&
+        rr < SIZE &&
+        cc >= 0 &&
+        cc < SIZE;
 
       const free =
         inside &&
         !board[rr][cc];
 
-      if(!inside || !free)
-        valid = false;
-
       dragPreview.push({
+
         row:rr,
+
         col:cc,
-        valid:inside && free
+
+        valid:
+          inside && free
+
       });
 
     }
@@ -1774,23 +1861,27 @@ function showPreview(
   dragPreview.forEach(p=>{
 
     if(
-      p.row>=0 &&
-      p.row<SIZE &&
-      p.col>=0 &&
-      p.col<SIZE
+      p.row >= 0 &&
+      p.row < SIZE &&
+      p.col >= 0 &&
+      p.col < SIZE
     ){
 
       const index =
-        p.row*SIZE+p.col;
+        p.row * SIZE + p.col;
 
       const cell =
         document
           .getElementById("board")
           .children[index];
 
-      cell.classList.add(
-        "preview"
-      );
+      if(cell){
+
+        cell.classList.add(
+          "preview"
+        );
+
+      }
 
     }
 
@@ -1804,16 +1895,18 @@ function clearPreview(){
   document
     .querySelectorAll(".preview")
     .forEach(cell=>{
+
       cell.classList.remove(
         "preview"
       );
+
     });
 
 }
 
 
 /* =====================================================
-   PLACE PIECE
+   PLACE
 ===================================================== */
 
 function placePiece(
@@ -1903,8 +1996,9 @@ function clearLines(){
 
     }
 
-    if(full)
+    if(full){
       cols.push(c);
+    }
 
   }
 
@@ -1931,7 +2025,7 @@ function clearLines(){
     for(let c=0;c<SIZE;c++){
 
       cells.push(
-        r*SIZE+c
+        r * SIZE + c
       );
 
     }
@@ -1943,24 +2037,31 @@ function clearLines(){
     for(let r=0;r<SIZE;r++){
 
       cells.push(
-        r*SIZE+c
+        r * SIZE + c
       );
 
     }
 
   });
 
-  [...new Set(cells)].forEach(index=>{
+  [
+    ...new Set(cells)
+  ].forEach(index=>{
 
-    boardElement
-      .children[index]
-      .classList.add("clear");
+    if(
+      boardElement.children[index]
+    ){
+
+      boardElement
+        .children[index]
+        .classList.add("clear");
+
+    }
 
   });
 
   score +=
-    (rows.length + cols.length) *
-    10;
+    (rows.length + cols.length) * 10;
 
   document
     .getElementById("score")
@@ -2010,7 +2111,7 @@ function checkPiecesFinished(){
   const left =
     pieces.filter(Boolean);
 
-  if(left.length===0){
+  if(left.length === 0){
 
     createPieces();
 
@@ -2057,16 +2158,16 @@ function canPlacePiece(piece){
           pc++
         ){
 
-          if(
-            !piece.shape[pr][pc]
-          ) continue;
+          if(!piece.shape[pr][pc])
+            continue;
 
-          const rr=r+pr;
-          const cc=c+pc;
+          const rr = r + pr;
+
+          const cc = c + pc;
 
           if(
-            rr>=SIZE ||
-            cc>=SIZE ||
+            rr >= SIZE ||
+            cc >= SIZE ||
             board[rr][cc]
           ){
 
@@ -2093,8 +2194,7 @@ function canPlacePiece(piece){
 function checkGameOver(){
 
   const available =
-    pieces
-      .filter(Boolean);
+    pieces.filter(Boolean);
 
   if(
     available.length &&
@@ -2126,7 +2226,7 @@ function closeGameOver(){
 
 
 /* =====================================================
-   YOUTUBE API
+   YOUTUBE
 ===================================================== */
 
 function onYouTubeIframeAPIReady(){
@@ -2136,21 +2236,16 @@ function onYouTubeIframeAPIReady(){
 }
 
 
-/* =====================================================
-   SEARCH YOUTUBE
-===================================================== */
-
 async function youtubeSearch(query){
 
   if(
     !YOUTUBE_API_KEY ||
-    YOUTUBE_API_KEY.includes(
-      "ВСТАВЬ"
-    )
+    YOUTUBE_API_KEY ===
+      "YOUR_YOUTUBE_API_KEY"
   ){
 
     alert(
-      "Сначала вставь YouTube API ключ в код."
+      "Для музыки нужен YouTube API ключ."
     );
 
     return [];
@@ -2191,9 +2286,7 @@ async function youtubeSearch(query){
 
     if(data.error){
 
-      console.error(
-        data.error
-      );
+      console.error(data.error);
 
       alert(
         "YouTube не дал результаты. Проверь API ключ."
@@ -2207,24 +2300,18 @@ async function youtubeSearch(query){
       data.items || []
     ).map(item=>({
 
-      id:
-        item.id.videoId,
+      id:item.id.videoId,
 
-      title:
-        item.snippet.title,
+      title:item.snippet.title,
 
-      artist:
-        item.snippet.channelTitle,
+      artist:item.snippet.channelTitle,
 
       cover:
-        item.snippet.thumbnails
-          ?.medium?.url ||
-        item.snippet.thumbnails
-          ?.default?.url ||
+        item.snippet.thumbnails?.medium?.url ||
+        item.snippet.thumbnails?.default?.url ||
         "",
 
-      videoId:
-        item.id.videoId
+      videoId:item.id.videoId
 
     }));
 
@@ -2244,15 +2331,13 @@ async function youtubeSearch(query){
 
 
 /* =====================================================
-   RECOMMENDATIONS
+   MUSIC
 ===================================================== */
 
 async function loadRecommendations(){
 
   const list =
-    document.getElementById(
-      "songList"
-    );
+    document.getElementById("songList");
 
   list.innerHTML =
     `<div style="color:#777;text-align:center;padding:20px">
@@ -2264,6 +2349,8 @@ async function loadRecommendations(){
       "popular songs 2026"
     );
 
+  searchResults = [];
+
   renderSongs(
     songs,
     list
@@ -2274,16 +2361,10 @@ async function loadRecommendations(){
 }
 
 
-/* =====================================================
-   SEARCH MUSIC
-===================================================== */
-
 async function searchMusic(){
 
   const input =
-    document.getElementById(
-      "musicSearch"
-    );
+    document.getElementById("musicSearch");
 
   const query =
     input.value.trim();
@@ -2297,9 +2378,7 @@ async function searchMusic(){
   }
 
   const list =
-    document.getElementById(
-      "songList"
-    );
+    document.getElementById("songList");
 
   list.innerHTML =
     `<div style="color:#777;text-align:center;padding:20px">
@@ -2307,9 +2386,7 @@ async function searchMusic(){
     </div>`;
 
   searchResults =
-    await youtubeSearch(
-      query
-    );
+    await youtubeSearch(query);
 
   renderSongs(
     searchResults,
@@ -2320,7 +2397,7 @@ async function searchMusic(){
 
 
 /* =====================================================
-   RENDER SONGS
+   SONGS
 ===================================================== */
 
 function renderSongs(
@@ -2345,35 +2422,27 @@ function renderSongs(
     (song,index)=>{
 
       const div =
-        document.createElement(
-          "div"
-        );
+        document.createElement("div");
 
-      div.className =
-        "song";
+      div.className = "song";
 
       if(
-        currentQueue
-          [currentSongIndex]
-          ?.id === song.id
+        currentQueue[currentSongIndex]?.id ===
+        song.id
       ){
 
-        div.classList.add(
-          "playing"
-        );
+        div.classList.add("playing");
 
       }
 
       const favorite =
-        favorites.includes(
-          song.id
-        );
+        favorites.includes(song.id);
 
       div.innerHTML = `
 
         <img
           class="song-cover"
-          src="${song.cover}"
+          src="${escapeAttribute(song.cover)}"
           alt="">
 
         <div class="song-info">
@@ -2390,7 +2459,7 @@ function renderSongs(
 
         <button
           class="song-heart ${favorite ? "active":""}"
-          onclick="toggleFavorite('${song.id}',event)">
+          onclick="toggleFavorite('${escapeAttribute(song.id)}',event)">
           ${favorite ? "♥":"♡"}
         </button>
 
@@ -2402,19 +2471,13 @@ function renderSongs(
 
       `;
 
-      container.appendChild(
-        div
-      );
+      container.appendChild(div);
 
     }
   );
 
 }
 
-
-/* =====================================================
-   PLAY FROM LIST
-===================================================== */
 
 function playSongFromList(index){
 
@@ -2425,24 +2488,17 @@ function playSongFromList(index){
 
   currentQueue = [...list];
 
-  currentSongIndex =
-    index;
+  currentSongIndex = index;
 
   playCurrentSong();
 
 }
 
 
-/* =====================================================
-   PLAY SONG
-===================================================== */
-
 function playCurrentSong(){
 
   const song =
-    currentQueue[
-      currentSongIndex
-    ];
+    currentQueue[currentSongIndex];
 
   if(!song)
     return;
@@ -2466,8 +2522,7 @@ function playCurrentSong(){
         "youtubePlayer",
         {
 
-          videoId:
-            song.videoId,
+          videoId:song.videoId,
 
           playerVars:{
             autoplay:1,
@@ -2477,9 +2532,13 @@ function playCurrentSong(){
           },
 
           events:{
+
             onReady:event=>{
+
               event.target.playVideo();
+
               startProgress();
+
             },
 
             onStateChange:
@@ -2494,8 +2553,7 @@ function playCurrentSong(){
 
     ytPlayer.loadVideoById({
 
-      videoId:
-        song.videoId,
+      videoId:song.videoId,
 
       startSeconds:0
 
@@ -2510,10 +2568,6 @@ function playCurrentSong(){
 }
 
 
-/* =====================================================
-   PLAYER STATE
-===================================================== */
-
 function onPlayerStateChange(event){
 
   if(
@@ -2521,9 +2575,7 @@ function onPlayerStateChange(event){
     YT.PlayerState.PLAYING
   ){
 
-    setPlayButtons(
-      "❚❚"
-    );
+    setPlayButtons("❚❚");
 
     startProgress();
 
@@ -2534,9 +2586,7 @@ function onPlayerStateChange(event){
     YT.PlayerState.PAUSED
   ){
 
-    setPlayButtons(
-      "▶"
-    );
+    setPlayButtons("▶");
 
   }
 
@@ -2553,7 +2603,7 @@ function onPlayerStateChange(event){
 
 
 /* =====================================================
-   SHOW PLAYER
+   PLAYER
 ===================================================== */
 
 function showPlayer(song){
@@ -2564,13 +2614,11 @@ function showPlayer(song){
 
   document
     .getElementById("playerTitle")
-    .textContent =
-      song.title;
+    .textContent = song.title;
 
   document
     .getElementById("playerArtist")
-    .textContent =
-      song.artist;
+    .textContent = song.artist;
 
   document
     .getElementById("player")
@@ -2580,10 +2628,6 @@ function showPlayer(song){
 
 }
 
-
-/* =====================================================
-   PLAY / PAUSE
-===================================================== */
 
 function toggleMusic(){
 
@@ -2618,10 +2662,6 @@ function toggleMusic(){
 }
 
 
-/* =====================================================
-   NEXT
-===================================================== */
-
 function nextSong(){
 
   if(!currentQueue.length)
@@ -2643,10 +2683,6 @@ function nextSong(){
 }
 
 
-/* =====================================================
-   PREVIOUS
-===================================================== */
-
 function previousSong(){
 
   if(!currentQueue.length)
@@ -2654,12 +2690,10 @@ function previousSong(){
 
   currentSongIndex--;
 
-  if(
-    currentSongIndex < 0
-  ){
+  if(currentSongIndex < 0){
 
     currentSongIndex =
-      currentQueue.length-1;
+      currentQueue.length - 1;
 
   }
 
@@ -2667,10 +2701,6 @@ function previousSong(){
 
 }
 
-
-/* =====================================================
-   STOP
-===================================================== */
 
 function stopMusic(){
 
@@ -2680,9 +2710,7 @@ function stopMusic(){
 
   }
 
-  clearInterval(
-    progressTimer
-  );
+  clearInterval(progressTimer);
 
   document
     .getElementById("progressBar")
@@ -2696,29 +2724,27 @@ function stopMusic(){
     .getElementById("miniPlayer")
     .classList.remove("show");
 
+  setPlayButtons("▶");
+
 }
 
 
-/* =====================================================
-   PROGRESS
-===================================================== */
-
 function startProgress(){
 
-  clearInterval(
-    progressTimer
-  );
+  clearInterval(progressTimer);
 
   progressTimer =
     setInterval(()=>{
 
       if(
         !ytPlayer ||
-        typeof ytPlayer
-          .getDuration !==
+        typeof ytPlayer.getDuration !==
           "function"
-      )
+      ){
+
         return;
+
+      }
 
       const duration =
         ytPlayer.getDuration();
@@ -2726,14 +2752,12 @@ function startProgress(){
       const current =
         ytPlayer.getCurrentTime();
 
-      if(duration>0){
+      if(duration > 0){
 
         document
-          .getElementById(
-            "progressBar"
-          )
+          .getElementById("progressBar")
           .value =
-            current/duration*100;
+            current / duration * 100;
 
       }
 
@@ -2753,8 +2777,7 @@ function seekMusic(value){
   if(duration){
 
     ytPlayer.seekTo(
-      duration *
-      Number(value)/100,
+      duration * Number(value) / 100,
       true
     );
 
@@ -2763,74 +2786,44 @@ function seekMusic(value){
 }
 
 
-/* =====================================================
-   PLAYER BUTTONS
-===================================================== */
-
 function setPlayButtons(icon){
 
   document
-    .getElementById(
-      "playPauseButton"
-    )
+    .getElementById("playPauseButton")
     .textContent = icon;
 
   document
-    .getElementById(
-      "miniPlay"
-    )
+    .getElementById("miniPlay")
     .textContent = icon;
 
 }
 
 
-/* =====================================================
-   PLAYER VISIBILITY
-===================================================== */
-
 function updatePlayerVisibility(){
 
   const game =
     document
-      .getElementById(
-        "gameScreen"
-      )
-      .classList.contains(
-        "active"
-      );
+      .getElementById("gameScreen")
+      .classList.contains("active");
 
   const player =
-    document
-      .getElementById(
-        "player"
-      );
+    document.getElementById("player");
 
   const mini =
-    document
-      .getElementById(
-        "miniPlayer"
-      );
+    document.getElementById("miniPlayer");
 
   if(
     game &&
-    player.classList.contains(
-      "show"
-    )
+    player.classList.contains("show")
   ){
 
-    mini.classList.add(
-      "show"
-    );
+    mini.classList.add("show");
 
-    player.classList.remove(
-      "show"
-    );
+    player.classList.remove("show");
 
   }else if(!game){
 
-    mini.classList.remove(
-      "show"
-    );
+    mini.classList.remove("show");
 
   }
 
@@ -2852,12 +2845,9 @@ function toggleFavorite(
   const index =
     favorites.indexOf(id);
 
-  if(index>=0){
+  if(index >= 0){
 
-    favorites.splice(
-      index,
-      1
-    );
+    favorites.splice(index,1);
 
   }else{
 
@@ -2867,9 +2857,7 @@ function toggleFavorite(
 
   localStorage.setItem(
     "blockRushFavorites",
-    JSON.stringify(
-      favorites
-    )
+    JSON.stringify(favorites)
   );
 
   renderSongs(
@@ -2877,9 +2865,7 @@ function toggleFavorite(
       ? searchResults
       : songs,
 
-    document.getElementById(
-      "songList"
-    )
+    document.getElementById("songList")
   );
 
   renderFavorites();
@@ -2890,25 +2876,21 @@ function toggleFavorite(
 function renderFavorites(){
 
   const list =
-    document.getElementById(
-      "favoriteList"
-    );
+    document.getElementById("favoriteList");
 
-  const all =
-    [
-      ...songs,
-      ...searchResults
-    ];
+  const all = [
+    ...songs,
+    ...searchResults
+  ];
 
-  const unique =
-    [];
+  const unique = [];
 
   all.forEach(song=>{
 
     if(
       favorites.includes(song.id) &&
       !unique.some(
-        x=>x.id===song.id
+        x=>x.id === song.id
       )
     ){
 
@@ -2917,6 +2899,17 @@ function renderFavorites(){
     }
 
   });
+
+  if(!unique.length){
+
+    list.innerHTML =
+      `<div style="color:#777;text-align:center;padding:20px">
+        Здесь появятся любимые песни
+      </div>`;
+
+    return;
+
+  }
 
   renderSongs(
     unique,
@@ -2927,32 +2920,28 @@ function renderFavorites(){
 
 
 /* =====================================================
-   HTML SECURITY
+   SECURITY
 ===================================================== */
 
 function escapeHTML(text){
 
   return String(text)
-    .replace(
-      /&/g,
-      "&amp;"
-    )
-    .replace(
-      /</g,
-      "&lt;"
-    )
-    .replace(
-      />/g,
-      "&gt;"
-    )
-    .replace(
-      /"/g,
-      "&quot;"
-    )
-    .replace(
-      /'/g,
-      "&#039;"
-    );
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeAttribute(text){
+
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/"/g,"&quot;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;");
 
 }
 
