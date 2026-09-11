@@ -130,10 +130,11 @@
     }
 
     function newGame() {
-      score = 0;
-      scoreElement.textContent = score;
-      createBoard();
-    }
+  score = 0;
+  scoreElement.textContent = score;
+  createBoard();
+  createPieces();
+}
 const shapes = [
   [[1]],
   [[1, 1]],
