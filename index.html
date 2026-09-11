@@ -14,6 +14,10 @@
 
 <style>
 
+/* =========================
+   ОСНОВА
+========================= */
+
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
@@ -29,8 +33,8 @@ body {
   background:
     radial-gradient(
       circle at top,
-      #252525 0%,
-      #101010 45%,
+      #282828 0%,
+      #111 45%,
       #080808 100%
     );
 
@@ -57,6 +61,11 @@ button {
   cursor: pointer;
 }
 
+
+/* =========================
+   ЭКРАНЫ
+========================= */
+
 .screen {
   display: none;
   width: 100%;
@@ -68,9 +77,9 @@ button {
 }
 
 
-/* ================================
+/* =========================
    ГЛАВНОЕ МЕНЮ
-================================ */
+========================= */
 
 .menu-screen {
 
@@ -88,8 +97,8 @@ button {
 
 .menu-logo {
 
-  width: 90px;
-  height: 90px;
+  width: 92px;
+  height: 92px;
 
   display: flex;
 
@@ -107,7 +116,7 @@ button {
 
   color: #111;
 
-  font-size: 52px;
+  font-size: 53px;
 
   font-weight: 900;
 
@@ -205,14 +214,16 @@ button {
 
   color: white;
 
-  border: 1px solid #303031;
+  border:
+    1px solid
+    #303031;
 
 }
 
 
-/* ================================
+/* =========================
    ИГРА
-================================ */
+========================= */
 
 .game-screen {
 
@@ -357,9 +368,9 @@ button {
 }
 
 
-/* ================================
+/* =========================
    ПОЛЕ
-================================ */
+========================= */
 
 .board-frame {
 
@@ -451,9 +462,9 @@ button {
 }
 
 
-/* ================================
+/* =========================
    ФИГУРЫ
-================================ */
+========================= */
 
 .choose-title {
 
@@ -563,9 +574,9 @@ button {
 }
 
 
-/* ================================
-   КНОПКИ
-================================ */
+/* =========================
+   КНОПКИ ИГРЫ
+========================= */
 
 .game-buttons {
 
@@ -596,9 +607,9 @@ button {
 }
 
 
-/* ================================
+/* =========================
    МУЗЫКА
-================================ */
+========================= */
 
 .music-screen {
 
@@ -808,6 +819,12 @@ button {
 
   background: #252526;
 
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
 }
 
 .song-cover img {
@@ -913,12 +930,14 @@ button {
 
   color: #666;
 
+  line-height: 1.5;
+
 }
 
 
-/* ================================
+/* =========================
    ПЛЕЕР
-================================ */
+========================= */
 
 .player {
 
@@ -978,6 +997,12 @@ button {
   overflow: hidden;
 
   background: #252526;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
 
 }
 
@@ -1046,9 +1071,82 @@ button {
 }
 
 
-/* ================================
+/* =========================
+   ПЛЕЕР В ИГРЕ
+========================= */
+
+.player.game-mode {
+
+  top: 14px;
+
+  bottom: auto;
+
+  left: auto;
+
+  right: 14px;
+
+  transform: none;
+
+  width: 50px;
+
+  height: 50px;
+
+  padding: 4px;
+
+  border-radius: 15px;
+
+  gap: 0;
+
+  justify-content: center;
+
+  background:
+    rgba(25,25,26,.96);
+
+  z-index: 800;
+
+}
+
+.player.game-mode .player-cover {
+
+  width: 42px;
+  height: 42px;
+
+}
+
+.player.game-mode .player-info {
+
+  display: none;
+
+}
+
+.player.game-mode
+.player-button:not(.player-stop) {
+
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: transparent;
+
+  color: white;
+
+  z-index: 2;
+
+}
+
+.player.game-mode .player-stop {
+
+  display: none;
+
+}
+
+
+/* =========================
    DRAG
-================================ */
+========================= */
 
 .drag-piece {
 
@@ -1078,9 +1176,9 @@ button {
 }
 
 
-/* ================================
+/* =========================
    GAME OVER
-================================ */
+========================= */
 
 .overlay {
 
@@ -1186,9 +1284,9 @@ button {
 }
 
 
-/* ================================
-   ТЕЛЕФОН
-================================ */
+/* =========================
+   МАЛЕНЬКИЙ ЭКРАН
+========================= */
 
 @media (max-width: 370px) {
 
@@ -1216,12 +1314,9 @@ button {
 <body>
 
 
-<div class="app">
-
-
-<!-- =================================
+<!-- =========================
      ГЛАВНОЕ МЕНЮ
-================================= -->
+========================= -->
 
 <section
   id="menuScreen"
@@ -1261,9 +1356,9 @@ button {
 </section>
 
 
-<!-- =================================
+<!-- =========================
      ИГРА
-================================= -->
+========================= -->
 
 <section
   id="gameScreen"
@@ -1285,6 +1380,7 @@ button {
         </div>
 
       </div>
+
 
       <div class="score-box">
 
@@ -1361,9 +1457,9 @@ button {
 </section>
 
 
-<!-- =================================
+<!-- =========================
      МУЗЫКА
-================================= -->
+========================= -->
 
 <section
   id="musicScreen"
@@ -1437,16 +1533,22 @@ button {
     <div
       id="songList"
       class="song-list"
-    ></div>
+    >
+
+      <div class="no-songs">
+        🎵 Загружаю рекомендации...
+      </div>
+
+    </div>
 
   </div>
 
 </section>
 
 
-<!-- =================================
+<!-- =========================
      ПЛЕЕР
-================================= -->
+========================= -->
 
 <div
   id="player"
@@ -1499,9 +1601,9 @@ button {
 </div>
 
 
-<!-- =================================
+<!-- =========================
      GAME OVER
-================================= -->
+========================= -->
 
 <div
   id="gameOver"
@@ -1519,14 +1621,18 @@ button {
     </h2>
 
     <p>
+
       Твой результат:
+
       <span
         id="finalScore"
         class="final-score"
       >
         0
       </span>
+
     </p>
+
 
     <button
       class="menu-button play-button"
@@ -1548,9 +1654,9 @@ button {
 
 <script>
 
-/* =========================================
+/* =====================================================
    ЭКРАНЫ
-========================================= */
+===================================================== */
 
 function showScreen(id) {
 
@@ -1558,7 +1664,9 @@ function showScreen(id) {
     .querySelectorAll(".screen")
     .forEach(screen => {
 
-      screen.classList.remove("active");
+      screen.classList.remove(
+        "active"
+      );
 
     });
 
@@ -1569,14 +1677,41 @@ function showScreen(id) {
 
   if (screen) {
 
-    screen.classList.add("active");
+    screen.classList.add(
+      "active"
+    );
 
   }
 
 
-  if (id === "musicScreen") {
+  /*
+    Во время игры плеер
+    превращается в маленькую
+    кнопку и не мешает.
+  */
 
-    if (!recommendationsLoaded) {
+  if (id === "gameScreen") {
+
+    player.classList.add(
+      "game-mode"
+    );
+
+  } else {
+
+    player.classList.remove(
+      "game-mode"
+    );
+
+  }
+
+
+  if (
+    id === "musicScreen"
+  ) {
+
+    if (
+      !recommendationsLoaded
+    ) {
 
       loadRecommendations();
 
@@ -1589,26 +1724,36 @@ function showScreen(id) {
 }
 
 
-/* =========================================
+/* =====================================================
    ИГРА
-========================================= */
+===================================================== */
 
 const SIZE = 8;
 
 const boardElement =
-  document.getElementById("board");
+  document.getElementById(
+    "board"
+  );
 
 const piecesElement =
-  document.getElementById("pieces");
+  document.getElementById(
+    "pieces"
+  );
 
 const scoreElement =
-  document.getElementById("score");
+  document.getElementById(
+    "score"
+  );
 
 const gameOverElement =
-  document.getElementById("gameOver");
+  document.getElementById(
+    "gameOver"
+  );
 
 const finalScoreElement =
-  document.getElementById("finalScore");
+  document.getElementById(
+    "finalScore"
+  );
 
 
 let gameBoard = [];
@@ -1624,9 +1769,9 @@ let draggedIndex = null;
 let dragElement = null;
 
 
-/* =========================================
+/* =====================================================
    ФИГУРЫ
-========================================= */
+===================================================== */
 
 const shapes = [
 
@@ -1697,23 +1842,33 @@ const shapes = [
 ];
 
 
-/* =========================================
-   ПОЛЕ
-========================================= */
+/* =====================================================
+   ПУСТОЕ ПОЛЕ
+===================================================== */
 
 function emptyBoard() {
 
   return Array.from(
-    {length: SIZE},
-    () => Array(SIZE).fill(0)
+    {
+      length: SIZE
+    },
+    () =>
+      Array(
+        SIZE
+      ).fill(0)
   );
 
 }
 
 
+/* =====================================================
+   ОТРИСОВКА ПОЛЯ
+===================================================== */
+
 function renderBoard() {
 
-  boardElement.innerHTML = "";
+  boardElement.innerHTML =
+    "";
 
 
   for (
@@ -1729,27 +1884,36 @@ function renderBoard() {
     ) {
 
       const cell =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
 
-      cell.className = "cell";
+      cell.className =
+        "cell";
 
 
-      cell.dataset.row = row;
+      cell.dataset.row =
+        row;
 
-      cell.dataset.col = col;
+      cell.dataset.col =
+        col;
 
 
       if (
         gameBoard[row][col]
       ) {
 
-        cell.classList.add("filled");
+        cell.classList.add(
+          "filled"
+        );
 
       }
 
 
-      boardElement.appendChild(cell);
+      boardElement.appendChild(
+        cell
+      );
 
     }
 
@@ -1758,15 +1922,16 @@ function renderBoard() {
 }
 
 
-/* =========================================
-   ФИГУРЫ
-========================================= */
+/* =====================================================
+   НОВЫЕ ФИГУРЫ
+===================================================== */
 
 function randomShape() {
 
   return shapes[
     Math.floor(
-      Math.random() * shapes.length
+      Math.random() *
+      shapes.length
     )
   ];
 
@@ -1775,7 +1940,8 @@ function randomShape() {
 
 function createPieces() {
 
-  piecesElement.innerHTML = "";
+  piecesElement.innerHTML =
+    "";
 
   currentPieces = [];
 
@@ -1815,14 +1981,18 @@ function createPiece(
 ) {
 
   const slot =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   slot.className =
     "piece-slot";
 
 
   const piece =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   piece.className =
     "piece";
@@ -1845,7 +2015,9 @@ function createPiece(
     ) {
 
       const cell =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
 
       cell.className =
@@ -1854,7 +2026,9 @@ function createPiece(
           : "piece-empty";
 
 
-      piece.appendChild(cell);
+      piece.appendChild(
+        cell
+      );
 
     }
 
@@ -1874,16 +2048,21 @@ function createPiece(
   );
 
 
-  slot.appendChild(piece);
+  slot.appendChild(
+    piece
+  );
 
-  piecesElement.appendChild(slot);
+
+  piecesElement.appendChild(
+    slot
+  );
 
 }
 
 
-/* =========================================
-   РАЗМЕЩЕНИЕ
-========================================= */
+/* =====================================================
+   МОЖНО ЛИ ПОСТАВИТЬ
+===================================================== */
 
 function canPlace(
   shape,
@@ -1905,12 +2084,18 @@ function canPlace(
 
       if (
         shape[r][c] !== 1
-      ) continue;
+      ) {
+
+        continue;
+
+      }
 
 
-      const rr = row + r;
+      const rr =
+        row + r;
 
-      const cc = col + c;
+      const cc =
+        col + c;
 
 
       if (
@@ -1942,10 +2127,18 @@ function canPlace(
 }
 
 
-function getBoardCell(x, y) {
+/* =====================================================
+   КООРДИНАТЫ ПОЛЯ
+===================================================== */
+
+function getBoardCell(
+  x,
+  y
+) {
 
   const rect =
-    boardElement.getBoundingClientRect();
+    boardElement
+      .getBoundingClientRect();
 
 
   const padding = 3;
@@ -1994,9 +2187,9 @@ function getBoardCell(x, y) {
 }
 
 
-/* =========================================
-   ПОДСВЕТКА
-========================================= */
+/* =====================================================
+   PREVIEW
+===================================================== */
 
 function clearPreview() {
 
@@ -2004,14 +2197,16 @@ function clearPreview() {
     .querySelectorAll(
       ".preview, .invalid"
     )
-    .forEach(cell => {
+    .forEach(
+      cell => {
 
-      cell.classList.remove(
-        "preview",
-        "invalid"
-      );
+        cell.classList.remove(
+          "preview",
+          "invalid"
+        );
 
-    });
+      }
+    );
 
 }
 
@@ -2047,12 +2242,18 @@ function showPreview(
 
       if (
         shape[r][c] !== 1
-      ) continue;
+      ) {
+
+        continue;
+
+      }
 
 
-      const rr = row + r;
+      const rr =
+        row + r;
 
-      const cc = col + c;
+      const cc =
+        col + c;
 
 
       if (
@@ -2060,7 +2261,11 @@ function showPreview(
         rr >= SIZE ||
         cc < 0 ||
         cc >= SIZE
-      ) continue;
+      ) {
+
+        continue;
+
+      }
 
 
       const cell =
@@ -2086,17 +2291,21 @@ function showPreview(
 }
 
 
-/* =========================================
+/* =====================================================
    DRAG
-========================================= */
+===================================================== */
 
-function createDragPiece(shape) {
+function createDragPiece(
+  shape
+) {
 
   removeDragPiece();
 
 
   dragElement =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   dragElement.className =
     "drag-piece";
@@ -2119,7 +2328,9 @@ function createDragPiece(shape) {
     ) {
 
       const cell =
-        document.createElement("div");
+        document.createElement(
+          "div"
+        );
 
 
       cell.className =
@@ -2128,7 +2339,9 @@ function createDragPiece(shape) {
           : "piece-empty";
 
 
-      dragElement.appendChild(cell);
+      dragElement.appendChild(
+        cell
+      );
 
     }
 
@@ -2162,7 +2375,11 @@ function startDrag(
 
   if (
     currentPieces[index].used
-  ) return;
+  ) {
+
+    return;
+
+  }
 
 
   event.preventDefault();
@@ -2187,22 +2404,32 @@ function startDrag(
   window.addEventListener(
     "pointermove",
     onDragMove,
-    {passive:false}
+    {
+      passive: false
+    }
   );
 
 
   window.addEventListener(
     "pointerup",
     onDragEnd,
-    {once:true}
+    {
+      once: true
+    }
   );
 
 }
 
 
-function onDragMove(event) {
+function onDragMove(
+  event
+) {
 
-  if (!dragging) return;
+  if (!dragging) {
+
+    return;
+
+  }
 
 
   event.preventDefault();
@@ -2216,9 +2443,16 @@ function onDragMove(event) {
 }
 
 
-function moveDrag(x, y) {
+function moveDrag(
+  x,
+  y
+) {
 
-  if (!dragElement) return;
+  if (!dragElement) {
+
+    return;
+
+  }
 
 
   dragElement.style.left =
@@ -2229,7 +2463,8 @@ function moveDrag(x, y) {
 
 
   const rect =
-    boardElement.getBoundingClientRect();
+    boardElement
+      .getBoundingClientRect();
 
 
   if (
@@ -2248,7 +2483,11 @@ function moveDrag(x, y) {
 
   if (
     draggedIndex === null
-  ) return;
+  ) {
+
+    return;
+
+  }
 
 
   const shape =
@@ -2287,9 +2526,15 @@ function moveDrag(x, y) {
 }
 
 
-function onDragEnd(event) {
+function onDragEnd(
+  event
+) {
 
-  if (!dragging) return;
+  if (!dragging) {
+
+    return;
+
+  }
 
 
   const x =
@@ -2300,7 +2545,8 @@ function onDragEnd(event) {
 
 
   const rect =
-    boardElement.getBoundingClientRect();
+    boardElement
+      .getBoundingClientRect();
 
 
   if (
@@ -2366,9 +2612,9 @@ function onDragEnd(event) {
 }
 
 
-/* =========================================
-   ПОСТАВИТЬ
-========================================= */
+/* =====================================================
+   ПОСТАВИТЬ ФИГУРУ
+===================================================== */
 
 function placeShape(
   shape,
@@ -2383,7 +2629,11 @@ function placeShape(
       row,
       col
     )
-  ) return false;
+  ) {
+
+    return false;
+
+  }
 
 
   let blocks = 0;
@@ -2405,7 +2655,11 @@ function placeShape(
         shape[r][c] === 1
       ) {
 
-        gameBoard[row+r][col+c] = 1;
+        gameBoard[
+          row + r
+        ][
+          col + c
+        ] = 1;
 
         blocks++;
 
@@ -2425,6 +2679,7 @@ function placeShape(
 
   renderBoard();
 
+
   clearLines();
 
 
@@ -2433,18 +2688,24 @@ function placeShape(
 
 
   const slot =
-    piecesElement.children[index];
+    piecesElement.children[
+      index
+    ];
 
 
   if (slot) {
 
     const piece =
-      slot.querySelector(".piece");
+      slot.querySelector(
+        ".piece"
+      );
 
 
     if (piece) {
 
-      piece.classList.add("used");
+      piece.classList.add(
+        "used"
+      );
 
     }
 
@@ -2464,14 +2725,15 @@ function placeShape(
 
   checkGameOver();
 
+
   return true;
 
 }
 
 
-/* =========================================
-   ЛИНИИ
-========================================= */
+/* =====================================================
+   ОЧИСТКА ЛИНИЙ
+===================================================== */
 
 function clearLines() {
 
@@ -2536,34 +2798,40 @@ function clearLines() {
   }
 
 
-  rows.forEach(r => {
+  rows.forEach(
+    r => {
 
-    for (
-      let c = 0;
-      c < SIZE;
-      c++
-    ) {
+      for (
+        let c = 0;
+        c < SIZE;
+        c++
+      ) {
 
-      gameBoard[r][c] = 0;
+        gameBoard[r][c] =
+          0;
 
-    }
-
-  });
-
-
-  cols.forEach(c => {
-
-    for (
-      let r = 0;
-      r < SIZE;
-      r++
-    ) {
-
-      gameBoard[r][c] = 0;
+      }
 
     }
+  );
 
-  });
+
+  cols.forEach(
+    c => {
+
+      for (
+        let r = 0;
+        r < SIZE;
+        r++
+      ) {
+
+        gameBoard[r][c] =
+          0;
+
+      }
+
+    }
+  );
 
 
   const total =
@@ -2571,12 +2839,17 @@ function clearLines() {
     cols.length;
 
 
-  if (total > 0) {
+  if (
+    total > 0
+  ) {
 
-    score += total * 10;
+    score +=
+      total * 10;
 
 
-    if (total > 1) {
+    if (
+      total > 1
+    ) {
 
       score +=
         (total - 1) * 5;
@@ -2591,9 +2864,9 @@ function clearLines() {
 }
 
 
-/* =========================================
+/* =====================================================
    GAME OVER
-========================================= */
+===================================================== */
 
 function checkGameOver() {
 
@@ -2605,7 +2878,11 @@ function checkGameOver() {
 
   if (
     available.length === 0
-  ) return;
+  ) {
+
+    return;
+
+  }
 
 
   for (
@@ -2653,9 +2930,9 @@ function checkGameOver() {
 }
 
 
-/* =========================================
+/* =====================================================
    НОВАЯ ИГРА
-========================================= */
+===================================================== */
 
 function newGame() {
 
@@ -2663,7 +2940,6 @@ function newGame() {
 
   gameBoard =
     emptyBoard();
-
 
   currentPieces = [];
 
@@ -2689,39 +2965,63 @@ function newGame() {
 
   createPieces();
 
+
+  /*
+    ВАЖНО:
+    музыка НЕ выключается.
+  */
+
 }
 
 
-/* =========================================
+/* =====================================================
    МУЗЫКА
-========================================= */
+===================================================== */
 
 const audio =
-  document.getElementById("audio");
+  document.getElementById(
+    "audio"
+  );
 
 const musicSearch =
-  document.getElementById("musicSearch");
+  document.getElementById(
+    "musicSearch"
+  );
 
 const songList =
-  document.getElementById("songList");
+  document.getElementById(
+    "songList"
+  );
 
 const musicTitle =
-  document.getElementById("musicTitle");
+  document.getElementById(
+    "musicTitle"
+  );
 
 const player =
-  document.getElementById("player");
+  document.getElementById(
+    "player"
+  );
 
 const playerTitle =
-  document.getElementById("playerTitle");
+  document.getElementById(
+    "playerTitle"
+  );
 
 const playerArtist =
-  document.getElementById("playerArtist");
+  document.getElementById(
+    "playerArtist"
+  );
 
 const playerCover =
-  document.getElementById("playerCover");
+  document.getElementById(
+    "playerCover"
+  );
 
 const pauseButton =
-  document.getElementById("pauseButton");
+  document.getElementById(
+    "pauseButton"
+  );
 
 
 let songs = [];
@@ -2737,10 +3037,13 @@ let currentQueue = [];
 let recommendationsLoaded =
   false;
 
+let searchTimer =
+  null;
 
-/* =========================================
+
+/* =====================================================
    ИЗБРАННОЕ
-========================================= */
+===================================================== */
 
 let favorites =
   JSON.parse(
@@ -2750,17 +3053,9 @@ let favorites =
   );
 
 
-/* =========================================
+/* =====================================================
    РЕКОМЕНДАЦИИ
-========================================= */
-
-const recommendationQueries = [
-  "The Weeknd",
-  "Imagine Dragons",
-  "Eminem",
-  "Linkin Park"
-];
-
+===================================================== */
 
 function loadRecommendations() {
 
@@ -2768,85 +3063,39 @@ function loadRecommendations() {
     true;
 
 
-  const results = [];
+  /*
+    Один запрос вместо
+    множества запросов.
+  */
 
-  let completed = 0;
+  jsonpSearch(
+    "popular music",
+    data => {
 
-
-  recommendationQueries.forEach(
-    query => {
-
-      jsonpSearch(
-        query,
-        data => {
-
-          const items =
-            (data.results || [])
-              .filter(
-                item =>
-                  item.previewUrl
-              )
-              .slice(0, 8)
-              .map(
-                item => normalizeSong(item)
-              );
-
-
-          results.push(
-            ...items
+      songs =
+        (data.results || [])
+          .filter(
+            item =>
+              item.previewUrl
+          )
+          .map(
+            item =>
+              normalizeSong(item)
+          )
+          .slice(
+            0,
+            50
           );
 
 
-          completed++;
+      if (
+        musicTab ===
+        "recommend"
+      ) {
 
+        renderMusic();
 
-          if (
-            completed ===
-            recommendationQueries.length
-          ) {
-
-            const unique =
-              [];
-
-
-            const ids =
-              new Set();
-
-
-            results.forEach(song => {
-
-              if (
-                !ids.has(song.id)
-              ) {
-
-                ids.add(song.id);
-
-                unique.push(song);
-
-              }
-
-            });
-
-
-            songs =
-              unique.slice(
-                0,
-                30
-              );
-
-
-            if (
-              musicTab === "recommend"
-            ) {
-
-              renderMusic();
-
-            }
-
-          }
-
-        }
-      );
+      }
 
     }
   );
@@ -2854,9 +3103,9 @@ function loadRecommendations() {
 }
 
 
-/* =========================================
-   JSONP ПОИСК
-========================================= */
+/* =====================================================
+   JSONP
+===================================================== */
 
 function jsonpSearch(
   query,
@@ -2864,7 +3113,7 @@ function jsonpSearch(
 ) {
 
   const callbackName =
-    "ravoMusic_" +
+    "blockRushMusic_" +
     Date.now() +
     "_" +
     Math.floor(
@@ -2873,31 +3122,58 @@ function jsonpSearch(
 
 
   const script =
-    document.createElement("script");
+    document.createElement(
+      "script"
+    );
 
 
-  window[callbackName] =
-    function(data) {
-
-      callback(data);
+  let finished =
+    false;
 
 
-      delete window[callbackName];
+  function finish(data) {
 
+    if (finished) {
+
+      return;
+
+    }
+
+
+    finished = true;
+
+
+    try {
+
+      callback(
+        data || {
+          results: []
+        }
+      );
+
+    } finally {
+
+      delete window[
+        callbackName
+      ];
 
       script.remove();
 
-    };
+    }
+
+  }
+
+
+  window[
+    callbackName
+  ] =
+    finish;
 
 
   script.onerror =
     function() {
 
-      delete window[callbackName];
-
-      script.remove();
-
-      callback({
+      finish({
         results: []
       });
 
@@ -2907,7 +3183,9 @@ function jsonpSearch(
   script.src =
     "https://itunes.apple.com/search" +
     "?term=" +
-    encodeURIComponent(query) +
+    encodeURIComponent(
+      query
+    ) +
     "&country=US" +
     "&media=music" +
     "&entity=song" +
@@ -2923,20 +3201,17 @@ function jsonpSearch(
 }
 
 
-/* =========================================
+/* =====================================================
    ПОИСК
-========================================= */
-
-let searchTimer =
-  null;
-
+===================================================== */
 
 musicSearch.addEventListener(
   "input",
   function() {
 
     const query =
-      this.value.trim();
+      this.value
+        .trim();
 
 
     clearTimeout(
@@ -2958,46 +3233,80 @@ musicSearch.addEventListener(
 
       renderMusic();
 
+
       return;
 
     }
 
 
     musicTitle.textContent =
-      "Поиск: " + query;
+      "🔎 Ищу: " + query;
 
 
     songList.innerHTML = `
       <div class="no-songs">
-        🔎 Ищу песни...
+        🔎 Ищу песни и исполнителей...
       </div>
     `;
 
+
+    /*
+      Небольшая задержка,
+      чтобы не делать запрос
+      после каждой буквы.
+    */
 
     searchTimer =
       setTimeout(
         () => {
 
-          searchMusic(query);
+          searchMusic(
+            query
+          );
 
         },
-        400
+        550
       );
 
   }
 );
 
 
-/* =========================================
+/* =====================================================
    УМНЫЙ ПОИСК
-========================================= */
+===================================================== */
 
 function searchMusic(
   query
 ) {
 
+  const cleanQuery =
+    query
+      .trim()
+      .replace(
+        /\s+/g,
+        " "
+      );
+
+
+  if (
+    cleanQuery.length < 2
+  ) {
+
+    return;
+
+  }
+
+
+  /*
+    Основной запрос.
+    Apple сам ищет как
+    по названию, так и
+    по исполнителю.
+  */
+
   jsonpSearch(
-    query,
+    cleanQuery,
     data => {
 
       let results =
@@ -3005,50 +3314,17 @@ function searchMusic(
           .filter(
             item =>
               item.previewUrl
+          )
+          .map(
+            item =>
+              normalizeSong(item)
           );
 
 
-      /*
-        Если запрос содержит
-        исполнителя и название,
-        API сам пытается найти
-        оба значения.
-      */
-
-
-      songs =
-        results.map(
-          item =>
-            normalizeSong(item)
-        );
-
-
-      musicTab =
-        "recommend";
-
-
-      musicTitle.textContent =
-        "Результаты поиска";
-
-
-      if (
-        songs.length === 0
-      ) {
-
-        songList.innerHTML = `
-          <div class="no-songs">
-            😕 Ничего не найдено.<br><br>
-            Попробуй название песни
-            или имя исполнителя.
-          </div>
-        `;
-
-        return;
-
-      }
-
-
-      renderMusic();
+      finishSmartSearch(
+        results,
+        cleanQuery
+      );
 
     }
   );
@@ -3056,9 +3332,308 @@ function searchMusic(
 }
 
 
-/* =========================================
-   НОРМАЛИЗАЦИЯ
-========================================= */
+/* =====================================================
+   УМНАЯ СОРТИРОВКА
+===================================================== */
+
+function finishSmartSearch(
+  results,
+  query
+) {
+
+  const normalizedQuery =
+    normalizeSearchText(
+      query
+    );
+
+
+  /*
+    Удаляем дубли.
+  */
+
+  const unique =
+    [];
+
+  const ids =
+    new Set();
+
+
+  results.forEach(
+    song => {
+
+      if (
+        !ids.has(song.id)
+      ) {
+
+        ids.add(
+          song.id
+        );
+
+        unique.push(
+          song
+        );
+
+      }
+
+    }
+  );
+
+
+  /*
+    Считаем,
+    насколько хорошо
+    песня соответствует
+    запросу.
+  */
+
+  unique.forEach(
+    song => {
+
+      const title =
+        normalizeSearchText(
+          song.title
+        );
+
+      const artist =
+        normalizeSearchText(
+          song.artist
+        );
+
+
+      let points = 0;
+
+
+      /*
+        Полное совпадение
+        названия.
+      */
+
+      if (
+        title ===
+        normalizedQuery
+      ) {
+
+        points += 1000;
+
+      }
+
+
+      /*
+        Название начинается
+        с запроса.
+      */
+
+      if (
+        title.startsWith(
+          normalizedQuery
+        )
+      ) {
+
+        points += 700;
+
+      }
+
+
+      /*
+        Совпадение исполнителя.
+      */
+
+      if (
+        artist ===
+        normalizedQuery
+      ) {
+
+        points += 650;
+
+      }
+
+
+      /*
+        Запрос находится
+        внутри названия.
+      */
+
+      if (
+        title.includes(
+          normalizedQuery
+        )
+      ) {
+
+        points += 500;
+
+      }
+
+
+      /*
+        Запрос находится
+        внутри имени исполнителя.
+      */
+
+      if (
+        artist.includes(
+          normalizedQuery
+        )
+      ) {
+
+        points += 400;
+
+      }
+
+
+      /*
+        Проверяем отдельные слова.
+      */
+
+      const words =
+        normalizedQuery
+          .split(" ")
+          .filter(
+            word =>
+              word.length > 0
+          );
+
+
+      words.forEach(
+        word => {
+
+          if (
+            title.includes(
+              word
+            )
+          ) {
+
+            points += 80;
+
+          }
+
+
+          if (
+            artist.includes(
+              word
+            )
+          ) {
+
+            points += 100;
+
+          }
+
+        }
+      );
+
+
+      song.searchScore =
+        points;
+
+    }
+  );
+
+
+  /*
+    Самые подходящие
+    идут первыми.
+  */
+
+  unique.sort(
+    (a, b) =>
+      b.searchScore -
+      a.searchScore
+  );
+
+
+  songs =
+    unique.slice(
+      0,
+      200
+    );
+
+
+  musicTab =
+    "recommend";
+
+
+  musicTitle.textContent =
+    `Результаты поиска: ${songs.length}`;
+
+
+  if (
+    songs.length === 0
+  ) {
+
+    songList.innerHTML = `
+      <div class="no-songs">
+
+        😕 Ничего не найдено.
+
+        <br><br>
+
+        Попробуй написать:
+
+        <br><br>
+
+        <b>исполнитель</b><br>
+
+        <b>название песни</b><br>
+
+        <b>исполнитель + песня</b>
+
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  renderMusic();
+
+}
+
+
+/* =====================================================
+   НОРМАЛИЗАЦИЯ ПОИСКА
+===================================================== */
+
+function normalizeSearchText(
+  text
+) {
+
+  return String(
+    text || ""
+  )
+    .toLowerCase()
+
+    .normalize(
+      "NFD"
+    )
+
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+
+    .replace(
+      /ё/g,
+      "е"
+    )
+
+    .replace(
+      /[^a-zа-я0-9\s]/gi,
+      " "
+    )
+
+    .replace(
+      /\s+/g,
+      " "
+    )
+
+    .trim();
+
+}
+
+
+/* =====================================================
+   НОРМАЛИЗАЦИЯ ПЕСНИ
+===================================================== */
 
 function normalizeSong(
   item
@@ -3085,16 +3660,19 @@ function normalizeSong(
     artwork:
       item.artworkUrl100 ||
       item.artworkUrl60 ||
-      ""
+      "",
+
+    searchScore:
+      0
 
   };
 
 }
 
 
-/* =========================================
+/* =====================================================
    ВКЛАДКИ
-========================================= */
+===================================================== */
 
 function showMusicTab(
   tab
@@ -3110,7 +3688,8 @@ function showMusicTab(
     )
     .classList.toggle(
       "active",
-      tab === "recommend"
+      tab ===
+      "recommend"
     );
 
 
@@ -3120,12 +3699,14 @@ function showMusicTab(
     )
     .classList.toggle(
       "active",
-      tab === "favorites"
+      tab ===
+      "favorites"
     );
 
 
   musicTitle.textContent =
-    tab === "recommend"
+    tab ===
+    "recommend"
       ? "Рекомендации"
       : "❤️ Избранное";
 
@@ -3135,14 +3716,15 @@ function showMusicTab(
 }
 
 
-/* =========================================
-   ОТРИСОВКА
-========================================= */
+/* =====================================================
+   ОТРИСОВКА МУЗЫКИ
+===================================================== */
 
 function renderMusic() {
 
   if (
-    musicTab === "favorites"
+    musicTab ===
+    "favorites"
   ) {
 
     renderSongs(
@@ -3165,7 +3747,8 @@ function renderSongs(
   array
 ) {
 
-  songList.innerHTML = "";
+  songList.innerHTML =
+    "";
 
 
   if (
@@ -3174,7 +3757,7 @@ function renderSongs(
 
     songList.innerHTML = `
       <div class="no-songs">
-        Пока здесь ничего нет.
+        Здесь пока ничего нет.
       </div>
     `;
 
@@ -3189,7 +3772,8 @@ function renderSongs(
       const isFavorite =
         favorites.some(
           item =>
-            item.id === song.id
+            item.id ===
+            song.id
         );
 
 
@@ -3223,11 +3807,15 @@ function renderSongs(
         <div class="song-info">
 
           <div class="song-name">
-            ${escapeHtml(song.title)}
+            ${escapeHtml(
+              song.title
+            )}
           </div>
 
           <div class="artist-name">
-            ${escapeHtml(song.artist)}
+            ${escapeHtml(
+              song.artist
+            )}
           </div>
 
         </div>
@@ -3236,7 +3824,6 @@ function renderSongs(
 
           <button
             class="song-play"
-            data-index="${index}"
           >
             ▶
           </button>
@@ -3247,7 +3834,6 @@ function renderSongs(
                 ? "favorite"
                 : ""
             }"
-            data-favorite="${index}"
           >
             ${
               isFavorite
@@ -3266,7 +3852,7 @@ function renderSongs(
           ".song-play"
         )
         .onclick =
-        () => {
+        function() {
 
           playSong(
             song,
@@ -3281,7 +3867,7 @@ function renderSongs(
           ".song-heart"
         )
         .onclick =
-        () => {
+        function() {
 
           toggleFavorite(
             song
@@ -3300,9 +3886,9 @@ function renderSongs(
 }
 
 
-/* =========================================
-   ВОСПРОИЗВЕДЕНИЕ
-========================================= */
+/* =====================================================
+   ЗАПУСК ПЕСНИ
+===================================================== */
 
 function playSong(
   song,
@@ -3310,6 +3896,7 @@ function playSong(
 ) {
 
   if (
+    !song ||
     !song.previewUrl
   ) {
 
@@ -3327,7 +3914,8 @@ function playSong(
   currentSongIndex =
     currentQueue.findIndex(
       item =>
-        item.id === song.id
+        item.id ===
+        song.id
     );
 
 
@@ -3335,7 +3923,8 @@ function playSong(
     currentSongIndex < 0
   ) {
 
-    currentSongIndex = 0;
+    currentSongIndex =
+      0;
 
   }
 
@@ -3344,6 +3933,10 @@ function playSong(
 
 }
 
+
+/* =====================================================
+   ТЕКУЩАЯ ПЕСНЯ
+===================================================== */
 
 function playCurrentSong() {
 
@@ -3374,11 +3967,24 @@ function playCurrentSong() {
   }
 
 
+  /*
+    Останавливаем предыдущую
+    песню.
+  */
+
+  audio.pause();
+
+
+  /*
+    Ставим новую.
+  */
+
   audio.src =
     song.previewUrl;
 
 
-  audio.load();
+  audio.currentTime =
+    0;
 
 
   playerTitle.textContent =
@@ -3413,26 +4019,47 @@ function playCurrentSong() {
   );
 
 
-  audio.play()
-    .then(() => {
+  /*
+    Каждый раз ждём загрузку
+    и начинаем с 0:00.
+  */
 
-      pauseButton.textContent =
-        "⏸";
+  audio.onloadedmetadata =
+    function() {
 
-    })
-    .catch(() => {
+      audio.currentTime =
+        0;
 
-      pauseButton.textContent =
-        "▶";
 
-    });
+      audio.play()
+        .then(
+          function() {
+
+            pauseButton.textContent =
+              "⏸";
+
+          }
+        )
+        .catch(
+          function() {
+
+            pauseButton.textContent =
+              "▶";
+
+          }
+        );
+
+    };
+
+
+  audio.load();
 
 }
 
 
-/* =========================================
+/* =====================================================
    СЛЕДУЮЩАЯ ПЕСНЯ
-========================================= */
+===================================================== */
 
 function nextSong() {
 
@@ -3449,8 +4076,8 @@ function nextSong() {
 
 
   /*
-    Дошли до конца —
-    начинаем очередь сначала.
+    Если очередь закончилась —
+    начинаем сначала.
   */
 
   if (
@@ -3458,7 +4085,8 @@ function nextSong() {
     currentQueue.length
   ) {
 
-    currentSongIndex = 0;
+    currentSongIndex =
+      0;
 
   }
 
@@ -3468,18 +4096,19 @@ function nextSong() {
 }
 
 
-/* =========================================
+/* =====================================================
    ПЕСНЯ ЗАКОНЧИЛАСЬ
-========================================= */
+===================================================== */
 
 audio.addEventListener(
   "ended",
   function() {
 
     /*
-      НЕ останавливаем музыку.
+      Музыка НЕ останавливается.
 
-      Сразу включаем следующую.
+      Автоматически включается
+      следующая песня.
     */
 
     nextSong();
@@ -3488,13 +4117,15 @@ audio.addEventListener(
 );
 
 
-/* =========================================
-   ПАУЗА
-========================================= */
+/* =====================================================
+   ПАУЗА / ПРОДОЛЖЕНИЕ
+===================================================== */
 
 function toggleMusic() {
 
-  if (!audio.src) {
+  if (
+    !audio.src
+  ) {
 
     return;
 
@@ -3505,10 +4136,15 @@ function toggleMusic() {
     audio.paused
   ) {
 
-    audio.play();
+    audio.play()
+      .then(
+        function() {
 
-    pauseButton.textContent =
-      "⏸";
+          pauseButton.textContent =
+            "⏸";
+
+        }
+      );
 
   } else {
 
@@ -3522,19 +4158,23 @@ function toggleMusic() {
 }
 
 
-/* =========================================
-   ПОЛНОСТЬЮ ОСТАНОВИТЬ
-========================================= */
+/* =====================================================
+   ОСТАНОВИТЬ МУЗЫКУ
+===================================================== */
 
 function stopMusic() {
 
   audio.pause();
 
-  audio.currentTime = 0;
+
+  audio.currentTime =
+    0;
+
 
   audio.removeAttribute(
     "src"
   );
+
 
   audio.load();
 
@@ -3544,9 +4184,16 @@ function stopMusic() {
   );
 
 
-  currentQueue = [];
+  player.classList.remove(
+    "game-mode"
+  );
 
-  currentSongIndex = -1;
+
+  currentQueue =
+    [];
+
+  currentSongIndex =
+    -1;
 
 
   pauseButton.textContent =
@@ -3555,9 +4202,9 @@ function stopMusic() {
 }
 
 
-/* =========================================
+/* =====================================================
    ИЗБРАННОЕ
-========================================= */
+===================================================== */
 
 function toggleFavorite(
   song
@@ -3566,7 +4213,8 @@ function toggleFavorite(
   const index =
     favorites.findIndex(
       item =>
-        item.id === song.id
+        item.id ===
+        song.id
     );
 
 
@@ -3601,31 +4249,38 @@ function toggleFavorite(
 }
 
 
-/* =========================================
-   ЗАЩИТА ТЕКСТА
-========================================= */
+/* =====================================================
+   ЗАЩИТА HTML
+===================================================== */
 
 function escapeHtml(
   text
 ) {
 
-  return String(text)
+  return String(
+    text
+  )
+
     .replace(
       /&/g,
       "&amp;"
     )
+
     .replace(
       /</g,
       "&lt;"
     )
+
     .replace(
       />/g,
       "&gt;"
     )
+
     .replace(
       /"/g,
       "&quot;"
     )
+
     .replace(
       /'/g,
       "&#039;"
@@ -3634,20 +4289,22 @@ function escapeHtml(
 }
 
 
-/* =========================================
+/* =====================================================
    ЗАПУСК
-========================================= */
-
-/*
-  ВАЖНО:
-
-  Здесь НЕ вызываем showScreen("gameScreen").
-
-  Поэтому при открытии сайта
-  первым всегда будет ГЛАВНОЕ МЕНЮ.
-*/
+===================================================== */
 
 newGame();
+
+
+/*
+  Самое главное:
+
+  при открытии сайта
+  сначала показывается
+  ГЛАВНОЕ МЕНЮ.
+
+  Игра сама не открывается.
+*/
 
 showScreen(
   "menuScreen"
@@ -3656,4 +4313,5 @@ showScreen(
 </script>
 
 </body>
+
 </html>
