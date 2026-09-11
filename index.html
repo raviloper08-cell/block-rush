@@ -134,7 +134,42 @@
       scoreElement.textContent = score;
       createBoard();
     }
+const shapes = [
+  [[1]],
+  [[1, 1]],
+  [[1, 1, 1]],
+  [[1], [1]],
+  [[1], [1], [1]],
+  [[1, 1], [1, 1]],
+  [[1, 1, 1], [0, 1, 0]]
+];
 
+function createPieces() {
+  const pieces = document.getElementById("pieces");
+  pieces.innerHTML = "";
+
+  shapes.slice(0, 3).forEach(shape => {
+    const piece = document.createElement("div");
+    piece.className = "piece";
+
+    piece.style.gridTemplateColumns =
+      `repeat(${shape[0].length}, 22px)`;
+
+    shape.forEach(row => {
+      row.forEach(value => {
+        const cell = document.createElement("div");
+
+        if (value === 1) {
+          cell.className = "piece-cell";
+        }
+
+        piece.appendChild(cell);
+      });
+    });
+
+    pieces.appendChild(piece);
+  });
+}
     newGame();
   </script>
 
