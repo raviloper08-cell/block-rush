@@ -169,6 +169,70 @@ function createPieces() {
     });
 
     pieces.appendChild(piece);
+
+    piece.addEventListener("click", () => {
+      placeShape(shape);
+    });
+  });
+}
+function placeShape(shape) {
+  const cells = document.querySelectorAll(".cell");
+
+  let placed = false;
+
+  for (let row = 0; row < 8 && !placed; row++) {
+    for (let col = 0; col < 8 && !placed; col++) {
+
+      let canPlace = true;
+
+      for (let r = 0; r < shape.length; r++) {
+        for (let c = 0; c < shape[r].length; c++) {
+
+          if (shape[r][c] === 1) {
+            const newRow = row + r;
+            const newCol = col + c;
+
+            if (
+              newRow >= 8 ||
+              newCol >= 8 ||
+              cells[newRow * 8 + newCol].classList.contains("filled")
+            ) {
+              canPlace = false;
+            }
+          }
+        }
+      }
+
+      if (canPlace) {
+
+        for (let r = 0; r < shape.length; r++) {
+          for (let c = 0; c < shape[r].length; c++) {
+
+            if (shape[r][c] === 1) {
+              const index = (row + r) * 8 + (col + c);
+              cells[index].classList.add("filled");
+            }
+
+          }
+        }
+
+        score += shape.flat().filter(x => x === 1).length;
+        scoreElement.textContent = score;
+
+        placed = true;
+      }
+    }
+  }
+}
+        piece.appendChild(cell);
+      });
+    });
+
+        pieces.appendChild(piece);
+
+    piece.addEventListener("click", () => {
+      placeShape(shape);
+    });
   });
 }
     newGame();
