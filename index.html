@@ -27,7 +27,7 @@ html,body{
   padding:0;
   width:100%;
   min-height:100%;
-  background:#111;
+  background:#0d0d0d;
   color:#fff;
   font-family:Arial,Helvetica,sans-serif;
   overflow-x:hidden;
@@ -74,7 +74,7 @@ input{
   font-size:44px;
   font-weight:900;
   margin-bottom:20px;
-  box-shadow:0 0 35px rgba(212,175,55,.18);
+  box-shadow:0 0 35px rgba(212,175,55,.2);
 }
 
 .loader-title{
@@ -177,6 +177,7 @@ input{
   font-size:18px;
   font-weight:800;
   transition:.2s;
+  box-shadow:0 6px 15px rgba(212,175,55,.15);
 }
 
 .main-btn:active{
@@ -243,6 +244,10 @@ input{
   font-weight:800;
 }
 
+/* =========================
+   BOARD
+========================= */
+
 .board-wrap{
   display:flex;
   justify-content:center;
@@ -256,70 +261,227 @@ input{
   grid-template-columns:repeat(8,1fr);
   gap:5px;
   padding:7px;
-  background:#202020;
+
+  background:
+    linear-gradient(
+      145deg,
+      #292929,
+      #151515
+    );
+
   border:2px solid #333;
   border-radius:16px;
+
   touch-action:none;
-  box-shadow:0 12px 40px rgba(0,0,0,.35);
+
+  box-shadow:
+    0 15px 45px rgba(0,0,0,.45),
+    inset 0 1px 0 rgba(255,255,255,.04);
 }
 
 .cell{
-  background:#101010;
+  background:
+    linear-gradient(
+      145deg,
+      #171717,
+      #0a0a0a
+    );
+
   border-radius:6px;
-  transition:.12s;
+
+  position:relative;
+
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,.65),
+    inset 0 -1px 1px rgba(255,255,255,.02);
+
+  transition:
+    transform .12s,
+    opacity .12s;
+}
+
+/* =========================
+   ОБЪЁМНЫЕ ЗОЛОТЫЕ БЛОКИ
+========================= */
+
+.cell.gold,
+.piece-cell.gold{
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff1a8 0%,
+      #f5d85c 16%,
+      #D4AF37 48%,
+      #b8860b 78%,
+      #8f6508 100%
+    );
+
+  border:1px solid #f4d76b;
+
+  box-shadow:
+
+    inset 2px 2px 3px rgba(255,255,255,.55),
+
+    inset -3px -4px 5px rgba(78,48,0,.45),
+
+    0 3px 0 #765205,
+
+    0 5px 8px rgba(0,0,0,.55);
+
   position:relative;
 }
 
-.cell.filled{
+/* Блик */
+
+.cell.gold::before,
+.piece-cell.gold::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:2px;
+  left:3px;
+
+  width:45%;
+  height:25%;
+
+  border-radius:50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.75),
+      rgba(255,255,255,0)
+    );
+
+  pointer-events:none;
+}
+
+/* Нижняя грань */
+
+.cell.gold::after,
+.piece-cell.gold::after{
+
+  content:"";
+
+  position:absolute;
+
+  left:3px;
+  right:3px;
+  bottom:2px;
+
+  height:3px;
+
+  border-radius:50%;
+
+  background:
+    rgba(90,55,0,.35);
+
+  pointer-events:none;
+}
+
+/* =========================
+   КРАСНЫЕ ОБЪЁМНЫЕ
+========================= */
+
+.cell.red,
+.piece-cell.red{
+
+  background:
+    linear-gradient(
+      145deg,
+      #ff6670 0%,
+      #d8323e 35%,
+      #a51f2a 70%,
+      #64131a 100%
+    );
+
+  border:1px solid #ff6971;
+
   box-shadow:
-    inset 0 0 0 2px rgba(255,255,255,.08),
-    0 2px 5px rgba(0,0,0,.5);
+    inset 2px 2px 3px rgba(255,255,255,.35),
+    inset -3px -4px 5px rgba(50,0,0,.5),
+    0 3px 0 #541018,
+    0 5px 8px rgba(0,0,0,.5);
+
+  position:relative;
 }
 
-.cell.gold{
-  background:#D4AF37;
+/* =========================
+   ЧЁРНЫЕ ОБЪЁМНЫЕ
+========================= */
+
+.cell.black,
+.piece-cell.black{
+
+  background:
+    linear-gradient(
+      145deg,
+      #777,
+      #292929 35%,
+      #0b0b0b 75%,
+      #000
+    );
+
+  border:1px solid #777;
+
+  box-shadow:
+    inset 2px 2px 3px rgba(255,255,255,.22),
+    inset -3px -4px 5px rgba(0,0,0,.8),
+    0 3px 0 #000,
+    0 5px 8px rgba(0,0,0,.5);
+
+  position:relative;
 }
 
-.cell.red{
-  background:#a51f2a;
-}
-
-.cell.black{
-  background:#050505;
-  border:1px solid #555;
-}
+/* =========================
+   PREVIEW
+========================= */
 
 .cell.preview{
-  opacity:.38;
-  transform:scale(.88);
+  opacity:.5;
+  transform:scale(.86);
 }
+
+/* =========================
+   CLEAR ANIMATION
+========================= */
 
 .cell.clear{
   animation:clearCell .35s forwards;
 }
 
 @keyframes clearCell{
+
   0%{
     transform:scale(1);
     opacity:1;
   }
 
-  50%{
-    transform:scale(1.3);
-    opacity:.8;
+  45%{
+    transform:scale(1.2);
+    opacity:1;
   }
 
   100%{
-    transform:scale(.1);
+    transform:scale(.05);
     opacity:0;
   }
+
 }
+
+/* =========================
+   SHAKE
+========================= */
 
 .board.shake{
   animation:shake .35s;
 }
 
 @keyframes shake{
+
   0%,100%{
     transform:translateX(0);
   }
@@ -335,6 +497,7 @@ input{
   75%{
     transform:translateX(-3px);
   }
+
 }
 
 /* =========================
@@ -348,30 +511,40 @@ input{
 }
 
 .pieces{
-  min-height:125px;
+  min-height:130px;
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:20px;
+  gap:18px;
   padding:10px;
 }
 
 .piece{
+
   display:grid;
+
   gap:4px;
-  padding:10px;
-  min-width:78px;
-  min-height:78px;
+
+  padding:12px;
+
+  min-width:82px;
+  min-height:82px;
+
   justify-content:center;
   align-content:center;
-  cursor:grab;
-  touch-action:none;
-  animation:floatPiece 2s ease-in-out infinite;
-}
 
-.piece:active{
-  cursor:grabbing;
-  transform:scale(1.05);
+  cursor:grab;
+
+  touch-action:none;
+
+  animation:
+    floatPiece 2s ease-in-out infinite;
+
+  filter:
+    drop-shadow(
+      0 6px 7px rgba(0,0,0,.45)
+    );
+
 }
 
 .piece:nth-child(2){
@@ -382,33 +555,32 @@ input{
   animation-delay:.4s;
 }
 
+.piece:active{
+  cursor:grabbing;
+  transform:scale(1.08);
+}
+
 @keyframes floatPiece{
+
   0%,100%{
     transform:translateY(0);
   }
 
   50%{
-    transform:translateY(-4px);
+    transform:translateY(-5px);
   }
+
 }
 
 .piece-cell{
+
   width:22px;
   height:22px;
+
   border-radius:5px;
-}
 
-.piece-cell.gold{
-  background:#D4AF37;
-}
+  position:relative;
 
-.piece-cell.red{
-  background:#a51f2a;
-}
-
-.piece-cell.black{
-  background:#050505;
-  border:1px solid #555;
 }
 
 .piece-cell.empty{
@@ -416,7 +588,7 @@ input{
 }
 
 /* =========================
-   GAME BUTTONS
+   BUTTON
 ========================= */
 
 .game-actions{
@@ -763,12 +935,12 @@ input{
   }
 
   .pieces{
-    gap:6px;
+    gap:5px;
   }
 
   .piece{
     min-width:76px;
-    padding:7px;
+    padding:8px;
   }
 
   .piece-cell{
@@ -833,11 +1005,15 @@ input{
 
   <div class="menu">
 
-    <div class="logo">R</div>
+    <div class="logo">
+      R
+    </div>
 
     <h1>Block Rush</h1>
 
-    <p>Играй. Собирай. Побеждай.</p>
+    <p>
+      Играй. Собирай. Побеждай.
+    </p>
 
     <div class="menu-buttons">
 
@@ -1141,14 +1317,15 @@ input{
 <script>
 
 /* =====================================================
-   YOUTUBE API KEY
+   YOUTUBE
 ===================================================== */
 
-const YOUTUBE_API_KEY = "YOUR_YOUTUBE_API_KEY";
+const YOUTUBE_API_KEY =
+"YOUR_YOUTUBE_API_KEY";
 
 
 /* =====================================================
-   GAME
+   GAME SETTINGS
 ===================================================== */
 
 const SIZE = 8;
@@ -1176,7 +1353,9 @@ let searchResults = [];
 
 let favorites =
   JSON.parse(
-    localStorage.getItem("blockRushFavorites") || "[]"
+    localStorage.getItem(
+      "blockRushFavorites"
+    ) || "[]"
   );
 
 let currentSongIndex = -1;
@@ -1194,7 +1373,7 @@ let progressTimer = null;
    LOADER
 ===================================================== */
 
-setTimeout(() => {
+setTimeout(()=>{
 
   const loader =
     document.getElementById("loader");
@@ -1203,7 +1382,7 @@ setTimeout(() => {
 
   loader.style.opacity = "0";
 
-  setTimeout(() => {
+  setTimeout(()=>{
 
     if(loader){
       loader.remove();
@@ -1215,25 +1394,20 @@ setTimeout(() => {
 
 
 /* =====================================================
-   SCREEN
+   SCREENS
 ===================================================== */
 
 function showScreen(id){
 
   document
     .querySelectorAll(".screen")
-    .forEach(screen => {
-
+    .forEach(screen=>{
       screen.classList.remove("active");
-
     });
 
-  const screen =
-    document.getElementById(id);
-
-  if(screen){
-    screen.classList.add("active");
-  }
+  document
+    .getElementById(id)
+    .classList.add("active");
 
 }
 
@@ -1265,9 +1439,7 @@ function openMusic(){
   updatePlayerVisibility();
 
   if(!songs.length){
-
     loadRecommendations();
-
   }
 
 }
@@ -1410,21 +1582,22 @@ function randomPiece(){
   const shape =
     SHAPES[
       Math.floor(
-        Math.random() * SHAPES.length
+        Math.random()*SHAPES.length
       )
     ];
 
   const colors =
-    ["gold","red","black"];
+    ["gold","gold","gold","red","black"];
 
   return {
 
-    shape:shape.map(row => [...row]),
+    shape:
+      shape.map(row=>[...row]),
 
     color:
       colors[
         Math.floor(
-          Math.random() * colors.length
+          Math.random()*colors.length
         )
       ]
 
@@ -1444,24 +1617,24 @@ function newGame(){
   board =
     Array.from(
       {length:SIZE},
-      () => Array(SIZE).fill(null)
+      ()=>Array(SIZE).fill(null)
     );
 
   document
     .getElementById("score")
     .textContent = score;
 
+  closeGameOver();
+
   createPieces();
 
   renderBoard();
-
-  closeGameOver();
 
 }
 
 
 /* =====================================================
-   PIECES
+   CREATE PIECES
 ===================================================== */
 
 function createPieces(){
@@ -1481,6 +1654,48 @@ function createPieces(){
 }
 
 
+/* =====================================================
+   BOARD
+===================================================== */
+
+function renderBoard(){
+
+  const boardElement =
+    document.getElementById("board");
+
+  boardElement.innerHTML = "";
+
+  for(let r=0;r<SIZE;r++){
+
+    for(let c=0;c<SIZE;c++){
+
+      const cell =
+        document.createElement("div");
+
+      cell.className = "cell";
+
+      if(board[r][c]){
+
+        cell.classList.add(
+          "filled",
+          board[r][c]
+        );
+
+      }
+
+      boardElement.appendChild(cell);
+
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+   PIECES DISPLAY
+===================================================== */
+
 function renderPieces(){
 
   const container =
@@ -1496,8 +1711,6 @@ function renderPieces(){
       document.createElement("div");
 
     element.className = "piece";
-
-    element.dataset.index = index;
 
     const rows =
       piece.shape.length;
@@ -1536,7 +1749,10 @@ function renderPieces(){
 
     }
 
-    addDragEvents(element,index);
+    addDragEvents(
+      element,
+      index
+    );
 
     container.appendChild(element);
 
@@ -1546,61 +1762,26 @@ function renderPieces(){
 
 
 /* =====================================================
-   BOARD
+   DRAG EVENTS
 ===================================================== */
 
-function renderBoard(){
-
-  const boardElement =
-    document.getElementById("board");
-
-  boardElement.innerHTML = "";
-
-  for(let r=0;r<SIZE;r++){
-
-    for(let c=0;c<SIZE;c++){
-
-      const cell =
-        document.createElement("div");
-
-      cell.className = "cell";
-
-      cell.dataset.row = r;
-
-      cell.dataset.col = c;
-
-      if(board[r][c]){
-
-        cell.classList.add(
-          "filled",
-          board[r][c]
-        );
-
-      }
-
-      boardElement.appendChild(cell);
-
-    }
-
-  }
-
-}
-
-
-/* =====================================================
-   DRAG
-===================================================== */
-
-function addDragEvents(element,index){
+function addDragEvents(
+  element,
+  index
+){
 
   element.addEventListener(
     "mousedown",
-    e => startDrag(e,index)
+    e=>{
+      startDrag(e,index);
+    }
   );
 
   element.addEventListener(
     "touchstart",
-    e => startDrag(e,index),
+    e=>{
+      startDrag(e,index);
+    },
     {passive:false}
   );
 
@@ -1683,7 +1864,7 @@ function moveDrag(e){
 
   e.preventDefault();
 
-  const p =
+  const pointer =
     getPointer(e);
 
   const boardElement =
@@ -1700,30 +1881,30 @@ function moveDrag(e){
 
   if(!piece) return;
 
-  const cols =
-    piece.shape[0].length;
-
   const rows =
     piece.shape.length;
 
-  const centerX =
-    p.x -
+  const cols =
+    piece.shape[0].length;
+
+  const x =
+    pointer.x -
     rect.left -
     cellSize * cols / 2;
 
-  const centerY =
-    p.y -
+  const y =
+    pointer.y -
     rect.top -
     cellSize * rows / 2;
 
   const col =
     Math.floor(
-      centerX / cellSize
+      x / cellSize
     );
 
   const row =
     Math.floor(
-      centerY / cellSize
+      y / cellSize
     );
 
   showPreview(
@@ -1734,6 +1915,10 @@ function moveDrag(e){
 
 }
 
+
+/* =====================================================
+   END DRAG
+===================================================== */
 
 function endDrag(){
 
@@ -1764,22 +1949,20 @@ function endDrag(){
   const preview =
     dragPreview;
 
+  const pieceIndex =
+    selectedPiece;
+
   clearPreview();
 
   if(
-    preview &&
-    preview.length
+    preview.length &&
+    preview.every(p=>p.valid)
   ){
 
-    const valid =
-      preview.every(
-        p => p.valid
-      );
+    const piece =
+      pieces[pieceIndex];
 
-    if(valid){
-
-      const piece =
-        pieces[selectedPiece];
+    if(piece){
 
       placePiece(
         piece,
@@ -1787,9 +1970,34 @@ function endDrag(){
         preview[0].col
       );
 
-      pieces[selectedPiece] = null;
+      /*
+        ВАЖНО:
+        Фигура исчезает только здесь,
+        после успешной установки.
+      */
 
-      checkPiecesFinished();
+      pieces[pieceIndex] = null;
+
+      renderPieces();
+
+      /*
+        Если использованы все три —
+        создаём новые.
+      */
+
+      if(
+        pieces.every(
+          piece=>piece===null
+        )
+      ){
+
+        createPieces();
+
+      }else{
+
+        checkGameOver();
+
+      }
 
     }
 
@@ -1829,15 +2037,17 @@ function showPreview(
       if(!piece.shape[r][c])
         continue;
 
-      const rr = row + r;
+      const rr =
+        row+r;
 
-      const cc = col + c;
+      const cc =
+        col+c;
 
       const inside =
-        rr >= 0 &&
-        rr < SIZE &&
-        cc >= 0 &&
-        cc < SIZE;
+        rr>=0 &&
+        rr<SIZE &&
+        cc>=0 &&
+        cc<SIZE;
 
       const free =
         inside &&
@@ -1861,14 +2071,14 @@ function showPreview(
   dragPreview.forEach(p=>{
 
     if(
-      p.row >= 0 &&
-      p.row < SIZE &&
-      p.col >= 0 &&
-      p.col < SIZE
+      p.row>=0 &&
+      p.row<SIZE &&
+      p.col>=0 &&
+      p.col<SIZE
     ){
 
       const index =
-        p.row * SIZE + p.col;
+        p.row*SIZE+p.col;
 
       const cell =
         document
@@ -1906,7 +2116,7 @@ function clearPreview(){
 
 
 /* =====================================================
-   PLACE
+   PLACE PIECE
 ===================================================== */
 
 function placePiece(
@@ -1932,7 +2142,30 @@ function placePiece(
       if(!piece.shape[r][c])
         continue;
 
-      board[row+r][col+c] =
+      const rr =
+        row+r;
+
+      const cc =
+        col+c;
+
+      /*
+        Дополнительная защита:
+        никогда не записываем блок
+        за пределы поля.
+      */
+
+      if(
+        rr<0 ||
+        rr>=SIZE ||
+        cc<0 ||
+        cc>=SIZE
+      ){
+
+        continue;
+
+      }
+
+      board[rr][cc] =
         piece.color;
 
       count++;
@@ -1951,7 +2184,7 @@ function placePiece(
 
   setTimeout(
     clearLines,
-    100
+    120
   );
 
 }
@@ -1963,15 +2196,19 @@ function placePiece(
 
 function clearLines(){
 
-  let rows = [];
+  const rows = [];
 
-  let cols = [];
+  const cols = [];
+
+  /*
+    Проверяем строки.
+  */
 
   for(let r=0;r<SIZE;r++){
 
     if(
       board[r].every(
-        cell => cell !== null
+        cell=>cell!==null
       )
     ){
 
@@ -1980,6 +2217,10 @@ function clearLines(){
     }
 
   }
+
+  /*
+    Проверяем столбцы.
+  */
 
   for(let c=0;c<SIZE;c++){
 
@@ -1990,6 +2231,7 @@ function clearLines(){
       if(!board[r][c]){
 
         full = false;
+
         break;
 
       }
@@ -2002,9 +2244,14 @@ function clearLines(){
 
   }
 
+  /*
+    Ничего не заполнено —
+    ничего не удаляем.
+  */
+
   if(
-    !rows.length &&
-    !cols.length
+    rows.length===0 &&
+    cols.length===0
   ){
 
     checkGameOver();
@@ -2025,7 +2272,7 @@ function clearLines(){
     for(let c=0;c<SIZE;c++){
 
       cells.push(
-        r * SIZE + c
+        r*SIZE+c
       );
 
     }
@@ -2037,7 +2284,7 @@ function clearLines(){
     for(let r=0;r<SIZE;r++){
 
       cells.push(
-        r * SIZE + c
+        r*SIZE+c
       );
 
     }
@@ -2060,8 +2307,15 @@ function clearLines(){
 
   });
 
+  /*
+    Бонус за очищение.
+  */
+
   score +=
-    (rows.length + cols.length) * 10;
+    (
+      rows.length +
+      cols.length
+    ) * 10;
 
   document
     .getElementById("score")
@@ -2103,46 +2357,14 @@ function clearLines(){
 
 
 /* =====================================================
-   PIECES FINISHED
-===================================================== */
-
-function checkPiecesFinished(){
-
-  const left =
-    pieces.filter(Boolean);
-
-  if(left.length === 0){
-
-    createPieces();
-
-  }else{
-
-    renderPieces();
-
-    checkGameOver();
-
-  }
-
-}
-
-
-/* =====================================================
    GAME OVER
 ===================================================== */
 
 function canPlacePiece(piece){
 
-  for(
-    let r=0;
-    r<SIZE;
-    r++
-  ){
+  for(let r=0;r<SIZE;r++){
 
-    for(
-      let c=0;
-      c<SIZE;
-      c++
-    ){
+    for(let c=0;c<SIZE;c++){
 
       let possible = true;
 
@@ -2161,13 +2383,15 @@ function canPlacePiece(piece){
           if(!piece.shape[pr][pc])
             continue;
 
-          const rr = r + pr;
+          const rr =
+            r+pr;
 
-          const cc = c + pc;
+          const cc =
+            c+pc;
 
           if(
-            rr >= SIZE ||
-            cc >= SIZE ||
+            rr>=SIZE ||
+            cc>=SIZE ||
             board[rr][cc]
           ){
 
@@ -2179,8 +2403,9 @@ function canPlacePiece(piece){
 
       }
 
-      if(possible)
+      if(possible){
         return true;
+      }
 
     }
 
@@ -2199,7 +2424,7 @@ function checkGameOver(){
   if(
     available.length &&
     available.every(
-      p => !canPlacePiece(p)
+      piece=>!canPlacePiece(piece)
     )
   ){
 
@@ -2226,7 +2451,7 @@ function closeGameOver(){
 
 
 /* =====================================================
-   YOUTUBE
+   YOUTUBE API
 ===================================================== */
 
 function onYouTubeIframeAPIReady(){
@@ -2258,7 +2483,7 @@ async function youtubeSearch(query){
       part:"snippet",
 
       q:
-        query +
+        query+
         " music official",
 
       type:"video",
@@ -2277,7 +2502,7 @@ async function youtubeSearch(query){
 
     const response =
       await fetch(
-        "https://www.googleapis.com/youtube/v3/search?" +
+        "https://www.googleapis.com/youtube/v3/search?"+
         params.toString()
       );
 
@@ -2297,21 +2522,25 @@ async function youtubeSearch(query){
     }
 
     return (
-      data.items || []
+      data.items||[]
     ).map(item=>({
 
-      id:item.id.videoId,
+      id:
+        item.id.videoId,
 
-      title:item.snippet.title,
+      title:
+        item.snippet.title,
 
-      artist:item.snippet.channelTitle,
+      artist:
+        item.snippet.channelTitle,
 
       cover:
-        item.snippet.thumbnails?.medium?.url ||
-        item.snippet.thumbnails?.default?.url ||
+        item.snippet.thumbnails?.medium?.url||
+        item.snippet.thumbnails?.default?.url||
         "",
 
-      videoId:item.id.videoId
+      videoId:
+        item.id.videoId
 
     }));
 
@@ -2337,7 +2566,9 @@ async function youtubeSearch(query){
 async function loadRecommendations(){
 
   const list =
-    document.getElementById("songList");
+    document.getElementById(
+      "songList"
+    );
 
   list.innerHTML =
     `<div style="color:#777;text-align:center;padding:20px">
@@ -2364,7 +2595,9 @@ async function loadRecommendations(){
 async function searchMusic(){
 
   const input =
-    document.getElementById("musicSearch");
+    document.getElementById(
+      "musicSearch"
+    );
 
   const query =
     input.value.trim();
@@ -2378,7 +2611,9 @@ async function searchMusic(){
   }
 
   const list =
-    document.getElementById("songList");
+    document.getElementById(
+      "songList"
+    );
 
   list.innerHTML =
     `<div style="color:#777;text-align:center;padding:20px">
@@ -2386,7 +2621,9 @@ async function searchMusic(){
     </div>`;
 
   searchResults =
-    await youtubeSearch(query);
+    await youtubeSearch(
+      query
+    );
 
   renderSongs(
     searchResults,
@@ -2427,16 +2664,21 @@ function renderSongs(
       div.className = "song";
 
       if(
-        currentQueue[currentSongIndex]?.id ===
-        song.id
+        currentQueue[
+          currentSongIndex
+        ]?.id === song.id
       ){
 
-        div.classList.add("playing");
+        div.classList.add(
+          "playing"
+        );
 
       }
 
       const favorite =
-        favorites.includes(song.id);
+        favorites.includes(
+          song.id
+        );
 
       div.innerHTML = `
 
@@ -2458,9 +2700,9 @@ function renderSongs(
         </div>
 
         <button
-          class="song-heart ${favorite ? "active":""}"
+          class="song-heart ${favorite?"active":""}"
           onclick="toggleFavorite('${escapeAttribute(song.id)}',event)">
-          ${favorite ? "♥":"♡"}
+          ${favorite?"♥":"♡"}
         </button>
 
         <button
@@ -2486,9 +2728,11 @@ function playSongFromList(index){
       ? searchResults
       : songs;
 
-  currentQueue = [...list];
+  currentQueue =
+    [...list];
 
-  currentSongIndex = index;
+  currentSongIndex =
+    index;
 
   playCurrentSong();
 
@@ -2498,7 +2742,9 @@ function playSongFromList(index){
 function playCurrentSong(){
 
   const song =
-    currentQueue[currentSongIndex];
+    currentQueue[
+      currentSongIndex
+    ];
 
   if(!song)
     return;
@@ -2522,7 +2768,8 @@ function playCurrentSong(){
         "youtubePlayer",
         {
 
-          videoId:song.videoId,
+          videoId:
+            song.videoId,
 
           playerVars:{
             autoplay:1,
@@ -2553,7 +2800,8 @@ function playCurrentSong(){
 
     ytPlayer.loadVideoById({
 
-      videoId:song.videoId,
+      videoId:
+        song.videoId,
 
       startSeconds:0
 
@@ -2614,11 +2862,13 @@ function showPlayer(song){
 
   document
     .getElementById("playerTitle")
-    .textContent = song.title;
+    .textContent =
+      song.title;
 
   document
     .getElementById("playerArtist")
-    .textContent = song.artist;
+    .textContent =
+      song.artist;
 
   document
     .getElementById("player")
@@ -2690,10 +2940,10 @@ function previousSong(){
 
   currentSongIndex--;
 
-  if(currentSongIndex < 0){
+  if(currentSongIndex<0){
 
     currentSongIndex =
-      currentQueue.length - 1;
+      currentQueue.length-1;
 
   }
 
@@ -2710,7 +2960,9 @@ function stopMusic(){
 
   }
 
-  clearInterval(progressTimer);
+  clearInterval(
+    progressTimer
+  );
 
   document
     .getElementById("progressBar")
@@ -2731,7 +2983,9 @@ function stopMusic(){
 
 function startProgress(){
 
-  clearInterval(progressTimer);
+  clearInterval(
+    progressTimer
+  );
 
   progressTimer =
     setInterval(()=>{
@@ -2752,12 +3006,14 @@ function startProgress(){
       const current =
         ytPlayer.getCurrentTime();
 
-      if(duration > 0){
+      if(duration>0){
 
         document
-          .getElementById("progressBar")
+          .getElementById(
+            "progressBar"
+          )
           .value =
-            current / duration * 100;
+            current/duration*100;
 
       }
 
@@ -2777,7 +3033,8 @@ function seekMusic(value){
   if(duration){
 
     ytPlayer.seekTo(
-      duration * Number(value) / 100,
+      duration*
+      Number(value)/100,
       true
     );
 
@@ -2789,12 +3046,18 @@ function seekMusic(value){
 function setPlayButtons(icon){
 
   document
-    .getElementById("playPauseButton")
-    .textContent = icon;
+    .getElementById(
+      "playPauseButton"
+    )
+    .textContent =
+      icon;
 
   document
-    .getElementById("miniPlay")
-    .textContent = icon;
+    .getElementById(
+      "miniPlay"
+    )
+    .textContent =
+      icon;
 
 }
 
@@ -2803,14 +3066,22 @@ function updatePlayerVisibility(){
 
   const game =
     document
-      .getElementById("gameScreen")
-      .classList.contains("active");
+      .getElementById(
+        "gameScreen"
+      )
+      .classList.contains(
+        "active"
+      );
 
   const player =
-    document.getElementById("player");
+    document.getElementById(
+      "player"
+    );
 
   const mini =
-    document.getElementById("miniPlayer");
+    document.getElementById(
+      "miniPlayer"
+    );
 
   if(
     game &&
@@ -2839,15 +3110,19 @@ function toggleFavorite(
   event
 ){
 
-  if(event)
+  if(event){
     event.stopPropagation();
+  }
 
   const index =
     favorites.indexOf(id);
 
-  if(index >= 0){
+  if(index>=0){
 
-    favorites.splice(index,1);
+    favorites.splice(
+      index,
+      1
+    );
 
   }else{
 
@@ -2857,7 +3132,9 @@ function toggleFavorite(
 
   localStorage.setItem(
     "blockRushFavorites",
-    JSON.stringify(favorites)
+    JSON.stringify(
+      favorites
+    )
   );
 
   renderSongs(
@@ -2865,7 +3142,9 @@ function toggleFavorite(
       ? searchResults
       : songs,
 
-    document.getElementById("songList")
+    document.getElementById(
+      "songList"
+    )
   );
 
   renderFavorites();
@@ -2876,7 +3155,9 @@ function toggleFavorite(
 function renderFavorites(){
 
   const list =
-    document.getElementById("favoriteList");
+    document.getElementById(
+      "favoriteList"
+    );
 
   const all = [
     ...songs,
@@ -2890,7 +3171,7 @@ function renderFavorites(){
     if(
       favorites.includes(song.id) &&
       !unique.some(
-        x=>x.id === song.id
+        x=>x.id===song.id
       )
     ){
 
