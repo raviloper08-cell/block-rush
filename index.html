@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
+
 <meta charset="UTF-8">
 
 <meta
@@ -11,6 +13,7 @@
 <title>Block Rush</title>
 
 <style>
+
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
@@ -22,9 +25,21 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100%;
-  background: #0b0b0c;
-  color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
+
+  background:
+    radial-gradient(
+      circle at top,
+      #252525 0%,
+      #101010 45%,
+      #080808 100%
+    );
+
+  color: white;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 }
 
 body {
@@ -42,15 +57,6 @@ button {
   cursor: pointer;
 }
 
-.app {
-  width: 100%;
-  min-height: 100vh;
-}
-
-/* =========================
-   ЭКРАНЫ
-========================= */
-
 .screen {
   display: none;
   width: 100%;
@@ -61,198 +67,302 @@ button {
   display: flex;
 }
 
-.center-screen {
-  justify-content: center;
-  align-items: center;
-}
 
-/* =========================
+/* ================================
    ГЛАВНОЕ МЕНЮ
-========================= */
+================================ */
 
 .menu-screen {
+
   flex-direction: column;
+
   justify-content: center;
+
   align-items: center;
-  padding: 25px;
+
   text-align: center;
+
+  padding: 25px;
+
 }
 
 .menu-logo {
-  width: 82px;
-  height: 82px;
-  border-radius: 25px;
+
+  width: 90px;
+  height: 90px;
 
   display: flex;
+
   justify-content: center;
   align-items: center;
 
-  background: linear-gradient(145deg, #f5d34d, #c69715);
+  border-radius: 27px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f4d34d,
+      #c69716
+    );
+
   color: #111;
 
-  font-size: 48px;
+  font-size: 52px;
+
   font-weight: 900;
 
   box-shadow:
-    0 15px 40px rgba(212,175,55,.18),
+    0 15px 40px rgba(212,175,55,.2),
     inset 0 3px 0 rgba(255,255,255,.4);
 
   margin-bottom: 20px;
+
 }
 
 .menu-title {
-  font-size: 42px;
-  font-weight: 900;
+
   margin: 0;
+
+  font-size: 42px;
+
+  font-weight: 900;
+
   letter-spacing: -1.5px;
+
 }
 
 .menu-subtitle {
+
+  margin:
+    8px
+    0
+    35px;
+
   color: #777;
-  margin: 8px 0 35px;
+
   font-size: 15px;
+
 }
 
 .menu-buttons {
+
   width: 100%;
-  max-width: 330px;
+
+  max-width: 340px;
 
   display: flex;
+
   flex-direction: column;
+
   gap: 13px;
+
 }
 
 .menu-button {
+
   width: 100%;
+
   padding: 17px 20px;
 
   border-radius: 17px;
 
   font-size: 18px;
+
   font-weight: 900;
 
-  transition: transform .12s;
+  transition:
+    transform .12s,
+    filter .12s;
+
 }
 
 .menu-button:active {
+
   transform: scale(.97);
+
 }
 
 .play-button {
-  background: linear-gradient(145deg, #f2ce45, #c89b18);
+
+  background:
+    linear-gradient(
+      145deg,
+      #f2ce45,
+      #c89b18
+    );
+
   color: #111;
 
   box-shadow:
     0 8px 25px rgba(0,0,0,.35),
     inset 0 2px 0 rgba(255,255,255,.35);
+
 }
 
 .music-button {
+
   background: #202021;
+
   color: white;
+
   border: 1px solid #303031;
+
 }
 
-/* =========================
+
+/* ================================
    ИГРА
-========================= */
+================================ */
 
 .game-screen {
+
   flex-direction: column;
+
   align-items: center;
 
   padding:
     max(18px, env(safe-area-inset-top))
     15px
-    max(20px, env(safe-area-inset-bottom));
+    25px;
+
 }
 
 .game-container {
+
   width: 100%;
+
   max-width: 520px;
+
 }
 
 .game-header {
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
 
   margin-bottom: 17px;
+
 }
 
 .game-logo {
+
   display: flex;
+
   align-items: center;
+
   gap: 9px;
+
 }
 
 .game-logo-icon {
+
   width: 39px;
   height: 39px;
 
   display: flex;
+
   justify-content: center;
   align-items: center;
 
   border-radius: 12px;
 
   background: #e2bd31;
+
   color: #111;
 
-  font-weight: 900;
   font-size: 22px;
+
+  font-weight: 900;
+
 }
 
 .game-logo-text {
+
   font-size: 21px;
+
   font-weight: 900;
+
 }
 
 .score-box {
-  padding: 7px 13px;
+
+  padding:
+    7px
+    13px;
 
   background: #202021;
-  border: 1px solid #2c2c2d;
+
+  border:
+    1px solid
+    #2c2c2d;
 
   border-radius: 12px;
 
   text-align: center;
+
 }
 
 .score-label {
+
   font-size: 9px;
+
   color: #777;
+
   text-transform: uppercase;
+
   letter-spacing: 1px;
+
 }
 
 .score {
+
   color: #f0ca3e;
+
   font-size: 19px;
+
   font-weight: 900;
+
 }
 
 .game-heading {
+
   margin-bottom: 15px;
+
 }
 
 .game-heading h1 {
+
   margin: 0;
+
   font-size: 26px;
+
   font-weight: 900;
+
 }
 
 .game-heading p {
-  margin: 4px 0 0;
+
+  margin:
+    4px
+    0
+    0;
+
   color: #777;
+
   font-size: 13px;
+
 }
 
-/* =========================
-   ИГРОВОЕ ПОЛЕ
-========================= */
+
+/* ================================
+   ПОЛЕ
+================================ */
 
 .board-frame {
+
   width: 100%;
 
   padding: 6px;
@@ -261,21 +371,28 @@ button {
 
   background: #19191a;
 
-  border: 1px solid #2b2b2c;
+  border:
+    1px solid
+    #2b2b2c;
 
   box-shadow:
-    0 15px 40px rgba(0,0,0,.35),
-    inset 0 1px 0 rgba(255,255,255,.04);
+    0 15px 40px rgba(0,0,0,.35);
+
 }
 
 .board {
+
   width: 100%;
+
   aspect-ratio: 1 / 1;
 
   display: grid;
 
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(8, 1fr);
+  grid-template-columns:
+    repeat(8, 1fr);
+
+  grid-template-rows:
+    repeat(8, 1fr);
 
   gap: 4px;
 
@@ -286,9 +403,11 @@ button {
   border-radius: 13px;
 
   touch-action: none;
+
 }
 
 .cell {
+
   width: 100%;
   height: 100%;
 
@@ -300,319 +419,430 @@ button {
     inset 0 1px 1px rgba(255,255,255,.025),
     inset 0 -2px 2px rgba(0,0,0,.3);
 
-  transition:
-    background .1s,
-    transform .1s;
 }
 
 .cell.filled {
-  background: linear-gradient(
-    145deg,
-    #f4d34c,
-    #c89c17
-  );
+
+  background:
+    linear-gradient(
+      145deg,
+      #f4d34c,
+      #c89c17
+    );
 
   box-shadow:
     inset 0 2px 0 rgba(255,255,255,.3),
     inset 0 -3px 0 rgba(0,0,0,.18);
+
 }
 
 .cell.preview {
-  background: rgba(244,211,76,.7);
+
+  background:
+    rgba(244,211,76,.75);
+
 }
 
 .cell.invalid {
-  background: rgba(240,55,55,.65);
+
+  background:
+    rgba(240,55,55,.7);
+
 }
 
-/* =========================
+
+/* ================================
    ФИГУРЫ
-========================= */
+================================ */
 
 .choose-title {
+
   margin-top: 18px;
+
   margin-bottom: 7px;
 
   color: #666;
 
   font-size: 10px;
+
   letter-spacing: 1.5px;
+
   text-transform: uppercase;
 
   text-align: center;
+
 }
 
 .pieces {
+
   width: 100%;
 
   display: flex;
+
   justify-content: space-between;
 
   gap: 8px;
 
   min-height: 105px;
+
 }
 
 .piece-slot {
+
   flex: 1;
+
   height: 100px;
 
   display: flex;
+
   justify-content: center;
+
   align-items: center;
 
   border-radius: 16px;
 
   background: #151516;
-  border: 1px solid #202021;
+
+  border:
+    1px solid
+    #202021;
+
 }
 
 .piece {
+
   display: grid;
+
   gap: 3px;
 
   padding: 5px;
 
   touch-action: none;
+
   user-select: none;
+
   -webkit-user-select: none;
 
   cursor: grab;
+
 }
 
 .piece-cell {
+
   width: 22px;
   height: 22px;
 
   border-radius: 5px;
 
-  background: linear-gradient(
-    145deg,
-    #f4d34c,
-    #c99d17
-  );
+  background:
+    linear-gradient(
+      145deg,
+      #f4d34c,
+      #c99d17
+    );
 
   box-shadow:
     inset 0 2px 0 rgba(255,255,255,.28),
     inset 0 -2px 0 rgba(0,0,0,.18);
+
 }
 
 .piece-empty {
+
   width: 22px;
   height: 22px;
+
 }
 
 .piece.used {
+
   opacity: 0;
+
   pointer-events: none;
+
 }
 
-/* =========================
-   КНОПКИ ИГРЫ
-========================= */
+
+/* ================================
+   КНОПКИ
+================================ */
 
 .game-buttons {
+
   display: flex;
+
   gap: 8px;
 
   margin-top: 10px;
+
 }
 
 .small-button {
-  padding: 10px 15px;
+
+  padding:
+    10px
+    15px;
 
   border-radius: 12px;
 
   background: #202021;
+
   color: #aaa;
 
   font-size: 13px;
+
   font-weight: bold;
+
 }
 
-.small-button:active {
-  transform: scale(.96);
-}
 
-/* =========================
+/* ================================
    МУЗЫКА
-========================= */
+================================ */
 
 .music-screen {
+
   flex-direction: column;
+
   align-items: center;
 
   padding:
     max(20px, env(safe-area-inset-top))
     15px
     120px;
+
 }
 
 .music-container {
+
   width: 100%;
+
   max-width: 520px;
+
 }
 
 .music-header {
+
   display: flex;
+
   align-items: center;
+
   gap: 12px;
 
   margin-bottom: 20px;
+
 }
 
 .back-button {
+
   width: 42px;
   height: 42px;
 
   border-radius: 13px;
 
   background: #202021;
+
   color: white;
 
   font-size: 21px;
+
 }
 
 .music-header h1 {
+
   margin: 0;
+
   font-size: 28px;
+
 }
 
 .search-box {
+
   position: relative;
 
   width: 100%;
 
-  margin-bottom: 20px;
+  margin-bottom: 18px;
+
 }
 
 .search-input {
+
   width: 100%;
 
-  padding: 15px 45px 15px 16px;
+  padding:
+    15px
+    45px
+    15px
+    16px;
 
   border-radius: 15px;
 
-  border: 1px solid #2b2b2c;
+  border:
+    1px solid
+    #393939;
 
   outline: none;
 
   background: #19191a;
+
   color: white;
 
   font-size: 16px;
-}
 
-.search-input::placeholder {
-  color: #666;
 }
 
 .search-input:focus {
-  border-color: #b18a18;
+
+  border-color: #c49b20;
+
+}
+
+.search-input::placeholder {
+
+  color: #666;
+
 }
 
 .search-icon {
+
   position: absolute;
 
   right: 15px;
+
   top: 50%;
 
-  transform: translateY(-50%);
+  transform:
+    translateY(-50%);
 
   color: #777;
-  font-size: 19px;
+
 }
 
 .music-tabs {
+
   display: flex;
+
   gap: 8px;
 
   margin-bottom: 18px;
+
 }
 
 .music-tab {
-  padding: 9px 14px;
+
+  padding:
+    9px
+    14px;
 
   border-radius: 12px;
 
   background: #19191a;
+
   color: #777;
 
   font-size: 13px;
+
   font-weight: bold;
+
 }
 
 .music-tab.active {
+
   background: #d4af37;
+
   color: #111;
+
 }
 
 .music-section-title {
+
   font-size: 19px;
+
   font-weight: 900;
 
   margin-bottom: 12px;
+
 }
 
 .song-list {
+
   display: flex;
+
   flex-direction: column;
+
   gap: 8px;
+
 }
 
 .song {
+
   display: flex;
+
   align-items: center;
 
   gap: 11px;
 
-  padding: 11px;
+  padding: 10px;
 
   background: #151516;
 
-  border: 1px solid #222;
+  border:
+    1px solid
+    #222;
 
   border-radius: 15px;
+
 }
 
 .song-cover {
-  width: 50px;
-  height: 50px;
+
+  width: 52px;
+  height: 52px;
 
   flex-shrink: 0;
 
   border-radius: 10px;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
 
-  background: linear-gradient(
-    145deg,
-    #333,
-    #171717
-  );
+  background: #252526;
 
-  color: #d4af37;
+}
 
-  font-size: 22px;
+.song-cover img {
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
 }
 
 .song-info {
+
   min-width: 0;
+
   flex: 1;
+
 }
 
 .song-name {
+
   font-size: 15px;
+
   font-weight: bold;
 
   white-space: nowrap;
+
   overflow: hidden;
+
   text-overflow: ellipsis;
+
 }
 
 .artist-name {
+
   margin-top: 4px;
 
   color: #777;
@@ -620,90 +850,124 @@ button {
   font-size: 12px;
 
   white-space: nowrap;
+
   overflow: hidden;
+
   text-overflow: ellipsis;
+
 }
 
 .song-actions {
+
   display: flex;
-  align-items: center;
+
   gap: 5px;
+
 }
 
 .song-play,
 .song-heart {
+
   width: 38px;
   height: 38px;
 
   border-radius: 11px;
 
   display: flex;
+
   justify-content: center;
+
   align-items: center;
 
   font-size: 17px;
+
 }
 
 .song-play {
+
   background: #d4af37;
+
   color: #111;
+
 }
 
 .song-heart {
+
   background: #242425;
+
   color: #777;
+
 }
 
 .song-heart.favorite {
+
   color: #e7bf32;
+
 }
 
 .no-songs {
+
   padding: 35px 15px;
 
   text-align: center;
 
   color: #666;
+
 }
 
-/* =========================
-   НИЖНИЙ ПЛЕЕР
-========================= */
+
+/* ================================
+   ПЛЕЕР
+================================ */
 
 .player {
+
   position: fixed;
 
   left: 50%;
+
   bottom: 12px;
 
-  transform: translateX(-50%);
+  transform:
+    translateX(-50%);
 
-  width: calc(100% - 24px);
+  width:
+    calc(100% - 24px);
+
   max-width: 500px;
 
   padding: 10px 12px;
 
   display: none;
+
   align-items: center;
+
   gap: 10px;
 
   border-radius: 17px;
 
-  background: rgba(27,27,28,.96);
+  background:
+    rgba(27,27,28,.97);
 
-  border: 1px solid #353536;
+  border:
+    1px solid
+    #353536;
 
   box-shadow:
     0 10px 35px rgba(0,0,0,.55);
 
   z-index: 500;
+
 }
 
 .player.visible {
+
   display: flex;
+
 }
 
 .player-cover {
+
   width: 42px;
   height: 42px;
 
@@ -711,81 +975,140 @@ button {
 
   border-radius: 10px;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
 
   background: #252526;
-  color: #d4af37;
+
+}
+
+.player-cover img {
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
 }
 
 .player-info {
+
   min-width: 0;
+
   flex: 1;
+
 }
 
 .player-title {
+
   font-size: 13px;
+
   font-weight: bold;
 
   white-space: nowrap;
+
   overflow: hidden;
+
   text-overflow: ellipsis;
+
 }
 
 .player-artist {
+
   margin-top: 3px;
 
   color: #777;
+
   font-size: 11px;
 
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .player-button {
+
   width: 40px;
   height: 40px;
 
   border-radius: 12px;
 
   background: #d4af37;
+
   color: #111;
 
-  font-size: 16px;
   font-weight: bold;
+
 }
 
-.player-close {
+.player-stop {
+
   background: #29292a;
+
   color: #aaa;
+
 }
 
-/* =========================
+
+/* ================================
+   DRAG
+================================ */
+
+.drag-piece {
+
+  position: fixed;
+
+  z-index: 2000;
+
+  pointer-events: none;
+
+  display: grid;
+
+  gap: 4px;
+
+  transform:
+    translate(-50%, -125%)
+    scale(1.1);
+
+  opacity: .95;
+
+}
+
+.drag-piece .piece-cell {
+
+  width: 24px;
+  height: 24px;
+
+}
+
+
+/* ================================
    GAME OVER
-========================= */
+================================ */
 
 .overlay {
+
   position: fixed;
+
   inset: 0;
 
   display: none;
 
   justify-content: center;
+
   align-items: center;
 
   padding: 20px;
 
-  background: rgba(0,0,0,.8);
+  background:
+    rgba(0,0,0,.8);
 
   backdrop-filter: blur(7px);
 
   z-index: 1000;
+
 }
 
 .game-over-box {
+
   width: 100%;
+
   max-width: 350px;
 
   padding: 30px 20px;
@@ -796,77 +1119,76 @@ button {
 
   background: #1d1d1e;
 
-  border: 1px solid #303031;
+  border:
+    1px solid
+    #303031;
+
 }
 
 .game-over-icon {
+
   width: 62px;
   height: 62px;
 
-  margin: 0 auto 15px;
+  margin:
+    0
+    auto
+    15px;
 
   border-radius: 19px;
 
   display: flex;
+
   justify-content: center;
+
   align-items: center;
 
   background: #d4af37;
+
   color: #111;
 
   font-size: 30px;
+
   font-weight: 900;
+
 }
 
 .game-over-box h2 {
-  margin: 0 0 8px;
+
+  margin:
+    0
+    0
+    8px;
 
   font-size: 27px;
+
 }
 
 .game-over-box p {
+
   color: #888;
-  margin: 0 0 22px;
+
+  margin:
+    0
+    0
+    22px;
+
 }
 
 .final-score {
+
   color: #d4af37;
+
   font-weight: 900;
+
   font-size: 22px;
+
 }
 
-/* =========================
-   DRAG
-========================= */
 
-.drag-piece {
-  position: fixed;
-
-  z-index: 2000;
-
-  pointer-events: none;
-
-  display: grid;
-  gap: 4px;
-
-  transform:
-    translate(-50%, -125%)
-    scale(1.1);
-
-  opacity: .95;
-
-  filter:
-    drop-shadow(0 8px 10px rgba(0,0,0,.5));
-}
-
-.drag-piece .piece-cell {
-  width: 24px;
-  height: 24px;
-}
-
-/* =========================
-   МАЛЕНЬКИЙ ЭКРАН
-========================= */
+/* ================================
+   ТЕЛЕФОН
+================================ */
 
 @media (max-width: 370px) {
 
@@ -884,22 +1206,18 @@ button {
     gap: 2px;
   }
 
-  .piece-slot {
-    height: 92px;
-  }
-
-  .game-heading h1 {
-    font-size: 23px;
-  }
 }
 
 </style>
+
 </head>
 
 
 <body>
 
+
 <div class="app">
+
 
 <!-- =================================
      ГЛАВНОЕ МЕНЮ
@@ -910,7 +1228,9 @@ button {
   class="screen active menu-screen"
 >
 
-  <div class="menu-logo">R</div>
+  <div class="menu-logo">
+    R
+  </div>
 
   <h1 class="menu-title">
     Block Rush
@@ -966,7 +1286,6 @@ button {
 
       </div>
 
-
       <div class="score-box">
 
         <div class="score-label">
@@ -974,8 +1293,8 @@ button {
         </div>
 
         <div
-          class="score"
           id="score"
+          class="score"
         >
           0
         </div>
@@ -1001,8 +1320,8 @@ button {
     <div class="board-frame">
 
       <div
-        class="board"
         id="board"
+        class="board"
       ></div>
 
     </div>
@@ -1014,8 +1333,8 @@ button {
 
 
     <div
-      class="pieces"
       id="pieces"
+      class="pieces"
     ></div>
 
 
@@ -1134,7 +1453,10 @@ button {
   class="player"
 >
 
-  <div class="player-cover">
+  <div
+    id="playerCover"
+    class="player-cover"
+  >
     🎵
   </div>
 
@@ -1168,7 +1490,7 @@ button {
 
 
   <button
-    class="player-button player-close"
+    class="player-button player-stop"
     onclick="stopMusic()"
   >
     ✕
@@ -1218,9 +1540,6 @@ button {
 </div>
 
 
-<!-- Настоящий аудиоплеер.
-     Он НЕ уничтожается при смене экранов. -->
-
 <audio
   id="audio"
   preload="none"
@@ -1229,11 +1548,11 @@ button {
 
 <script>
 
-/* ==================================================
-   ПЕРЕКЛЮЧЕНИЕ ЭКРАНОВ
-================================================== */
+/* =========================================
+   ЭКРАНЫ
+========================================= */
 
-function showScreen(screenId) {
+function showScreen(id) {
 
   document
     .querySelectorAll(".screen")
@@ -1245,7 +1564,7 @@ function showScreen(screenId) {
 
 
   const screen =
-    document.getElementById(screenId);
+    document.getElementById(id);
 
 
   if (screen) {
@@ -1255,7 +1574,13 @@ function showScreen(screenId) {
   }
 
 
-  if (screenId === "musicScreen") {
+  if (id === "musicScreen") {
+
+    if (!recommendationsLoaded) {
+
+      loadRecommendations();
+
+    }
 
     renderMusic();
 
@@ -1264,9 +1589,9 @@ function showScreen(screenId) {
 }
 
 
-/* ==================================================
+/* =========================================
    ИГРА
-================================================== */
+========================================= */
 
 const SIZE = 8;
 
@@ -1299,9 +1624,9 @@ let draggedIndex = null;
 let dragElement = null;
 
 
-/* ==================================================
+/* =========================================
    ФИГУРЫ
-================================================== */
+========================================= */
 
 const shapes = [
 
@@ -1372,23 +1697,19 @@ const shapes = [
 ];
 
 
-/* ==================================================
-   ПУСТОЕ ПОЛЕ
-================================================== */
+/* =========================================
+   ПОЛЕ
+========================================= */
 
 function emptyBoard() {
 
   return Array.from(
-    { length: SIZE },
+    {length: SIZE},
     () => Array(SIZE).fill(0)
   );
 
 }
 
-
-/* ==================================================
-   ОТРИСОВКА ПОЛЯ
-================================================== */
 
 function renderBoard() {
 
@@ -1415,6 +1736,7 @@ function renderBoard() {
 
 
       cell.dataset.row = row;
+
       cell.dataset.col = col;
 
 
@@ -1422,16 +1744,12 @@ function renderBoard() {
         gameBoard[row][col]
       ) {
 
-        cell.classList.add(
-          "filled"
-        );
+        cell.classList.add("filled");
 
       }
 
 
-      boardElement.appendChild(
-        cell
-      );
+      boardElement.appendChild(cell);
 
     }
 
@@ -1440,9 +1758,9 @@ function renderBoard() {
 }
 
 
-/* ==================================================
-   НОВАЯ ФИГУРА
-================================================== */
+/* =========================================
+   ФИГУРЫ
+========================================= */
 
 function randomShape() {
 
@@ -1454,10 +1772,6 @@ function randomShape() {
 
 }
 
-
-/* ==================================================
-   СОЗДАТЬ 3 ФИГУРЫ
-================================================== */
 
 function createPieces() {
 
@@ -1495,10 +1809,6 @@ function createPieces() {
 }
 
 
-/* ==================================================
-   ОТРИСОВКА ФИГУРЫ
-================================================== */
-
 function createPiece(
   shape,
   index
@@ -1507,7 +1817,6 @@ function createPiece(
   const slot =
     document.createElement("div");
 
-
   slot.className =
     "piece-slot";
 
@@ -1515,13 +1824,8 @@ function createPiece(
   const piece =
     document.createElement("div");
 
-
   piece.className =
     "piece";
-
-
-  piece.dataset.index =
-    index;
 
 
   piece.style.gridTemplateColumns =
@@ -1544,19 +1848,10 @@ function createPiece(
         document.createElement("div");
 
 
-      if (
+      cell.className =
         shape[r][c] === 1
-      ) {
-
-        cell.className =
-          "piece-cell";
-
-      } else {
-
-        cell.className =
-          "piece-empty";
-
-      }
+          ? "piece-cell"
+          : "piece-empty";
 
 
       piece.appendChild(cell);
@@ -1572,8 +1867,7 @@ function createPiece(
 
       startDrag(
         event,
-        index,
-        piece
+        index
       );
 
     }
@@ -1587,9 +1881,9 @@ function createPiece(
 }
 
 
-/* ==================================================
-   ПРОВЕРКА УСТАНОВКИ
-================================================== */
+/* =========================================
+   РАЗМЕЩЕНИЕ
+========================================= */
 
 function canPlace(
   shape,
@@ -1611,18 +1905,12 @@ function canPlace(
 
       if (
         shape[r][c] !== 1
-      ) {
-
-        continue;
-
-      }
+      ) continue;
 
 
-      const rr =
-        row + r;
+      const rr = row + r;
 
-      const cc =
-        col + c;
+      const cc = col + c;
 
 
       if (
@@ -1649,20 +1937,12 @@ function canPlace(
 
   }
 
-
   return true;
 
 }
 
 
-/* ==================================================
-   ТОЧНАЯ ПОЗИЦИЯ НА ПОЛЕ
-================================================== */
-
-function getBoardCell(
-  x,
-  y
-) {
+function getBoardCell(x, y) {
 
   const rect =
     boardElement.getBoundingClientRect();
@@ -1671,6 +1951,7 @@ function getBoardCell(
   const padding = 3;
 
   const gap = 4;
+
 
   const available =
     rect.width -
@@ -1713,9 +1994,9 @@ function getBoardCell(
 }
 
 
-/* ==================================================
+/* =========================================
    ПОДСВЕТКА
-================================================== */
+========================================= */
 
 function clearPreview() {
 
@@ -1766,18 +2047,12 @@ function showPreview(
 
       if (
         shape[r][c] !== 1
-      ) {
-
-        continue;
-
-      }
+      ) continue;
 
 
-      const rr =
-        row + r;
+      const rr = row + r;
 
-      const cc =
-        col + c;
+      const cc = col + c;
 
 
       if (
@@ -1785,11 +2060,7 @@ function showPreview(
         rr >= SIZE ||
         cc < 0 ||
         cc >= SIZE
-      ) {
-
-        continue;
-
-      }
+      ) continue;
 
 
       const cell =
@@ -1815,9 +2086,9 @@ function showPreview(
 }
 
 
-/* ==================================================
+/* =========================================
    DRAG
-================================================== */
+========================================= */
 
 function createDragPiece(shape) {
 
@@ -1826,7 +2097,6 @@ function createDragPiece(shape) {
 
   dragElement =
     document.createElement("div");
-
 
   dragElement.className =
     "drag-piece";
@@ -1852,24 +2122,13 @@ function createDragPiece(shape) {
         document.createElement("div");
 
 
-      if (
+      cell.className =
         shape[r][c] === 1
-      ) {
-
-        cell.className =
-          "piece-cell";
-
-      } else {
-
-        cell.className =
-          "piece-empty";
-
-      }
+          ? "piece-cell"
+          : "piece-empty";
 
 
-      dragElement.appendChild(
-        cell
-      );
+      dragElement.appendChild(cell);
 
     }
 
@@ -1896,23 +2155,14 @@ function removeDragPiece() {
 }
 
 
-/* ==================================================
-   НАЧАЛО DRAG
-================================================== */
-
 function startDrag(
   event,
-  index,
-  piece
+  index
 ) {
 
   if (
     currentPieces[index].used
-  ) {
-
-    return;
-
-  }
+  ) return;
 
 
   event.preventDefault();
@@ -1923,12 +2173,8 @@ function startDrag(
   draggedIndex = index;
 
 
-  const shape =
-    currentPieces[index].shape;
-
-
   createDragPiece(
-    shape
+    currentPieces[index].shape
   );
 
 
@@ -1941,14 +2187,14 @@ function startDrag(
   window.addEventListener(
     "pointermove",
     onDragMove,
-    { passive: false }
+    {passive:false}
   );
 
 
   window.addEventListener(
     "pointerup",
     onDragEnd,
-    { once: true }
+    {once:true}
   );
 
 }
@@ -1956,11 +2202,7 @@ function startDrag(
 
 function onDragMove(event) {
 
-  if (!dragging) {
-
-    return;
-
-  }
+  if (!dragging) return;
 
 
   event.preventDefault();
@@ -1974,20 +2216,9 @@ function onDragMove(event) {
 }
 
 
-/* ==================================================
-   ДВИЖЕНИЕ
-================================================== */
+function moveDrag(x, y) {
 
-function moveDrag(
-  x,
-  y
-) {
-
-  if (!dragElement) {
-
-    return;
-
-  }
+  if (!dragElement) return;
 
 
   dragElement.style.left =
@@ -2001,14 +2232,12 @@ function moveDrag(
     boardElement.getBoundingClientRect();
 
 
-  const inside =
-    x >= rect.left &&
-    x <= rect.right &&
-    y >= rect.top &&
-    y <= rect.bottom;
-
-
-  if (!inside) {
+  if (
+    x < rect.left ||
+    x > rect.right ||
+    y < rect.top ||
+    y > rect.bottom
+  ) {
 
     clearPreview();
 
@@ -2019,11 +2248,7 @@ function moveDrag(
 
   if (
     draggedIndex === null
-  ) {
-
-    return;
-
-  }
+  ) return;
 
 
   const shape =
@@ -2038,11 +2263,6 @@ function moveDrag(
       y
     );
 
-
-  /*
-    Центр фигуры находится
-    примерно под пальцем.
-  */
 
   const row =
     pos.row -
@@ -2067,17 +2287,9 @@ function moveDrag(
 }
 
 
-/* ==================================================
-   ОТПУСТИЛ ФИГУРУ
-================================================== */
-
 function onDragEnd(event) {
 
-  if (!dragging) {
-
-    return;
-
-  }
+  if (!dragging) return;
 
 
   const x =
@@ -2091,15 +2303,11 @@ function onDragEnd(event) {
     boardElement.getBoundingClientRect();
 
 
-  const inside =
+  if (
     x >= rect.left &&
     x <= rect.right &&
     y >= rect.top &&
-    y <= rect.bottom;
-
-
-  if (
-    inside &&
+    y <= rect.bottom &&
     draggedIndex !== null
   ) {
 
@@ -2158,9 +2366,9 @@ function onDragEnd(event) {
 }
 
 
-/* ==================================================
-   ПОСТАВИТЬ ФИГУРУ
-================================================== */
+/* =========================================
+   ПОСТАВИТЬ
+========================================= */
 
 function placeShape(
   shape,
@@ -2175,11 +2383,7 @@ function placeShape(
       row,
       col
     )
-  ) {
-
-    return false;
-
-  }
+  ) return false;
 
 
   let blocks = 0;
@@ -2201,12 +2405,7 @@ function placeShape(
         shape[r][c] === 1
       ) {
 
-        gameBoard[
-          row + r
-        ][
-          col + c
-        ] = 1;
-
+        gameBoard[row+r][col+c] = 1;
 
         blocks++;
 
@@ -2225,7 +2424,6 @@ function placeShape(
 
 
   renderBoard();
-
 
   clearLines();
 
@@ -2246,9 +2444,7 @@ function placeShape(
 
     if (piece) {
 
-      piece.classList.add(
-        "used"
-      );
+      piece.classList.add("used");
 
     }
 
@@ -2257,7 +2453,7 @@ function placeShape(
 
   if (
     currentPieces.every(
-      piece => piece.used
+      p => p.used
     )
   ) {
 
@@ -2268,19 +2464,19 @@ function placeShape(
 
   checkGameOver();
 
-
   return true;
 
 }
 
 
-/* ==================================================
+/* =========================================
    ЛИНИИ
-================================================== */
+========================================= */
 
 function clearLines() {
 
   const rows = [];
+
   const cols = [];
 
 
@@ -2377,11 +2573,10 @@ function clearLines() {
 
   if (total > 0) {
 
-    score +=
-      total * 10;
+    score += total * 10;
 
 
-    if (total >= 2) {
+    if (total > 1) {
 
       score +=
         (total - 1) * 5;
@@ -2396,25 +2591,21 @@ function clearLines() {
 }
 
 
-/* ==================================================
+/* =========================================
    GAME OVER
-================================================== */
+========================================= */
 
 function checkGameOver() {
 
   const available =
     currentPieces.filter(
-      piece => !piece.used
+      p => !p.used
     );
 
 
   if (
     available.length === 0
-  ) {
-
-    return;
-
-  }
+  ) return;
 
 
   for (
@@ -2422,22 +2613,22 @@ function checkGameOver() {
   ) {
 
     for (
-      let row = 0;
-      row < SIZE;
-      row++
+      let r = 0;
+      r < SIZE;
+      r++
     ) {
 
       for (
-        let col = 0;
-        col < SIZE;
-        col++
+        let c = 0;
+        c < SIZE;
+        c++
       ) {
 
         if (
           canPlace(
             piece.shape,
-            row,
-            col
+            r,
+            c
           )
         ) {
 
@@ -2462,9 +2653,9 @@ function checkGameOver() {
 }
 
 
-/* ==================================================
+/* =========================================
    НОВАЯ ИГРА
-================================================== */
+========================================= */
 
 function newGame() {
 
@@ -2498,61 +2689,58 @@ function newGame() {
 
   createPieces();
 
-
-  showScreen(
-    "gameScreen"
-  );
-
 }
 
 
-/* ==================================================
+/* =========================================
    МУЗЫКА
-================================================== */
+========================================= */
 
 const audio =
   document.getElementById("audio");
 
-
 const musicSearch =
   document.getElementById("musicSearch");
-
 
 const songList =
   document.getElementById("songList");
 
-
 const musicTitle =
   document.getElementById("musicTitle");
-
 
 const player =
   document.getElementById("player");
 
-
 const playerTitle =
   document.getElementById("playerTitle");
-
 
 const playerArtist =
   document.getElementById("playerArtist");
 
+const playerCover =
+  document.getElementById("playerCover");
 
 const pauseButton =
   document.getElementById("pauseButton");
 
 
+let songs = [];
+
 let musicTab =
   "recommend";
 
+let currentSongIndex =
+  -1;
 
-let songs = [];
+let currentQueue = [];
+
+let recommendationsLoaded =
+  false;
 
 
-/*
-  Избранное сохраняем
-  в памяти браузера.
-*/
+/* =========================================
+   ИЗБРАННОЕ
+========================================= */
 
 let favorites =
   JSON.parse(
@@ -2562,52 +2750,358 @@ let favorites =
   );
 
 
-/* ==================================================
+/* =========================================
    РЕКОМЕНДАЦИИ
-================================================== */
+========================================= */
 
-const recommendations = [
-
-  {
-    id: "r1",
-    title: "Blinding Lights",
-    artist: "The Weeknd"
-  },
-
-  {
-    id: "r2",
-    title: "Believer",
-    artist: "Imagine Dragons"
-  },
-
-  {
-    id: "r3",
-    title: "Thunder",
-    artist: "Imagine Dragons"
-  },
-
-  {
-    id: "r4",
-    title: "Counting Stars",
-    artist: "OneRepublic"
-  },
-
-  {
-    id: "r5",
-    title: "Shape of You",
-    artist: "Ed Sheeran"
-  }
-
+const recommendationQueries = [
+  "The Weeknd",
+  "Imagine Dragons",
+  "Eminem",
+  "Linkin Park"
 ];
 
 
-/* ==================================================
-   ПОКАЗ МУЗЫКИ
-================================================== */
+function loadRecommendations() {
 
-function showMusicTab(tab) {
+  recommendationsLoaded =
+    true;
 
-  musicTab = tab;
+
+  const results = [];
+
+  let completed = 0;
+
+
+  recommendationQueries.forEach(
+    query => {
+
+      jsonpSearch(
+        query,
+        data => {
+
+          const items =
+            (data.results || [])
+              .filter(
+                item =>
+                  item.previewUrl
+              )
+              .slice(0, 8)
+              .map(
+                item => normalizeSong(item)
+              );
+
+
+          results.push(
+            ...items
+          );
+
+
+          completed++;
+
+
+          if (
+            completed ===
+            recommendationQueries.length
+          ) {
+
+            const unique =
+              [];
+
+
+            const ids =
+              new Set();
+
+
+            results.forEach(song => {
+
+              if (
+                !ids.has(song.id)
+              ) {
+
+                ids.add(song.id);
+
+                unique.push(song);
+
+              }
+
+            });
+
+
+            songs =
+              unique.slice(
+                0,
+                30
+              );
+
+
+            if (
+              musicTab === "recommend"
+            ) {
+
+              renderMusic();
+
+            }
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   JSONP ПОИСК
+========================================= */
+
+function jsonpSearch(
+  query,
+  callback
+) {
+
+  const callbackName =
+    "ravoMusic_" +
+    Date.now() +
+    "_" +
+    Math.floor(
+      Math.random() * 100000
+    );
+
+
+  const script =
+    document.createElement("script");
+
+
+  window[callbackName] =
+    function(data) {
+
+      callback(data);
+
+
+      delete window[callbackName];
+
+
+      script.remove();
+
+    };
+
+
+  script.onerror =
+    function() {
+
+      delete window[callbackName];
+
+      script.remove();
+
+      callback({
+        results: []
+      });
+
+    };
+
+
+  script.src =
+    "https://itunes.apple.com/search" +
+    "?term=" +
+    encodeURIComponent(query) +
+    "&country=US" +
+    "&media=music" +
+    "&entity=song" +
+    "&limit=200" +
+    "&callback=" +
+    callbackName;
+
+
+  document.body.appendChild(
+    script
+  );
+
+}
+
+
+/* =========================================
+   ПОИСК
+========================================= */
+
+let searchTimer =
+  null;
+
+
+musicSearch.addEventListener(
+  "input",
+  function() {
+
+    const query =
+      this.value.trim();
+
+
+    clearTimeout(
+      searchTimer
+    );
+
+
+    if (
+      query.length < 2
+    ) {
+
+      musicTab =
+        "recommend";
+
+
+      musicTitle.textContent =
+        "Рекомендации";
+
+
+      renderMusic();
+
+      return;
+
+    }
+
+
+    musicTitle.textContent =
+      "Поиск: " + query;
+
+
+    songList.innerHTML = `
+      <div class="no-songs">
+        🔎 Ищу песни...
+      </div>
+    `;
+
+
+    searchTimer =
+      setTimeout(
+        () => {
+
+          searchMusic(query);
+
+        },
+        400
+      );
+
+  }
+);
+
+
+/* =========================================
+   УМНЫЙ ПОИСК
+========================================= */
+
+function searchMusic(
+  query
+) {
+
+  jsonpSearch(
+    query,
+    data => {
+
+      let results =
+        (data.results || [])
+          .filter(
+            item =>
+              item.previewUrl
+          );
+
+
+      /*
+        Если запрос содержит
+        исполнителя и название,
+        API сам пытается найти
+        оба значения.
+      */
+
+
+      songs =
+        results.map(
+          item =>
+            normalizeSong(item)
+        );
+
+
+      musicTab =
+        "recommend";
+
+
+      musicTitle.textContent =
+        "Результаты поиска";
+
+
+      if (
+        songs.length === 0
+      ) {
+
+        songList.innerHTML = `
+          <div class="no-songs">
+            😕 Ничего не найдено.<br><br>
+            Попробуй название песни
+            или имя исполнителя.
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      renderMusic();
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   НОРМАЛИЗАЦИЯ
+========================================= */
+
+function normalizeSong(
+  item
+) {
+
+  return {
+
+    id:
+      String(
+        item.trackId
+      ),
+
+    title:
+      item.trackName ||
+      "Без названия",
+
+    artist:
+      item.artistName ||
+      "Неизвестный исполнитель",
+
+    previewUrl:
+      item.previewUrl,
+
+    artwork:
+      item.artworkUrl100 ||
+      item.artworkUrl60 ||
+      ""
+
+  };
+
+}
+
+
+/* =========================================
+   ВКЛАДКИ
+========================================= */
+
+function showMusicTab(
+  tab
+) {
+
+  musicTab =
+    tab;
 
 
   document
@@ -2641,9 +3135,9 @@ function showMusicTab(tab) {
 }
 
 
-/* ==================================================
-   ОТРИСОВКА МУЗЫКИ
-================================================== */
+/* =========================================
+   ОТРИСОВКА
+========================================= */
 
 function renderMusic() {
 
@@ -2651,426 +3145,234 @@ function renderMusic() {
     musicTab === "favorites"
   ) {
 
-    renderFavorites();
+    renderSongs(
+      favorites
+    );
 
     return;
 
   }
 
 
-  renderRecommendations();
-
-}
-
-
-/* ==================================================
-   РЕКОМЕНДАЦИИ
-================================================== */
-
-function renderRecommendations() {
-
-  if (!songs.length) {
-
-    songList.innerHTML =
-      `
-      <div class="no-songs">
-        🔎 Введи название песни
-        или исполнителя в поиск
-      </div>
-      `;
-
-    return;
-
-  }
-
-
-  renderSongArray(
+  renderSongs(
     songs
   );
 
 }
 
 
-/* ==================================================
-   ИЗБРАННОЕ
-================================================== */
-
-function renderFavorites() {
-
-  if (
-    favorites.length === 0
-  ) {
-
-    songList.innerHTML =
-      `
-      <div class="no-songs">
-        ❤️ Здесь пока ничего нет.<br>
-        Нажимай сердечко рядом с песнями.
-      </div>
-      `;
-
-    return;
-
-  }
-
-
-  renderSongArray(
-    favorites
-  );
-
-}
-
-
-/* ==================================================
-   СПИСОК ПЕСЕН
-================================================== */
-
-function renderSongArray(
+function renderSongs(
   array
 ) {
 
   songList.innerHTML = "";
 
 
-  array.forEach(song => {
-
-    const favorite =
-      favorites.some(
-        item =>
-          item.id === song.id
-      );
-
-
-    const row =
-      document.createElement(
-        "div"
-      );
-
-
-    row.className =
-      "song";
-
-
-    row.innerHTML = `
-
-      <div class="song-cover">
-        ♪
-      </div>
-
-      <div class="song-info">
-
-        <div class="song-name">
-          ${escapeHtml(song.title)}
-        </div>
-
-        <div class="artist-name">
-          ${escapeHtml(song.artist)}
-        </div>
-
-      </div>
-
-      <div class="song-actions">
-
-        <button
-          class="song-play"
-          onclick='playSong(${JSON.stringify(song).replace(/'/g, "&apos;")})'
-        >
-          ▶
-        </button>
-
-        <button
-          class="song-heart ${favorite ? "favorite" : ""}"
-          onclick='toggleFavorite(${JSON.stringify(song).replace(/'/g, "&apos;")})'
-        >
-          ${favorite ? "♥" : "♡"}
-        </button>
-
-      </div>
-
-    `;
-
-
-    songList.appendChild(
-      row
-    );
-
-  });
-
-}
-
-
-/* ==================================================
-   ПОИСК ПЕСЕН
-================================================== */
-
-let searchTimer = null;
-
-
-musicSearch.addEventListener(
-  "input",
-  function() {
-
-    const query =
-      this.value.trim();
-
-
-    clearTimeout(
-      searchTimer
-    );
-
-
-    if (
-      query.length < 2
-    ) {
-
-      songs = [];
-
-      musicTab = "recommend";
-
-      musicTitle.textContent =
-        "Рекомендации";
-
-      renderRecommendations();
-
-      return;
-
-    }
-
-
-    musicTitle.textContent =
-      "Результаты поиска";
-
-
-    songList.innerHTML =
-      `
-      <div class="no-songs">
-        🔎 Ищу песни...
-      </div>
-      `;
-
-
-    searchTimer =
-      setTimeout(
-        () => searchMusic(query),
-        500
-      );
-
-  }
-);
-
-
-/* ==================================================
-   ITUNES ПОИСК
-================================================== */
-
-async function searchMusic(
-  query
-) {
-
-  try {
-
-    const url =
-      "https://itunes.apple.com/search" +
-      "?term=" +
-      encodeURIComponent(query) +
-      "&media=music" +
-      "&entity=song" +
-      "&limit=25";
-
-
-    const response =
-      await fetch(url);
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        "Search error"
-      );
-
-    }
-
-
-    const data =
-      await response.json();
-
-
-    songs =
-      data.results
-        .filter(
-          item =>
-            item.previewUrl
-        )
-        .map(
-          item => ({
-
-            id:
-              String(
-                item.trackId
-              ),
-
-            title:
-              item.trackName,
-
-            artist:
-              item.artistName,
-
-            previewUrl:
-              item.previewUrl,
-
-            artwork:
-              item.artworkUrl100 || ""
-
-          })
-        );
-
-
-    musicTab =
-      "recommend";
-
-
-    musicTitle.textContent =
-      "Результаты поиска";
-
-
-    if (
-      songs.length === 0
-    ) {
-
-      songList.innerHTML =
-        `
-        <div class="no-songs">
-          😕 Ничего не найдено
-        </div>
-        `;
-
-      return;
-
-    }
-
-
-    renderSongArray(
-      songs
-    );
-
-  }
-
-  catch (error) {
-
-    songList.innerHTML =
-      `
-      <div class="no-songs">
-        ⚠️ Не удалось выполнить поиск.<br>
-        Проверь интернет-соединение.
-      </div>
-      `;
-
-  }
-
-}
-
-function searchMusic(query) {
-
-  songList.innerHTML = `
-    <div class="no-songs">
-      🔎 Ищу песни...
-    </div>
-  `;
-
-  const oldScript =
-    document.getElementById("musicSearchScript");
-
-  if (oldScript) {
-    oldScript.remove();
-  }
-
-  const callbackName =
-    "blockRushMusicCallback";
-
-  window[callbackName] = function(data) {
-
-    songs = data.results
-      .filter(item => item.previewUrl)
-      .map(item => ({
-        id: String(item.trackId),
-        title: item.trackName,
-        artist: item.artistName,
-        previewUrl: item.previewUrl,
-        artwork: item.artworkUrl100 || ""
-      }));
-
-    musicTab = "recommend";
-
-    musicTitle.textContent =
-      "Результаты поиска";
-
-    if (songs.length === 0) {
-
-      songList.innerHTML = `
-        <div class="no-songs">
-          😕 Песни не найдены
-        </div>
-      `;
-
-      return;
-    }
-
-    renderSongArray(songs);
-
-  };
-
-
-  const script =
-    document.createElement("script");
-
-  script.id =
-    "musicSearchScript";
-
-  script.src =
-    "https://itunes.apple.com/search" +
-    "?term=" +
-    encodeURIComponent(query) +
-    "&media=music" +
-    "&entity=song" +
-    "&limit=25" +
-    "&callback=" +
-    callbackName;
-
-  script.onerror = function() {
+  if (
+    array.length === 0
+  ) {
 
     songList.innerHTML = `
       <div class="no-songs">
-        ⚠️ Не удалось выполнить поиск.<br>
-        Попробуй ещё раз.
+        Пока здесь ничего нет.
       </div>
     `;
-
-  };
-
-  document.body.appendChild(script);
-
-}
-
-function playSong(song) {
-
-  if (
-    !song.previewUrl
-  ) {
-
-    alert(
-      "Для этой песни нет доступного превью."
-    );
 
     return;
 
   }
 
 
-  /*
-    Если нажали другую песню,
-    текущая останавливается
-    и запускается новая.
-  */
+  array.forEach(
+    (song, index) => {
+
+      const isFavorite =
+        favorites.some(
+          item =>
+            item.id === song.id
+        );
+
+
+      const row =
+        document.createElement(
+          "div"
+        );
+
+
+      row.className =
+        "song";
+
+
+      const cover =
+        song.artwork
+          ? `
+            <img
+              src="${song.artwork}"
+              alt=""
+            >
+          `
+          : "🎵";
+
+
+      row.innerHTML = `
+
+        <div class="song-cover">
+          ${cover}
+        </div>
+
+        <div class="song-info">
+
+          <div class="song-name">
+            ${escapeHtml(song.title)}
+          </div>
+
+          <div class="artist-name">
+            ${escapeHtml(song.artist)}
+          </div>
+
+        </div>
+
+        <div class="song-actions">
+
+          <button
+            class="song-play"
+            data-index="${index}"
+          >
+            ▶
+          </button>
+
+          <button
+            class="song-heart ${
+              isFavorite
+                ? "favorite"
+                : ""
+            }"
+            data-favorite="${index}"
+          >
+            ${
+              isFavorite
+                ? "♥"
+                : "♡"
+            }
+          </button>
+
+        </div>
+
+      `;
+
+
+      row
+        .querySelector(
+          ".song-play"
+        )
+        .onclick =
+        () => {
+
+          playSong(
+            song,
+            array
+          );
+
+        };
+
+
+      row
+        .querySelector(
+          ".song-heart"
+        )
+        .onclick =
+        () => {
+
+          toggleFavorite(
+            song
+          );
+
+        };
+
+
+      songList.appendChild(
+        row
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================
+   ВОСПРОИЗВЕДЕНИЕ
+========================================= */
+
+function playSong(
+  song,
+  queue
+) {
+
+  if (
+    !song.previewUrl
+  ) {
+
+    return;
+
+  }
+
+
+  currentQueue =
+    queue.length
+      ? queue
+      : [song];
+
+
+  currentSongIndex =
+    currentQueue.findIndex(
+      item =>
+        item.id === song.id
+    );
+
+
+  if (
+    currentSongIndex < 0
+  ) {
+
+    currentSongIndex = 0;
+
+  }
+
+
+  playCurrentSong();
+
+}
+
+
+function playCurrentSong() {
+
+  if (
+    currentQueue.length === 0
+  ) {
+
+    return;
+
+  }
+
+
+  const song =
+    currentQueue[
+      currentSongIndex
+    ];
+
+
+  if (
+    !song ||
+    !song.previewUrl
+  ) {
+
+    nextSong();
+
+    return;
+
+  }
+
 
   audio.src =
     song.previewUrl;
@@ -3079,21 +3381,40 @@ function playSong(song) {
   audio.load();
 
 
+  playerTitle.textContent =
+    song.title;
+
+
+  playerArtist.textContent =
+    song.artist;
+
+
+  if (
+    song.artwork
+  ) {
+
+    playerCover.innerHTML = `
+      <img
+        src="${song.artwork}"
+        alt=""
+      >
+    `;
+
+  } else {
+
+    playerCover.innerHTML =
+      "🎵";
+
+  }
+
+
+  player.classList.add(
+    "visible"
+  );
+
+
   audio.play()
     .then(() => {
-
-      player.classList.add(
-        "visible"
-      );
-
-
-      playerTitle.textContent =
-        song.title;
-
-
-      playerArtist.textContent =
-        song.artist;
-
 
       pauseButton.textContent =
         "⏸";
@@ -3101,18 +3422,75 @@ function playSong(song) {
     })
     .catch(() => {
 
-      alert(
-        "Нажми ▶ ещё раз, чтобы запустить музыку."
-      );
+      pauseButton.textContent =
+        "▶";
 
     });
 
 }
 
 
-/* ==================================================
-   ПАУЗА / ПРОДОЛЖЕНИЕ
-================================================== */
+/* =========================================
+   СЛЕДУЮЩАЯ ПЕСНЯ
+========================================= */
+
+function nextSong() {
+
+  if (
+    currentQueue.length === 0
+  ) {
+
+    return;
+
+  }
+
+
+  currentSongIndex++;
+
+
+  /*
+    Дошли до конца —
+    начинаем очередь сначала.
+  */
+
+  if (
+    currentSongIndex >=
+    currentQueue.length
+  ) {
+
+    currentSongIndex = 0;
+
+  }
+
+
+  playCurrentSong();
+
+}
+
+
+/* =========================================
+   ПЕСНЯ ЗАКОНЧИЛАСЬ
+========================================= */
+
+audio.addEventListener(
+  "ended",
+  function() {
+
+    /*
+      НЕ останавливаем музыку.
+
+      Сразу включаем следующую.
+    */
+
+    nextSong();
+
+  }
+);
+
+
+/* =========================================
+   ПАУЗА
+========================================= */
 
 function toggleMusic() {
 
@@ -3144,9 +3522,9 @@ function toggleMusic() {
 }
 
 
-/* ==================================================
-   ОСТАНОВИТЬ
-================================================== */
+/* =========================================
+   ПОЛНОСТЬЮ ОСТАНОВИТЬ
+========================================= */
 
 function stopMusic() {
 
@@ -3166,30 +3544,20 @@ function stopMusic() {
   );
 
 
+  currentQueue = [];
+
+  currentSongIndex = -1;
+
+
   pauseButton.textContent =
     "▶";
 
 }
 
 
-/* ==================================================
-   АВТОПЕРЕКЛЮЧЕНИЕ UI ПО КОНЦУ ПРЕВЬЮ
-================================================== */
-
-audio.addEventListener(
-  "ended",
-  function() {
-
-    pauseButton.textContent =
-      "▶";
-
-  }
-);
-
-
-/* ==================================================
+/* =========================================
    ИЗБРАННОЕ
-================================================== */
+========================================= */
 
 function toggleFavorite(
   song
@@ -3202,7 +3570,9 @@ function toggleFavorite(
     );
 
 
-  if (index >= 0) {
+  if (
+    index >= 0
+  ) {
 
     favorites.splice(
       index,
@@ -3231,9 +3601,9 @@ function toggleFavorite(
 }
 
 
-/* ==================================================
+/* =========================================
    ЗАЩИТА ТЕКСТА
-================================================== */
+========================================= */
 
 function escapeHtml(
   text
@@ -3264,11 +3634,24 @@ function escapeHtml(
 }
 
 
-/* ==================================================
-   СТАРТ ИГРЫ
-================================================== */
+/* =========================================
+   ЗАПУСК
+========================================= */
+
+/*
+  ВАЖНО:
+
+  Здесь НЕ вызываем showScreen("gameScreen").
+
+  Поэтому при открытии сайта
+  первым всегда будет ГЛАВНОЕ МЕНЮ.
+*/
 
 newGame();
+
+showScreen(
+  "menuScreen"
+);
 
 </script>
 
