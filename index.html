@@ -22,137 +22,249 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100%;
-  background:
-    radial-gradient(circle at top, #252525 0%, #111 45%, #080808 100%);
-  color: white;
+  background: #0b0b0c;
+  color: #fff;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
   overflow-x: hidden;
 }
 
-button {
+button,
+input {
   font-family: inherit;
 }
 
-.game {
+button {
+  border: 0;
+  cursor: pointer;
+}
+
+.app {
   width: 100%;
-  max-width: 520px;
   min-height: 100vh;
-  padding:
-    max(24px, env(safe-area-inset-top))
-    18px
-    max(25px, env(safe-area-inset-bottom));
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-/* ---------- HEADER ---------- */
+/* =========================
+   ЭКРАНЫ
+========================= */
 
-.header {
+.screen {
+  display: none;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 18px;
+  min-height: 100vh;
 }
 
-.logo {
+.screen.active {
   display: flex;
-  align-items: center;
-  gap: 10px;
 }
 
-.logo-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 13px;
+.center-screen {
+  justify-content: center;
+  align-items: center;
+}
+
+/* =========================
+   ГЛАВНОЕ МЕНЮ
+========================= */
+
+.menu-screen {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  text-align: center;
+}
+
+.menu-logo {
+  width: 82px;
+  height: 82px;
+  border-radius: 25px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  background: linear-gradient(145deg, #f4ce45, #c89d18);
+  background: linear-gradient(145deg, #f5d34d, #c69715);
   color: #111;
 
-  font-size: 25px;
+  font-size: 48px;
   font-weight: 900;
 
   box-shadow:
-    0 5px 18px rgba(212,175,55,.25),
+    0 15px 40px rgba(212,175,55,.18),
+    inset 0 3px 0 rgba(255,255,255,.4);
+
+  margin-bottom: 20px;
+}
+
+.menu-title {
+  font-size: 42px;
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: -1.5px;
+}
+
+.menu-subtitle {
+  color: #777;
+  margin: 8px 0 35px;
+  font-size: 15px;
+}
+
+.menu-buttons {
+  width: 100%;
+  max-width: 330px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.menu-button {
+  width: 100%;
+  padding: 17px 20px;
+
+  border-radius: 17px;
+
+  font-size: 18px;
+  font-weight: 900;
+
+  transition: transform .12s;
+}
+
+.menu-button:active {
+  transform: scale(.97);
+}
+
+.play-button {
+  background: linear-gradient(145deg, #f2ce45, #c89b18);
+  color: #111;
+
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.35),
     inset 0 2px 0 rgba(255,255,255,.35);
 }
 
-.logo-text {
-  font-size: 23px;
+.music-button {
+  background: #202021;
+  color: white;
+  border: 1px solid #303031;
+}
+
+/* =========================
+   ИГРА
+========================= */
+
+.game-screen {
+  flex-direction: column;
+  align-items: center;
+
+  padding:
+    max(18px, env(safe-area-inset-top))
+    15px
+    max(20px, env(safe-area-inset-bottom));
+}
+
+.game-container {
+  width: 100%;
+  max-width: 520px;
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 17px;
+}
+
+.game-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.game-logo-icon {
+  width: 39px;
+  height: 39px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 12px;
+
+  background: #e2bd31;
+  color: #111;
+
   font-weight: 900;
-  letter-spacing: -0.5px;
+  font-size: 22px;
+}
+
+.game-logo-text {
+  font-size: 21px;
+  font-weight: 900;
 }
 
 .score-box {
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(255,255,255,.08);
+  padding: 7px 13px;
 
-  padding: 8px 14px;
-  border-radius: 13px;
+  background: #202021;
+  border: 1px solid #2c2c2d;
+
+  border-radius: 12px;
 
   text-align: center;
 }
 
 .score-label {
-  font-size: 11px;
-  color: #aaa;
+  font-size: 9px;
+  color: #777;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .score {
-  margin-top: 2px;
-  font-size: 20px;
+  color: #f0ca3e;
+  font-size: 19px;
   font-weight: 900;
-  color: #f0c93c;
 }
 
-/* ---------- TITLE ---------- */
-
-.title {
-  width: 100%;
-  margin-bottom: 18px;
+.game-heading {
+  margin-bottom: 15px;
 }
 
-.title h1 {
+.game-heading h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 900;
 }
 
-.title p {
-  margin: 5px 0 0;
-  color: #8e8e8e;
-  font-size: 14px;
+.game-heading p {
+  margin: 4px 0 0;
+  color: #777;
+  font-size: 13px;
 }
 
-/* ---------- BOARD ---------- */
+/* =========================
+   ИГРОВОЕ ПОЛЕ
+========================= */
 
-.board-wrap {
+.board-frame {
   width: 100%;
-  max-width: 480px;
 
-  padding: 8px;
+  padding: 6px;
 
-  border-radius: 22px;
+  border-radius: 18px;
 
-  background:
-    linear-gradient(145deg, #292929, #181818);
+  background: #19191a;
+
+  border: 1px solid #2b2b2c;
 
   box-shadow:
-    0 18px 45px rgba(0,0,0,.45),
+    0 15px 40px rgba(0,0,0,.35),
     inset 0 1px 0 rgba(255,255,255,.04);
 }
 
@@ -161,157 +273,133 @@ button {
   aspect-ratio: 1 / 1;
 
   display: grid;
+
   grid-template-columns: repeat(8, 1fr);
   grid-template-rows: repeat(8, 1fr);
 
-  gap: 5px;
+  gap: 4px;
 
-  padding: 4px;
+  padding: 3px;
 
-  background: #101010;
-  border-radius: 17px;
+  background: #0d0d0e;
+
+  border-radius: 13px;
 
   touch-action: none;
 }
 
 .cell {
-  min-width: 0;
-  min-height: 0;
+  width: 100%;
+  height: 100%;
 
-  border-radius: 7px;
+  border-radius: 5px;
 
-  background:
-    linear-gradient(145deg, #292929, #222);
+  background: #252526;
 
   box-shadow:
-    inset 0 2px 2px rgba(255,255,255,.025),
-    inset 0 -2px 2px rgba(0,0,0,.25);
+    inset 0 1px 1px rgba(255,255,255,.025),
+    inset 0 -2px 2px rgba(0,0,0,.3);
 
   transition:
-    background .12s,
-    transform .12s,
-    box-shadow .12s;
+    background .1s,
+    transform .1s;
 }
 
 .cell.filled {
-  background:
-    linear-gradient(145deg, #f2ce45, #c79c16);
+  background: linear-gradient(
+    145deg,
+    #f4d34c,
+    #c89c17
+  );
 
   box-shadow:
     inset 0 2px 0 rgba(255,255,255,.3),
-    inset 0 -3px 0 rgba(0,0,0,.18),
-    0 2px 5px rgba(0,0,0,.3);
+    inset 0 -3px 0 rgba(0,0,0,.18);
 }
 
 .cell.preview {
-  background:
-    linear-gradient(
-      145deg,
-      rgba(242,206,69,.9),
-      rgba(199,156,22,.8)
-    );
-
-  box-shadow:
-    0 0 10px rgba(242,206,69,.35);
+  background: rgba(244,211,76,.7);
 }
 
 .cell.invalid {
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,80,80,.75),
-      rgba(180,35,35,.7)
-    );
+  background: rgba(240,55,55,.65);
 }
 
-/* ---------- PIECES ---------- */
+/* =========================
+   ФИГУРЫ
+========================= */
 
-.pieces-title {
-  width: 100%;
-  margin-top: 22px;
+.choose-title {
+  margin-top: 18px;
   margin-bottom: 7px;
 
-  color: #777;
-  font-size: 12px;
-  text-transform: uppercase;
+  color: #666;
+
+  font-size: 10px;
   letter-spacing: 1.5px;
+  text-transform: uppercase;
+
   text-align: center;
 }
 
 .pieces {
   width: 100%;
-  min-height: 125px;
 
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: space-between;
 
   gap: 8px;
+
+  min-height: 105px;
 }
 
 .piece-slot {
-  width: 31%;
-  height: 115px;
+  flex: 1;
+  height: 100px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  border-radius: 18px;
+  border-radius: 16px;
 
-  background: rgba(255,255,255,.035);
-  border: 1px solid rgba(255,255,255,.04);
-
-  transition:
-    transform .15s,
-    background .15s;
-}
-
-.piece-slot:hover {
-  background: rgba(255,255,255,.06);
+  background: #151516;
+  border: 1px solid #202021;
 }
 
 .piece {
   display: grid;
-  gap: 4px;
+  gap: 3px;
 
-  padding: 8px;
+  padding: 5px;
 
+  touch-action: none;
   user-select: none;
   -webkit-user-select: none;
 
-  touch-action: none;
-
   cursor: grab;
-
-  transition:
-    transform .15s,
-    opacity .2s;
-}
-
-.piece:active {
-  cursor: grabbing;
-  transform: scale(1.06);
 }
 
 .piece-cell {
-  width: 23px;
-  height: 23px;
+  width: 22px;
+  height: 22px;
 
-  border-radius: 6px;
+  border-radius: 5px;
 
-  background:
-    linear-gradient(145deg, #f2ce45, #c79c16);
+  background: linear-gradient(
+    145deg,
+    #f4d34c,
+    #c99d17
+  );
 
   box-shadow:
-    inset 0 2px 0 rgba(255,255,255,.3),
-    inset 0 -3px 0 rgba(0,0,0,.18),
-    0 2px 5px rgba(0,0,0,.25);
+    inset 0 2px 0 rgba(255,255,255,.28),
+    inset 0 -2px 0 rgba(0,0,0,.18);
 }
 
 .piece-empty {
-  width: 23px;
-  height: 23px;
+  width: 22px;
+  height: 22px;
 }
 
 .piece.used {
@@ -319,79 +407,364 @@ button {
   pointer-events: none;
 }
 
-/* ---------- BUTTON ---------- */
+/* =========================
+   КНОПКИ ИГРЫ
+========================= */
 
-.new-game {
-  width: 100%;
-  max-width: 300px;
+.game-buttons {
+  display: flex;
+  gap: 8px;
 
   margin-top: 10px;
+}
 
-  border: none;
+.small-button {
+  padding: 10px 15px;
+
+  border-radius: 12px;
+
+  background: #202021;
+  color: #aaa;
+
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.small-button:active {
+  transform: scale(.96);
+}
+
+/* =========================
+   МУЗЫКА
+========================= */
+
+.music-screen {
+  flex-direction: column;
+  align-items: center;
+
+  padding:
+    max(20px, env(safe-area-inset-top))
+    15px
+    120px;
+}
+
+.music-container {
+  width: 100%;
+  max-width: 520px;
+}
+
+.music-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin-bottom: 20px;
+}
+
+.back-button {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 13px;
+
+  background: #202021;
+  color: white;
+
+  font-size: 21px;
+}
+
+.music-header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.search-box {
+  position: relative;
+
+  width: 100%;
+
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+
+  padding: 15px 45px 15px 16px;
+
   border-radius: 15px;
 
-  padding: 15px 25px;
+  border: 1px solid #2b2b2c;
 
-  background:
-    linear-gradient(145deg, #f1ce45, #c99f1b);
+  outline: none;
 
+  background: #19191a;
+  color: white;
+
+  font-size: 16px;
+}
+
+.search-input::placeholder {
+  color: #666;
+}
+
+.search-input:focus {
+  border-color: #b18a18;
+}
+
+.search-icon {
+  position: absolute;
+
+  right: 15px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #777;
+  font-size: 19px;
+}
+
+.music-tabs {
+  display: flex;
+  gap: 8px;
+
+  margin-bottom: 18px;
+}
+
+.music-tab {
+  padding: 9px 14px;
+
+  border-radius: 12px;
+
+  background: #19191a;
+  color: #777;
+
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.music-tab.active {
+  background: #d4af37;
   color: #111;
+}
 
-  font-size: 17px;
+.music-section-title {
+  font-size: 19px;
   font-weight: 900;
 
-  box-shadow:
-    0 8px 22px rgba(0,0,0,.3),
-    inset 0 2px 0 rgba(255,255,255,.35);
-
-  cursor: pointer;
-
-  transition:
-    transform .12s,
-    filter .12s;
+  margin-bottom: 12px;
 }
 
-.new-game:active {
-  transform: scale(.97);
+.song-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.new-game:hover {
-  filter: brightness(1.06);
+.song {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 11px;
+
+  background: #151516;
+
+  border: 1px solid #222;
+
+  border-radius: 15px;
 }
 
-/* ---------- DRAG PIECE ---------- */
+.song-cover {
+  width: 50px;
+  height: 50px;
 
-.drag-piece {
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(
+    145deg,
+    #333,
+    #171717
+  );
+
+  color: #d4af37;
+
+  font-size: 22px;
+}
+
+.song-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.song-name {
+  font-size: 15px;
+  font-weight: bold;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artist-name {
+  margin-top: 4px;
+
+  color: #777;
+
+  font-size: 12px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.song-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.song-play,
+.song-heart {
+  width: 38px;
+  height: 38px;
+
+  border-radius: 11px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 17px;
+}
+
+.song-play {
+  background: #d4af37;
+  color: #111;
+}
+
+.song-heart {
+  background: #242425;
+  color: #777;
+}
+
+.song-heart.favorite {
+  color: #e7bf32;
+}
+
+.no-songs {
+  padding: 35px 15px;
+
+  text-align: center;
+
+  color: #666;
+}
+
+/* =========================
+   НИЖНИЙ ПЛЕЕР
+========================= */
+
+.player {
   position: fixed;
 
-  left: 0;
-  top: 0;
+  left: 50%;
+  bottom: 12px;
 
-  pointer-events: none;
+  transform: translateX(-50%);
 
-  z-index: 9999;
+  width: calc(100% - 24px);
+  max-width: 500px;
 
-  display: grid;
-  gap: 4px;
+  padding: 10px 12px;
 
-  padding: 8px;
+  display: none;
+  align-items: center;
+  gap: 10px;
 
-  transform:
-    translate(-50%, -125%)
-    scale(1.08);
+  border-radius: 17px;
 
-  opacity: .92;
+  background: rgba(27,27,28,.96);
 
-  filter:
-    drop-shadow(0 8px 10px rgba(0,0,0,.4));
+  border: 1px solid #353536;
+
+  box-shadow:
+    0 10px 35px rgba(0,0,0,.55);
+
+  z-index: 500;
 }
 
-.drag-piece .piece-cell {
-  width: 25px;
-  height: 25px;
+.player.visible {
+  display: flex;
 }
 
-/* ---------- GAME OVER ---------- */
+.player-cover {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #252526;
+  color: #d4af37;
+}
+
+.player-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.player-title {
+  font-size: 13px;
+  font-weight: bold;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-artist {
+  margin-top: 3px;
+
+  color: #777;
+  font-size: 11px;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-button {
+  width: 40px;
+  height: 40px;
+
+  border-radius: 12px;
+
+  background: #d4af37;
+  color: #111;
+
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.player-close {
+  background: #29292a;
+  color: #aaa;
+}
+
+/* =========================
+   GAME OVER
+========================= */
 
 .overlay {
   position: fixed;
@@ -404,173 +777,439 @@ button {
 
   padding: 20px;
 
-  background: rgba(0,0,0,.78);
+  background: rgba(0,0,0,.8);
 
   backdrop-filter: blur(7px);
 
-  z-index: 10000;
+  z-index: 1000;
 }
 
-.game-over {
+.game-over-box {
   width: 100%;
   max-width: 350px;
 
-  padding: 30px 22px;
+  padding: 30px 20px;
 
   text-align: center;
 
-  border-radius: 24px;
+  border-radius: 23px;
 
-  background:
-    linear-gradient(145deg, #292929, #171717);
+  background: #1d1d1e;
 
-  border: 1px solid rgba(255,255,255,.07);
-
-  box-shadow:
-    0 25px 70px rgba(0,0,0,.6);
+  border: 1px solid #303031;
 }
 
 .game-over-icon {
-  width: 64px;
-  height: 64px;
+  width: 62px;
+  height: 62px;
 
   margin: 0 auto 15px;
+
+  border-radius: 19px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  border-radius: 20px;
-
-  background: #f0c93c;
+  background: #d4af37;
   color: #111;
 
-  font-size: 34px;
+  font-size: 30px;
   font-weight: 900;
 }
 
-.game-over h2 {
+.game-over-box h2 {
   margin: 0 0 8px;
 
-  font-size: 28px;
+  font-size: 27px;
 }
 
-.game-over p {
+.game-over-box p {
+  color: #888;
   margin: 0 0 22px;
-
-  color: #aaa;
 }
 
 .final-score {
-  color: #f0c93c;
-  font-size: 24px;
+  color: #d4af37;
   font-weight: 900;
+  font-size: 22px;
 }
 
-/* ---------- SMALL SCREEN ---------- */
+/* =========================
+   DRAG
+========================= */
 
-@media (max-width: 380px) {
+.drag-piece {
+  position: fixed;
 
-  .game {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
+  z-index: 2000;
 
-  .logo-text {
-    font-size: 20px;
-  }
+  pointer-events: none;
 
-  .logo-icon {
-    width: 38px;
-    height: 38px;
+  display: grid;
+  gap: 4px;
+
+  transform:
+    translate(-50%, -125%)
+    scale(1.1);
+
+  opacity: .95;
+
+  filter:
+    drop-shadow(0 8px 10px rgba(0,0,0,.5));
+}
+
+.drag-piece .piece-cell {
+  width: 24px;
+  height: 24px;
+}
+
+/* =========================
+   МАЛЕНЬКИЙ ЭКРАН
+========================= */
+
+@media (max-width: 370px) {
+
+  .menu-title {
+    font-size: 35px;
   }
 
   .piece-cell,
   .piece-empty {
-    width: 19px;
-    height: 19px;
-  }
-
-  .piece-cell {
-    border-radius: 5px;
+    width: 18px;
+    height: 18px;
   }
 
   .piece {
-    gap: 3px;
-    padding: 5px;
-  }
-
-  .pieces {
-    min-height: 105px;
+    gap: 2px;
   }
 
   .piece-slot {
-    height: 100px;
+    height: 92px;
   }
 
-  .cell {
-    border-radius: 5px;
+  .game-heading h1 {
+    font-size: 23px;
   }
 }
+
 </style>
 </head>
 
+
 <body>
 
-<div class="game">
+<div class="app">
 
-  <div class="header">
+<!-- =================================
+     ГЛАВНОЕ МЕНЮ
+================================= -->
 
-    <div class="logo">
-      <div class="logo-icon">R</div>
-      <div class="logo-text">Block Rush</div>
+<section
+  id="menuScreen"
+  class="screen active menu-screen"
+>
+
+  <div class="menu-logo">R</div>
+
+  <h1 class="menu-title">
+    Block Rush
+  </h1>
+
+  <p class="menu-subtitle">
+    Собирай блоки. Набирай очки.
+  </p>
+
+  <div class="menu-buttons">
+
+    <button
+      class="menu-button play-button"
+      onclick="showScreen('gameScreen')"
+    >
+      🎮 Начать игру
+    </button>
+
+    <button
+      class="menu-button music-button"
+      onclick="showScreen('musicScreen')"
+    >
+      🎵 Музыка
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =================================
+     ИГРА
+================================= -->
+
+<section
+  id="gameScreen"
+  class="screen game-screen"
+>
+
+  <div class="game-container">
+
+    <div class="game-header">
+
+      <div class="game-logo">
+
+        <div class="game-logo-icon">
+          R
+        </div>
+
+        <div class="game-logo-text">
+          Block Rush
+        </div>
+
+      </div>
+
+
+      <div class="score-box">
+
+        <div class="score-label">
+          Очки
+        </div>
+
+        <div
+          class="score"
+          id="score"
+        >
+          0
+        </div>
+
+      </div>
+
     </div>
 
-    <div class="score-box">
-      <div class="score-label">Очки</div>
-      <div class="score" id="score">0</div>
+
+    <div class="game-heading">
+
+      <h1>
+        Собери максимум
+      </h1>
+
+      <p>
+        Размещай блоки и очищай линии
+      </p>
+
+    </div>
+
+
+    <div class="board-frame">
+
+      <div
+        class="board"
+        id="board"
+      ></div>
+
+    </div>
+
+
+    <div class="choose-title">
+      Выбери блок
+    </div>
+
+
+    <div
+      class="pieces"
+      id="pieces"
+    ></div>
+
+
+    <div class="game-buttons">
+
+      <button
+        class="small-button"
+        onclick="newGame()"
+      >
+        ↻ Новая игра
+      </button>
+
+      <button
+        class="small-button"
+        onclick="showScreen('menuScreen')"
+      >
+        ← Меню
+      </button>
+
     </div>
 
   </div>
 
-  <div class="title">
-    <h1>Собери максимум</h1>
-    <p>Размещай блоки и очищай линии</p>
+</section>
+
+
+<!-- =================================
+     МУЗЫКА
+================================= -->
+
+<section
+  id="musicScreen"
+  class="screen music-screen"
+>
+
+  <div class="music-container">
+
+    <div class="music-header">
+
+      <button
+        class="back-button"
+        onclick="showScreen('menuScreen')"
+      >
+        ←
+      </button>
+
+      <h1>
+        🎵 Музыка
+      </h1>
+
+    </div>
+
+
+    <div class="search-box">
+
+      <input
+        id="musicSearch"
+        class="search-input"
+        type="search"
+        placeholder="Найти песню или исполнителя..."
+        autocomplete="off"
+      >
+
+      <div class="search-icon">
+        🔎
+      </div>
+
+    </div>
+
+
+    <div class="music-tabs">
+
+      <button
+        id="recommendTab"
+        class="music-tab active"
+        onclick="showMusicTab('recommend')"
+      >
+        Рекомендации
+      </button>
+
+      <button
+        id="favoriteTab"
+        class="music-tab"
+        onclick="showMusicTab('favorites')"
+      >
+        ❤️ Избранное
+      </button>
+
+    </div>
+
+
+    <div
+      id="musicTitle"
+      class="music-section-title"
+    >
+      Рекомендации
+    </div>
+
+
+    <div
+      id="songList"
+      class="song-list"
+    ></div>
+
   </div>
 
-  <div class="board-wrap">
-    <div class="board" id="board"></div>
+</section>
+
+
+<!-- =================================
+     ПЛЕЕР
+================================= -->
+
+<div
+  id="player"
+  class="player"
+>
+
+  <div class="player-cover">
+    🎵
   </div>
 
-  <div class="pieces-title">
-    Выбери блок
+
+  <div class="player-info">
+
+    <div
+      id="playerTitle"
+      class="player-title"
+    >
+      —
+    </div>
+
+    <div
+      id="playerArtist"
+      class="player-artist"
+    >
+      —
+    </div>
+
   </div>
 
-  <div class="pieces" id="pieces"></div>
 
-  <button class="new-game" onclick="newGame()">
-    Новая игра
+  <button
+    id="pauseButton"
+    class="player-button"
+    onclick="toggleMusic()"
+  >
+    ▶
+  </button>
+
+
+  <button
+    class="player-button player-close"
+    onclick="stopMusic()"
+  >
+    ✕
   </button>
 
 </div>
 
 
-<div class="overlay" id="gameOver">
+<!-- =================================
+     GAME OVER
+================================= -->
 
-  <div class="game-over">
+<div
+  id="gameOver"
+  class="overlay"
+>
+
+  <div class="game-over-box">
 
     <div class="game-over-icon">
       R
     </div>
 
-    <h2>Игра окончена</h2>
+    <h2>
+      Игра окончена
+    </h2>
 
     <p>
       Твой результат:
-      <span class="final-score" id="finalScore">0</span>
+      <span
+        id="finalScore"
+        class="final-score"
+      >
+        0
+      </span>
     </p>
 
-    <button class="new-game" onclick="newGame()">
+    <button
+      class="menu-button play-button"
+      onclick="newGame()"
+    >
       Играть снова
     </button>
 
@@ -579,7 +1218,55 @@ button {
 </div>
 
 
+<!-- Настоящий аудиоплеер.
+     Он НЕ уничтожается при смене экранов. -->
+
+<audio
+  id="audio"
+  preload="none"
+></audio>
+
+
 <script>
+
+/* ==================================================
+   ПЕРЕКЛЮЧЕНИЕ ЭКРАНОВ
+================================================== */
+
+function showScreen(screenId) {
+
+  document
+    .querySelectorAll(".screen")
+    .forEach(screen => {
+
+      screen.classList.remove("active");
+
+    });
+
+
+  const screen =
+    document.getElementById(screenId);
+
+
+  if (screen) {
+
+    screen.classList.add("active");
+
+  }
+
+
+  if (screenId === "musicScreen") {
+
+    renderMusic();
+
+  }
+
+}
+
+
+/* ==================================================
+   ИГРА
+================================================== */
 
 const SIZE = 8;
 
@@ -599,23 +1286,22 @@ const finalScoreElement =
   document.getElementById("finalScore");
 
 
-let board = [];
+let gameBoard = [];
+
 let score = 0;
 
 let currentPieces = [];
 
 let dragging = false;
+
 let draggedIndex = null;
 
 let dragElement = null;
 
-let pointerX = 0;
-let pointerY = 0;
 
-
-/* =====================================
+/* ==================================================
    ФИГУРЫ
-===================================== */
+================================================== */
 
 const shapes = [
 
@@ -665,9 +1351,9 @@ const shapes = [
 
   [[0,1,1],[1,1,0]],
 
-  [[1,0],[1,1],[0,1]],
-
   [[0,1],[1,1],[1,0]],
+
+  [[1,0],[1,1],[0,1]],
 
   [[0,1,0],[1,1,1]],
 
@@ -679,22 +1365,18 @@ const shapes = [
 
   [[1,1,1],[1,1,0]],
 
-  [[1,1,1],[1,0,1]],
-
   [[1,0,1],[1,1,1]],
 
-  [[1,1],[1,1],[1,0]],
-
-  [[1,1],[1,1],[0,1]]
+  [[1,1,1],[1,0,1]]
 
 ];
 
 
-/* =====================================
-   НОВАЯ ПУСТАЯ ДОСКА
-===================================== */
+/* ==================================================
+   ПУСТОЕ ПОЛЕ
+================================================== */
 
-function createEmptyBoard() {
+function emptyBoard() {
 
   return Array.from(
     { length: SIZE },
@@ -704,31 +1386,52 @@ function createEmptyBoard() {
 }
 
 
-/* =====================================
-   СОЗДАНИЕ ПОЛЯ
-===================================== */
+/* ==================================================
+   ОТРИСОВКА ПОЛЯ
+================================================== */
 
 function renderBoard() {
 
   boardElement.innerHTML = "";
 
-  for (let row = 0; row < SIZE; row++) {
 
-    for (let col = 0; col < SIZE; col++) {
+  for (
+    let row = 0;
+    row < SIZE;
+    row++
+  ) {
+
+    for (
+      let col = 0;
+      col < SIZE;
+      col++
+    ) {
 
       const cell =
         document.createElement("div");
 
+
       cell.className = "cell";
+
 
       cell.dataset.row = row;
       cell.dataset.col = col;
 
-      if (board[row][col]) {
-        cell.classList.add("filled");
+
+      if (
+        gameBoard[row][col]
+      ) {
+
+        cell.classList.add(
+          "filled"
+        );
+
       }
 
-      boardElement.appendChild(cell);
+
+      boardElement.appendChild(
+        cell
+      );
 
     }
 
@@ -737,23 +1440,24 @@ function renderBoard() {
 }
 
 
-/* =====================================
-   СЛУЧАЙНАЯ ФИГУРА
-===================================== */
+/* ==================================================
+   НОВАЯ ФИГУРА
+================================================== */
 
-function getRandomShape() {
+function randomShape() {
 
-  const index =
-    Math.floor(Math.random() * shapes.length);
-
-  return shapes[index];
+  return shapes[
+    Math.floor(
+      Math.random() * shapes.length
+    )
+  ];
 
 }
 
 
-/* =====================================
-   СОЗДАНИЕ 3 ФИГУР
-===================================== */
+/* ==================================================
+   СОЗДАТЬ 3 ФИГУРЫ
+================================================== */
 
 function createPieces() {
 
@@ -761,67 +1465,88 @@ function createPieces() {
 
   currentPieces = [];
 
-  for (let i = 0; i < 3; i++) {
+
+  for (
+    let i = 0;
+    i < 3;
+    i++
+  ) {
 
     const shape =
-      getRandomShape();
+      randomShape();
+
 
     currentPieces.push({
+
       shape: shape,
+
       used: false
+
     });
 
-    createPieceSlot(shape, i);
+
+    createPiece(
+      shape,
+      i
+    );
 
   }
 
 }
 
 
-/* =====================================
-   СОЗДАНИЕ ФИГУРЫ
-===================================== */
+/* ==================================================
+   ОТРИСОВКА ФИГУРЫ
+================================================== */
 
-function createPieceSlot(shape, index) {
+function createPiece(
+  shape,
+  index
+) {
 
   const slot =
     document.createElement("div");
 
-  slot.className = "piece-slot";
+
+  slot.className =
+    "piece-slot";
 
 
   const piece =
     document.createElement("div");
 
-  piece.className = "piece";
 
-  piece.dataset.index = index;
+  piece.className =
+    "piece";
 
 
-  const width =
-    shape[0].length;
+  piece.dataset.index =
+    index;
+
 
   piece.style.gridTemplateColumns =
-    `repeat(${width}, 23px)`;
+    `repeat(${shape[0].length}, 22px)`;
 
 
   for (
-    let row = 0;
-    row < shape.length;
-    row++
+    let r = 0;
+    r < shape.length;
+    r++
   ) {
 
     for (
-      let col = 0;
-      col < shape[row].length;
-      col++
+      let c = 0;
+      c < shape[r].length;
+      c++
     ) {
 
       const cell =
         document.createElement("div");
 
 
-      if (shape[row][col] === 1) {
+      if (
+        shape[r][c] === 1
+      ) {
 
         cell.className =
           "piece-cell";
@@ -833,18 +1558,13 @@ function createPieceSlot(shape, index) {
 
       }
 
+
       piece.appendChild(cell);
 
     }
 
   }
 
-
-  /*
-    Используем Pointer Events.
-    Это работает и мышкой,
-    и пальцем на телефоне.
-  */
 
   piece.addEventListener(
     "pointerdown",
@@ -867,11 +1587,15 @@ function createPieceSlot(shape, index) {
 }
 
 
-/* =====================================
-   МОЖНО ЛИ ПОСТАВИТЬ ФИГУРУ?
-===================================== */
+/* ==================================================
+   ПРОВЕРКА УСТАНОВКИ
+================================================== */
 
-function canPlace(shape, row, col) {
+function canPlace(
+  shape,
+  row,
+  col
+) {
 
   for (
     let r = 0;
@@ -885,23 +1609,27 @@ function canPlace(shape, row, col) {
       c++
     ) {
 
-      if (shape[r][c] !== 1) {
+      if (
+        shape[r][c] !== 1
+      ) {
+
         continue;
+
       }
 
 
-      const targetRow =
+      const rr =
         row + r;
 
-      const targetCol =
+      const cc =
         col + c;
 
 
       if (
-        targetRow < 0 ||
-        targetRow >= SIZE ||
-        targetCol < 0 ||
-        targetCol >= SIZE
+        rr < 0 ||
+        rr >= SIZE ||
+        cc < 0 ||
+        cc >= SIZE
       ) {
 
         return false;
@@ -910,7 +1638,7 @@ function canPlace(shape, row, col) {
 
 
       if (
-        board[targetRow][targetCol]
+        gameBoard[rr][cc]
       ) {
 
         return false;
@@ -921,65 +1649,91 @@ function canPlace(shape, row, col) {
 
   }
 
+
   return true;
 
 }
 
 
-/* =====================================
-   КООРДИНАТЫ ПОЛЯ
-===================================== */
+/* ==================================================
+   ТОЧНАЯ ПОЗИЦИЯ НА ПОЛЕ
+================================================== */
 
-function getBoardPosition(x, y) {
+function getBoardCell(
+  x,
+  y
+) {
 
   const rect =
     boardElement.getBoundingClientRect();
 
 
-  /*
-    Реальный размер содержимого поля.
-  */
+  const padding = 3;
 
-  const padding = 4;
+  const gap = 4;
 
-  const gap = 5;
+  const available =
+    rect.width -
+    padding * 2 -
+    gap * 7;
 
-  const contentWidth =
-    rect.width - padding * 2;
 
   const cellSize =
-    (contentWidth - gap * 7) / 8;
+    available / SIZE;
 
 
   const localX =
-    x - rect.left - padding;
+    x -
+    rect.left -
+    padding;
+
 
   const localY =
-    y - rect.top - padding;
-
-
-  let col =
-    Math.floor(
-      localX / (cellSize + gap)
-    );
-
-  let row =
-    Math.floor(
-      localY / (cellSize + gap)
-    );
+    y -
+    rect.top -
+    padding;
 
 
   return {
-    row,
-    col
+
+    col:
+      Math.floor(
+        localX /
+        (cellSize + gap)
+      ),
+
+    row:
+      Math.floor(
+        localY /
+        (cellSize + gap)
+      )
+
   };
 
 }
 
 
-/* =====================================
+/* ==================================================
    ПОДСВЕТКА
-===================================== */
+================================================== */
+
+function clearPreview() {
+
+  boardElement
+    .querySelectorAll(
+      ".preview, .invalid"
+    )
+    .forEach(cell => {
+
+      cell.classList.remove(
+        "preview",
+        "invalid"
+      );
+
+    });
+
+}
+
 
 function showPreview(
   shape,
@@ -1010,23 +1764,27 @@ function showPreview(
       c++
     ) {
 
-      if (shape[r][c] !== 1) {
+      if (
+        shape[r][c] !== 1
+      ) {
+
         continue;
+
       }
 
 
-      const targetRow =
+      const rr =
         row + r;
 
-      const targetCol =
+      const cc =
         col + c;
 
 
       if (
-        targetRow < 0 ||
-        targetRow >= SIZE ||
-        targetCol < 0 ||
-        targetCol >= SIZE
+        rr < 0 ||
+        rr >= SIZE ||
+        cc < 0 ||
+        cc >= SIZE
       ) {
 
         continue;
@@ -1036,25 +1794,16 @@ function showPreview(
 
       const cell =
         boardElement.querySelector(
-          `[data-row="${targetRow}"][data-col="${targetCol}"]`
+          `[data-row="${rr}"][data-col="${cc}"]`
         );
 
 
-      if (!cell) {
-        continue;
-      }
-
-
-      if (valid) {
+      if (cell) {
 
         cell.classList.add(
-          "preview"
-        );
-
-      } else {
-
-        cell.classList.add(
-          "invalid"
+          valid
+            ? "preview"
+            : "invalid"
         );
 
       }
@@ -1066,65 +1815,46 @@ function showPreview(
 }
 
 
-/* =====================================
-   ОЧИСТКА ПОДСВЕТКИ
-===================================== */
+/* ==================================================
+   DRAG
+================================================== */
 
-function clearPreview() {
+function createDragPiece(shape) {
 
-  boardElement
-    .querySelectorAll(
-      ".preview, .invalid"
-    )
-    .forEach(cell => {
-
-      cell.classList.remove(
-        "preview",
-        "invalid"
-      );
-
-    });
-
-}
-
-
-/* =====================================
-   СОЗДАНИЕ ФИГУРЫ ПОД МЫШЬЮ
-===================================== */
-
-function createDragElement(shape) {
-
-  removeDragElement();
+  removeDragPiece();
 
 
   dragElement =
     document.createElement("div");
+
 
   dragElement.className =
     "drag-piece";
 
 
   dragElement.style.gridTemplateColumns =
-    `repeat(${shape[0].length}, 25px)`;
+    `repeat(${shape[0].length}, 24px)`;
 
 
   for (
-    let row = 0;
-    row < shape.length;
-    row++
+    let r = 0;
+    r < shape.length;
+    r++
   ) {
 
     for (
-      let col = 0;
-      col < shape[row].length;
-      col++
+      let c = 0;
+      c < shape[r].length;
+      c++
     ) {
 
       const cell =
         document.createElement("div");
 
 
-      if (shape[row][col] === 1) {
+      if (
+        shape[r][c] === 1
+      ) {
 
         cell.className =
           "piece-cell";
@@ -1137,7 +1867,9 @@ function createDragElement(shape) {
       }
 
 
-      dragElement.appendChild(cell);
+      dragElement.appendChild(
+        cell
+      );
 
     }
 
@@ -1151,11 +1883,7 @@ function createDragElement(shape) {
 }
 
 
-/* =====================================
-   УДАЛИТЬ DRAG
-===================================== */
-
-function removeDragElement() {
+function removeDragPiece() {
 
   if (dragElement) {
 
@@ -1168,9 +1896,9 @@ function removeDragElement() {
 }
 
 
-/* =====================================
-   НАЧАЛО ПЕРЕТАСКИВАНИЯ
-===================================== */
+/* ==================================================
+   НАЧАЛО DRAG
+================================================== */
 
 function startDrag(
   event,
@@ -1195,26 +1923,18 @@ function startDrag(
   draggedIndex = index;
 
 
-  pointerX =
-    event.clientX;
-
-  pointerY =
-    event.clientY;
+  const shape =
+    currentPieces[index].shape;
 
 
-  createDragElement(
-    currentPieces[index].shape
+  createDragPiece(
+    shape
   );
 
 
   moveDrag(
-    pointerX,
-    pointerY
-  );
-
-
-  piece.setPointerCapture?.(
-    event.pointerId
+    event.clientX,
+    event.clientY
   );
 
 
@@ -1234,43 +1954,39 @@ function startDrag(
 }
 
 
-/* =====================================
-   ДВИЖЕНИЕ
-===================================== */
-
 function onDragMove(event) {
 
   if (!dragging) {
+
     return;
+
   }
 
 
   event.preventDefault();
 
 
-  pointerX =
-    event.clientX;
-
-  pointerY =
-    event.clientY;
-
-
   moveDrag(
-    pointerX,
-    pointerY
+    event.clientX,
+    event.clientY
   );
 
 }
 
 
-/* =====================================
-   ДВИЖЕНИЕ ФИГУРЫ
-===================================== */
+/* ==================================================
+   ДВИЖЕНИЕ
+================================================== */
 
-function moveDrag(x, y) {
+function moveDrag(
+  x,
+  y
+) {
 
   if (!dragElement) {
+
     return;
+
   }
 
 
@@ -1301,57 +2017,66 @@ function moveDrag(x, y) {
   }
 
 
-  const position =
-    getBoardPosition(
+  if (
+    draggedIndex === null
+  ) {
+
+    return;
+
+  }
+
+
+  const shape =
+    currentPieces[
+      draggedIndex
+    ].shape;
+
+
+  const pos =
+    getBoardCell(
       x,
       y
     );
 
 
-  if (
-    draggedIndex !== null &&
-    currentPieces[draggedIndex]
-  ) {
+  /*
+    Центр фигуры находится
+    примерно под пальцем.
+  */
 
-    const shape =
-      currentPieces[
-        draggedIndex
-      ].shape;
-
-
-    /*
-      Ставим фигуру примерно
-      центром под пальцем.
-    */
-
-    const row =
-      position.row -
-      Math.floor(shape.length / 2);
-
-    const col =
-      position.col -
-      Math.floor(shape[0].length / 2);
-
-
-    showPreview(
-      shape,
-      row,
-      col
+  const row =
+    pos.row -
+    Math.floor(
+      shape.length / 2
     );
 
-  }
+
+  const col =
+    pos.col -
+    Math.floor(
+      shape[0].length / 2
+    );
+
+
+  showPreview(
+    shape,
+    row,
+    col
+  );
 
 }
 
 
-/* =====================================
-   КОНЕЦ ПЕРЕТАСКИВАНИЯ
-===================================== */
+/* ==================================================
+   ОТПУСТИЛ ФИГУРУ
+================================================== */
 
 function onDragEnd(event) {
 
   if (!dragging) {
+
     return;
+
   }
 
 
@@ -1378,26 +2103,31 @@ function onDragEnd(event) {
     draggedIndex !== null
   ) {
 
-    const position =
-      getBoardPosition(
-        x,
-        y
-      );
-
-
     const shape =
       currentPieces[
         draggedIndex
       ].shape;
 
 
+    const pos =
+      getBoardCell(
+        x,
+        y
+      );
+
+
     const row =
-      position.row -
-      Math.floor(shape.length / 2);
+      pos.row -
+      Math.floor(
+        shape.length / 2
+      );
+
 
     const col =
-      position.col -
-      Math.floor(shape[0].length / 2);
+      pos.col -
+      Math.floor(
+        shape[0].length / 2
+      );
 
 
     placeShape(
@@ -1412,7 +2142,7 @@ function onDragEnd(event) {
 
   clearPreview();
 
-  removeDragElement();
+  removeDragPiece();
 
 
   dragging = false;
@@ -1428,9 +2158,9 @@ function onDragEnd(event) {
 }
 
 
-/* =====================================
+/* ==================================================
    ПОСТАВИТЬ ФИГУРУ
-===================================== */
+================================================== */
 
 function placeShape(
   shape,
@@ -1471,11 +2201,12 @@ function placeShape(
         shape[r][c] === 1
       ) {
 
-        board[
+        gameBoard[
           row + r
         ][
           col + c
         ] = 1;
+
 
         blocks++;
 
@@ -1485,10 +2216,6 @@ function placeShape(
 
   }
 
-
-  /*
-    Очки за блоки.
-  */
 
   score += blocks;
 
@@ -1500,10 +2227,6 @@ function placeShape(
   renderBoard();
 
 
-  /*
-    Проверяем линии.
-  */
-
   clearLines();
 
 
@@ -1511,23 +2234,26 @@ function placeShape(
     score;
 
 
-  const slots =
-    piecesElement.children;
+  const slot =
+    piecesElement.children[index];
 
 
-  if (slots[index]) {
+  if (slot) {
 
-    slots[index]
-      .querySelector(".piece")
-      ?.classList.add("used");
+    const piece =
+      slot.querySelector(".piece");
+
+
+    if (piece) {
+
+      piece.classList.add(
+        "used"
+      );
+
+    }
 
   }
 
-
-  /*
-    Если все 3 использованы —
-    выдаём новые.
-  */
 
   if (
     currentPieces.every(
@@ -1548,56 +2274,52 @@ function placeShape(
 }
 
 
-/* =====================================
-   ОЧИСТКА ЛИНИЙ
-===================================== */
+/* ==================================================
+   ЛИНИИ
+================================================== */
 
 function clearLines() {
 
-  const fullRows = [];
-  const fullCols = [];
+  const rows = [];
+  const cols = [];
 
-
-  /* строки */
 
   for (
-    let row = 0;
-    row < SIZE;
-    row++
+    let r = 0;
+    r < SIZE;
+    r++
   ) {
 
     if (
-      board[row].every(
+      gameBoard[r].every(
         cell => cell === 1
       )
     ) {
 
-      fullRows.push(row);
+      rows.push(r);
 
     }
 
   }
 
 
-  /* столбцы */
-
   for (
-    let col = 0;
-    col < SIZE;
-    col++
+    let c = 0;
+    c < SIZE;
+    c++
   ) {
 
     let full = true;
 
 
     for (
-      let row = 0;
-      row < SIZE;
-      row++
+      let r = 0;
+      r < SIZE;
+      r++
     ) {
 
       if (
-        board[row][col] === 0
+        gameBoard[r][c] === 0
       ) {
 
         full = false;
@@ -1611,74 +2333,58 @@ function clearLines() {
 
     if (full) {
 
-      fullCols.push(col);
+      cols.push(c);
 
     }
 
   }
 
 
-  /*
-    Удаляем строки.
-  */
-
-  fullRows.forEach(row => {
+  rows.forEach(r => {
 
     for (
-      let col = 0;
-      col < SIZE;
-      col++
+      let c = 0;
+      c < SIZE;
+      c++
     ) {
 
-      board[row][col] = 0;
+      gameBoard[r][c] = 0;
 
     }
 
   });
 
 
-  /*
-    Удаляем столбцы.
-  */
-
-  fullCols.forEach(col => {
+  cols.forEach(c => {
 
     for (
-      let row = 0;
-      row < SIZE;
-      row++
+      let r = 0;
+      r < SIZE;
+      r++
     ) {
 
-      board[row][col] = 0;
+      gameBoard[r][c] = 0;
 
     }
 
   });
 
 
-  const lines =
-    fullRows.length +
-    fullCols.length;
+  const total =
+    rows.length +
+    cols.length;
 
 
-  if (lines > 0) {
-
-    /*
-      Бонус за линии.
-    */
+  if (total > 0) {
 
     score +=
-      lines * 10;
+      total * 10;
 
-    /*
-      Дополнительный бонус
-      за несколько линий сразу.
-    */
 
-    if (lines >= 2) {
+    if (total >= 2) {
 
       score +=
-        (lines - 1) * 5;
+        (total - 1) * 5;
 
     }
 
@@ -1690,9 +2396,9 @@ function clearLines() {
 }
 
 
-/* =====================================
-   ПРОВЕРКА GAME OVER
-===================================== */
+/* ==================================================
+   GAME OVER
+================================================== */
 
 function checkGameOver() {
 
@@ -1715,10 +2421,6 @@ function checkGameOver() {
     const piece of available
   ) {
 
-    const shape =
-      piece.shape;
-
-
     for (
       let row = 0;
       row < SIZE;
@@ -1733,7 +2435,7 @@ function checkGameOver() {
 
         if (
           canPlace(
-            shape,
+            piece.shape,
             row,
             col
           )
@@ -1750,12 +2452,9 @@ function checkGameOver() {
   }
 
 
-  /*
-    Ходов больше нет.
-  */
-
   finalScoreElement.textContent =
     score;
+
 
   gameOverElement.style.display =
     "flex";
@@ -1763,16 +2462,17 @@ function checkGameOver() {
 }
 
 
-/* =====================================
+/* ==================================================
    НОВАЯ ИГРА
-===================================== */
+================================================== */
 
 function newGame() {
 
   score = 0;
 
-  board =
-    createEmptyBoard();
+  gameBoard =
+    emptyBoard();
+
 
   currentPieces = [];
 
@@ -1791,19 +2491,705 @@ function newGame() {
 
   clearPreview();
 
-  removeDragElement();
+  removeDragPiece();
 
 
   renderBoard();
 
   createPieces();
 
+
+  showScreen(
+    "gameScreen"
+  );
+
 }
 
 
-/* =====================================
-   СТАРТ
-===================================== */
+/* ==================================================
+   МУЗЫКА
+================================================== */
+
+const audio =
+  document.getElementById("audio");
+
+
+const musicSearch =
+  document.getElementById("musicSearch");
+
+
+const songList =
+  document.getElementById("songList");
+
+
+const musicTitle =
+  document.getElementById("musicTitle");
+
+
+const player =
+  document.getElementById("player");
+
+
+const playerTitle =
+  document.getElementById("playerTitle");
+
+
+const playerArtist =
+  document.getElementById("playerArtist");
+
+
+const pauseButton =
+  document.getElementById("pauseButton");
+
+
+let musicTab =
+  "recommend";
+
+
+let songs = [];
+
+
+/*
+  Избранное сохраняем
+  в памяти браузера.
+*/
+
+let favorites =
+  JSON.parse(
+    localStorage.getItem(
+      "blockRushFavorites"
+    ) || "[]"
+  );
+
+
+/* ==================================================
+   РЕКОМЕНДАЦИИ
+================================================== */
+
+const recommendations = [
+
+  {
+    id: "r1",
+    title: "Blinding Lights",
+    artist: "The Weeknd"
+  },
+
+  {
+    id: "r2",
+    title: "Believer",
+    artist: "Imagine Dragons"
+  },
+
+  {
+    id: "r3",
+    title: "Thunder",
+    artist: "Imagine Dragons"
+  },
+
+  {
+    id: "r4",
+    title: "Counting Stars",
+    artist: "OneRepublic"
+  },
+
+  {
+    id: "r5",
+    title: "Shape of You",
+    artist: "Ed Sheeran"
+  }
+
+];
+
+
+/* ==================================================
+   ПОКАЗ МУЗЫКИ
+================================================== */
+
+function showMusicTab(tab) {
+
+  musicTab = tab;
+
+
+  document
+    .getElementById(
+      "recommendTab"
+    )
+    .classList.toggle(
+      "active",
+      tab === "recommend"
+    );
+
+
+  document
+    .getElementById(
+      "favoriteTab"
+    )
+    .classList.toggle(
+      "active",
+      tab === "favorites"
+    );
+
+
+  musicTitle.textContent =
+    tab === "recommend"
+      ? "Рекомендации"
+      : "❤️ Избранное";
+
+
+  renderMusic();
+
+}
+
+
+/* ==================================================
+   ОТРИСОВКА МУЗЫКИ
+================================================== */
+
+function renderMusic() {
+
+  if (
+    musicTab === "favorites"
+  ) {
+
+    renderFavorites();
+
+    return;
+
+  }
+
+
+  renderRecommendations();
+
+}
+
+
+/* ==================================================
+   РЕКОМЕНДАЦИИ
+================================================== */
+
+function renderRecommendations() {
+
+  if (!songs.length) {
+
+    songList.innerHTML =
+      `
+      <div class="no-songs">
+        🔎 Введи название песни
+        или исполнителя в поиск
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  renderSongArray(
+    songs
+  );
+
+}
+
+
+/* ==================================================
+   ИЗБРАННОЕ
+================================================== */
+
+function renderFavorites() {
+
+  if (
+    favorites.length === 0
+  ) {
+
+    songList.innerHTML =
+      `
+      <div class="no-songs">
+        ❤️ Здесь пока ничего нет.<br>
+        Нажимай сердечко рядом с песнями.
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  renderSongArray(
+    favorites
+  );
+
+}
+
+
+/* ==================================================
+   СПИСОК ПЕСЕН
+================================================== */
+
+function renderSongArray(
+  array
+) {
+
+  songList.innerHTML = "";
+
+
+  array.forEach(song => {
+
+    const favorite =
+      favorites.some(
+        item =>
+          item.id === song.id
+      );
+
+
+    const row =
+      document.createElement(
+        "div"
+      );
+
+
+    row.className =
+      "song";
+
+
+    row.innerHTML = `
+
+      <div class="song-cover">
+        ♪
+      </div>
+
+      <div class="song-info">
+
+        <div class="song-name">
+          ${escapeHtml(song.title)}
+        </div>
+
+        <div class="artist-name">
+          ${escapeHtml(song.artist)}
+        </div>
+
+      </div>
+
+      <div class="song-actions">
+
+        <button
+          class="song-play"
+          onclick='playSong(${JSON.stringify(song).replace(/'/g, "&apos;")})'
+        >
+          ▶
+        </button>
+
+        <button
+          class="song-heart ${favorite ? "favorite" : ""}"
+          onclick='toggleFavorite(${JSON.stringify(song).replace(/'/g, "&apos;")})'
+        >
+          ${favorite ? "♥" : "♡"}
+        </button>
+
+      </div>
+
+    `;
+
+
+    songList.appendChild(
+      row
+    );
+
+  });
+
+}
+
+
+/* ==================================================
+   ПОИСК ПЕСЕН
+================================================== */
+
+let searchTimer = null;
+
+
+musicSearch.addEventListener(
+  "input",
+  function() {
+
+    const query =
+      this.value.trim();
+
+
+    clearTimeout(
+      searchTimer
+    );
+
+
+    if (
+      query.length < 2
+    ) {
+
+      songs = [];
+
+      musicTab = "recommend";
+
+      musicTitle.textContent =
+        "Рекомендации";
+
+      renderRecommendations();
+
+      return;
+
+    }
+
+
+    musicTitle.textContent =
+      "Результаты поиска";
+
+
+    songList.innerHTML =
+      `
+      <div class="no-songs">
+        🔎 Ищу песни...
+      </div>
+      `;
+
+
+    searchTimer =
+      setTimeout(
+        () => searchMusic(query),
+        500
+      );
+
+  }
+);
+
+
+/* ==================================================
+   ITUNES ПОИСК
+================================================== */
+
+async function searchMusic(
+  query
+) {
+
+  try {
+
+    const url =
+      "https://itunes.apple.com/search" +
+      "?term=" +
+      encodeURIComponent(query) +
+      "&media=music" +
+      "&entity=song" +
+      "&limit=25";
+
+
+    const response =
+      await fetch(url);
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        "Search error"
+      );
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    songs =
+      data.results
+        .filter(
+          item =>
+            item.previewUrl
+        )
+        .map(
+          item => ({
+
+            id:
+              String(
+                item.trackId
+              ),
+
+            title:
+              item.trackName,
+
+            artist:
+              item.artistName,
+
+            previewUrl:
+              item.previewUrl,
+
+            artwork:
+              item.artworkUrl100 || ""
+
+          })
+        );
+
+
+    musicTab =
+      "recommend";
+
+
+    musicTitle.textContent =
+      "Результаты поиска";
+
+
+    if (
+      songs.length === 0
+    ) {
+
+      songList.innerHTML =
+        `
+        <div class="no-songs">
+          😕 Ничего не найдено
+        </div>
+        `;
+
+      return;
+
+    }
+
+
+    renderSongArray(
+      songs
+    );
+
+  }
+
+  catch (error) {
+
+    songList.innerHTML =
+      `
+      <div class="no-songs">
+        ⚠️ Не удалось выполнить поиск.<br>
+        Проверь интернет-соединение.
+      </div>
+      `;
+
+  }
+
+}
+
+
+/* ==================================================
+   ВОСПРОИЗВЕДЕНИЕ
+================================================== */
+
+function playSong(song) {
+
+  if (
+    !song.previewUrl
+  ) {
+
+    alert(
+      "Для этой песни нет доступного превью."
+    );
+
+    return;
+
+  }
+
+
+  /*
+    Если нажали другую песню,
+    текущая останавливается
+    и запускается новая.
+  */
+
+  audio.src =
+    song.previewUrl;
+
+
+  audio.load();
+
+
+  audio.play()
+    .then(() => {
+
+      player.classList.add(
+        "visible"
+      );
+
+
+      playerTitle.textContent =
+        song.title;
+
+
+      playerArtist.textContent =
+        song.artist;
+
+
+      pauseButton.textContent =
+        "⏸";
+
+    })
+    .catch(() => {
+
+      alert(
+        "Нажми ▶ ещё раз, чтобы запустить музыку."
+      );
+
+    });
+
+}
+
+
+/* ==================================================
+   ПАУЗА / ПРОДОЛЖЕНИЕ
+================================================== */
+
+function toggleMusic() {
+
+  if (!audio.src) {
+
+    return;
+
+  }
+
+
+  if (
+    audio.paused
+  ) {
+
+    audio.play();
+
+    pauseButton.textContent =
+      "⏸";
+
+  } else {
+
+    audio.pause();
+
+    pauseButton.textContent =
+      "▶";
+
+  }
+
+}
+
+
+/* ==================================================
+   ОСТАНОВИТЬ
+================================================== */
+
+function stopMusic() {
+
+  audio.pause();
+
+  audio.currentTime = 0;
+
+  audio.removeAttribute(
+    "src"
+  );
+
+  audio.load();
+
+
+  player.classList.remove(
+    "visible"
+  );
+
+
+  pauseButton.textContent =
+    "▶";
+
+}
+
+
+/* ==================================================
+   АВТОПЕРЕКЛЮЧЕНИЕ UI ПО КОНЦУ ПРЕВЬЮ
+================================================== */
+
+audio.addEventListener(
+  "ended",
+  function() {
+
+    pauseButton.textContent =
+      "▶";
+
+  }
+);
+
+
+/* ==================================================
+   ИЗБРАННОЕ
+================================================== */
+
+function toggleFavorite(
+  song
+) {
+
+  const index =
+    favorites.findIndex(
+      item =>
+        item.id === song.id
+    );
+
+
+  if (index >= 0) {
+
+    favorites.splice(
+      index,
+      1
+    );
+
+  } else {
+
+    favorites.push(
+      song
+    );
+
+  }
+
+
+  localStorage.setItem(
+    "blockRushFavorites",
+    JSON.stringify(
+      favorites
+    )
+  );
+
+
+  renderMusic();
+
+}
+
+
+/* ==================================================
+   ЗАЩИТА ТЕКСТА
+================================================== */
+
+function escapeHtml(
+  text
+) {
+
+  return String(text)
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+/* ==================================================
+   СТАРТ ИГРЫ
+================================================== */
 
 newGame();
 
