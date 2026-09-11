@@ -2969,10 +2969,87 @@ async function searchMusic(
 
 }
 
+function searchMusic(query) {
 
-/* ==================================================
-   ВОСПРОИЗВЕДЕНИЕ
-================================================== */
+  songList.innerHTML = `
+    <div class="no-songs">
+      🔎 Ищу песни...
+    </div>
+  `;
+
+  const oldScript =
+    document.getElementById("musicSearchScript");
+
+  if (oldScript) {
+    oldScript.remove();
+  }
+
+  const callbackName =
+    "blockRushMusicCallback";
+
+  window[callbackName] = function(data) {
+
+    songs = data.results
+      .filter(item => item.previewUrl)
+      .map(item => ({
+        id: String(item.trackId),
+        title: item.trackName,
+        artist: item.artistName,
+        previewUrl: item.previewUrl,
+        artwork: item.artworkUrl100 || ""
+      }));
+
+    musicTab = "recommend";
+
+    musicTitle.textContent =
+      "Результаты поиска";
+
+    if (songs.length === 0) {
+
+      songList.innerHTML = `
+        <div class="no-songs">
+          😕 Песни не найдены
+        </div>
+      `;
+
+      return;
+    }
+
+    renderSongArray(songs);
+
+  };
+
+
+  const script =
+    document.createElement("script");
+
+  script.id =
+    "musicSearchScript";
+
+  script.src =
+    "https://itunes.apple.com/search" +
+    "?term=" +
+    encodeURIComponent(query) +
+    "&media=music" +
+    "&entity=song" +
+    "&limit=25" +
+    "&callback=" +
+    callbackName;
+
+  script.onerror = function() {
+
+    songList.innerHTML = `
+      <div class="no-songs">
+        ⚠️ Не удалось выполнить поиск.<br>
+        Попробуй ещё раз.
+      </div>
+    `;
+
+  };
+
+  document.body.appendChild(script);
+
+}
 
 function playSong(song) {
 
