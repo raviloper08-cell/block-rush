@@ -11,16 +11,16 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
 .screen{display:none;width:100%;height:100%;flex-direction:column}
 .screen.active{display:flex}
 
-/* ===== MENU ===== */
+/* MENU */
 #menuScreen{align-items:center;justify-content:center;background:#0b0b0b;padding:20px}
 .menu-logo{width:110px;height:110px;border-radius:50%;border:3px solid #D4AF37;background:#181818;color:#D4AF37;display:flex;align-items:center;justify-content:center;font-size:64px;font-weight:900;box-shadow:0 0 40px rgba(212,175,55,.25);margin-bottom:18px}
 .menu-title{font-size:36px;font-weight:800;margin-bottom:6px}
-.menu-sub{color:#888;margin-bottom:40px;font-size:15px}
-.menu-btn{width:100%;max-width:320px;padding:16px;margin:8px 0;border:none;border-radius:16px;background:#D4AF37;color:#111;font-size:18px;font-weight:800;cursor:pointer}
+.menu-sub{color:#888;margin-bottom:36px;font-size:15px}
+.menu-btn{width:100%;max-width:320px;padding:16px;margin:8px 0;border:none;border-radius:16px;background:#D4AF37;color:#111;font-size:18px;font-weight:800}
 .menu-btn.secondary{background:#1c1c1c;color:#D4AF37;border:1px solid #D4AF37}
 .menu-btn:active{transform:scale(.97)}
 
-/* ===== GAME ===== */
+/* GAME */
 #gameScreen{padding:12px 12px 20px;max-width:480px;margin:0 auto;width:100%}
 .header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .btn-icon{width:44px;height:44px;border-radius:12px;border:1px solid #333;background:#1c1c1c;color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center}
@@ -44,10 +44,22 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
 .bottom-actions{display:flex;justify-content:center;margin-top:14px}
 .action-btn{padding:12px 28px;border-radius:14px;border:1px solid #444;background:#222;color:#fff;font-size:15px;font-weight:600}
 
-/* ===== MUSIC ===== */
-#musicScreen{padding:16px;overflow-y:auto}
-.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+/* RECORDS & SETTINGS */
+.page{padding:16px;overflow-y:auto}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
 .topbar h2{font-size:20px}
+.record-card{background:#1a1a1a;border:1px solid #333;border-radius:16px;padding:20px;margin-bottom:12px;text-align:center}
+.record-card .label{color:#888;font-size:13px;margin-bottom:6px}
+.record-card .value{font-size:32px;font-weight:800;color:#D4AF37}
+.setting-item{display:flex;justify-content:space-between;align-items:center;padding:16px;background:#1a1a1a;border:1px solid #333;border-radius:14px;margin-bottom:10px}
+.setting-item span{font-size:16px}
+.toggle{width:52px;height:30px;background:#333;border-radius:20px;position:relative;cursor:pointer;transition:.2s}
+.toggle.on{background:#D4AF37}
+.toggle::after{content:"";position:absolute;width:24px;height:24px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.2s}
+.toggle.on::after{left:25px}
+
+/* MUSIC */
+#musicScreen{padding:16px;overflow-y:auto}
 .music-search{display:flex;gap:8px;margin-bottom:20px}
 .music-search input{flex:1;padding:14px;background:#1b1b1b;color:#fff;border:1px solid #333;border-radius:13px;outline:none;font-size:15px}
 .music-search input:focus{border-color:#D4AF37}
@@ -61,7 +73,6 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
 .song-artist{color:#888;font-size:12px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .song-play{width:40px;height:40px;border:none;border-radius:50%;background:#D4AF37;color:#111;font-weight:900;font-size:16px}
 
-/* Player */
 #player{position:fixed;bottom:0;left:0;right:0;background:#161616;border-top:1px solid #333;padding:10px 14px;display:none;align-items:center;gap:12px;z-index:50}
 #player.show{display:flex}
 .player-cover{width:48px;height:48px;border-radius:8px;object-fit:cover;background:#222}
@@ -72,7 +83,6 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
 .player-btn{width:36px;height:36px;border:none;border-radius:50%;background:#2a2a2a;color:#fff;font-size:14px}
 .player-btn.main{background:#D4AF37;color:#111}
 
-/* Modal */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
 .modal.show{display:flex}
 .modal-box{background:#181818;border:1px solid #333;border-radius:20px;padding:28px 24px;width:100%;max-width:340px;text-align:center}
@@ -86,18 +96,18 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
 </head>
 <body>
 
-<!-- ===== MENU ===== -->
+<!-- MENU -->
 <div id="menuScreen" class="screen active">
   <div class="menu-logo">R</div>
   <div class="menu-title">Block Rush</div>
   <div class="menu-sub">Играй. Собирай. Побеждай.</div>
   <button class="menu-btn" onclick="startGame()">🎮 Начать игру</button>
   <button class="menu-btn secondary" onclick="openMusic()">🎵 Музыка</button>
-  <button class="menu-btn secondary" onclick="alert('Скоро!')">🏆 Рекорды</button>
-  <button class="menu-btn secondary" onclick="alert('Скоро!')">⚙️ Настройки</button>
+  <button class="menu-btn secondary" onclick="openRecords()">🏆 Рекорды</button>
+  <button class="menu-btn secondary" onclick="openSettings()">⚙️ Настройки</button>
 </div>
 
-<!-- ===== GAME ===== -->
+<!-- GAME -->
 <div id="gameScreen" class="screen">
   <div class="header">
     <button class="btn-icon" onclick="openMenu()">←</button>
@@ -117,8 +127,51 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
   </div>
 </div>
 
-<!-- ===== MUSIC ===== -->
-<div id="musicScreen" class="screen">
+<!-- RECORDS -->
+<div id="recordsScreen" class="screen page">
+  <div class="topbar">
+    <button class="btn-icon" onclick="openMenu()">‹</button>
+    <h2>🏆 Рекорды</h2>
+    <div style="width:44px"></div>
+  </div>
+  <div class="record-card">
+    <div class="label">Лучший результат</div>
+    <div class="value" id="bestScore">0</div>
+  </div>
+  <div class="record-card">
+    <div class="label">Последняя игра</div>
+    <div class="value" id="lastScore">0</div>
+  </div>
+  <div class="record-card">
+    <div class="label">Всего игр</div>
+    <div class="value" id="gamesPlayed">0</div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="settingsScreen" class="screen page">
+  <div class="topbar">
+    <button class="btn-icon" onclick="openMenu()">‹</button>
+    <h2>⚙️ Настройки</h2>
+    <div style="width:44px"></div>
+  </div>
+  <div class="setting-item">
+    <span>Вибрация</span>
+    <div class="toggle on" id="vibroToggle" onclick="toggleSetting('vibro')"></div>
+  </div>
+  <div class="setting-item">
+    <span>Звуки игры</span>
+    <div class="toggle on" id="soundToggle" onclick="toggleSetting('sound')"></div>
+  </div>
+  <div class="setting-item">
+    <span>Музыка</span>
+    <div class="toggle on" id="musicToggle" onclick="toggleSetting('music')"></div>
+  </div>
+  <button class="menu-btn secondary" style="margin-top:30px" onclick="resetRecords()">Сбросить рекорды</button>
+</div>
+
+<!-- MUSIC -->
+<div id="musicScreen" class="screen page">
   <div class="topbar">
     <button class="btn-icon" onclick="openMenu()">‹</button>
     <h2>🎵 Музыка</h2>
@@ -128,7 +181,7 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
     <input id="musicSearch" type="text" placeholder="Найти песню..." onkeydown="if(event.key==='Enter')searchMusic()">
     <button class="search-btn" onclick="searchMusic()">🔎</button>
   </div>
-  <h3 class="music-section-title">Результаты поиска</h3>
+  <h3 class="music-section-title">Результаты</h3>
   <div id="songList" class="song-list">
     <div style="color:#777;text-align:center;padding:30px">Введите название песни</div>
   </div>
@@ -162,8 +215,9 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
 
 <script>
 const SIZE = 8;
-let board = [], score = 0, pieces = [], selected = null, dragging = false, combo = 0;
-let ytPlayer = null, currentVideoId = null;
+let board=[], score=0, pieces=[], selected=null, dragging=false, combo=0;
+let ytPlayer=null;
+let settings = JSON.parse(localStorage.getItem('br_settings')||'{"vibro":true,"sound":true,"music":true}');
 
 const SHAPES = [
   [[1]],[[1,1]],[[1,1,1]],[[1,1,1,1]],
@@ -183,6 +237,35 @@ function showScreen(id){
 function openMenu(){showScreen('menuScreen');document.getElementById('gameOver').classList.remove('show')}
 function startGame(){showScreen('gameScreen');newGame()}
 function openMusic(){showScreen('musicScreen')}
+function openRecords(){
+  showScreen('recordsScreen');
+  document.getElementById('bestScore').textContent = localStorage.getItem('br_best')||0;
+  document.getElementById('lastScore').textContent = localStorage.getItem('br_last')||0;
+  document.getElementById('gamesPlayed').textContent = localStorage.getItem('br_games')||0;
+}
+function openSettings(){
+  showScreen('settingsScreen');
+  updateToggles();
+}
+
+function updateToggles(){
+  document.getElementById('vibroToggle').classList.toggle('on', settings.vibro);
+  document.getElementById('soundToggle').classList.toggle('on', settings.sound);
+  document.getElementById('musicToggle').classList.toggle('on', settings.music);
+}
+function toggleSetting(key){
+  settings[key] = !settings[key];
+  localStorage.setItem('br_settings', JSON.stringify(settings));
+  updateToggles();
+}
+function resetRecords(){
+  if(confirm('Сбросить все рекорды?')){
+    localStorage.removeItem('br_best');
+    localStorage.removeItem('br_last');
+    localStorage.removeItem('br_games');
+    alert('Рекорды сброшены');
+  }
+}
 
 function initBoard(){
   const el=document.getElementById('board');
@@ -270,9 +353,8 @@ function moveDrag(e){
   const piece=pieces[selected];
   if(!piece)return;
   const rows=piece.shape.length,cols=piece.shape[0].length;
-  const offsetY=50;
   let col=Math.round((pointer.x-rect.left)/cellSize-cols/2);
-  let row=Math.round((pointer.y-rect.top-offsetY)/cellSize-rows/2);
+  let row=Math.round((pointer.y-rect.top-50)/cellSize-rows/2);
   col=Math.max(-1,Math.min(SIZE-cols,col));
   row=Math.max(-1,Math.min(SIZE-rows,row));
   showPreview(piece,row,col);
@@ -323,8 +405,8 @@ function endDrag(){
     pieces[selected]=null;
     renderPieces();
     if(pieces.every(p=>p===null)){
-      setTimeout(()=>{createPieces();checkGameOver()},350);
-    }else setTimeout(checkGameOver,100);
+      setTimeout(()=>{createPieces();checkGameOver()},300);
+    }else setTimeout(checkGameOver,80);
   }
   selected=null;
 }
@@ -342,7 +424,8 @@ function placePiece(piece,row,col){
   score+=cells;
   document.getElementById('score').textContent=score;
   renderBoard();
-  setTimeout(clearLines,60);
+  if(settings.vibro&&navigator.vibrate)navigator.vibrate(15);
+  setTimeout(clearLines,50);
 }
 
 function clearLines(){
@@ -368,10 +451,11 @@ function clearLines(){
     t.classList.add('show');
     setTimeout(()=>t.classList.remove('show'),700);
   }
+  if(settings.vibro&&navigator.vibrate)navigator.vibrate([20,30,20]);
   setTimeout(()=>{
     toClear.forEach(i=>{const r=Math.floor(i/SIZE),c=i%SIZE;board[r][c]=null});
     renderBoard();
-  },300);
+  },280);
 }
 
 function canPlace(piece){
@@ -388,30 +472,41 @@ function checkGameOver(){
   const available=pieces.filter(p=>p!==null);
   if(available.length===0)return;
   if(!available.some(p=>canPlace(p))){
+    // Save records
+    const best=parseInt(localStorage.getItem('br_best')||0);
+    if(score>best)localStorage.setItem('br_best',score);
+    localStorage.setItem('br_last',score);
+    localStorage.setItem('br_games',(parseInt(localStorage.getItem('br_games')||0)+1));
+    
     document.getElementById('finalScore').textContent=score;
     document.getElementById('gameOver').classList.add('show');
   }
 }
 
-/* ===== MUSIC (YouTube) ===== */
-function onYouTubeIframeAPIReady(){}
+/* MUSIC - faster search */
 async function searchMusic(){
   const q=document.getElementById('musicSearch').value.trim();
   if(!q)return;
   const list=document.getElementById('songList');
   list.innerHTML='<div style="color:#777;text-align:center;padding:20px">Ищу...</div>';
+  
   try{
-    // Используем публичный поиск через Invidious / альтернативу (чтобы не нужен был API key)
-    const res=await fetch(`https://yt.lemnoslife.com/noKey/search?q=${encodeURIComponent(q)}&type=video`);
+    const res=await fetch(`https://inv.nadeko.net/api/v1/search?q=${encodeURIComponent(q)}&type=video`);
     const data=await res.json();
-    const items=(data.items||[]).slice(0,12);
-    if(!items.length){list.innerHTML='<div style="color:#777;text-align:center;padding:20px">Ничего не найдено</div>';return}
+    const items=(Array.isArray(data)?data:[]).slice(0,10);
+    
+    if(!items.length){
+      list.innerHTML='<div style="color:#777;text-align:center;padding:20px">Ничего не найдено</div>';
+      return;
+    }
+    
     list.innerHTML='';
     items.forEach(item=>{
-      const id=item.id;
+      const id=item.videoId;
       const title=item.title||'Без названия';
-      const channel=item.channelTitle||'';
-      const thumb=item.thumbnails?.[0]?.url||'';
+      const channel=item.author||'';
+      const thumb=item.videoThumbnails?.[3]?.url || item.videoThumbnails?.[0]?.url || `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
+      
       const div=document.createElement('div');
       div.className='song';
       div.innerHTML=`
@@ -425,12 +520,12 @@ async function searchMusic(){
       list.appendChild(div);
     });
   }catch(e){
-    list.innerHTML='<div style="color:#777;text-align:center;padding:20px">Ошибка поиска. Попробуй другое название.</div>';
+    list.innerHTML='<div style="color:#777;text-align:center;padding:20px">Ошибка. Попробуй другое название</div>';
   }
 }
 
 function playVideo(id,title,artist){
-  currentVideoId=id;
+  if(!settings.music)return;
   document.getElementById('playerTitle').textContent=title;
   document.getElementById('playerArtist').textContent=artist;
   document.getElementById('playerCover').src=`https://img.youtube.com/vi/${id}/mqdefault.jpg`;
@@ -442,13 +537,12 @@ function playVideo(id,title,artist){
     ytPlayer.playVideo();
   }else{
     ytPlayer=new YT.Player('youtubePlayer',{
-      height:'0',width:'0',
-      videoId:id,
+      height:'0',width:'0',videoId:id,
       playerVars:{autoplay:1},
       events:{
         onStateChange:e=>{
-          if(e.data===YT.PlayerState.PLAYING)document.getElementById('playPauseBtn').textContent='❚❚';
-          if(e.data===YT.PlayerState.PAUSED||e.data===YT.PlayerState.ENDED)document.getElementById('playPauseBtn').textContent='▶';
+          if(e.data===1)document.getElementById('playPauseBtn').textContent='❚❚';
+          if(e.data===2||e.data===0)document.getElementById('playPauseBtn').textContent='▶';
         }
       }
     });
@@ -458,14 +552,13 @@ function playVideo(id,title,artist){
 function togglePlay(){
   if(!ytPlayer)return;
   const state=ytPlayer.getPlayerState();
-  if(state===YT.PlayerState.PLAYING){ytPlayer.pauseVideo();document.getElementById('playPauseBtn').textContent='▶'}
+  if(state===1){ytPlayer.pauseVideo();document.getElementById('playPauseBtn').textContent='▶'}
   else{ytPlayer.playVideo();document.getElementById('playPauseBtn').textContent='❚❚'}
 }
 
 function stopMusic(){
   if(ytPlayer)ytPlayer.stopVideo();
   document.getElementById('player').classList.remove('show');
-  document.getElementById('playPauseBtn').textContent='▶';
 }
 
 initBoard();
