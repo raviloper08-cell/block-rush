@@ -96,7 +96,6 @@
     position: relative;
   }
 
-  /* ===== GOLD BLOCK ===== */
   .cell.gold, .piece-cell.gold {
     background: linear-gradient(
       145deg,
@@ -133,8 +132,8 @@
   }
 
   .cell.preview.invalid {
-    outline-color: #e53935;
-    background: rgba(229, 57, 53, 0.15);
+    outline-color: #e53935 !important;
+    background: rgba(229, 57, 53, 0.2) !important;
   }
 
   .cell.clearing {
@@ -435,12 +434,8 @@ function renderPieces() {
 }
 
 function getPointer(e) {
-  if (e.touches && e.touches[0]) {
-    return { x: e.touches[0].clientX, y: e.touches[0].clientY };
-  }
-  if (e.changedTouches && e.changedTouches[0]) {
-    return { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
-  }
+  if (e.touches && e.touches[0]) return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  if (e.changedTouches && e.changedTouches[0]) return { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
   return { x: e.clientX, y: e.clientY };
 }
 
@@ -473,24 +468,19 @@ function moveDrag(e) {
 
   const rows = piece.shape.length;
   const cols = piece.shape[0].length;
-
   const offsetY = 55;
 
   let col = Math.round((pointer.x - rect.left) / cellSize - cols / 2);
   let row = Math.round((pointer.y - rect.top - offsetY) / cellSize - rows / 2);
 
-  col = Math.max(-2, Math.min(SIZE - cols + 2, col));
-  row = Math.max(-2, Math.min(SIZE - rows + 2, row));
+  col = Math.max(-1, Math.min(SIZE - cols, col));
+  row = Math.max(-1, Math.min(SIZE - rows, row));
 
   showPreview(piece, row, col);
 }
 
-function showPreview(piece, row, col) {
-  clearPreview();
-
-  let valid = true;
-  const positions = [];
-
+// ===== ГЛАВНАЯ ПРОВЕРКА =====
+function isValidPosition(piece, row, col) {
   for (let r = 0; r < piece.shape.length; r++) {
     for (let c = 0; c < piece.shape[r].length; c++) {
       if (!piece.shape[r][c]) continue;
@@ -498,11 +488,30 @@ function showPreview(piece, row, col) {
       const rr = row + r;
       const cc = col + c;
 
-      if (rr < 0 || rr >= SIZE || cc < 0 || cc >= SIZE || board[rr][cc] !== null) {
-        valid = false;
+      // Выход за границы
+      if (rr < 0 || rr >= SIZE || cc < 0 || cc >= SIZE) {
+        return false;
       }
 
-      positions.push({ r: rr, c: cc });
+      // Клетка уже занята
+      if (board[rr][cc] !== null) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+function showPreview(piece, row, col) {
+  clearPreview();
+
+  const valid = isValidPosition(piece, row, col);
+  const positions = [];
+
+  for (let r = 0; r < piece.shape.length; r++) {
+    for (let c = 0; c < piece.shape[r].length; c++) {
+      if (!piece.shape[r][c]) continue;
+      positions.push({ r: row + r, c: col + c });
     }
   }
 
@@ -539,22 +548,9 @@ function endDrag() {
   clearPreview();
 
   if (data && data.valid && selected !== null) {
-    let canPlaceHere = true;
-    const piece = data.piece;
-
-    for (let r = 0; r < piece.shape.length; r++) {
-      for (let c = 0; c < piece.shape[r].length; c++) {
-        if (!piece.shape[r][c]) continue;
-        const rr = data.row + r;
-        const cc = data.col + c;
-        if (rr < 0 || rr >= SIZE || cc < 0 || cc >= SIZE || board[rr][cc] !== null) {
-          canPlaceHere = false;
-        }
-      }
-    }
-
-    if (canPlaceHere) {
-      placePiece(piece, data.row, data.col);
+    // Ещё одна жёсткая проверка прямо перед постановкой
+    if (isValidPosition(data.piece, data.row, data.col)) {
+      placePiece(data.piece, data.row, data.col);
       pieces[selected] = null;
       renderPieces();
 
@@ -564,7 +560,7 @@ function endDrag() {
           checkGameOver();
         }, 350);
       } else {
-        setTimeout(checkGameOver, 100);
+        setTimeout(checkGameOver, 120);
       }
     }
   }
@@ -573,6 +569,12 @@ function endDrag() {
 }
 
 function placePiece(piece, row, col) {
+  // Финальная защита внутри placePiece
+  if (!isValidPosition(piece, row, col)) {
+    console.log("Blocked overlapping placement");
+    return;
+  }
+
   let cells = 0;
   for (let r = 0; r < piece.shape.length; r++) {
     for (let c = 0; c < piece.shape[r].length; c++) {
@@ -592,14 +594,12 @@ function placePiece(piece, row, col) {
 function clearLines() {
   const toClear = new Set();
 
-  // Rows
   for (let r = 0; r < SIZE; r++) {
     if (board[r].every(cell => cell !== null)) {
       for (let c = 0; c < SIZE; c++) toClear.add(r * SIZE + c);
     }
   }
 
-  // Columns
   for (let c = 0; c < SIZE; c++) {
     let full = true;
     for (let r = 0; r < SIZE; r++) {
@@ -619,9 +619,7 @@ function clearLines() {
   }
 
   const cells = document.querySelectorAll("#board .cell");
-  toClear.forEach(idx => {
-    cells[idx].classList.add("clearing");
-  });
+  toClear.forEach(idx => cells[idx].classList.add("clearing"));
 
   combo++;
   const lines = Math.floor(toClear.size / SIZE);
@@ -652,15 +650,7 @@ function canPlace(piece) {
 
   for (let r = 0; r <= SIZE - rows; r++) {
     for (let c = 0; c <= SIZE - cols; c++) {
-      let ok = true;
-      for (let i = 0; i < rows && ok; i++) {
-        for (let j = 0; j < cols && ok; j++) {
-          if (piece.shape[i][j] && board[r + i][c + j]) {
-            ok = false;
-          }
-        }
-      }
-      if (ok) return true;
+      if (isValidPosition(piece, r, c)) return true;
     }
   }
   return false;
@@ -670,8 +660,7 @@ function checkGameOver() {
   const available = pieces.filter(p => p !== null);
   if (available.length === 0) return;
 
-  const canAny = available.some(p => canPlace(p));
-  if (!canAny) {
+  if (!available.some(p => canPlace(p))) {
     document.getElementById("finalScore").textContent = score;
     document.getElementById("gameOver").classList.add("show");
   }
