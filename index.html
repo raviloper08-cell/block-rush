@@ -21,82 +21,81 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
 .menu-btn:active{transform:scale(.97)}
 
 /* GAME */
-#gameScreen{padding:12px 12px 20px;max-width:480px;margin:0 auto;width:100%}
-.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.btn-icon{width:44px;height:44px;border-radius:12px;border:1px solid #333;background:#1c1c1c;color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center}
-.score-box{background:#1d1d1d;border:1px solid #333;border-radius:14px;padding:8px 16px;color:#D4AF37;font-weight:800;font-size:18px;display:flex;align-items:center;gap:6px}
-.board-wrap{display:flex;justify-content:center;margin:8px 0 14px;position:relative}
-#board{width:min(92vw,400px);aspect-ratio:1;display:grid;grid-template-columns:repeat(8,1fr);gap:4px;padding:6px;background:linear-gradient(145deg,#222,#111);border:2px solid #333;border-radius:16px;touch-action:none}
-.cell{background:linear-gradient(145deg,#1a1a1a,#0a0a0a);border-radius:6px;position:relative}
-.cell.gold,.piece-cell.gold{background:linear-gradient(145deg,#fff6c0 0%,#f8e27a 18%,#D4AF37 48%,#b8870b 78%,#6b3f00 100%);border:1px solid #f5d76e;box-shadow:inset 2px 2px 4px rgba(255,255,255,.55),inset -2px -3px 5px rgba(60,35,0,.45),0 3px 0 #5c3a00,0 5px 10px rgba(0,0,0,.55)}
-.cell.gold::before,.piece-cell.gold::before{content:"";position:absolute;top:2px;left:3px;width:45%;height:28%;border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,.75),transparent);pointer-events:none}
-.cell.preview{outline:2.5px solid #D4AF37;outline-offset:-1px;background:rgba(212,175,55,.18)}
-.cell.preview.invalid{outline-color:#e53935!important;background:rgba(229,57,53,.2)!important}
-.cell.clearing{animation:clearAnim .32s forwards}
-@keyframes clearAnim{0%{transform:scale(1);opacity:1}40%{transform:scale(1.15);opacity:1}100%{transform:scale(.1);opacity:0}}
+#gameScreen{padding:12px 12px 16px;max-width:480px;margin:0 auto;width:100%;height:100%}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.btn-icon{width:42px;height:42px;border-radius:12px;border:1px solid #333;background:#1c1c1c;color:#fff;font-size:18px;display:flex;align-items:center;justify-content:center}
+.score-box{background:#1d1d1d;border:1px solid #333;border-radius:14px;padding:7px 14px;color:#D4AF37;font-weight:800;font-size:17px;display:flex;align-items:center;gap:6px}
+.board-wrap{display:flex;justify-content:center;margin:6px 0 12px;position:relative}
+#board{width:min(94vw,400px);aspect-ratio:1;display:grid;grid-template-columns:repeat(8,1fr);gap:3.5px;padding:5px;background:linear-gradient(145deg,#1f1f1f,#111);border:2px solid #333;border-radius:14px;touch-action:none}
+.cell{background:linear-gradient(145deg,#181818,#0a0a0a);border-radius:5px;position:relative;transition:background .05s}
+.cell.gold,.piece-cell.gold{background:linear-gradient(145deg,#fff6c0 0%,#f8e27a 18%,#D4AF37 48%,#b8870b 78%,#6b3f00 100%);border:1px solid #f5d76e;box-shadow:inset 1.5px 1.5px 3px rgba(255,255,255,.5),inset -2px -2px 4px rgba(60,35,0,.4),0 2px 0 #5c3a00,0 4px 8px rgba(0,0,0,.5)}
+.cell.gold::before,.piece-cell.gold::before{content:"";position:absolute;top:1.5px;left:2px;width:42%;height:26%;border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,.7),transparent);pointer-events:none}
+.cell.preview{outline:2px solid #D4AF37;outline-offset:-1px;background:rgba(212,175,55,.22)!important}
+.cell.preview.invalid{outline-color:#e53935!important;background:rgba(229,57,53,.18)!important}
+.cell.clearing{animation:clearAnim .28s forwards}
+@keyframes clearAnim{0%{transform:scale(1);opacity:1}50%{transform:scale(1.12);opacity:1}100%{transform:scale(0);opacity:0}}
 .pieces-area{margin-top:auto}
-.pieces-title{text-align:center;color:#777;font-size:14px;margin-bottom:10px}
-#pieces{display:flex;justify-content:space-evenly;align-items:center;gap:8px;min-height:110px}
-.piece{display:grid;gap:3px;padding:10px;cursor:grab;touch-action:none;transition:transform .12s;filter:drop-shadow(0 6px 8px rgba(0,0,0,.5))}
-.piece:active{cursor:grabbing;transform:scale(1.08)}
-.piece-cell{width:20px;height:20px;border-radius:5px;position:relative}
+.pieces-title{text-align:center;color:#666;font-size:13px;margin-bottom:8px}
+#pieces{display:flex;justify-content:space-evenly;align-items:center;gap:6px;min-height:105px}
+.piece{display:grid;gap:2.5px;padding:8px;cursor:grab;touch-action:none;transition:transform .1s;filter:drop-shadow(0 5px 6px rgba(0,0,0,.45))}
+.piece.dragging{opacity:0.35;transform:scale(0.92)}
+.piece-cell{width:19px;height:19px;border-radius:4px;position:relative}
 .piece-cell.empty{visibility:hidden}
-.bottom-actions{display:flex;justify-content:center;margin-top:14px}
-.action-btn{padding:12px 28px;border-radius:14px;border:1px solid #444;background:#222;color:#fff;font-size:15px;font-weight:600}
+.bottom-actions{display:flex;justify-content:center;margin-top:10px}
+.action-btn{padding:11px 26px;border-radius:13px;border:1px solid #444;background:#222;color:#fff;font-size:14px;font-weight:600}
 
 /* RECORDS & SETTINGS */
 .page{padding:16px;overflow-y:auto}
-.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
-.topbar h2{font-size:20px}
-.record-card{background:#1a1a1a;border:1px solid #333;border-radius:16px;padding:20px;margin-bottom:12px;text-align:center}
-.record-card .label{color:#888;font-size:13px;margin-bottom:6px}
-.record-card .value{font-size:32px;font-weight:800;color:#D4AF37}
-.setting-item{display:flex;justify-content:space-between;align-items:center;padding:16px;background:#1a1a1a;border:1px solid #333;border-radius:14px;margin-bottom:10px}
-.setting-item span{font-size:16px}
-.toggle{width:52px;height:30px;background:#333;border-radius:20px;position:relative;cursor:pointer;transition:.2s}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.topbar h2{font-size:19px}
+.record-card{background:#1a1a1a;border:1px solid #333;border-radius:16px;padding:18px;margin-bottom:11px;text-align:center}
+.record-card .label{color:#888;font-size:13px;margin-bottom:5px}
+.record-card .value{font-size:30px;font-weight:800;color:#D4AF37}
+.setting-item{display:flex;justify-content:space-between;align-items:center;padding:15px;background:#1a1a1a;border:1px solid #333;border-radius:14px;margin-bottom:10px}
+.setting-item span{font-size:15px}
+.toggle{width:50px;height:28px;background:#333;border-radius:20px;position:relative;cursor:pointer;transition:.2s}
 .toggle.on{background:#D4AF37}
-.toggle::after{content:"";position:absolute;width:24px;height:24px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.2s}
+.toggle::after{content:"";position:absolute;width:22px;height:22px;background:#fff;border-radius:50%;top:3px;left:3px;transition:.2s}
 .toggle.on::after{left:25px}
 
 /* MUSIC */
 #musicScreen{padding:16px;overflow-y:auto}
-.music-search{display:flex;gap:8px;margin-bottom:20px}
-.music-search input{flex:1;padding:14px;background:#1b1b1b;color:#fff;border:1px solid #333;border-radius:13px;outline:none;font-size:15px}
+.music-search{display:flex;gap:8px;margin-bottom:18px}
+.music-search input{flex:1;padding:13px;background:#1b1b1b;color:#fff;border:1px solid #333;border-radius:12px;outline:none;font-size:15px}
 .music-search input:focus{border-color:#D4AF37}
-.search-btn{width:52px;border:none;border-radius:13px;background:#D4AF37;color:#111;font-weight:900;font-size:18px}
-.music-section-title{color:#D4AF37;margin:18px 0 10px;font-size:15px}
+.search-btn{width:50px;border:none;border-radius:12px;background:#D4AF37;color:#111;font-weight:900;font-size:17px}
+.music-section-title{color:#D4AF37;margin:16px 0 10px;font-size:14px}
 .song-list{display:flex;flex-direction:column;gap:8px}
-.song{display:flex;align-items:center;gap:10px;padding:10px;background:#1a1a1a;border:1px solid #292929;border-radius:14px}
-.song-cover{width:52px;height:52px;border-radius:8px;object-fit:cover;background:#222}
+.song{display:flex;align-items:center;gap:10px;padding:9px;background:#1a1a1a;border:1px solid #292929;border-radius:13px}
+.song-cover{width:48px;height:48px;border-radius:7px;object-fit:cover;background:#222}
 .song-info{flex:1;min-width:0}
-.song-title{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px}
-.song-artist{color:#888;font-size:12px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.song-play{width:40px;height:40px;border:none;border-radius:50%;background:#D4AF37;color:#111;font-weight:900;font-size:16px}
+.song-title{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13px}
+.song-artist{color:#888;font-size:11px;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.song-play{width:38px;height:38px;border:none;border-radius:50%;background:#D4AF37;color:#111;font-weight:900;font-size:15px}
 
-#player{position:fixed;bottom:0;left:0;right:0;background:#161616;border-top:1px solid #333;padding:10px 14px;display:none;align-items:center;gap:12px;z-index:50}
+#player{position:fixed;bottom:0;left:0;right:0;background:#161616;border-top:1px solid #333;padding:9px 12px;display:none;align-items:center;gap:10px;z-index:50}
 #player.show{display:flex}
-.player-cover{width:48px;height:48px;border-radius:8px;object-fit:cover;background:#222}
+.player-cover{width:44px;height:44px;border-radius:7px;object-fit:cover;background:#222}
 .player-main{flex:1;min-width:0}
-.player-title{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.player-artist{color:#888;font-size:12px}
-.player-buttons{display:flex;gap:6px}
-.player-btn{width:36px;height:36px;border:none;border-radius:50%;background:#2a2a2a;color:#fff;font-size:14px}
+.player-title{font-weight:700;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.player-artist{color:#888;font-size:11px}
+.player-buttons{display:flex;gap:5px}
+.player-btn{width:34px;height:34px;border:none;border-radius:50%;background:#2a2a2a;color:#fff;font-size:13px}
 .player-btn.main{background:#D4AF37;color:#111}
 
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
 .modal.show{display:flex}
-.modal-box{background:#181818;border:1px solid #333;border-radius:20px;padding:28px 24px;width:100%;max-width:340px;text-align:center}
-.modal-box h2{margin-bottom:8px;font-size:24px}
-.modal-box p{color:#aaa;margin-bottom:20px}
-.modal-btn{width:100%;padding:14px;border:none;border-radius:14px;background:#D4AF37;color:#111;font-weight:800;font-size:16px;margin-top:8px}
+.modal-box{background:#181818;border:1px solid #333;border-radius:18px;padding:26px 22px;width:100%;max-width:330px;text-align:center}
+.modal-box h2{margin-bottom:8px;font-size:22px}
+.modal-box p{color:#aaa;margin-bottom:18px}
+.modal-btn{width:100%;padding:13px;border:none;border-radius:13px;background:#D4AF37;color:#111;font-weight:800;font-size:15px;margin-top:7px}
 .modal-btn.dark{background:#2a2a2a;color:#fff}
-.combo-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:28px;font-weight:900;color:#D4AF37;text-shadow:0 0 20px rgba(212,175,55,.6);pointer-events:none;opacity:0;transition:opacity .3s}
+.combo-text{position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);font-size:26px;font-weight:900;color:#D4AF37;text-shadow:0 0 18px rgba(212,175,55,.6);pointer-events:none;opacity:0;transition:opacity .25s}
 .combo-text.show{opacity:1}
 </style>
 </head>
 <body>
 
-<!-- MENU -->
 <div id="menuScreen" class="screen active">
   <div class="menu-logo">R</div>
   <div class="menu-title">Block Rush</div>
@@ -107,7 +106,6 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
   <button class="menu-btn secondary" onclick="openSettings()">⚙️ Настройки</button>
 </div>
 
-<!-- GAME -->
 <div id="gameScreen" class="screen">
   <div class="header">
     <button class="btn-icon" onclick="openMenu()">←</button>
@@ -127,67 +125,43 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
   </div>
 </div>
 
-<!-- RECORDS -->
 <div id="recordsScreen" class="screen page">
   <div class="topbar">
     <button class="btn-icon" onclick="openMenu()">‹</button>
     <h2>🏆 Рекорды</h2>
-    <div style="width:44px"></div>
+    <div style="width:42px"></div>
   </div>
-  <div class="record-card">
-    <div class="label">Лучший результат</div>
-    <div class="value" id="bestScore">0</div>
-  </div>
-  <div class="record-card">
-    <div class="label">Последняя игра</div>
-    <div class="value" id="lastScore">0</div>
-  </div>
-  <div class="record-card">
-    <div class="label">Всего игр</div>
-    <div class="value" id="gamesPlayed">0</div>
-  </div>
+  <div class="record-card"><div class="label">Лучший результат</div><div class="value" id="bestScore">0</div></div>
+  <div class="record-card"><div class="label">Последняя игра</div><div class="value" id="lastScore">0</div></div>
+  <div class="record-card"><div class="label">Всего игр</div><div class="value" id="gamesPlayed">0</div></div>
 </div>
 
-<!-- SETTINGS -->
 <div id="settingsScreen" class="screen page">
   <div class="topbar">
     <button class="btn-icon" onclick="openMenu()">‹</button>
     <h2>⚙️ Настройки</h2>
-    <div style="width:44px"></div>
+    <div style="width:42px"></div>
   </div>
-  <div class="setting-item">
-    <span>Вибрация</span>
-    <div class="toggle on" id="vibroToggle" onclick="toggleSetting('vibro')"></div>
-  </div>
-  <div class="setting-item">
-    <span>Звуки игры</span>
-    <div class="toggle on" id="soundToggle" onclick="toggleSetting('sound')"></div>
-  </div>
-  <div class="setting-item">
-    <span>Музыка</span>
-    <div class="toggle on" id="musicToggle" onclick="toggleSetting('music')"></div>
-  </div>
-  <button class="menu-btn secondary" style="margin-top:30px" onclick="resetRecords()">Сбросить рекорды</button>
+  <div class="setting-item"><span>Вибрация</span><div class="toggle on" id="vibroToggle" onclick="toggleSetting('vibro')"></div></div>
+  <div class="setting-item"><span>Звуки игры</span><div class="toggle on" id="soundToggle" onclick="toggleSetting('sound')"></div></div>
+  <div class="setting-item"><span>Музыка</span><div class="toggle on" id="musicToggle" onclick="toggleSetting('music')"></div></div>
+  <button class="menu-btn secondary" style="margin-top:28px" onclick="resetRecords()">Сбросить рекорды</button>
 </div>
 
-<!-- MUSIC -->
 <div id="musicScreen" class="screen page">
   <div class="topbar">
     <button class="btn-icon" onclick="openMenu()">‹</button>
     <h2>🎵 Музыка</h2>
-    <div style="width:44px"></div>
+    <div style="width:42px"></div>
   </div>
   <div class="music-search">
     <input id="musicSearch" type="text" placeholder="Найти песню..." onkeydown="if(event.key==='Enter')searchMusic()">
     <button class="search-btn" onclick="searchMusic()">🔎</button>
   </div>
   <h3 class="music-section-title">Результаты</h3>
-  <div id="songList" class="song-list">
-    <div style="color:#777;text-align:center;padding:30px">Введите название песни</div>
-  </div>
+  <div id="songList" class="song-list"><div style="color:#777;text-align:center;padding:30px">Введите название песни</div></div>
 </div>
 
-<!-- Player -->
 <div id="player">
   <img id="playerCover" class="player-cover" src="" alt="">
   <div class="player-main">
@@ -200,7 +174,6 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
   </div>
 </div>
 
-<!-- Game Over -->
 <div id="gameOver" class="modal">
   <div class="modal-box">
     <h2>Игра окончена</h2>
@@ -214,12 +187,11 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
 <script src="https://www.youtube.com/iframe_api"></script>
 
 <script>
-const SIZE = 8;
-let board=[], score=0, pieces=[], selected=null, dragging=false, combo=0;
-let ytPlayer=null;
-let settings = JSON.parse(localStorage.getItem('br_settings')||'{"vibro":true,"sound":true,"music":true}');
+const SIZE=8;
+let board=[],score=0,pieces=[],selected=null,dragging=false,combo=0,ytPlayer=null;
+let settings=JSON.parse(localStorage.getItem('br_settings')||'{"vibro":true,"sound":true,"music":true}');
 
-const SHAPES = [
+const SHAPES=[
   [[1]],[[1,1]],[[1,1,1]],[[1,1,1,1]],
   [[1],[1]],[[1],[1],[1]],[[1],[1],[1],[1]],
   [[1,1],[1,1]],[[1,1,1],[1,1,1]],[[1,1],[1,1],[1,1]],
@@ -230,51 +202,28 @@ const SHAPES = [
   [[1,1,1],[0,1,0]],[[0,1,0],[1,1,1]],[[1,0,1],[1,1,1]],[[1,1,1],[1,0,1]]
 ];
 
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
 function openMenu(){showScreen('menuScreen');document.getElementById('gameOver').classList.remove('show')}
 function startGame(){showScreen('gameScreen');newGame()}
 function openMusic(){showScreen('musicScreen')}
 function openRecords(){
   showScreen('recordsScreen');
-  document.getElementById('bestScore').textContent = localStorage.getItem('br_best')||0;
-  document.getElementById('lastScore').textContent = localStorage.getItem('br_last')||0;
-  document.getElementById('gamesPlayed').textContent = localStorage.getItem('br_games')||0;
+  document.getElementById('bestScore').textContent=localStorage.getItem('br_best')||0;
+  document.getElementById('lastScore').textContent=localStorage.getItem('br_last')||0;
+  document.getElementById('gamesPlayed').textContent=localStorage.getItem('br_games')||0;
 }
-function openSettings(){
-  showScreen('settingsScreen');
-  updateToggles();
-}
-
+function openSettings(){showScreen('settingsScreen');updateToggles()}
 function updateToggles(){
-  document.getElementById('vibroToggle').classList.toggle('on', settings.vibro);
-  document.getElementById('soundToggle').classList.toggle('on', settings.sound);
-  document.getElementById('musicToggle').classList.toggle('on', settings.music);
+  document.getElementById('vibroToggle').classList.toggle('on',settings.vibro);
+  document.getElementById('soundToggle').classList.toggle('on',settings.sound);
+  document.getElementById('musicToggle').classList.toggle('on',settings.music);
 }
-function toggleSetting(key){
-  settings[key] = !settings[key];
-  localStorage.setItem('br_settings', JSON.stringify(settings));
-  updateToggles();
-}
-function resetRecords(){
-  if(confirm('Сбросить все рекорды?')){
-    localStorage.removeItem('br_best');
-    localStorage.removeItem('br_last');
-    localStorage.removeItem('br_games');
-    alert('Рекорды сброшены');
-  }
-}
+function toggleSetting(key){settings[key]=!settings[key];localStorage.setItem('br_settings',JSON.stringify(settings));updateToggles()}
+function resetRecords(){if(confirm('Сбросить все рекорды?')){localStorage.removeItem('br_best');localStorage.removeItem('br_last');localStorage.removeItem('br_games');alert('Рекорды сброшены')}}
 
 function initBoard(){
-  const el=document.getElementById('board');
-  el.innerHTML='';
-  for(let i=0;i<SIZE*SIZE;i++){
-    const c=document.createElement('div');
-    c.className='cell';
-    el.appendChild(c);
-  }
+  const el=document.getElementById('board');el.innerHTML='';
+  for(let i=0;i<SIZE*SIZE;i++){const c=document.createElement('div');c.className='cell';el.appendChild(c)}
 }
 
 function newGame(){
@@ -282,8 +231,7 @@ function newGame(){
   score=0;combo=0;
   document.getElementById('score').textContent='0';
   document.getElementById('gameOver').classList.remove('show');
-  createPieces();
-  renderBoard();
+  createPieces();renderBoard();
 }
 
 function createPieces(){
@@ -300,25 +248,21 @@ function renderBoard(){
   cells.forEach((cell,i)=>{
     const r=Math.floor(i/SIZE),c=i%SIZE;
     cell.className='cell';
-    if(board[r][c]) cell.classList.add(board[r][c]);
+    if(board[r][c])cell.classList.add(board[r][c]);
   });
 }
 
 function renderPieces(){
-  const container=document.getElementById('pieces');
-  container.innerHTML='';
+  const container=document.getElementById('pieces');container.innerHTML='';
   pieces.forEach((piece,index)=>{
-    if(!piece){const e=document.createElement('div');e.style.width='80px';container.appendChild(e);return}
-    const div=document.createElement('div');
-    div.className='piece';
+    if(!piece){const e=document.createElement('div');e.style.width='70px';container.appendChild(e);return}
+    const div=document.createElement('div');div.className='piece';div.dataset.index=index;
     const rows=piece.shape.length,cols=piece.shape[0].length;
-    div.style.gridTemplateColumns=`repeat(${cols},20px)`;
-    for(let r=0;r<rows;r++){
-      for(let c=0;c<cols;c++){
-        const cell=document.createElement('div');
-        cell.className='piece-cell'+(piece.shape[r][c]?' gold':' empty');
-        div.appendChild(cell);
-      }
+    div.style.gridTemplateColumns=`repeat(${cols},19px)`;
+    for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
+      const cell=document.createElement('div');
+      cell.className='piece-cell'+(piece.shape[r][c]?' gold':' empty');
+      div.appendChild(cell);
     }
     div.addEventListener('mousedown',e=>startDrag(e,index));
     div.addEventListener('touchstart',e=>startDrag(e,index),{passive:false});
@@ -336,7 +280,9 @@ function startDrag(e,index){
   e.preventDefault();
   if(!pieces[index])return;
   selected=index;dragging=true;
-  document.addEventListener('mousemove',moveDrag);
+  const el=document.querySelector(`.piece[data-index="${index}"]`);
+  if(el)el.classList.add('dragging');
+  document.addEventListener('mousemove',moveDrag,{passive:false});
   document.addEventListener('touchmove',moveDrag,{passive:false});
   document.addEventListener('mouseup',endDrag);
   document.addEventListener('touchend',endDrag);
@@ -353,8 +299,11 @@ function moveDrag(e){
   const piece=pieces[selected];
   if(!piece)return;
   const rows=piece.shape.length,cols=piece.shape[0].length;
-  let col=Math.round((pointer.x-rect.left)/cellSize-cols/2);
-  let row=Math.round((pointer.y-rect.top-50)/cellSize-rows/2);
+
+  // Более точное позиционирование как в Block Blast
+  let col=Math.floor((pointer.x-rect.left)/cellSize-cols/2+0.5);
+  let row=Math.floor((pointer.y-rect.top-40)/cellSize-rows/2+0.5);
+
   col=Math.max(-1,Math.min(SIZE-cols,col));
   row=Math.max(-1,Math.min(SIZE-rows,row));
   showPreview(piece,row,col);
@@ -387,9 +336,7 @@ function showPreview(piece,row,col){
   window._lastPreview={row,col,valid,piece};
 }
 
-function clearPreview(){
-  document.querySelectorAll('.preview').forEach(c=>c.classList.remove('preview','invalid'));
-}
+function clearPreview(){document.querySelectorAll('.preview').forEach(c=>c.classList.remove('preview','invalid'))}
 
 function endDrag(){
   if(!dragging)return;
@@ -398,15 +345,16 @@ function endDrag(){
   document.removeEventListener('touchmove',moveDrag);
   document.removeEventListener('mouseup',endDrag);
   document.removeEventListener('touchend',endDrag);
+  document.querySelectorAll('.piece.dragging').forEach(el=>el.classList.remove('dragging'));
+
   const data=window._lastPreview;
   clearPreview();
   if(data&&data.valid&&selected!==null&&isValidPosition(data.piece,data.row,data.col)){
     placePiece(data.piece,data.row,data.col);
     pieces[selected]=null;
     renderPieces();
-    if(pieces.every(p=>p===null)){
-      setTimeout(()=>{createPieces();checkGameOver()},300);
-    }else setTimeout(checkGameOver,80);
+    if(pieces.every(p=>p===null))setTimeout(()=>{createPieces();checkGameOver()},260);
+    else setTimeout(checkGameOver,60);
   }
   selected=null;
 }
@@ -417,25 +365,21 @@ function placePiece(piece,row,col){
   for(let r=0;r<piece.shape.length;r++){
     for(let c=0;c<piece.shape[r].length;c++){
       if(!piece.shape[r][c])continue;
-      board[row+r][col+c]='gold';
-      cells++;
+      board[row+r][col+c]='gold';cells++;
     }
   }
   score+=cells;
   document.getElementById('score').textContent=score;
   renderBoard();
-  if(settings.vibro&&navigator.vibrate)navigator.vibrate(15);
-  setTimeout(clearLines,50);
+  if(settings.vibro&&navigator.vibrate)navigator.vibrate(12);
+  setTimeout(clearLines,40);
 }
 
 function clearLines(){
   const toClear=new Set();
-  for(let r=0;r<SIZE;r++){
-    if(board[r].every(c=>c!==null))for(let c=0;c<SIZE;c++)toClear.add(r*SIZE+c);
-  }
+  for(let r=0;r<SIZE;r++)if(board[r].every(c=>c!==null))for(let c=0;c<SIZE;c++)toClear.add(r*SIZE+c);
   for(let c=0;c<SIZE;c++){
-    let full=true;
-    for(let r=0;r<SIZE;r++)if(!board[r][c]){full=false;break}
+    let full=true;for(let r=0;r<SIZE;r++)if(!board[r][c]){full=false;break}
     if(full)for(let r=0;r<SIZE;r++)toClear.add(r*SIZE+c);
   }
   if(toClear.size===0){combo=0;return}
@@ -447,24 +391,16 @@ function clearLines(){
   document.getElementById('score').textContent=score;
   if(combo>1){
     const t=document.getElementById('comboText');
-    t.textContent=`COMBO x${combo}`;
-    t.classList.add('show');
-    setTimeout(()=>t.classList.remove('show'),700);
+    t.textContent=`COMBO x${combo}`;t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'),650);
   }
-  if(settings.vibro&&navigator.vibrate)navigator.vibrate([20,30,20]);
-  setTimeout(()=>{
-    toClear.forEach(i=>{const r=Math.floor(i/SIZE),c=i%SIZE;board[r][c]=null});
-    renderBoard();
-  },280);
+  if(settings.vibro&&navigator.vibrate)navigator.vibrate([15,25,15]);
+  setTimeout(()=>{toClear.forEach(i=>{const r=Math.floor(i/SIZE),c=i%SIZE;board[r][c]=null});renderBoard()},260);
 }
 
 function canPlace(piece){
   const rows=piece.shape.length,cols=piece.shape[0].length;
-  for(let r=0;r<=SIZE-rows;r++){
-    for(let c=0;c<=SIZE-cols;c++){
-      if(isValidPosition(piece,r,c))return true;
-    }
-  }
+  for(let r=0;r<=SIZE-rows;r++)for(let c=0;c<=SIZE-cols;c++)if(isValidPosition(piece,r,c))return true;
   return false;
 }
 
@@ -472,56 +408,34 @@ function checkGameOver(){
   const available=pieces.filter(p=>p!==null);
   if(available.length===0)return;
   if(!available.some(p=>canPlace(p))){
-    // Save records
     const best=parseInt(localStorage.getItem('br_best')||0);
     if(score>best)localStorage.setItem('br_best',score);
     localStorage.setItem('br_last',score);
     localStorage.setItem('br_games',(parseInt(localStorage.getItem('br_games')||0)+1));
-    
     document.getElementById('finalScore').textContent=score;
     document.getElementById('gameOver').classList.add('show');
   }
 }
 
-/* MUSIC - faster search */
 async function searchMusic(){
   const q=document.getElementById('musicSearch').value.trim();
   if(!q)return;
   const list=document.getElementById('songList');
   list.innerHTML='<div style="color:#777;text-align:center;padding:20px">Ищу...</div>';
-  
   try{
     const res=await fetch(`https://inv.nadeko.net/api/v1/search?q=${encodeURIComponent(q)}&type=video`);
     const data=await res.json();
     const items=(Array.isArray(data)?data:[]).slice(0,10);
-    
-    if(!items.length){
-      list.innerHTML='<div style="color:#777;text-align:center;padding:20px">Ничего не найдено</div>';
-      return;
-    }
-    
+    if(!items.length){list.innerHTML='<div style="color:#777;text-align:center;padding:20px">Ничего не найдено</div>';return}
     list.innerHTML='';
     items.forEach(item=>{
-      const id=item.videoId;
-      const title=item.title||'Без названия';
-      const channel=item.author||'';
-      const thumb=item.videoThumbnails?.[3]?.url || item.videoThumbnails?.[0]?.url || `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
-      
-      const div=document.createElement('div');
-      div.className='song';
-      div.innerHTML=`
-        <img class="song-cover" src="${thumb}" alt="">
-        <div class="song-info">
-          <div class="song-title">${title}</div>
-          <div class="song-artist">${channel}</div>
-        </div>
-        <button class="song-play" onclick="playVideo('${id}','${title.replace(/'/g,"\\'")}','${channel.replace(/'/g,"\\'")}')">▶</button>
-      `;
+      const id=item.videoId,title=item.title||'Без названия',channel=item.author||'';
+      const thumb=item.videoThumbnails?.[3]?.url||item.videoThumbnails?.[0]?.url||`https://img.youtube.com/vi/${id}/mqdefault.jpg`;
+      const div=document.createElement('div');div.className='song';
+      div.innerHTML=`<img class="song-cover" src="${thumb}"><div class="song-info"><div class="song-title">${title}</div><div class="song-artist">${channel}</div></div><button class="song-play" onclick="playVideo('${id}','${title.replace(/'/g,"\\'")}','${channel.replace(/'/g,"\\'")}')">▶</button>`;
       list.appendChild(div);
     });
-  }catch(e){
-    list.innerHTML='<div style="color:#777;text-align:center;padding:20px">Ошибка. Попробуй другое название</div>';
-  }
+  }catch(e){list.innerHTML='<div style="color:#777;text-align:center;padding:20px">Ошибка поиска</div>'}
 }
 
 function playVideo(id,title,artist){
@@ -531,37 +445,17 @@ function playVideo(id,title,artist){
   document.getElementById('playerCover').src=`https://img.youtube.com/vi/${id}/mqdefault.jpg`;
   document.getElementById('player').classList.add('show');
   document.getElementById('playPauseBtn').textContent='❚❚';
-
-  if(ytPlayer){
-    ytPlayer.loadVideoById(id);
-    ytPlayer.playVideo();
-  }else{
-    ytPlayer=new YT.Player('youtubePlayer',{
-      height:'0',width:'0',videoId:id,
-      playerVars:{autoplay:1},
-      events:{
-        onStateChange:e=>{
-          if(e.data===1)document.getElementById('playPauseBtn').textContent='❚❚';
-          if(e.data===2||e.data===0)document.getElementById('playPauseBtn').textContent='▶';
-        }
-      }
+  if(ytPlayer){ytPlayer.loadVideoById(id);ytPlayer.playVideo()}
+  else{
+    ytPlayer=new YT.Player('youtubePlayer',{height:'0',width:'0',videoId:id,playerVars:{autoplay:1},
+      events:{onStateChange:e=>{if(e.data===1)document.getElementById('playPauseBtn').textContent='❚❚';if(e.data===2||e.data===0)document.getElementById('playPauseBtn').textContent='▶'}}
     });
   }
 }
-
-function togglePlay(){
-  if(!ytPlayer)return;
-  const state=ytPlayer.getPlayerState();
-  if(state===1){ytPlayer.pauseVideo();document.getElementById('playPauseBtn').textContent='▶'}
-  else{ytPlayer.playVideo();document.getElementById('playPauseBtn').textContent='❚❚'}
-}
-
-function stopMusic(){
-  if(ytPlayer)ytPlayer.stopVideo();
-  document.getElementById('player').classList.remove('show');
-}
+function togglePlay(){if(!ytPlayer)return;const s=ytPlayer.getPlayerState();if(s===1){ytPlayer.pauseVideo();document.getElementById('playPauseBtn').textContent='▶'}else{ytPlayer.playVideo();document.getElementById('playPauseBtn').textContent='❚❚'}}
+function stopMusic(){if(ytPlayer)ytPlayer.stopVideo();document.getElementById('player').classList.remove('show')}
 
 initBoard();
 </script>
 </body>
-</html> 
+</html>
