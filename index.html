@@ -35,7 +35,6 @@
     margin: 0 auto;
   }
 
-  /* ===== HEADER ===== */
   .header {
     width: 100%;
     display: flex;
@@ -70,12 +69,12 @@
     gap: 6px;
   }
 
-  /* ===== BOARD ===== */
   .board-wrap {
     width: 100%;
     display: flex;
     justify-content: center;
     margin: 8px 0 16px;
+    position: relative;
   }
 
   #board {
@@ -127,7 +126,6 @@
     pointer-events: none;
   }
 
-  /* Preview */
   .cell.preview {
     outline: 2.5px solid #D4AF37;
     outline-offset: -1px;
@@ -139,7 +137,6 @@
     background: rgba(229, 57, 53, 0.15);
   }
 
-  /* Clear animation */
   .cell.clearing {
     animation: clearAnim 0.32s forwards;
   }
@@ -150,7 +147,6 @@
     100% { transform: scale(0.1); opacity: 0; }
   }
 
-  /* ===== PIECES ===== */
   .pieces-area {
     width: 100%;
     margin-top: auto;
@@ -197,7 +193,6 @@
     visibility: hidden;
   }
 
-  /* ===== BUTTONS ===== */
   .bottom-actions {
     width: 100%;
     display: flex;
@@ -215,7 +210,6 @@
     font-weight: 600;
   }
 
-  /* ===== MODAL ===== */
   .modal {
     position: fixed;
     inset: 0;
@@ -263,11 +257,6 @@
     margin-top: 8px;
   }
 
-  .modal-btn.dark {
-    background: #2a2a2a;
-    color: white;
-  }
-
   .combo-text {
     position: absolute;
     top: 50%;
@@ -299,7 +288,7 @@
     <button class="btn-icon" onclick="newGame()">↻</button>
   </div>
 
-  <div class="board-wrap" style="position:relative">
+  <div class="board-wrap">
     <div id="board"></div>
     <div id="comboText" class="combo-text"></div>
   </div>
@@ -314,7 +303,6 @@
   </div>
 </div>
 
-<!-- Game Over -->
 <div id="gameOver" class="modal">
   <div class="modal-box">
     <h2>Игра окончена</h2>
@@ -330,10 +318,8 @@ let score = 0;
 let pieces = [];
 let selected = null;
 let dragging = false;
-let currentPreview = [];
 let combo = 0;
 
-// ===================== SHAPES =====================
 const SHAPES = [
   [[1]],
   [[1,1]],
@@ -364,14 +350,12 @@ const SHAPES = [
   [[1,1,1],[1,0,1]]
 ];
 
-// ===================== INIT =====================
 function initBoard() {
   const el = document.getElementById("board");
   el.innerHTML = "";
   for (let i = 0; i < SIZE * SIZE; i++) {
     const cell = document.createElement("div");
     cell.className = "cell";
-    cell.dataset.index = i;
     el.appendChild(cell);
   }
 }
@@ -398,7 +382,6 @@ function createPieces() {
   renderPieces();
 }
 
-// ===================== RENDER =====================
 function renderBoard() {
   const cells = document.querySelectorAll("#board .cell");
   cells.forEach((cell, i) => {
@@ -444,7 +427,6 @@ function renderPieces() {
       }
     }
 
-    // Events
     div.addEventListener("mousedown", e => startDrag(e, index));
     div.addEventListener("touchstart", e => startDrag(e, index), { passive: false });
 
@@ -452,7 +434,6 @@ function renderPieces() {
   });
 }
 
-// ===================== DRAG =====================
 function getPointer(e) {
   if (e.touches && e.touches[0]) {
     return { x: e.touches[0].clientX, y: e.touches[0].clientY };
@@ -493,13 +474,11 @@ function moveDrag(e) {
   const rows = piece.shape.length;
   const cols = piece.shape[0].length;
 
-  // Центрируем фигуру относительно пальца (немного выше)
   const offsetY = 55;
 
   let col = Math.round((pointer.x - rect.left) / cellSize - cols / 2);
   let row = Math.round((pointer.y - rect.top - offsetY) / cellSize - rows / 2);
 
-  // Ограничиваем
   col = Math.max(-2, Math.min(SIZE - cols + 2, col));
   row = Math.max(-2, Math.min(SIZE - rows + 2, row));
 
@@ -508,7 +487,6 @@ function moveDrag(e) {
 
 function showPreview(piece, row, col) {
   clearPreview();
-  currentPreview = [];
 
   let valid = true;
   const positions = [];
@@ -520,7 +498,7 @@ function showPreview(piece, row, col) {
       const rr = row + r;
       const cc = col + c;
 
-      if (rr < 0 || rr >= SIZE || cc < 0 || cc >= SIZE || board[rr][cc]) {
+      if (rr < 0 || rr >= SIZE || cc < 0 || cc >= SIZE || board[rr][cc] !== null) {
         valid = false;
       }
 
@@ -535,12 +513,10 @@ function showPreview(piece, row, col) {
       if (cell) {
         cell.classList.add("preview");
         if (!valid) cell.classList.add("invalid");
-        currentPreview.push(cell);
       }
     }
   });
 
-  // Сохраняем для endDrag
   window._lastPreview = { row, col, valid, piece };
 }
 
@@ -548,7 +524,6 @@ function clearPreview() {
   document.querySelectorAll(".preview").forEach(c => {
     c.classList.remove("preview", "invalid");
   });
-  currentPreview = [];
 }
 
 function endDrag() {
@@ -564,25 +539,39 @@ function endDrag() {
   clearPreview();
 
   if (data && data.valid && selected !== null) {
-    placePiece(data.piece, data.row, data.col);
-    pieces[selected] = null;
-    renderPieces();
+    let canPlaceHere = true;
+    const piece = data.piece;
 
-    // Если все фигуры поставлены — новые
-    if (pieces.every(p => p === null)) {
-      setTimeout(() => {
-        createPieces();
-        checkGameOver();
-      }, 350);
-    } else {
-      setTimeout(checkGameOver, 100);
+    for (let r = 0; r < piece.shape.length; r++) {
+      for (let c = 0; c < piece.shape[r].length; c++) {
+        if (!piece.shape[r][c]) continue;
+        const rr = data.row + r;
+        const cc = data.col + c;
+        if (rr < 0 || rr >= SIZE || cc < 0 || cc >= SIZE || board[rr][cc] !== null) {
+          canPlaceHere = false;
+        }
+      }
+    }
+
+    if (canPlaceHere) {
+      placePiece(piece, data.row, data.col);
+      pieces[selected] = null;
+      renderPieces();
+
+      if (pieces.every(p => p === null)) {
+        setTimeout(() => {
+          createPieces();
+          checkGameOver();
+        }, 350);
+      } else {
+        setTimeout(checkGameOver, 100);
+      }
     }
   }
 
   selected = null;
 }
 
-// ===================== PLACE & CLEAR =====================
 function placePiece(piece, row, col) {
   let cells = 0;
   for (let r = 0; r < piece.shape.length; r++) {
@@ -629,13 +618,11 @@ function clearLines() {
     return;
   }
 
-  // Animation
   const cells = document.querySelectorAll("#board .cell");
   toClear.forEach(idx => {
     cells[idx].classList.add("clearing");
   });
 
-  // Combo
   combo++;
   const lines = Math.floor(toClear.size / SIZE);
   const bonus = lines * 10 * combo;
@@ -659,7 +646,6 @@ function clearLines() {
   }, 320);
 }
 
-// ===================== GAME OVER =====================
 function canPlace(piece) {
   const rows = piece.shape.length;
   const cols = piece.shape[0].length;
@@ -691,7 +677,6 @@ function checkGameOver() {
   }
 }
 
-// Start
 initBoard();
 newGame();
 </script>
