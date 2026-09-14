@@ -11,139 +11,134 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
 .screen{display:none;width:100%;height:100%;flex-direction:column}
 .screen.active{display:flex}
 
-/* ===== СИЛЬНО УЛУЧШЕННОЕ МЕНЮ ===== */
-#menuScreen{
-  align-items:center;
-  justify-content:center;
-  background: radial-gradient(ellipse at center, #1c1c1c 0%, #0a0a0a 70%);
-  padding:30px 20px;
-  position:relative;
-  overflow:hidden;
-}
+/* MENU */
+#menuScreen{align-items:center;justify-content:center;background:radial-gradient(ellipse at center,#1c1c1c 0%,#0a0a0a 70%);padding:30px 20px;position:relative;overflow:hidden}
+#menuScreen::before{content:"";position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(212,175,55,.13) 0%,transparent 70%);pointer-events:none}
+.menu-logo{width:130px;height:130px;border-radius:50%;background:linear-gradient(145deg,#2e2e2e,#111);border:3px solid #D4AF37;display:flex;align-items:center;justify-content:center;font-size:82px;font-weight:900;font-family:Georgia,"Times New Roman",serif;color:#D4AF37;text-shadow:0 0 20px rgba(212,175,55,.5);box-shadow:0 0 0 8px rgba(212,175,55,.08),0 0 50px rgba(212,175,55,.22),inset 0 0 25px rgba(212,175,55,.08);margin-bottom:28px;letter-spacing:-3px}
+.menu-title{font-size:46px;font-weight:900;letter-spacing:1px;margin-bottom:8px;background:linear-gradient(90deg,#fff6c0,#D4AF37,#b8870b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.menu-sub{color:#999;font-size:15px;letter-spacing:.8px;margin-bottom:48px}
+.menu-buttons{width:100%;max-width:310px;display:flex;flex-direction:column;gap:12px}
+.menu-btn{width:100%;padding:18px;border:none;border-radius:18px;font-size:17px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:10px;transition:all .15s}
+.menu-btn.primary{background:linear-gradient(145deg,#f0d060,#D4AF37,#b8870b);color:#111;box-shadow:0 8px 25px rgba(212,175,55,.3)}
+.menu-btn.primary:active{transform:scale(.96)}
+.menu-btn.secondary{background:#161616;color:#D4AF37;border:1.5px solid rgba(212,175,55,.5)}
+.menu-btn.secondary:active{background:#1f1f1f;transform:scale(.97)}
 
-/* мягкое золотое свечение сверху */
-#menuScreen::before{
-  content:"";
-  position:absolute;
-  top:-80px;
-  left:50%;
-  transform:translateX(-50%);
-  width:320px;
-  height:320px;
-  background:radial-gradient(circle, rgba(212,175,55,0.13) 0%, transparent 70%);
-  pointer-events:none;
-}
+/* ===== НОВЫЙ ИГРОВОЙ ЭКРАН ===== */
+#gameScreen{padding:8px 10px 0;max-width:500px;margin:0 auto;width:100%;height:100%;display:flex;flex-direction:column}
 
-.menu-logo{
-  width:130px;
-  height:130px;
-  border-radius:50%;
-  background: linear-gradient(145deg, #2e2e2e, #111);
-  border: 3px solid #D4AF37;
+.top-bar{
   display:flex;
   align-items:center;
-  justify-content:center;
-  font-size:82px;
-  font-weight:900;
-  font-family: Georgia, "Times New Roman", serif;
-  color:#D4AF37;
-  text-shadow: 0 0 20px rgba(212,175,55,0.5);
-  box-shadow: 
-    0 0 0 8px rgba(212,175,55,0.08),
-    0 0 50px rgba(212,175,55,0.22),
-    inset 0 0 25px rgba(212,175,55,0.08);
-  margin-bottom:28px;
-  letter-spacing: -3px;
+  justify-content:space-between;
+  padding:4px 0 8px;
 }
 
-.menu-title{
-  font-size:46px;
-  font-weight:900;
-  letter-spacing:1px;
-  margin-bottom:8px;
-  background: linear-gradient(90deg, #fff6c0, #D4AF37, #b8870b);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 0 30px rgba(212,175,55,0.3);
-}
-
-.menu-sub{
-  color:#999;
-  font-size:15px;
-  letter-spacing:0.8px;
-  margin-bottom:48px;
-}
-
-.menu-buttons{
-  width:100%;
-  max-width:310px;
+.left-info{
   display:flex;
   flex-direction:column;
-  gap:12px;
+  align-items:flex-start;
+  min-width:70px;
 }
+.record-label{font-size:11px;color:#888}
+.record-value{font-size:16px;font-weight:700;color:#D4AF37}
 
-.menu-btn{
-  width:100%;
-  padding:18px;
-  border:none;
-  border-radius:18px;
-  font-size:17px;
-  font-weight:800;
+.center-score{
+  text-align:center;
+  flex:1;
+}
+.current-score{
+  font-size:42px;
+  font-weight:900;
+  color:#fff;
+  line-height:1;
+  text-shadow:0 0 20px rgba(255,255,255,.15);
+}
+.score-label{font-size:12px;color:#888;margin-top:2px}
+
+.right-controls{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  min-width:70px;
+  justify-content:flex-end;
+}
+.music-btn{
+  width:42px;height:42px;
+  border-radius:12px;
+  border:1px solid #333;
+  background:#1c1c1c;
+  overflow:hidden;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:10px;
-  transition: all 0.15s ease;
+  padding:0;
+}
+.music-btn img{width:100%;height:100%;object-fit:cover}
+.music-btn span{font-size:18px}
+.btn-icon{
+  width:42px;height:42px;
+  border-radius:12px;
+  border:1px solid #333;
+  background:#1c1c1c;
+  color:#fff;
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.menu-btn.primary{
-  background: linear-gradient(145deg, #f0d060, #D4AF37, #b8870b);
-  color:#111;
-  box-shadow: 0 8px 25px rgba(212,175,55,0.3);
+.board-wrap{
+  display:flex;
+  justify-content:center;
+  margin:6px 0 0;
+  position:relative;
+  flex:1;
+  align-items:flex-start;
 }
-.menu-btn.primary:active{
-  transform: scale(0.96);
-  box-shadow: 0 4px 12px rgba(212,175,55,0.25);
+#board{
+  width:min(96vw,440px);
+  aspect-ratio:1;
+  display:grid;
+  grid-template-columns:repeat(8,1fr);
+  gap:4px;
+  padding:6px;
+  background:linear-gradient(145deg,#1f1f1f,#111);
+  border:2px solid #333;
+  border-radius:16px;
+  touch-action:none;
 }
-
-.menu-btn.secondary{
-  background: #161616;
-  color:#D4AF37;
-  border: 1.5px solid rgba(212,175,55,0.5);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+.cell{background:linear-gradient(145deg,#181818,#0a0a0a);border-radius:6px;position:relative;transition:transform .12s}
+.cell.gold,.piece-cell.gold,#dragGhost .piece-cell.gold{
+  background:linear-gradient(145deg,#fff6c0 0%,#f8e27a 18%,#D4AF37 48%,#b8870b 78%,#6b3f00 100%);
+  border:1px solid #f5d76e;
+  box-shadow:inset 2px 2px 3px rgba(255,255,255,.55),inset -2px -3px 4px rgba(60,35,0,.4),0 3px 0 #5c3a00,0 5px 10px rgba(0,0,0,.5);
 }
-.menu-btn.secondary:active{
-  background:#1f1f1f;
-  transform: scale(0.97);
+.cell.gold::before,.piece-cell.gold::before,#dragGhost .piece-cell.gold::before{
+  content:"";position:absolute;top:2px;left:3px;width:45%;height:28%;border-radius:50%;
+  background:linear-gradient(135deg,rgba(255,255,255,.7),transparent);pointer-events:none;
 }
-
-/* ===== ИГРА (остальное без изменений) ===== */
-#gameScreen{padding:10px 10px 14px;max-width:500px;margin:0 auto;width:100%;height:100%}
-.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.btn-icon{width:44px;height:44px;border-radius:12px;border:1px solid #333;background:#1c1c1c;color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center}
-.score-box{background:#1d1d1d;border:1px solid #333;border-radius:14px;padding:8px 16px;color:#D4AF37;font-weight:800;font-size:18px;display:flex;align-items:center;gap:6px}
-.board-wrap{display:flex;justify-content:center;margin:4px 0 10px;position:relative}
-#board{width:min(96vw,420px);aspect-ratio:1;display:grid;grid-template-columns:repeat(8,1fr);gap:4px;padding:6px;background:linear-gradient(145deg,#1f1f1f,#111);border:2px solid #333;border-radius:16px;touch-action:none}
-.cell{background:linear-gradient(145deg,#181818,#0a0a0a);border-radius:6px;position:relative}
-.cell.gold,.piece-cell.gold,#dragGhost .piece-cell.gold{background:linear-gradient(145deg,#fff6c0 0%,#f8e27a 18%,#D4AF37 48%,#b8870b 78%,#6b3f00 100%);border:1px solid #f5d76e;box-shadow:inset 2px 2px 3px rgba(255,255,255,.55),inset -2px -3px 4px rgba(60,35,0,.4),0 3px 0 #5c3a00,0 5px 10px rgba(0,0,0,.5)}
-.cell.gold::before,.piece-cell.gold::before,#dragGhost .piece-cell.gold::before{content:"";position:absolute;top:2px;left:3px;width:45%;height:28%;border-radius:50%;background:linear-gradient(135deg,rgba(255,255,255,.7),transparent);pointer-events:none}
 .cell.preview{outline:2.5px solid #D4AF37;outline-offset:-1px;background:rgba(212,175,55,.25)!important}
 .cell.preview.invalid{outline-color:#e53935!important;background:rgba(229,57,53,.2)!important}
+.cell.placing{animation:placeAnim .2s ease}
+@keyframes placeAnim{0%{transform:scale(.6);opacity:.5}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
 .cell.clearing{animation:clearAnim .28s forwards}
 @keyframes clearAnim{0%{transform:scale(1);opacity:1}50%{transform:scale(1.15);opacity:1}100%{transform:scale(0);opacity:0}}
-.pieces-area{margin-top:auto}
-.pieces-title{text-align:center;color:#666;font-size:13px;margin-bottom:8px}
-#pieces{display:flex;justify-content:space-evenly;align-items:center;gap:10px;min-height:120px;padding:0 4px}
-.piece{display:grid;gap:3px;padding:10px;cursor:grab;touch-action:none;transition:opacity .15s,transform .15s;filter:drop-shadow(0 6px 8px rgba(0,0,0,.5))}
-.piece.dragging{opacity:0.2;transform:scale(0.85)}
-.piece-cell{width:24px;height:24px;border-radius:5px;position:relative}
-.piece-cell.empty{visibility:hidden}
-.bottom-actions{display:flex;justify-content:center;margin-top:8px}
-.action-btn{padding:12px 28px;border-radius:14px;border:1px solid #444;background:#222;color:#fff;font-size:15px;font-weight:600}
 
-#dragGhost{position:fixed;pointer-events:none;z-index:999;display:none;filter:drop-shadow(0 12px 18px rgba(0,0,0,.6));transform:translate(-50%,-60%) scale(1.25)}
-#dragGhost .piece-cell{width:28px;height:28px;border-radius:6px}
+.pieces-area{
+  margin-top:auto;
+  padding-bottom:12px;
+  padding-top:8px;
+}
+.pieces-title{text-align:center;color:#666;font-size:12px;margin-bottom:6px}
+#pieces{display:flex;justify-content:space-evenly;align-items:center;gap:8px;min-height:110px}
+.piece{display:grid;gap:3px;padding:8px;cursor:grab;touch-action:none;transition:opacity .15s,transform .15s;filter:drop-shadow(0 6px 8px rgba(0,0,0,.5))}
+.piece.dragging{opacity:.2;transform:scale(.85)}
+.piece-cell{width:22px;height:22px;border-radius:5px;position:relative}
+.piece-cell.empty{visibility:hidden}
+
+#dragGhost{position:fixed;pointer-events:none;z-index:999;display:none;filter:drop-shadow(0 12px 18px rgba(0,0,0,.6));transform:translate(-50%,-60%) scale(1.2)}
+#dragGhost .piece-cell{width:26px;height:26px;border-radius:6px}
 
 .page{padding:16px;overflow-y:auto}
 .topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
@@ -189,7 +184,7 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
 .modal-box p{color:#aaa;margin-bottom:18px}
 .modal-btn{width:100%;padding:13px;border:none;border-radius:13px;background:#D4AF37;color:#111;font-weight:800;font-size:15px;margin-top:7px}
 .modal-btn.dark{background:#2a2a2a;color:#fff}
-.combo-text{position:absolute;top:45%;left:50%;transform:translate(-50%,-50%);font-size:26px;font-weight:900;color:#D4AF37;text-shadow:0 0 18px rgba(212,175,55,.6);pointer-events:none;opacity:0;transition:opacity .25s}
+.combo-text{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);font-size:28px;font-weight:900;color:#D4AF37;text-shadow:0 0 20px rgba(212,175,55,.6);pointer-events:none;opacity:0;transition:opacity .25s}
 .combo-text.show{opacity:1}
 </style>
 </head>
@@ -199,7 +194,6 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
   <div class="menu-logo">R</div>
   <div class="menu-title">Block Rush</div>
   <div class="menu-sub">Играй. Собирай. Побеждай.</div>
-  
   <div class="menu-buttons">
     <button class="menu-btn primary" onclick="startGame()">🎮 Начать игру</button>
     <button class="menu-btn secondary" onclick="openMusic()">🎵 Музыка</button>
@@ -208,23 +202,35 @@ html,body{width:100%;height:100%;background:#0b0b0b;color:#fff;font-family:-appl
   </div>
 </div>
 
-<!-- Остальной код игры остаётся тем же -->
 <div id="gameScreen" class="screen">
-  <div class="header">
-    <button class="btn-icon" onclick="openMenu()">←</button>
-    <div class="score-box"><span>🏆</span><span id="score">0</span></div>
-    <button class="btn-icon" onclick="newGame()">↻</button>
+  <!-- Верхняя панель -->
+  <div class="top-bar">
+    <div class="left-info">
+      <div class="record-label">Рекорд</div>
+      <div class="record-value" id="gameBest">0</div>
+    </div>
+    
+    <div class="center-score">
+      <div class="current-score" id="score">0</div>
+      <div class="score-label">счёт</div>
+    </div>
+    
+    <div class="right-controls">
+      <button class="music-btn" id="musicMiniBtn" onclick="openMusic()">
+        <span>🎵</span>
+      </button>
+      <button class="btn-icon" onclick="openSettings()">⚙️</button>
+    </div>
   </div>
+
   <div class="board-wrap">
     <div id="board"></div>
     <div id="comboText" class="combo-text"></div>
   </div>
+
   <div class="pieces-area">
-    <div class="pieces-title">Перетащи фигуру на поле</div>
+    <div class="pieces-title">Перетащи фигуру</div>
     <div id="pieces"></div>
-  </div>
-  <div class="bottom-actions">
-    <button class="action-btn" onclick="newGame()">Новая игра</button>
   </div>
 </div>
 
@@ -309,7 +315,11 @@ const SHAPES=[
 
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active')}
 function openMenu(){showScreen('menuScreen');document.getElementById('gameOver').classList.remove('show')}
-function startGame(){showScreen('gameScreen');newGame()}
+function startGame(){
+  showScreen('gameScreen');
+  document.getElementById('gameBest').textContent=localStorage.getItem('br_best')||0;
+  newGame();
+}
 function openMusic(){showScreen('musicScreen')}
 function openRecords(){
   showScreen('recordsScreen');
@@ -360,10 +370,10 @@ function renderBoard(){
 function renderPieces(){
   const container=document.getElementById('pieces');container.innerHTML='';
   pieces.forEach((piece,index)=>{
-    if(!piece){const e=document.createElement('div');e.style.width='80px';container.appendChild(e);return}
+    if(!piece){const e=document.createElement('div');e.style.width='70px';container.appendChild(e);return}
     const div=document.createElement('div');div.className='piece';div.dataset.index=index;
     const rows=piece.shape.length,cols=piece.shape[0].length;
-    div.style.gridTemplateColumns=`repeat(${cols},24px)`;
+    div.style.gridTemplateColumns=`repeat(${cols},22px)`;
     for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){
       const cell=document.createElement('div');
       cell.className='piece-cell'+(piece.shape[r][c]?' gold':' empty');
@@ -386,8 +396,8 @@ function createGhost(piece){
   ghost.innerHTML='';
   ghost.style.display='grid';
   const rows=piece.shape.length,cols=piece.shape[0].length;
-  ghost.style.gridTemplateColumns=`repeat(${cols},28px)`;
-  ghost.style.gap='3.5px';
+  ghost.style.gridTemplateColumns=`repeat(${cols},26px)`;
+  ghost.style.gap='3px';
   for(let r=0;r<rows;r++){
     for(let c=0;c<cols;c++){
       const cell=document.createElement('div');
@@ -417,7 +427,7 @@ function moveDrag(e){
   const pointer=getPointer(e);
   const ghost=document.getElementById('dragGhost');
   ghost.style.left=pointer.x+'px';
-  ghost.style.top=(pointer.y-25)+'px';
+  ghost.style.top=(pointer.y-20)+'px';
 
   const boardEl=document.getElementById('board');
   const rect=boardEl.getBoundingClientRect();
@@ -426,7 +436,7 @@ function moveDrag(e){
   if(!piece)return;
   const rows=piece.shape.length,cols=piece.shape[0].length;
   let col=Math.floor((pointer.x-rect.left)/cellSize-cols/2+0.5);
-  let row=Math.floor((pointer.y-rect.top-25)/cellSize-rows/2+0.5);
+  let row=Math.floor((pointer.y-rect.top-20)/cellSize-rows/2+0.5);
   col=Math.max(-1,Math.min(SIZE-cols,col));
   row=Math.max(-1,Math.min(SIZE-rows,row));
   showPreview(piece,row,col);
@@ -476,7 +486,7 @@ function endDrag(){
     placePiece(data.piece,data.row,data.col);
     pieces[selected]=null;
     renderPieces();
-    if(pieces.every(p=>p===null))setTimeout(()=>{createPieces();checkGameOver()},240);
+    if(pieces.every(p=>p===null))setTimeout(()=>{createPieces();checkGameOver()},220);
     else setTimeout(checkGameOver,40);
   }
   selected=null;
@@ -485,17 +495,28 @@ function endDrag(){
 function placePiece(piece,row,col){
   if(!isValidPosition(piece,row,col))return;
   let cells=0;
+  const cellsToAnimate=[];
   for(let r=0;r<piece.shape.length;r++){
     for(let c=0;c<piece.shape[r].length;c++){
       if(!piece.shape[r][c])continue;
-      board[row+r][col+c]='gold';cells++;
+      board[row+r][col+c]='gold';
+      cellsToAnimate.push((row+r)*SIZE+(col+c));
+      cells++;
     }
   }
   score+=cells;
   document.getElementById('score').textContent=score;
   renderBoard();
+  
+  // Анимация постановки
+  const allCells=document.querySelectorAll('#board .cell');
+  cellsToAnimate.forEach(i=>{
+    allCells[i].classList.add('placing');
+    setTimeout(()=>allCells[i].classList.remove('placing'),200);
+  });
+
   if(settings.vibro&&navigator.vibrate)navigator.vibrate(12);
-  setTimeout(clearLines,25);
+  setTimeout(clearLines,30);
 }
 
 function clearLines(){
@@ -555,19 +576,24 @@ async function searchMusic(){
       const id=item.videoId,title=item.title||'Без названия',channel=item.author||'';
       const thumb=item.videoThumbnails?.[3]?.url||item.videoThumbnails?.[0]?.url||`https://img.youtube.com/vi/${id}/mqdefault.jpg`;
       const div=document.createElement('div');div.className='song';
-      div.innerHTML=`<img class="song-cover" src="${thumb}"><div class="song-info"><div class="song-title">${title}</div><div class="song-artist">${channel}</div></div><button class="song-play" onclick="playVideo('${id}','${title.replace(/'/g,"\\'")}','${channel.replace(/'/g,"\\'")}')">▶</button>`;
+      div.innerHTML=`<img class="song-cover" src="${thumb}"><div class="song-info"><div class="song-title">${title}</div><div class="song-artist">${channel}</div></div><button class="song-play" onclick="playVideo('${id}','${title.replace(/'/g,"\\'")}','${channel.replace(/'/g,"\\'")}','${thumb}')">▶</button>`;
       list.appendChild(div);
     });
   }catch(e){list.innerHTML='<div style="color:#777;text-align:center;padding:20px">Ошибка поиска</div>'}
 }
 
-function playVideo(id,title,artist){
+function playVideo(id,title,artist,thumb){
   if(!settings.music)return;
   document.getElementById('playerTitle').textContent=title;
   document.getElementById('playerArtist').textContent=artist;
-  document.getElementById('playerCover').src=`https://img.youtube.com/vi/${id}/mqdefault.jpg`;
+  document.getElementById('playerCover').src=thumb||`https://img.youtube.com/vi/${id}/mqdefault.jpg`;
   document.getElementById('player').classList.add('show');
   document.getElementById('playPauseBtn').textContent='❚❚';
+
+  // Обновляем иконку в игре
+  const mini=document.getElementById('musicMiniBtn');
+  mini.innerHTML=`<img src="${thumb||`https://img.youtube.com/vi/${id}/mqdefault.jpg`}" alt="">`;
+
   if(ytPlayer){ytPlayer.loadVideoById(id);ytPlayer.playVideo()}
   else{
     ytPlayer=new YT.Player('youtubePlayer',{height:'0',width:'0',videoId:id,playerVars:{autoplay:1},
@@ -576,7 +602,7 @@ function playVideo(id,title,artist){
   }
 }
 function togglePlay(){if(!ytPlayer)return;const s=ytPlayer.getPlayerState();if(s===1){ytPlayer.pauseVideo();document.getElementById('playPauseBtn').textContent='▶'}else{ytPlayer.playVideo();document.getElementById('playPauseBtn').textContent='❚❚'}}
-function stopMusic(){if(ytPlayer)ytPlayer.stopVideo();document.getElementById('player').classList.remove('show')}
+function stopMusic(){if(ytPlayer)ytPlayer.stopVideo();document.getElementById('player').classList.remove('show');document.getElementById('musicMiniBtn').innerHTML='<span>🎵</span>'}
 
 initBoard();
 </script>
