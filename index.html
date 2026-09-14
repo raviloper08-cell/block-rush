@@ -2386,9 +2386,745 @@ function placePiece(
 
 
 /* =====================================================
-   CLEAR LINES
+   DRAG EVENTS — FIXED
+   Точная установка фигур на поле
 ===================================================== */
 
+let dropRow = null;
+let dropCol = null;
+
+function addDragEvents(element, index){
+
+  element.addEventListener(
+    "mousedown",
+    e=>{
+      startDrag(e,index);
+    }
+  );
+
+  element.addEventListener(
+    "touchstart",
+    e=>{
+      startDrag(e,index);
+    },
+    {passive:false}
+  );
+
+}
+
+
+function getPointer(e){
+
+  if(e.touches && e.touches.length){
+
+    return {
+      x:e.touches[0].clientX,
+      y:e.touches[0].clientY
+    };
+
+  }
+
+  if(e.changedTouches && e.changedTouches.length){
+
+    return {
+      x:e.changedTouches[0].clientX,
+      y:e.changedTouches[0].clientY
+    };
+
+  }
+
+  return {
+    x:e.clientX,
+    y:e.clientY
+  };
+
+}
+
+
+/* =====================================================
+   START DRAG
+===================================================== */
+
+function startDrag(e,index){
+
+  e.preventDefault();
+
+  if(!pieces[index])
+    return;
+
+  selectedPiece = index;
+
+  dragging = true;
+
+  dropRow = null;
+  dropCol = null;
+
+  /*
+    Фигура немного выше пальца,
+    чтобы её было видно.
+  */
+
+  dragOffsetY = 45;
+
+  moveDrag(e);
+
+  document.addEventListener(
+    "mousemove",
+    moveDrag
+  );
+
+  document.addEventListener(
+    "touchmove",
+    moveDrag,
+    {passive:false}
+  );
+
+  document.addEventListener(
+    "mouseup",
+    endDrag
+  );
+
+  document.addEventListener(
+    "touchend",
+    endDrag
+  );
+
+}
+
+
+/* =====================================================
+   MOVE DRAG
+===================================================== */
+
+function moveDrag(e){
+
+  if(!dragging)
+    return;
+
+  e.preventDefault();
+
+  const pointer = getPointer(e);
+
+  const boardElement =
+    document.getElementById("board");
+
+  if(!boardElement)
+    return;
+
+  const piece =
+    pieces[selectedPiece];
+
+  if(!piece)
+    return;
+
+
+  /*
+    Получаем реальные клетки поля.
+    Это важно, потому что у board есть
+    padding и gap.
+  */
+
+  const cells =
+    boardElement.children;
+
+  if(!cells.length)
+    return;
+
+
+  /*
+    Находим ближайшую клетку
+    к пальцу.
+  */
+
+  const adjustedY =
+    pointer.y - dragOffsetY;
+
+
+  let closestRow = 0;
+  let closestCol = 0;
+
+  let closestDistance = Infinity;
+
+
+  for(let i=0;i<cells.length;i++){
+
+    const cell = cells[i];
+
+    const rect =
+      cell.getBoundingClientRect();
+
+    const centerX =
+      rect.left + rect.width / 2;
+
+    const centerY =
+      rect.top + rect.height / 2;
+
+
+    const distance =
+      Math.pow(
+        pointer.x-centerX,
+        2
+      ) +
+      Math.pow(
+        adjustedY-centerY,
+        2
+      );
+
+
+    if(distance < closestDistance){
+
+      closestDistance = distance;
+
+      closestRow =
+        Math.floor(i / SIZE);
+
+      closestCol =
+        i % SIZE;
+
+    }
+
+  }
+
+
+  /*
+    Определяем размеры фигуры.
+  */
+
+  const shape =
+    piece.shape;
+
+
+  const rows =
+    shape.length;
+
+  const cols =
+    shape[0].length;
+
+
+  /*
+    Считаем настоящие заполненные клетки.
+  */
+
+  let minR = rows;
+  let maxR = -1;
+
+  let minC = cols;
+  let maxC = -1;
+
+
+  for(let r=0;r<rows;r++){
+
+    for(let c=0;c<cols;c++){
+
+      if(!shape[r][c])
+        continue;
+
+      minR =
+        Math.min(minR,r);
+
+      maxR =
+        Math.max(maxR,r);
+
+      minC =
+        Math.min(minC,c);
+
+      maxC =
+        Math.max(maxC,c);
+
+    }
+
+  }
+
+
+  /*
+    Центр заполненной части фигуры.
+  */
+
+  const occupiedCenterR =
+    (minR + maxR) / 2;
+
+  const occupiedCenterC =
+    (minC + maxC) / 2;
+
+
+  /*
+    Корректируем начало фигуры,
+    чтобы центр фигуры оказался
+    под пальцем.
+  */
+
+  let row =
+    Math.round(
+      closestRow -
+      occupiedCenterR
+    );
+
+  let col =
+    Math.round(
+      closestCol -
+      occupiedCenterC
+    );
+
+
+  /*
+    Не даём фигуре вылезти
+    за пределы поля.
+  */
+
+  row =
+    Math.max(
+      -minR,
+      Math.min(
+        SIZE - 1 - maxR,
+        row
+      )
+    );
+
+  col =
+    Math.max(
+      -minC,
+      Math.min(
+        SIZE - 1 - maxC,
+        col
+      )
+    );
+
+
+  dropRow = row;
+  dropCol = col;
+
+
+  showPreview(
+    piece,
+    row,
+    col
+  );
+
+}
+
+
+/* =====================================================
+   END DRAG
+===================================================== */
+
+function endDrag(){
+
+  if(!dragging)
+    return;
+
+
+  dragging = false;
+
+
+  document.removeEventListener(
+    "mousemove",
+    moveDrag
+  );
+
+  document.removeEventListener(
+    "touchmove",
+    moveDrag
+  );
+
+  document.removeEventListener(
+    "mouseup",
+    endDrag
+  );
+
+  document.removeEventListener(
+    "touchend",
+    endDrag
+  );
+
+
+  const pieceIndex =
+    selectedPiece;
+
+
+  const piece =
+    pieces[pieceIndex];
+
+
+  /*
+    Сохраняем координаты ДО очистки preview.
+  */
+
+  const finalRow =
+    dropRow;
+
+  const finalCol =
+    dropCol;
+
+
+  clearPreview();
+
+
+  /*
+    Если координаты существуют,
+    проверяем ВСЮ фигуру.
+  */
+
+  if(
+    piece &&
+    finalRow !== null &&
+    finalCol !== null &&
+    canPlacePiece(
+      piece,
+      finalRow,
+      finalCol
+    )
+  ){
+
+    placePiece(
+      piece,
+      finalRow,
+      finalCol
+    );
+
+
+    /*
+      Только после успешной установки
+      удаляем фигуру из трёх доступных.
+    */
+
+    pieces[pieceIndex] = null;
+
+    renderPieces();
+
+
+    /*
+      Если использовали все 3 фигуры —
+      создаём новые.
+    */
+
+    if(
+      pieces.every(
+        p=>p===null
+      )
+    ){
+
+      setTimeout(
+        createPieces,
+        450
+      );
+
+    }else{
+
+      checkGameOver();
+
+    }
+
+  }
+
+
+  selectedPiece = null;
+
+  dropRow = null;
+  dropCol = null;
+
+}
+
+
+/* =====================================================
+   CHECK PIECE
+===================================================== */
+
+function canPlacePiece(
+  piece,
+  row,
+  col
+){
+
+  for(
+    let r=0;
+    r<piece.shape.length;
+    r++
+  ){
+
+    for(
+      let c=0;
+      c<piece.shape[r].length;
+      c++
+    ){
+
+      if(!piece.shape[r][c])
+        continue;
+
+
+      const rr =
+        row + r;
+
+      const cc =
+        col + c;
+
+
+      /*
+        За пределы нельзя.
+      */
+
+      if(
+        rr < 0 ||
+        rr >= SIZE ||
+        cc < 0 ||
+        cc >= SIZE
+      ){
+
+        return false;
+
+      }
+
+
+      /*
+        Нельзя поверх другого блока.
+      */
+
+      if(board[rr][cc]){
+
+        return false;
+
+      }
+
+    }
+
+  }
+
+
+  return true;
+
+}
+
+
+/* =====================================================
+   PREVIEW
+===================================================== */
+
+function showPreview(
+  piece,
+  row,
+  col
+){
+
+  clearPreview();
+
+  dragPreview = [];
+
+
+  /*
+    Сначала проверяем всю фигуру.
+  */
+
+  const valid =
+    canPlacePiece(
+      piece,
+      row,
+      col
+    );
+
+
+  for(
+    let r=0;
+    r<piece.shape.length;
+    r++
+  ){
+
+    for(
+      let c=0;
+      c<piece.shape[r].length;
+      c++
+    ){
+
+      if(!piece.shape[r][c])
+        continue;
+
+
+      const rr =
+        row + r;
+
+      const cc =
+        col + c;
+
+
+      const inside =
+        rr >= 0 &&
+        rr < SIZE &&
+        cc >= 0 &&
+        cc < SIZE;
+
+
+      dragPreview.push({
+
+        row:rr,
+
+        col:cc,
+
+        valid:
+          valid &&
+          inside
+
+      });
+
+    }
+
+  }
+
+
+  /*
+    Показываем preview.
+  */
+
+  dragPreview.forEach(
+    p=>{
+
+      if(
+        p.row < 0 ||
+        p.row >= SIZE ||
+        p.col < 0 ||
+        p.col >= SIZE
+      ){
+
+        return;
+
+      }
+
+
+      const index =
+        p.row * SIZE + p.col;
+
+
+      const cell =
+        document
+          .getElementById("board")
+          .children[index];
+
+
+      if(cell){
+
+        cell.classList.add(
+          "preview"
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+function clearPreview(){
+
+  document
+    .querySelectorAll(
+      ".preview"
+    )
+    .forEach(
+      cell=>{
+
+        cell.classList.remove(
+          "preview"
+        );
+
+      }
+    );
+
+}
+
+
+/* =====================================================
+   PLACE PIECE
+===================================================== */
+
+function placePiece(
+  piece,
+  row,
+  col
+){
+
+  /*
+    Дополнительная защита.
+    Фигура вообще не будет поставлена,
+    если хотя бы один блок не подходит.
+  */
+
+  if(
+    !canPlacePiece(
+      piece,
+      row,
+      col
+    )
+  ){
+
+    return false;
+
+  }
+
+
+  let count = 0;
+
+
+  for(
+    let r=0;
+    r<piece.shape.length;
+    r++
+  ){
+
+    for(
+      let c=0;
+      c<piece.shape[r].length;
+      c++
+    ){
+
+      if(!piece.shape[r][c])
+        continue;
+
+
+      const rr =
+        row + r;
+
+      const cc =
+        col + c;
+
+
+      board[rr][cc] =
+        piece.color;
+
+
+      count++;
+
+    }
+
+  }
+
+
+  /*
+    Очки за каждый поставленный блок.
+  */
+
+  score += count;
+
+
+  document
+    .getElementById("score")
+    .textContent =
+      score;
+
+
+  renderBoard();
+
+
+  /*
+    Проверяем заполненные линии.
+  */
+
+  setTimeout(
+    clearLines,
+    100
+  );
+
+
+  return true;
+
+}
 function clearLines(){
 
   const rows = [];
