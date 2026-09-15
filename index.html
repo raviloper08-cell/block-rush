@@ -2,68 +2,95 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no,
+viewport-fit=cover">
+
 <title>Block Rush</title>
 <meta name="theme-color" content="#D4AF37">
 
 <style>
+
 *{
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
   user-select:none;
   -webkit-user-select:none;
   margin:0;
-  padding:0
+  padding:0;
 }
 
 html,body{
   width:100%;
   height:100%;
-  background:#0a0a0a;
+  background:#070707;
   color:#fff;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  overflow:hidden
+  overflow:hidden;
+}
+
+button{
+  font-family:inherit;
 }
 
 .screen{
   display:none;
   width:100%;
   height:100%;
-  flex-direction:column
+  flex-direction:column;
 }
 
 .screen.active{
-  display:flex
+  display:flex;
 }
 
-/* ===== MENU ===== */
+
+/* =========================================================
+   MENU
+========================================================= */
 
 #menuScreen{
   align-items:center;
   justify-content:center;
-  background:radial-gradient(ellipse at 50% 30%,#1a1a1a 0%,#0a0a0a 70%);
+  background:
+    radial-gradient(
+      ellipse at 50% 25%,
+      #202020 0%,
+      #0d0d0d 45%,
+      #050505 100%
+    );
   padding:20px;
   position:relative;
-  overflow:hidden
+  overflow:hidden;
 }
 
 #menuScreen::before{
   content:"";
   position:absolute;
-  top:-100px;
+  top:-160px;
   left:50%;
   transform:translateX(-50%);
-  width:400px;
-  height:400px;
-  background:radial-gradient(circle,rgba(212,175,55,0.12) 0%,transparent 70%);
-  pointer-events:none
+  width:500px;
+  height:500px;
+  background:
+    radial-gradient(
+      circle,
+      rgba(212,175,55,.16) 0%,
+      rgba(212,175,55,.05) 35%,
+      transparent 70%
+    );
+  pointer-events:none;
 }
 
 .menu-logo{
   width:140px;
   height:140px;
   border-radius:50%;
-  background:linear-gradient(145deg,#2a2a2a,#111);
+  background:linear-gradient(145deg,#292929,#101010);
   border:3px solid #D4AF37;
   display:flex;
   align-items:center;
@@ -72,13 +99,15 @@ html,body{
   font-weight:900;
   font-family:Georgia,serif;
   color:#D4AF37;
-  text-shadow:0 0 25px rgba(212,175,55,0.6);
+  text-shadow:
+    0 0 20px rgba(212,175,55,.8),
+    0 0 45px rgba(212,175,55,.3);
   box-shadow:
-    0 0 0 10px rgba(212,175,55,0.07),
-    0 0 60px rgba(212,175,55,0.2),
-    inset 0 0 30px rgba(212,175,55,0.08);
+    0 0 0 10px rgba(212,175,55,.05),
+    0 0 70px rgba(212,175,55,.22),
+    inset 0 0 35px rgba(212,175,55,.08);
   margin-bottom:24px;
-  letter-spacing:-4px
+  letter-spacing:-4px;
 }
 
 .menu-title{
@@ -86,17 +115,22 @@ html,body{
   font-weight:900;
   letter-spacing:1px;
   margin-bottom:6px;
-  background:linear-gradient(90deg,#fff8d0,#D4AF37,#b8870b);
+  background:linear-gradient(
+    90deg,
+    #fff8d0,
+    #D4AF37,
+    #b8870b
+  );
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  background-clip:text
+  background-clip:text;
 }
 
 .menu-sub{
   color:#999;
   font-size:15px;
   margin-bottom:50px;
-  letter-spacing:0.5px
+  letter-spacing:.5px;
 }
 
 .menu-buttons{
@@ -104,7 +138,7 @@ html,body{
   max-width:300px;
   display:flex;
   flex-direction:column;
-  gap:12px
+  gap:12px;
 }
 
 .menu-btn{
@@ -118,51 +152,63 @@ html,body{
   align-items:center;
   justify-content:center;
   gap:10px;
-  transition:transform .12s,box-shadow .12s
+  transition:.12s;
 }
 
 .menu-btn.primary{
-  background:linear-gradient(145deg,#f0d060,#D4AF37,#b8870b);
+  background:
+    linear-gradient(
+      145deg,
+      #f4d86b,
+      #D4AF37,
+      #b8870b
+    );
   color:#111;
-  box-shadow:0 8px 28px rgba(212,175,55,0.35)
+  box-shadow:
+    0 8px 28px rgba(212,175,55,.35);
 }
 
 .menu-btn.primary:active{
-  transform:scale(0.96)
+  transform:scale(.96);
 }
 
 .menu-btn.secondary{
   background:#151515;
   color:#D4AF37;
-  border:1.5px solid rgba(212,175,55,0.45)
+  border:1.5px solid rgba(212,175,55,.45);
 }
 
 .menu-btn.secondary:active{
-  background:#1e1e1e;
-  transform:scale(0.97)
+  background:#202020;
+  transform:scale(.97);
 }
 
-/* ===== GAME ===== */
+
+/* =========================================================
+   GAME
+========================================================= */
 
 #gameScreen{
-  padding:6px 8px 0;
+  padding:5px 8px 4px;
   max-width:480px;
   margin:0 auto;
   width:100%;
-  height:100%
+  height:100%;
+  overflow:hidden;
 }
 
 .top-bar{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  padding:4px 2px 6px
+  padding:4px 2px 5px;
+  flex:0 0 auto;
 }
 
 .left-side{
   display:flex;
   align-items:center;
-  gap:8px
+  gap:8px;
 }
 
 .home-btn,
@@ -176,47 +222,53 @@ html,body{
   font-size:18px;
   display:flex;
   align-items:center;
-  justify-content:center
+  justify-content:center;
+}
+
+.home-btn:active,
+.btn-icon:active{
+  transform:scale(.93);
 }
 
 .record-box{
   display:flex;
-  flex-direction:column
+  flex-direction:column;
 }
 
 .record-label{
   font-size:10px;
-  color:#777
+  color:#777;
 }
 
 .record-value{
   font-size:15px;
   font-weight:700;
-  color:#D4AF37
+  color:#D4AF37;
 }
 
 .center-score{
   text-align:center;
-  flex:1
+  flex:1;
 }
 
 .current-score{
-  font-size:48px;
+  font-size:46px;
   font-weight:900;
   line-height:1;
-  letter-spacing:-1px
+  letter-spacing:-1px;
+  text-shadow:0 0 18px rgba(255,255,255,.08);
 }
 
 .score-sub{
   font-size:11px;
   color:#777;
-  margin-top:1px
+  margin-top:1px;
 }
 
 .right-side{
   display:flex;
   align-items:center;
-  gap:7px
+  gap:7px;
 }
 
 .music-mini{
@@ -229,70 +281,123 @@ html,body{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:0
+  padding:0;
+}
+
+.music-mini:active{
+  transform:scale(.93);
 }
 
 .music-mini img{
   width:100%;
   height:100%;
-  object-fit:cover
+  object-fit:cover;
 }
 
 .music-mini span{
-  font-size:16px
+  font-size:16px;
 }
+
+
+/* =========================================================
+   BOARD
+========================================================= */
 
 .board-wrap{
   display:flex;
   justify-content:center;
-  margin:4px 0 0;
+  margin:3px 0 0;
   position:relative;
-  flex:1;
-  align-items:flex-start
+  flex:0 0 auto;
 }
 
 #board{
-  width:min(96vw,430px);
+  width:min(92vw,430px);
   aspect-ratio:1;
   display:grid;
   grid-template-columns:repeat(8,1fr);
   gap:3.5px;
   padding:5px;
-  background:linear-gradient(160deg,#1c1c1c,#0e0e0e);
+  background:
+    linear-gradient(
+      160deg,
+      #1c1c1c,
+      #0c0c0c
+    );
   border:2px solid #2a2a2a;
   border-radius:18px;
   touch-action:none;
   box-shadow:
-    0 10px 40px rgba(0,0,0,0.5),
-    inset 0 1px 0 rgba(255,255,255,0.03)
+    0 10px 40px rgba(0,0,0,.55),
+    inset 0 1px 0 rgba(255,255,255,.03);
+  transition:
+    box-shadow .15s,
+    transform .15s;
+}
+
+#board.success-board{
+  animation:boardSuccess .5s ease-out;
+}
+
+@keyframes boardSuccess{
+
+  0%{
+    transform:scale(1);
+    box-shadow:
+      0 10px 40px rgba(0,0,0,.55),
+      inset 0 1px 0 rgba(255,255,255,.03);
+  }
+
+  30%{
+    transform:scale(1.025);
+    box-shadow:
+      0 0 15px rgba(255,230,120,.95),
+      0 0 55px rgba(212,175,55,.7),
+      0 0 100px rgba(212,175,55,.35);
+  }
+
+  100%{
+    transform:scale(1);
+    box-shadow:
+      0 10px 40px rgba(0,0,0,.55),
+      inset 0 1px 0 rgba(255,255,255,.03);
+  }
+
 }
 
 .cell{
-  background:linear-gradient(160deg,#161616,#0a0a0a);
+  background:
+    linear-gradient(
+      160deg,
+      #161616,
+      #090909
+    );
   border-radius:6px;
   position:relative;
-  box-shadow:inset 0 1px 2px rgba(0,0,0,0.6)
+  box-shadow:
+    inset 0 1px 2px rgba(0,0,0,.6);
 }
 
 .cell.gold,
 .piece-cell.gold,
 #dragGhost .piece-cell.gold{
-  background:linear-gradient(
-    145deg,
-    #fff8c8 0%,
-    #f5dfa0 12%,
-    #D4AF37 45%,
-    #b8870b 75%,
-    #6b3f00 100%
-  );
+  background:
+    linear-gradient(
+      145deg,
+      #fffbdc 0%,
+      #f8e6a3 12%,
+      #D4AF37 45%,
+      #b8870b 75%,
+      #6b3f00 100%
+    );
 
   border:1px solid #f0d878;
 
   box-shadow:
-    inset 2px 2px 4px rgba(255,255,255,0.55),
-    inset -2px -3px 5px rgba(60,35,0,0.45),
+    inset 2px 2px 4px rgba(255,255,255,.55),
+    inset -2px -3px 5px rgba(60,35,0,.45),
     0 3px 0 #5a3800,
-    0 6px 12px rgba(0,0,0,0.45)
+    0 6px 12px rgba(0,0,0,.45);
 }
 
 .cell.gold::before,
@@ -305,116 +410,128 @@ html,body{
   width:48%;
   height:30%;
   border-radius:50%;
-  background:linear-gradient(135deg,rgba(255,255,255,0.75),transparent);
-  pointer-events:none
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.8),
+      transparent
+    );
+  pointer-events:none;
 }
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
 
 .cell.preview{
   outline:2.5px solid #D4AF37;
   outline-offset:-1px;
-  background:rgba(212,175,55,0.2)!important
+  background:rgba(212,175,55,.2)!important;
+  box-shadow:
+    inset 0 0 12px rgba(212,175,55,.25),
+    0 0 10px rgba(212,175,55,.2);
 }
 
 .cell.preview.invalid{
   outline-color:#e53935!important;
-  background:rgba(229,57,53,0.18)!important
+  background:rgba(229,57,53,.18)!important;
 }
 
-.cell.placing{
-  animation:placePop .22s cubic-bezier(0.2,0.9,0.3,1.2)
+.correct-preview{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%) scale(.8);
+  z-index:20;
+  pointer-events:none;
+  opacity:0;
+  white-space:nowrap;
+  font-size:24px;
+  font-weight:1000;
+  color:#fff6b0;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 15px #D4AF37,
+    0 0 35px #D4AF37;
+  transition:
+    opacity .12s,
+    transform .15s;
 }
 
-@keyframes placePop{
-  0%{
-    transform:scale(0.5);
-    opacity:0.4
-  }
-  70%{
-    transform:scale(1.08)
-  }
-  100%{
-    transform:scale(1);
-    opacity:1
-  }
+.correct-preview.show{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1);
 }
 
-.cell.clearing{
-  animation:clearPop .3s forwards
+.correct-preview.bad{
+  color:#ff7777;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 15px #e53935;
 }
 
-@keyframes clearPop{
-  0%{
-    transform:scale(1);
-    opacity:1
-  }
-  40%{
-    transform:scale(1.2);
-    opacity:1
-  }
-  100%{
-    transform:scale(0);
-    opacity:0
-  }
-}
 
-/* ===== ФИГУРЫ ПОД ПОЛЕМ ===== */
+/* =========================================================
+   PIECES — ПОДНЯЛИ ВЫШЕ
+========================================================= */
 
 .pieces-area{
-  margin-top:-8px;
-  padding:0 0 3px;
   flex:0 0 auto;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:flex-start
+  margin-top:7px;
+  padding:0 0 7px;
+  position:relative;
 }
 
 .pieces-title{
   text-align:center;
-  color:#555;
-  font-size:10px;
-  margin-bottom:-2px;
-  height:12px;
-  line-height:12px
+  color:#666;
+  font-size:12px;
+  margin-bottom:2px;
 }
 
 #pieces{
   display:flex;
   justify-content:center;
   align-items:center;
-  gap:4px;
-  min-height:78px;
+  gap:12px;
+  min-height:92px;
+  height:92px;
   width:100%;
-  padding:0
 }
 
 .piece{
   display:grid;
   gap:3px;
   padding:6px;
-  min-width:78px;
-  min-height:72px;
   cursor:grab;
   touch-action:none;
-  transition:opacity .15s,transform .15s;
-  filter:drop-shadow(0 7px 9px rgba(0,0,0,0.5));
-  border-radius:12px
+  transition:
+    opacity .15s,
+    transform .15s,
+    filter .15s;
+  filter:
+    drop-shadow(0 7px 10px rgba(0,0,0,.55));
+}
+
+.piece:active{
+  transform:scale(1.05);
 }
 
 .piece.dragging{
-  opacity:0.15;
-  transform:scale(0.8)
+  opacity:.12;
+  transform:scale(.75);
 }
 
 .piece-cell{
   width:23px;
   height:23px;
   border-radius:5px;
-  position:relative
+  position:relative;
 }
 
 .piece-cell.empty{
-  visibility:hidden
+  visibility:hidden;
 }
 
 #dragGhost{
@@ -422,32 +539,229 @@ html,body{
   pointer-events:none;
   z-index:999;
   display:none;
-  filter:drop-shadow(0 14px 20px rgba(0,0,0,0.65));
-  transform:translate(-50%,-65%) scale(1.25)
+  filter:
+    drop-shadow(0 14px 20px rgba(0,0,0,.65))
+    drop-shadow(0 0 15px rgba(212,175,55,.35));
+  transform:
+    translate(-50%,-65%)
+    scale(1.25);
 }
 
 #dragGhost .piece-cell{
   width:27px;
   height:27px;
-  border-radius:6px
+  border-radius:6px;
 }
 
-/* ===== ОСТАЛЬНЫЕ ЭКРАНЫ ===== */
+
+/* =========================================================
+   SUCCESS EFFECT
+========================================================= */
+
+#successFlash{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  pointer-events:none;
+  opacity:0;
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255,248,190,.98) 0%,
+      rgba(255,226,92,.72) 12%,
+      rgba(212,175,55,.30) 35%,
+      transparent 70%
+    );
+}
+
+#successFlash.go{
+  animation:successFlash .62s ease-out forwards;
+}
+
+@keyframes successFlash{
+
+  0%{
+    opacity:0;
+    transform:scale(.5);
+  }
+
+  15%{
+    opacity:1;
+    transform:scale(1);
+  }
+
+  38%{
+    opacity:.72;
+  }
+
+  100%{
+    opacity:0;
+    transform:scale(1.5);
+  }
+
+}
+
+#sparkCanvas{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  z-index:1999;
+  pointer-events:none;
+}
+
+.success-text{
+  position:fixed;
+  left:50%;
+  top:42%;
+  transform:translate(-50%,-50%) scale(.5);
+  z-index:2001;
+  pointer-events:none;
+  opacity:0;
+  font-size:38px;
+  font-weight:1000;
+  letter-spacing:1px;
+  color:#fff9c9;
+  text-shadow:
+    0 0 4px #fff,
+    0 0 12px #D4AF37,
+    0 0 30px #D4AF37,
+    0 0 60px #b8870b;
+}
+
+.success-text.go{
+  animation:successText .72s cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+@keyframes successText{
+
+  0%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.4);
+  }
+
+  25%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1.2);
+  }
+
+  55%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1);
+  }
+
+  100%{
+    opacity:0;
+    transform:translate(-50%,-60%) scale(1.15);
+  }
+
+}
+
+.shake{
+  animation:screenShake .35s ease-out;
+}
+
+@keyframes screenShake{
+
+  0%,100%{
+    transform:translate(0,0);
+  }
+
+  20%{
+    transform:translate(-4px,2px);
+  }
+
+  40%{
+    transform:translate(4px,-2px);
+  }
+
+  60%{
+    transform:translate(-3px,1px);
+  }
+
+  80%{
+    transform:translate(2px,-1px);
+  }
+
+}
+
+
+/* =========================================================
+   LINE CLEAR
+========================================================= */
+
+.cell.placing{
+  animation:
+    placePop .28s
+    cubic-bezier(.2,.9,.3,1.25);
+}
+
+@keyframes placePop{
+
+  0%{
+    transform:scale(.25) rotate(-8deg);
+    opacity:.1;
+  }
+
+  55%{
+    transform:scale(1.15) rotate(3deg);
+    opacity:1;
+  }
+
+  100%{
+    transform:scale(1) rotate(0);
+    opacity:1;
+  }
+
+}
+
+.cell.clearing{
+  animation:
+    clearPop .36s
+    forwards;
+}
+
+@keyframes clearPop{
+
+  0%{
+    transform:scale(1);
+    opacity:1;
+    filter:brightness(1);
+  }
+
+  35%{
+    transform:scale(1.25);
+    opacity:1;
+    filter:brightness(2);
+  }
+
+  100%{
+    transform:scale(0);
+    opacity:0;
+    filter:brightness(3);
+  }
+
+}
+
+
+/* =========================================================
+   OTHER SCREENS
+========================================================= */
 
 .page{
   padding:16px;
-  overflow-y:auto
+  overflow-y:auto;
 }
 
 .topbar{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  margin-bottom:22px
+  margin-bottom:22px;
 }
 
 .topbar h2{
-  font-size:19px
+  font-size:19px;
 }
 
 .record-card{
@@ -456,19 +770,19 @@ html,body{
   border-radius:16px;
   padding:18px;
   margin-bottom:11px;
-  text-align:center
+  text-align:center;
 }
 
 .record-card .label{
   color:#888;
   font-size:13px;
-  margin-bottom:5px
+  margin-bottom:5px;
 }
 
 .record-card .value{
   font-size:30px;
   font-weight:800;
-  color:#D4AF37
+  color:#D4AF37;
 }
 
 .setting-item{
@@ -479,11 +793,11 @@ html,body{
   background:#161616;
   border:1px solid #2a2a2a;
   border-radius:14px;
-  margin-bottom:10px
+  margin-bottom:10px;
 }
 
 .setting-item span{
-  font-size:15px
+  font-size:15px;
 }
 
 .toggle{
@@ -493,11 +807,11 @@ html,body{
   border-radius:20px;
   position:relative;
   cursor:pointer;
-  transition:.2s
+  transition:.2s;
 }
 
 .toggle.on{
-  background:#D4AF37
+  background:#D4AF37;
 }
 
 .toggle::after{
@@ -509,24 +823,27 @@ html,body{
   border-radius:50%;
   top:3px;
   left:3px;
-  transition:.2s
+  transition:.2s;
 }
 
 .toggle.on::after{
-  left:25px
+  left:25px;
 }
 
-/* ===== MUSIC ===== */
+
+/* =========================================================
+   MUSIC
+========================================================= */
 
 #musicScreen{
   padding:16px;
-  overflow-y:auto
+  overflow-y:auto;
 }
 
 .music-search{
   display:flex;
   gap:8px;
-  margin-bottom:18px
+  margin-bottom:18px;
 }
 
 .music-search input{
@@ -537,11 +854,13 @@ html,body{
   border:1px solid #333;
   border-radius:12px;
   outline:none;
-  font-size:15px
+  font-size:15px;
+  user-select:text;
+  -webkit-user-select:text;
 }
 
 .music-search input:focus{
-  border-color:#D4AF37
+  border-color:#D4AF37;
 }
 
 .search-btn{
@@ -551,19 +870,19 @@ html,body{
   background:#D4AF37;
   color:#111;
   font-weight:900;
-  font-size:17px
+  font-size:17px;
 }
 
 .music-section-title{
   color:#D4AF37;
   margin:16px 0 10px;
-  font-size:14px
+  font-size:14px;
 }
 
 .song-list{
   display:flex;
   flex-direction:column;
-  gap:8px
+  gap:8px;
 }
 
 .song{
@@ -573,7 +892,7 @@ html,body{
   padding:9px;
   background:#161616;
   border:1px solid #2a2a2a;
-  border-radius:13px
+  border-radius:13px;
 }
 
 .song-cover{
@@ -581,12 +900,12 @@ html,body{
   height:48px;
   border-radius:8px;
   object-fit:cover;
-  background:#222
+  background:#222;
 }
 
 .song-info{
   flex:1;
-  min-width:0
+  min-width:0;
 }
 
 .song-title{
@@ -594,7 +913,7 @@ html,body{
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  font-size:13px
+  font-size:13px;
 }
 
 .song-artist{
@@ -603,7 +922,7 @@ html,body{
   margin-top:2px;
   white-space:nowrap;
   overflow:hidden;
-  text-overflow:ellipsis
+  text-overflow:ellipsis;
 }
 
 .song-play{
@@ -614,10 +933,8 @@ html,body{
   background:#D4AF37;
   color:#111;
   font-weight:900;
-  font-size:15px
+  font-size:15px;
 }
-
-/* ===== PLAYER ===== */
 
 #player{
   position:fixed;
@@ -630,11 +947,11 @@ html,body{
   display:none;
   align-items:center;
   gap:10px;
-  z-index:50
+  z-index:50;
 }
 
 #player.show{
-  display:flex
+  display:flex;
 }
 
 .player-cover{
@@ -642,12 +959,12 @@ html,body{
   height:44px;
   border-radius:8px;
   object-fit:cover;
-  background:#222
+  background:#222;
 }
 
 .player-main{
   flex:1;
-  min-width:0
+  min-width:0;
 }
 
 .player-title{
@@ -655,17 +972,17 @@ html,body{
   font-size:13px;
   white-space:nowrap;
   overflow:hidden;
-  text-overflow:ellipsis
+  text-overflow:ellipsis;
 }
 
 .player-artist{
   color:#888;
-  font-size:11px
+  font-size:11px;
 }
 
 .player-buttons{
   display:flex;
-  gap:5px
+  gap:5px;
 }
 
 .player-btn{
@@ -675,29 +992,32 @@ html,body{
   border-radius:50%;
   background:#2a2a2a;
   color:#fff;
-  font-size:13px
+  font-size:13px;
 }
 
 .player-btn.main{
   background:#D4AF37;
-  color:#111
+  color:#111;
 }
 
-/* ===== MODAL ===== */
+
+/* =========================================================
+   MODAL
+========================================================= */
 
 .modal{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,0.88);
+  background:rgba(0,0,0,.9);
   display:none;
   align-items:center;
   justify-content:center;
   z-index:100;
-  padding:20px
+  padding:20px;
 }
 
 .modal.show{
-  display:flex
+  display:flex;
 }
 
 .modal-box{
@@ -707,17 +1027,19 @@ html,body{
   padding:28px 24px;
   width:100%;
   max-width:320px;
-  text-align:center
+  text-align:center;
+  box-shadow:
+    0 0 50px rgba(0,0,0,.8);
 }
 
 .modal-box h2{
   margin-bottom:8px;
-  font-size:24px
+  font-size:24px;
 }
 
 .modal-box p{
   color:#aaa;
-  margin-bottom:20px
+  margin-bottom:20px;
 }
 
 .modal-btn{
@@ -725,34 +1047,133 @@ html,body{
   padding:14px;
   border:none;
   border-radius:14px;
-  background:linear-gradient(145deg,#D4AF37,#b8870b);
+  background:
+    linear-gradient(
+      145deg,
+      #D4AF37,
+      #b8870b
+    );
   color:#111;
   font-weight:800;
   font-size:16px;
-  margin-top:8px
+  margin-top:8px;
 }
 
 .modal-btn.dark{
   background:#222;
-  color:#fff
+  color:#fff;
 }
+
+
+/* =========================================================
+   COMBO
+========================================================= */
 
 .combo-text{
   position:absolute;
-  top:38%;
+  top:45%;
   left:50%;
-  transform:translate(-50%,-50%);
+  transform:translate(-50%,-50%) scale(.7);
   font-size:30px;
   font-weight:900;
   color:#D4AF37;
-  text-shadow:0 0 25px rgba(212,175,55,0.7);
+  text-shadow:
+    0 0 8px #fff,
+    0 0 25px rgba(212,175,55,.9),
+    0 0 45px rgba(212,175,55,.6);
   pointer-events:none;
   opacity:0;
-  transition:opacity .25s
 }
 
 .combo-text.show{
-  opacity:1
+  animation:comboShow .75s ease-out forwards;
+}
+
+@keyframes comboShow{
+
+  0%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(.5);
+  }
+
+  25%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1.2);
+  }
+
+  100%{
+    opacity:0;
+    transform:translate(-50%,-60%) scale(1);
+  }
+
+}
+
+
+/* =========================================================
+   SMALL SCREEN
+========================================================= */
+
+@media(max-height:700px){
+
+  .menu-logo{
+    width:105px;
+    height:105px;
+    font-size:68px;
+    margin-bottom:15px;
+  }
+
+  .menu-title{
+    font-size:38px;
+  }
+
+  .menu-sub{
+    margin-bottom:25px;
+  }
+
+  .menu-btn{
+    padding:14px;
+  }
+
+  #board{
+    width:min(88vw,390px);
+  }
+
+  #pieces{
+    height:78px;
+    min-height:78px;
+  }
+
+  .piece-cell{
+    width:20px;
+    height:20px;
+  }
+
+}
+
+
+/* =========================================================
+   EXTRA GOLD GLOW
+========================================================= */
+
+.goldPulse{
+  animation:goldPulse .5s ease-out;
+}
+
+@keyframes goldPulse{
+
+  0%{
+    filter:brightness(1);
+  }
+
+  35%{
+    filter:brightness(1.8)
+      drop-shadow(0 0 15px rgba(255,215,70,.9));
+  }
+
+  100%{
+    filter:brightness(1);
+  }
+
 }
 
 </style>
@@ -760,13 +1181,29 @@ html,body{
 
 <body>
 
-<!-- MENU -->
+
+<!-- =====================================================
+     SUCCESS EFFECT LAYERS
+===================================================== -->
+
+<div id="successFlash"></div>
+<canvas id="sparkCanvas"></canvas>
+<div id="successText" class="success-text">
+  ПРАВИЛЬНО!
+</div>
+
+
+<!-- =====================================================
+     MENU
+===================================================== -->
 
 <div id="menuScreen" class="screen active">
 
   <div class="menu-logo">R</div>
 
-  <div class="menu-title">Block Rush</div>
+  <div class="menu-title">
+    Block Rush
+  </div>
 
   <div class="menu-sub">
     Играй. Собирай. Побеждай.
@@ -774,19 +1211,27 @@ html,body{
 
   <div class="menu-buttons">
 
-    <button class="menu-btn primary" onclick="startGame()">
+    <button
+      class="menu-btn primary"
+      onclick="startGame()">
       🎮 Начать игру
     </button>
 
-    <button class="menu-btn secondary" onclick="openMusic()">
+    <button
+      class="menu-btn secondary"
+      onclick="openMusic()">
       🎵 Музыка
     </button>
 
-    <button class="menu-btn secondary" onclick="openRecords()">
+    <button
+      class="menu-btn secondary"
+      onclick="openRecords()">
       🏆 Рекорды
     </button>
 
-    <button class="menu-btn secondary" onclick="openSettings()">
+    <button
+      class="menu-btn secondary"
+      onclick="openSettings()">
       ⚙️ Настройки
     </button>
 
@@ -795,7 +1240,9 @@ html,body{
 </div>
 
 
-<!-- GAME -->
+<!-- =====================================================
+     GAME
+===================================================== -->
 
 <div id="gameScreen" class="screen">
 
@@ -803,7 +1250,9 @@ html,body{
 
     <div class="left-side">
 
-      <button class="home-btn" onclick="openMenu()">
+      <button
+        class="home-btn"
+        onclick="openMenu()">
         🏠
       </button>
 
@@ -813,7 +1262,9 @@ html,body{
           Рекорд
         </div>
 
-        <div class="record-value" id="gameBest">
+        <div
+          class="record-value"
+          id="gameBest">
           0
         </div>
 
@@ -824,7 +1275,9 @@ html,body{
 
     <div class="center-score">
 
-      <div class="current-score" id="score">
+      <div
+        class="current-score"
+        id="score">
         0
       </div>
 
@@ -840,15 +1293,15 @@ html,body{
       <button
         class="music-mini"
         id="musicMiniBtn"
-        onclick="openMusic()"
-      >
+        onclick="openMusic()">
+
         <span>🎵</span>
+
       </button>
 
       <button
         class="btn-icon"
-        onclick="openSettings()"
-      >
+        onclick="openSettings()">
         ⚙️
       </button>
 
@@ -862,12 +1315,20 @@ html,body{
     <div id="board"></div>
 
     <div
+      id="correctPreview"
+      class="correct-preview">
+      ПРАВИЛЬНО ✓
+    </div>
+
+    <div
       id="comboText"
-      class="combo-text"
-    ></div>
+      class="combo-text">
+    </div>
 
   </div>
 
+
+  <!-- ФИГУРЫ ТЕПЕРЬ ВЫШЕ -->
 
   <div class="pieces-area">
 
@@ -882,19 +1343,24 @@ html,body{
 </div>
 
 
+<!-- DRAG GHOST -->
+
 <div id="dragGhost"></div>
 
 
-<!-- RECORDS -->
+<!-- =====================================================
+     RECORDS
+===================================================== -->
 
-<div id="recordsScreen" class="screen page">
+<div
+  id="recordsScreen"
+  class="screen page">
 
   <div class="topbar">
 
     <button
       class="btn-icon"
-      onclick="openMenu()"
-    >
+      onclick="openMenu()">
       ‹
     </button>
 
@@ -915,8 +1381,7 @@ html,body{
 
     <div
       class="value"
-      id="bestScore"
-    >
+      id="bestScore">
       0
     </div>
 
@@ -931,8 +1396,7 @@ html,body{
 
     <div
       class="value"
-      id="lastScore"
-    >
+      id="lastScore">
       0
     </div>
 
@@ -947,8 +1411,7 @@ html,body{
 
     <div
       class="value"
-      id="gamesPlayed"
-    >
+      id="gamesPlayed">
       0
     </div>
 
@@ -957,16 +1420,19 @@ html,body{
 </div>
 
 
-<!-- SETTINGS -->
+<!-- =====================================================
+     SETTINGS
+===================================================== -->
 
-<div id="settingsScreen" class="screen page">
+<div
+  id="settingsScreen"
+  class="screen page">
 
   <div class="topbar">
 
     <button
       class="btn-icon"
-      onclick="openMenu()"
-    >
+      onclick="openMenu()">
       ‹
     </button>
 
@@ -988,8 +1454,8 @@ html,body{
     <div
       class="toggle on"
       id="vibroToggle"
-      onclick="toggleSetting('vibro')"
-    ></div>
+      onclick="toggleSetting('vibro')">
+    </div>
 
   </div>
 
@@ -1003,8 +1469,8 @@ html,body{
     <div
       class="toggle on"
       id="soundToggle"
-      onclick="toggleSetting('sound')"
-    ></div>
+      onclick="toggleSetting('sound')">
+    </div>
 
   </div>
 
@@ -1018,8 +1484,8 @@ html,body{
     <div
       class="toggle on"
       id="musicToggle"
-      onclick="toggleSetting('music')"
-    ></div>
+      onclick="toggleSetting('music')">
+    </div>
 
   </div>
 
@@ -1027,24 +1493,28 @@ html,body{
   <button
     class="menu-btn secondary"
     style="margin-top:30px"
-    onclick="resetRecords()"
-  >
+    onclick="resetRecords()">
+
     Сбросить рекорды
+
   </button>
 
 </div>
 
 
-<!-- MUSIC -->
+<!-- =====================================================
+     MUSIC
+===================================================== -->
 
-<div id="musicScreen" class="screen page">
+<div
+  id="musicScreen"
+  class="screen page">
 
   <div class="topbar">
 
     <button
       class="btn-icon"
-      onclick="openMenu()"
-    >
+      onclick="openMenu()">
       ‹
     </button>
 
@@ -1063,13 +1533,14 @@ html,body{
       id="musicSearch"
       type="text"
       placeholder="Найти песню..."
-      onkeydown="if(event.key==='Enter')searchMusic()"
-    >
+      onkeydown="
+        if(event.key==='Enter')
+        searchMusic()
+      ">
 
     <button
       class="search-btn"
-      onclick="searchMusic()"
-    >
+      onclick="searchMusic()">
       🔎
     </button>
 
@@ -1083,13 +1554,18 @@ html,body{
 
   <div
     id="songList"
-    class="song-list"
-  >
+    class="song-list">
+
     <div
-      style="color:#777;text-align:center;padding:30px"
-    >
+      style="
+      color:#777;
+      text-align:center;
+      padding:30px">
+
       Введите название песни
+
     </div>
+
   </div>
 
 </div>
@@ -1103,22 +1579,19 @@ html,body{
     id="playerCover"
     class="player-cover"
     src=""
-    alt=""
-  >
+    alt="">
 
   <div class="player-main">
 
     <div
       id="playerTitle"
-      class="player-title"
-    >
+      class="player-title">
       Музыка
     </div>
 
     <div
       id="playerArtist"
-      class="player-artist"
-    >
+      class="player-artist">
       —
     </div>
 
@@ -1130,15 +1603,13 @@ html,body{
     <button
       class="player-btn main"
       id="playPauseBtn"
-      onclick="togglePlay()"
-    >
+      onclick="togglePlay()">
       ▶
     </button>
 
     <button
       class="player-btn"
-      onclick="stopMusic()"
-    >
+      onclick="stopMusic()">
       ✕
     </button>
 
@@ -1147,9 +1618,13 @@ html,body{
 </div>
 
 
-<!-- GAME OVER -->
+<!-- =====================================================
+     GAME OVER
+===================================================== -->
 
-<div id="gameOver" class="modal">
+<div
+  id="gameOver"
+  class="modal">
 
   <div class="modal-box">
 
@@ -1166,15 +1641,13 @@ html,body{
 
     <button
       class="modal-btn"
-      onclick="newGame()"
-    >
+      onclick="newGame()">
       Играть снова
     </button>
 
     <button
       class="modal-btn dark"
-      onclick="openMenu()"
-    >
+      onclick="openMenu()">
       В меню
     </button>
 
@@ -1183,33 +1656,43 @@ html,body{
 </div>
 
 
+<!-- YOUTUBE -->
+
 <div
   id="youtubePlayer"
-  style="display:none"
-></div>
-
+  style="display:none">
+</div>
 
 <script src="https://www.youtube.com/iframe_api"></script>
 
+
 <script>
 
-const SIZE=8;
+/* =========================================================
+   GAME VARIABLES
+========================================================= */
 
-let board=[];
-let score=0;
-let pieces=[];
-let selected=null;
-let dragging=false;
-let combo=0;
-let ytPlayer=null;
+const SIZE = 8;
 
-let settings=JSON.parse(
-  localStorage.getItem('br_settings') ||
+let board = [];
+let score = 0;
+let pieces = [];
+let selected = null;
+let dragging = false;
+let combo = 0;
+let ytPlayer = null;
+
+let settings = JSON.parse(
+  localStorage.getItem("br_settings") ||
   '{"vibro":true,"sound":true,"music":true}'
 );
 
 
-const SHAPES=[
+/* =========================================================
+   SHAPES
+========================================================= */
+
+const SHAPES = [
 
   [[1]],
   [[1,1]],
@@ -1220,68 +1703,117 @@ const SHAPES=[
   [[1],[1],[1]],
   [[1],[1],[1],[1]],
 
-  [[1,1],[1,1]],
+  [[1,1],
+   [1,1]],
 
-  [[1,1,1],[1,1,1]],
+  [[1,1,1],
+   [1,1,1]],
 
-  [[1,1],[1,1],[1,1]],
+  [[1,1],
+   [1,1],
+   [1,1]],
 
-  [[1,1,1],[1,1,1],[1,1,1]],
+  [[1,1,1],
+   [1,1,1],
+   [1,1,1]],
 
-  [[1,0],[1,1]],
-  [[0,1],[1,1]],
-  [[1,1],[1,0]],
-  [[1,1],[0,1]],
+  [[1,0],
+   [1,1]],
 
-  [[1,0,0],[1,1,1]],
-  [[0,0,1],[1,1,1]],
-  [[1,1,1],[1,0,0]],
-  [[1,1,1],[0,0,1]],
+  [[0,1],
+   [1,1]],
 
-  [[1,0],[1,0],[1,1]],
-  [[0,1],[0,1],[1,1]],
-  [[1,1],[1,0],[1,0]],
-  [[1,1],[0,1],[0,1]],
+  [[1,1],
+   [1,0]],
 
-  [[1,1,1],[0,1,0]],
-  [[0,1,0],[1,1,1]],
-  [[1,0,1],[1,1,1]],
-  [[1,1,1],[1,0,1]]
+  [[1,1],
+   [0,1]],
+
+  [[1,0,0],
+   [1,1,1]],
+
+  [[0,0,1],
+   [1,1,1]],
+
+  [[1,1,1],
+   [1,0,0]],
+
+  [[1,1,1],
+   [0,0,1]],
+
+  [[1,0],
+   [1,0],
+   [1,1]],
+
+  [[0,1],
+   [0,1],
+   [1,1]],
+
+  [[1,1],
+   [1,0],
+   [1,0]],
+
+  [[1,1],
+   [0,1],
+   [0,1]],
+
+  [[1,1,1],
+   [0,1,0]],
+
+  [[0,1,0],
+   [1,1,1]],
+
+  [[1,0,1],
+   [1,1,1]],
+
+  [[1,1,1],
+   [1,0,1]]
 
 ];
 
 
+/* =========================================================
+   SCREEN CONTROL
+========================================================= */
+
 function showScreen(id){
 
   document
-    .querySelectorAll('.screen')
-    .forEach(s=>s.classList.remove('active'));
+    .querySelectorAll(".screen")
+    .forEach(s =>
+      s.classList.remove("active")
+    );
 
   document
     .getElementById(id)
-    .classList.add('active');
+    .classList.add("active");
 
 }
 
 
+/* =========================================================
+   MENU
+========================================================= */
+
 function openMenu(){
 
-  showScreen('menuScreen');
+  showScreen("menuScreen");
 
   document
-    .getElementById('gameOver')
-    .classList.remove('show');
+    .getElementById("gameOver")
+    .classList.remove("show");
 
 }
 
 
 function startGame(){
 
-  showScreen('gameScreen');
+  showScreen("gameScreen");
 
   document
-    .getElementById('gameBest')
-    .textContent=localStorage.getItem('br_best')||0;
+    .getElementById("gameBest")
+    .textContent =
+    localStorage.getItem("br_best") || 0;
 
   newGame();
 
@@ -1290,65 +1822,72 @@ function startGame(){
 
 function openMusic(){
 
-  showScreen('musicScreen');
+  showScreen("musicScreen");
 
 }
 
 
 function openRecords(){
 
-  showScreen('recordsScreen');
+  showScreen("recordsScreen");
 
   document
-    .getElementById('bestScore')
-    .textContent=localStorage.getItem('br_best')||0;
+    .getElementById("bestScore")
+    .textContent =
+    localStorage.getItem("br_best") || 0;
 
   document
-    .getElementById('lastScore')
-    .textContent=localStorage.getItem('br_last')||0;
+    .getElementById("lastScore")
+    .textContent =
+    localStorage.getItem("br_last") || 0;
 
   document
-    .getElementById('gamesPlayed')
-    .textContent=localStorage.getItem('br_games')||0;
+    .getElementById("gamesPlayed")
+    .textContent =
+    localStorage.getItem("br_games") || 0;
 
 }
 
 
 function openSettings(){
 
-  showScreen('settingsScreen');
+  showScreen("settingsScreen");
 
   updateToggles();
 
 }
 
 
+/* =========================================================
+   SETTINGS
+========================================================= */
+
 function updateToggles(){
 
   document
-    .getElementById('vibroToggle')
+    .getElementById("vibroToggle")
     .classList
-    .toggle('on',settings.vibro);
+    .toggle("on",settings.vibro);
 
   document
-    .getElementById('soundToggle')
+    .getElementById("soundToggle")
     .classList
-    .toggle('on',settings.sound);
+    .toggle("on",settings.sound);
 
   document
-    .getElementById('musicToggle')
+    .getElementById("musicToggle")
     .classList
-    .toggle('on',settings.music);
+    .toggle("on",settings.music);
 
 }
 
 
 function toggleSetting(key){
 
-  settings[key]=!settings[key];
+  settings[key] = !settings[key];
 
   localStorage.setItem(
-    'br_settings',
+    "br_settings",
     JSON.stringify(settings)
   );
 
@@ -1359,30 +1898,42 @@ function toggleSetting(key){
 
 function resetRecords(){
 
-  if(confirm('Сбросить все рекорды?')){
+  if(
+    confirm("Сбросить все рекорды?")
+  ){
 
-    localStorage.removeItem('br_best');
-    localStorage.removeItem('br_last');
-    localStorage.removeItem('br_games');
+    localStorage.removeItem("br_best");
+    localStorage.removeItem("br_last");
+    localStorage.removeItem("br_games");
 
-    alert('Рекорды сброшены');
+    alert("Рекорды сброшены");
 
   }
 
 }
 
 
+/* =========================================================
+   BOARD
+========================================================= */
+
 function initBoard(){
 
-  const el=document.getElementById('board');
+  const el =
+    document.getElementById("board");
 
-  el.innerHTML='';
+  el.innerHTML = "";
 
-  for(let i=0;i<SIZE*SIZE;i++){
+  for(
+    let i=0;
+    i<SIZE*SIZE;
+    i++
+  ){
 
-    const c=document.createElement('div');
+    const c =
+      document.createElement("div");
 
-    c.className='cell';
+    c.className = "cell";
 
     el.appendChild(c);
 
@@ -1391,40 +1942,47 @@ function initBoard(){
 }
 
 
+/* =========================================================
+   NEW GAME
+========================================================= */
+
 function newGame(){
 
-  board=Array.from(
-    {length:SIZE},
-    ()=>Array(SIZE).fill(null)
-  );
+  board =
+    Array.from(
+      {length:SIZE},
+      () => Array(SIZE).fill(null)
+    );
 
-  score=0;
-
-  combo=0;
-
-  document
-    .getElementById('score')
-    .textContent='0';
+  score = 0;
+  combo = 0;
 
   document
-    .getElementById('gameOver')
+    .getElementById("score")
+    .textContent = "0";
+
+  document
+    .getElementById("gameOver")
     .classList
-    .remove('show');
+    .remove("show");
 
   createPieces();
-
   renderBoard();
 
 }
 
 
+/* =========================================================
+   PIECES
+========================================================= */
+
 function createPieces(){
 
-  pieces=[];
+  pieces = [];
 
   for(let i=0;i<3;i++){
 
-    const shape=
+    const shape =
       SHAPES[
         Math.floor(
           Math.random()*SHAPES.length
@@ -1433,9 +1991,10 @@ function createPieces(){
 
     pieces.push({
 
-      shape:shape.map(r=>[...r]),
+      shape:
+        shape.map(r => [...r]),
 
-      color:'gold'
+      color:"gold"
 
     });
 
@@ -1446,104 +2005,103 @@ function createPieces(){
 }
 
 
-function renderBoard(){
-
-  const cells=
-    document.querySelectorAll('#board .cell');
-
-  cells.forEach((cell,i)=>{
-
-    const r=Math.floor(i/SIZE);
-
-    const c=i%SIZE;
-
-    cell.className='cell';
-
-    if(board[r][c])
-      cell.classList.add(board[r][c]);
-
-  });
-
-}
-
-
 function renderPieces(){
 
-  const container=
-    document.getElementById('pieces');
+  const container =
+    document.getElementById("pieces");
 
-  container.innerHTML='';
-
-  pieces.forEach((piece,index)=>{
-
-    if(!piece){
-
-      const e=document.createElement('div');
-
-      e.style.width='70px';
-
-      container.appendChild(e);
-
-      return;
-
-    }
+  container.innerHTML = "";
 
 
-    const div=document.createElement('div');
+  pieces.forEach(
+    (piece,index)=>{
 
-    div.className='piece';
+      if(!piece){
 
-    div.dataset.index=index;
+        const empty =
+          document.createElement("div");
 
+        empty.style.width = "70px";
 
-    const rows=piece.shape.length;
+        container.appendChild(empty);
 
-    const cols=piece.shape[0].length;
-
-
-    div.style.gridTemplateColumns=
-      `repeat(${cols},23px)`;
-
-
-    for(let r=0;r<rows;r++){
-
-      for(let c=0;c<cols;c++){
-
-        const cell=
-          document.createElement('div');
-
-        cell.className=
-          'piece-cell'+
-          (piece.shape[r][c]
-            ?' gold'
-            :' empty');
-
-        div.appendChild(cell);
+        return;
 
       }
 
+
+      const div =
+        document.createElement("div");
+
+      div.className = "piece";
+
+      div.dataset.index = index;
+
+
+      const rows =
+        piece.shape.length;
+
+      const cols =
+        piece.shape[0].length;
+
+
+      div.style.gridTemplateColumns =
+        `repeat(${cols},23px)`;
+
+
+      for(
+        let r=0;
+        r<rows;
+        r++
+      ){
+
+        for(
+          let c=0;
+          c<cols;
+          c++
+        ){
+
+          const cell =
+            document.createElement("div");
+
+          cell.className =
+            "piece-cell " +
+            (
+              piece.shape[r][c]
+              ? "gold"
+              : "empty"
+            );
+
+          div.appendChild(cell);
+
+        }
+
+      }
+
+
+      div.addEventListener(
+        "mousedown",
+        e => startDrag(e,index)
+      );
+
+      div.addEventListener(
+        "touchstart",
+        e => startDrag(e,index),
+        {passive:false}
+      );
+
+
+      container.appendChild(div);
+
     }
-
-
-    div.addEventListener(
-      'mousedown',
-      e=>startDrag(e,index)
-    );
-
-
-    div.addEventListener(
-      'touchstart',
-      e=>startDrag(e,index),
-      {passive:false}
-    );
-
-
-    container.appendChild(div);
-
-  });
+  );
 
 }
 
+
+/* =========================================================
+   POINTER
+========================================================= */
 
 function getPointer(e){
 
@@ -1552,28 +2110,26 @@ function getPointer(e){
     e.touches[0]
   ){
 
-    return{
+    return {
       x:e.touches[0].clientX,
       y:e.touches[0].clientY
     };
 
   }
 
-
   if(
     e.changedTouches &&
     e.changedTouches[0]
   ){
 
-    return{
+    return {
       x:e.changedTouches[0].clientX,
       y:e.changedTouches[0].clientY
     };
 
   }
 
-
-  return{
+  return {
     x:e.clientX,
     y:e.clientY
   };
@@ -1581,39 +2137,55 @@ function getPointer(e){
 }
 
 
+/* =========================================================
+   GHOST
+========================================================= */
+
 function createGhost(piece){
 
-  const ghost=
-    document.getElementById('dragGhost');
+  const ghost =
+    document.getElementById("dragGhost");
 
-  ghost.innerHTML='';
+  ghost.innerHTML = "";
 
-  ghost.style.display='grid';
-
-
-  const rows=piece.shape.length;
-
-  const cols=piece.shape[0].length;
+  ghost.style.display = "grid";
 
 
-  ghost.style.gridTemplateColumns=
+  const rows =
+    piece.shape.length;
+
+  const cols =
+    piece.shape[0].length;
+
+
+  ghost.style.gridTemplateColumns =
     `repeat(${cols},27px)`;
 
-  ghost.style.gap='3px';
+  ghost.style.gap = "3px";
 
 
-  for(let r=0;r<rows;r++){
+  for(
+    let r=0;
+    r<rows;
+    r++
+  ){
 
-    for(let c=0;c<cols;c++){
+    for(
+      let c=0;
+      c<cols;
+      c++
+    ){
 
-      const cell=
-        document.createElement('div');
+      const cell =
+        document.createElement("div");
 
-      cell.className=
-        'piece-cell'+
-        (piece.shape[r][c]
-          ?' gold'
-          :' empty');
+      cell.className =
+        "piece-cell " +
+        (
+          piece.shape[r][c]
+          ? "gold"
+          : "empty"
+        );
 
       ghost.appendChild(cell);
 
@@ -1624,6 +2196,10 @@ function createGhost(piece){
 }
 
 
+/* =========================================================
+   START DRAG
+========================================================= */
+
 function startDrag(e,index){
 
   e.preventDefault();
@@ -1632,19 +2208,18 @@ function startDrag(e,index){
     return;
 
 
-  selected=index;
+  selected = index;
+  dragging = true;
 
-  dragging=true;
 
-
-  const el=
+  const el =
     document.querySelector(
       `.piece[data-index="${index}"]`
     );
 
 
   if(el)
-    el.classList.add('dragging');
+    el.classList.add("dragging");
 
 
   createGhost(
@@ -1653,24 +2228,24 @@ function startDrag(e,index){
 
 
   document.addEventListener(
-    'mousemove',
+    "mousemove",
     moveDrag,
     {passive:false}
   );
 
   document.addEventListener(
-    'touchmove',
+    "touchmove",
     moveDrag,
     {passive:false}
   );
 
   document.addEventListener(
-    'mouseup',
+    "mouseup",
     endDrag
   );
 
   document.addEventListener(
-    'touchend',
+    "touchend",
     endDrag
   );
 
@@ -1679,6 +2254,10 @@ function startDrag(e,index){
 
 }
 
+
+/* =========================================================
+   DRAG
+========================================================= */
 
 function moveDrag(e){
 
@@ -1692,34 +2271,38 @@ function moveDrag(e){
   e.preventDefault();
 
 
-  const pointer=
+  const pointer =
     getPointer(e);
 
 
-  const ghost=
-    document.getElementById('dragGhost');
+  const ghost =
+    document.getElementById(
+      "dragGhost"
+    );
 
 
-  ghost.style.left=
-    pointer.x+'px';
+  ghost.style.left =
+    pointer.x + "px";
 
-  ghost.style.top=
-    (pointer.y-18)+'px';
-
-
-  const boardEl=
-    document.getElementById('board');
+  ghost.style.top =
+    (pointer.y - 18) + "px";
 
 
-  const rect=
+  const boardEl =
+    document.getElementById(
+      "board"
+    );
+
+
+  const rect =
     boardEl.getBoundingClientRect();
 
 
-  const cellSize=
-    rect.width/SIZE;
+  const cellSize =
+    rect.width / SIZE;
 
 
-  const piece=
+  const piece =
     pieces[selected];
 
 
@@ -1727,45 +2310,55 @@ function moveDrag(e){
     return;
 
 
-  const rows=
+  const rows =
     piece.shape.length;
 
-  const cols=
+  const cols =
     piece.shape[0].length;
 
 
-  let col=Math.floor(
-    (pointer.x-rect.left)/
-    cellSize-
-    cols/2+
-    0.5
-  );
+  /*
+     Более точное определение позиции.
+     Теперь фигура лучше попадает именно
+     туда, куда пользователь её тянет.
+  */
+
+  let col =
+    Math.floor(
+      (pointer.x - rect.left)
+      / cellSize
+      - cols/2
+      + .5
+    );
 
 
-  let row=Math.floor(
-    (pointer.y-rect.top-18)/
-    cellSize-
-    rows/2+
-    0.5
-  );
+  let row =
+    Math.floor(
+      (pointer.y - rect.top - 18)
+      / cellSize
+      - rows/2
+      + .5
+    );
 
 
-  col=Math.max(
-    -1,
-    Math.min(
-      SIZE-cols,
-      col
-    )
-  );
+  col =
+    Math.max(
+      -1,
+      Math.min(
+        SIZE-cols,
+        col
+      )
+    );
 
 
-  row=Math.max(
-    -1,
-    Math.min(
-      SIZE-rows,
-      row
-    )
-  );
+  row =
+    Math.max(
+      -1,
+      Math.min(
+        SIZE-rows,
+        row
+      )
+    );
 
 
   showPreview(
@@ -1776,6 +2369,10 @@ function moveDrag(e){
 
 }
 
+
+/* =========================================================
+   VALID POSITION
+========================================================= */
 
 function isValidPosition(
   piece,
@@ -1799,9 +2396,11 @@ function isValidPosition(
         continue;
 
 
-      const rr=row+r;
+      const rr =
+        row+r;
 
-      const cc=col+c;
+      const cc =
+        col+c;
 
 
       if(
@@ -1810,8 +2409,11 @@ function isValidPosition(
         cc<0 ||
         cc>=SIZE ||
         board[rr][cc]!==null
-      )
+      ){
+
         return false;
+
+      }
 
     }
 
@@ -1822,6 +2424,10 @@ function isValidPosition(
 }
 
 
+/* =========================================================
+   PREVIEW
+========================================================= */
+
 function showPreview(
   piece,
   row,
@@ -1831,7 +2437,7 @@ function showPreview(
   clearPreview();
 
 
-  const valid=
+  const valid =
     isValidPosition(
       piece,
       row,
@@ -1855,9 +2461,11 @@ function showPreview(
         continue;
 
 
-      const rr=row+r;
+      const rr =
+        row+r;
 
-      const cc=col+c;
+      const cc =
+        col+c;
 
 
       if(
@@ -1867,23 +2475,28 @@ function showPreview(
         cc<SIZE
       ){
 
-        const cell=
+        const cell =
           document.querySelectorAll(
-            '#board .cell'
-          )[rr*SIZE+cc];
+            "#board .cell"
+          )[
+            rr*SIZE+cc
+          ];
 
 
         if(cell){
 
           cell.classList.add(
-            'preview'
+            "preview"
           );
 
 
-          if(!valid)
+          if(!valid){
+
             cell.classList.add(
-              'invalid'
+              "invalid"
             );
+
+          }
 
         }
 
@@ -1894,7 +2507,42 @@ function showPreview(
   }
 
 
-  window._lastPreview={
+  const text =
+    document.getElementById(
+      "correctPreview"
+    );
+
+
+  if(valid){
+
+    text.textContent =
+      "ПРАВИЛЬНО ✓";
+
+    text.classList.remove(
+      "bad"
+    );
+
+    text.classList.add(
+      "show"
+    );
+
+  }else{
+
+    text.textContent =
+      "НЕЛЬЗЯ ✕";
+
+    text.classList.add(
+      "bad"
+    );
+
+    text.classList.add(
+      "show"
+    );
+
+  }
+
+
+  window._lastPreview = {
     row,
     col,
     valid,
@@ -1904,19 +2552,41 @@ function showPreview(
 }
 
 
+/* =========================================================
+   CLEAR PREVIEW
+========================================================= */
+
 function clearPreview(){
 
   document
-    .querySelectorAll('.preview')
+    .querySelectorAll(
+      ".preview"
+    )
     .forEach(
-      c=>c.classList.remove(
-        'preview',
-        'invalid'
-      )
+      c =>
+        c.classList.remove(
+          "preview",
+          "invalid"
+        )
     );
+
+
+  const text =
+    document.getElementById(
+      "correctPreview"
+    );
+
+  text.classList.remove(
+    "show",
+    "bad"
+  );
 
 }
 
+
+/* =========================================================
+   END DRAG
+========================================================= */
 
 function endDrag(){
 
@@ -1924,47 +2594,50 @@ function endDrag(){
     return;
 
 
-  dragging=false;
+  dragging = false;
 
 
   document.removeEventListener(
-    'mousemove',
+    "mousemove",
     moveDrag
   );
 
   document.removeEventListener(
-    'touchmove',
+    "touchmove",
     moveDrag
   );
 
   document.removeEventListener(
-    'mouseup',
+    "mouseup",
     endDrag
   );
 
   document.removeEventListener(
-    'touchend',
+    "touchend",
     endDrag
   );
 
 
   document
-    .getElementById('dragGhost')
-    .style.display='none';
+    .getElementById(
+      "dragGhost"
+    )
+    .style.display = "none";
 
 
   document
     .querySelectorAll(
-      '.piece.dragging'
+      ".piece.dragging"
     )
     .forEach(
-      el=>el.classList.remove(
-        'dragging'
-      )
+      el =>
+        el.classList.remove(
+          "dragging"
+        )
     );
 
 
-  const data=
+  const data =
     window._lastPreview;
 
 
@@ -1989,8 +2662,7 @@ function endDrag(){
     );
 
 
-    pieces[selected]=null;
-
+    pieces[selected] = null;
 
     renderPieces();
 
@@ -2006,15 +2678,14 @@ function endDrag(){
           createPieces();
           checkGameOver();
         },
-        200
+        300
       );
 
-    }
-    else{
+    }else{
 
       setTimeout(
         checkGameOver,
-        30
+        50
       );
 
     }
@@ -2022,10 +2693,14 @@ function endDrag(){
   }
 
 
-  selected=null;
+  selected = null;
 
 }
 
+
+/* =========================================================
+   PLACE PIECE
+========================================================= */
 
 function placePiece(
   piece,
@@ -2043,9 +2718,9 @@ function placePiece(
     return;
 
 
-  let cells=0;
+  let cells = 0;
 
-  const toAnim=[];
+  const toAnim = [];
 
 
   for(
@@ -2064,11 +2739,12 @@ function placePiece(
         continue;
 
 
-      board[row+r][col+c]='gold';
+      board[row+r][col+c] =
+        "gold";
 
 
       toAnim.push(
-        (row+r)*SIZE+
+        (row+r)*SIZE +
         (col+c)
       );
 
@@ -2080,61 +2756,633 @@ function placePiece(
   }
 
 
-  score+=cells;
+  score += cells;
 
 
   document
-    .getElementById('score')
-    .textContent=score;
+    .getElementById("score")
+    .textContent = score;
 
 
   renderBoard();
 
 
-  const all=
+  const all =
     document.querySelectorAll(
-      '#board .cell'
+      "#board .cell"
     );
 
 
-  toAnim.forEach(i=>{
+  toAnim.forEach(
+    (i,index)=>{
 
-    all[i].classList.add(
-      'placing'
-    );
+      setTimeout(
+        ()=>{
+
+          all[i]
+            .classList
+            .add("placing");
+
+          all[i]
+            .classList
+            .add("goldPulse");
 
 
-    setTimeout(
-      ()=>{
-        all[i].classList.remove(
-          'placing'
-        )
-      },
-      220
-    );
+          setTimeout(
+            ()=>{
+              all[i]
+                .classList
+                .remove("placing");
 
-  });
+              all[i]
+                .classList
+                .remove("goldPulse");
+            },
+            350
+          );
+
+        },
+        index*18
+      );
+
+    }
+  );
+
+
+  /*
+     МОЩНАЯ АНИМАЦИЯ УСПЕШНОЙ ПОСТАНОВКИ
+  */
+
+  successEffect(
+    row,
+    col,
+    piece
+  );
 
 
   if(
     settings.vibro &&
     navigator.vibrate
-  )
-    navigator.vibrate(10);
+  ){
+
+    navigator.vibrate(
+      [15,25,35,15]
+    );
+
+  }
 
 
   setTimeout(
     clearLines,
-    25
+    100
   );
 
 }
 
 
+/* =========================================================
+   BOARD RENDER
+========================================================= */
+
+function renderBoard(){
+
+  const cells =
+    document.querySelectorAll(
+      "#board .cell"
+    );
+
+
+  cells.forEach(
+    (cell,i)=>{
+
+      const r =
+        Math.floor(i/SIZE);
+
+      const c =
+        i%SIZE;
+
+
+      cell.className =
+        "cell";
+
+
+      if(board[r][c]){
+
+        cell.classList.add(
+          board[r][c]
+        );
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   SUCCESS EFFECT
+========================================================= */
+
+function successEffect(
+  row,
+  col,
+  piece
+){
+
+  const flash =
+    document.getElementById(
+      "successFlash"
+    );
+
+
+  const text =
+    document.getElementById(
+      "successText"
+    );
+
+
+  const boardEl =
+    document.getElementById(
+      "board"
+    );
+
+
+  flash.classList.remove("go");
+  text.classList.remove("go");
+  boardEl.classList.remove(
+    "success-board"
+  );
+
+
+  /*
+     Перезапуск CSS-анимации
+  */
+
+  void flash.offsetWidth;
+  void text.offsetWidth;
+  void boardEl.offsetWidth;
+
+
+  flash.classList.add("go");
+  text.classList.add("go");
+  boardEl.classList.add(
+    "success-board"
+  );
+
+
+  document.body.classList.remove(
+    "shake"
+  );
+
+  void document.body.offsetWidth;
+
+  document.body.classList.add(
+    "shake"
+  );
+
+
+  /*
+     Частицы по всему экрану
+  */
+
+  createGoldExplosion();
+
+
+  /*
+     Дополнительная вибрация
+  */
+
+  if(
+    settings.vibro &&
+    navigator.vibrate
+  ){
+
+    navigator.vibrate(
+      [20,20,40,20,70]
+    );
+
+  }
+
+
+  /*
+     Звуковой эффект без внешнего файла
+  */
+
+  if(settings.sound){
+
+    playSuccessSound();
+
+  }
+
+}
+
+
+/* =========================================================
+   GOLD PARTICLES
+========================================================= */
+
+const canvas =
+  document.getElementById(
+    "sparkCanvas"
+  );
+
+const ctx =
+  canvas.getContext("2d");
+
+let particles = [];
+let animationRunning = false;
+
+
+function resizeCanvas(){
+
+  canvas.width =
+    window.innerWidth *
+    devicePixelRatio;
+
+  canvas.height =
+    window.innerHeight *
+    devicePixelRatio;
+
+  canvas.style.width =
+    window.innerWidth+"px";
+
+  canvas.style.height =
+    window.innerHeight+"px";
+
+  ctx.setTransform(
+    devicePixelRatio,
+    0,
+    0,
+    devicePixelRatio,
+    0,
+    0
+  );
+
+}
+
+
+resizeCanvas();
+
+window.addEventListener(
+  "resize",
+  resizeCanvas
+);
+
+
+function createGoldExplosion(){
+
+  const cx =
+    window.innerWidth / 2;
+
+  const cy =
+    window.innerHeight * .45;
+
+
+  /*
+     Большой центральный взрыв
+  */
+
+  for(
+    let i=0;
+    i<130;
+    i++
+  ){
+
+    const angle =
+      Math.random() *
+      Math.PI*2;
+
+    const speed =
+      2 +
+      Math.random()*8;
+
+
+    particles.push({
+
+      x:cx +
+        (Math.random()-.5)*40,
+
+      y:cy +
+        (Math.random()-.5)*40,
+
+      vx:
+        Math.cos(angle) *
+        speed,
+
+      vy:
+        Math.sin(angle) *
+        speed,
+
+      size:
+        1.5 +
+        Math.random()*4,
+
+      life:
+        45 +
+        Math.random()*45,
+
+      maxLife:
+        90,
+
+      rotation:
+        Math.random()*Math.PI*2,
+
+      rotationSpeed:
+        (Math.random()-.5)*.3
+
+    });
+
+  }
+
+
+  /*
+     Дополнительные вертикальные искры
+  */
+
+  for(
+    let i=0;
+    i<55;
+    i++
+  ){
+
+    particles.push({
+
+      x:
+        Math.random() *
+        window.innerWidth,
+
+      y:
+        window.innerHeight*.45,
+
+      vx:
+        (Math.random()-.5)*3,
+
+      vy:
+        -2 -
+        Math.random()*7,
+
+      size:
+        1 +
+        Math.random()*3,
+
+      life:
+        40 +
+        Math.random()*60,
+
+      maxLife:
+        100,
+
+      rotation:
+        Math.random()*Math.PI,
+
+      rotationSpeed:
+        (Math.random()-.5)*.2
+
+    });
+
+  }
+
+
+  if(!animationRunning){
+
+    animationRunning = true;
+
+    requestAnimationFrame(
+      animateParticles
+    );
+
+  }
+
+}
+
+
+function animateParticles(){
+
+  ctx.clearRect(
+    0,
+    0,
+    window.innerWidth,
+    window.innerHeight
+  );
+
+
+  particles =
+    particles.filter(
+      p => p.life > 0
+    );
+
+
+  particles.forEach(
+    p => {
+
+      p.x += p.vx;
+      p.y += p.vy;
+
+      p.vy += .08;
+
+      p.vx *= .992;
+
+      p.life--;
+
+      p.rotation +=
+        p.rotationSpeed;
+
+
+      const alpha =
+        Math.max(
+          0,
+          p.life /
+          p.maxLife
+        );
+
+
+      ctx.save();
+
+      ctx.translate(
+        p.x,
+        p.y
+      );
+
+      ctx.rotate(
+        p.rotation
+      );
+
+
+      /*
+         Золотой ромб / искра
+      */
+
+      ctx.fillStyle =
+        `rgba(255,${190 +
+        Math.floor(Math.random()*60)},60,${alpha})`;
+
+
+      ctx.shadowBlur =
+        10;
+
+      ctx.shadowColor =
+        "#D4AF37";
+
+
+      ctx.beginPath();
+
+      ctx.moveTo(
+        0,
+        -p.size*2
+      );
+
+      ctx.lineTo(
+        p.size,
+        0
+      );
+
+      ctx.lineTo(
+        0,
+        p.size*2
+      );
+
+      ctx.lineTo(
+        -p.size,
+        0
+      );
+
+      ctx.closePath();
+
+      ctx.fill();
+
+
+      ctx.restore();
+
+    }
+  );
+
+
+  if(particles.length){
+
+    requestAnimationFrame(
+      animateParticles
+    );
+
+  }else{
+
+    animationRunning = false;
+
+    ctx.clearRect(
+      0,
+      0,
+      window.innerWidth,
+      window.innerHeight
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   SUCCESS SOUND
+========================================================= */
+
+let audioContext = null;
+
+
+function playSuccessSound(){
+
+  try{
+
+    if(!audioContext){
+
+      audioContext =
+        new (
+          window.AudioContext ||
+          window.webkitAudioContext
+        )();
+
+    }
+
+
+    const now =
+      audioContext.currentTime;
+
+
+    const notes =
+      [
+        523.25,
+        659.25,
+        783.99,
+        1046.50
+      ];
+
+
+    notes.forEach(
+      (freq,i)=>{
+
+        const osc =
+          audioContext.createOscillator();
+
+        const gain =
+          audioContext.createGain();
+
+
+        osc.type =
+          "sine";
+
+        osc.frequency.value =
+          freq;
+
+
+        gain.gain.setValueAtTime(
+          .0001,
+          now+i*.055
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+          .18,
+          now+i*.055+.02
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+          .0001,
+          now+i*.055+.25
+        );
+
+
+        osc.connect(gain);
+        gain.connect(
+          audioContext.destination
+        );
+
+
+        osc.start(
+          now+i*.055
+        );
+
+        osc.stop(
+          now+i*.055+.27
+        );
+
+      }
+    );
+
+  }catch(e){}
+
+}
+
+
+/* =========================================================
+   CLEAR LINES
+========================================================= */
+
 function clearLines(){
 
-  const toClear=new Set();
+  const toClear =
+    new Set();
 
+
+  /*
+     ROWS
+  */
 
   for(
     let r=0;
@@ -2144,7 +3392,7 @@ function clearLines(){
 
     if(
       board[r].every(
-        c=>c!==null
+        c => c!==null
       )
     ){
 
@@ -2165,13 +3413,17 @@ function clearLines(){
   }
 
 
+  /*
+     COLUMNS
+  */
+
   for(
     let c=0;
     c<SIZE;
     c++
   ){
 
-    let full=true;
+    let full = true;
 
 
     for(
@@ -2182,8 +3434,7 @@ function clearLines(){
 
       if(!board[r][c]){
 
-        full=false;
-
+        full = false;
         break;
 
       }
@@ -2214,68 +3465,79 @@ function clearLines(){
     toClear.size===0
   ){
 
-    combo=0;
+    combo = 0;
 
     return;
 
   }
 
 
-  const cells=
+  const cells =
     document.querySelectorAll(
-      '#board .cell'
+      "#board .cell"
     );
 
 
   toClear.forEach(
-    i=>cells[i].classList.add(
-      'clearing'
-    )
+    i =>
+      cells[i]
+        .classList
+        .add("clearing")
   );
 
 
   combo++;
 
 
-  const lines=
+  const lines =
     Math.floor(
-      toClear.size/SIZE
+      toClear.size /
+      SIZE
     );
 
 
-  score+=
-    lines*
-    10*
+  score +=
+    lines *
+    10 *
     combo;
 
 
   document
-    .getElementById('score')
-    .textContent=score;
+    .getElementById("score")
+    .textContent = score;
+
+
+  /*
+     Мощный эффект если линия закрыта
+  */
+
+  createGoldExplosion();
 
 
   if(combo>1){
 
-    const t=
+    const t =
       document.getElementById(
-        'comboText'
+        "comboText"
       );
 
 
-    t.textContent=
+    t.textContent =
       `COMBO x${combo}`;
 
 
     t.classList.add(
-      'show'
+      "show"
     );
 
 
     setTimeout(
-      ()=>t.classList.remove(
-        'show'
-      ),
-      700
+      ()=>{
+        t.classList.remove(
+          "show"
+        );
+      },
+      750
     );
 
   }
@@ -2284,10 +3546,20 @@ function clearLines(){
   if(
     settings.vibro &&
     navigator.vibrate
-  )
+  ){
+
     navigator.vibrate(
-      [12,20,12]
+      [20,30,20,40,60]
     );
+
+  }
+
+
+  if(settings.sound){
+
+    playSuccessSound();
+
+  }
 
 
   setTimeout(
@@ -2296,15 +3568,17 @@ function clearLines(){
       toClear.forEach(
         i=>{
 
-          const r=
+          const r =
             Math.floor(
               i/SIZE
             );
 
-          const c=
+          const c =
             i%SIZE;
 
-          board[r][c]=null;
+
+          board[r][c] =
+            null;
 
         }
       );
@@ -2313,18 +3587,22 @@ function clearLines(){
       renderBoard();
 
     },
-    280
+    330
   );
 
 }
 
 
+/* =========================================================
+   CAN PLACE
+========================================================= */
+
 function canPlace(piece){
 
-  const rows=
+  const rows =
     piece.shape.length;
 
-  const cols=
+  const cols =
     piece.shape[0].length;
 
 
@@ -2346,8 +3624,11 @@ function canPlace(piece){
           r,
           c
         )
-      )
+      ){
+
         return true;
+
+      }
 
     }
 
@@ -2359,9 +3640,13 @@ function canPlace(piece){
 }
 
 
+/* =========================================================
+   GAME OVER
+========================================================= */
+
 function checkGameOver(){
 
-  const available=
+  const available =
     pieces.filter(
       p=>p!==null
     );
@@ -2379,18 +3664,18 @@ function checkGameOver(){
     )
   ){
 
-    const best=
+    const best =
       parseInt(
         localStorage.getItem(
-          'br_best'
-        )||0
+          "br_best"
+        ) || 0
       );
 
 
     if(score>best){
 
       localStorage.setItem(
-        'br_best',
+        "br_best",
         score
       );
 
@@ -2398,51 +3683,52 @@ function checkGameOver(){
 
 
     localStorage.setItem(
-      'br_last',
+      "br_last",
       score
     );
 
 
     localStorage.setItem(
-      'br_games',
+      "br_games",
       (
         parseInt(
           localStorage.getItem(
-            'br_games'
-          )||0
-        )+1
+            "br_games"
+          ) || 0
+        ) + 1
       )
     );
 
 
     document
       .getElementById(
-        'finalScore'
+        "finalScore"
       )
-      .textContent=score;
+      .textContent = score;
 
 
     document
       .getElementById(
-        'gameOver'
+        "gameOver"
       )
-      .classList.add(
-        'show'
-      );
+      .classList
+      .add("show");
 
   }
 
 }
 
 
-/* ===== MUSIC SEARCH ===== */
+/* =========================================================
+   MUSIC SEARCH
+========================================================= */
 
 async function searchMusic(){
 
-  const q=
+  const q =
     document
       .getElementById(
-        'musicSearch'
+        "musicSearch"
       )
       .value
       .trim();
@@ -2452,96 +3738,126 @@ async function searchMusic(){
     return;
 
 
-  const list=
+  const list =
     document.getElementById(
-      'songList'
+      "songList"
     );
 
 
-  list.innerHTML=
-    '<div style="color:#777;text-align:center;padding:20px">Ищу...</div>';
+  list.innerHTML =
+    `
+    <div style="
+      color:#777;
+      text-align:center;
+      padding:20px">
+      Ищу...
+    </div>
+    `;
 
 
   try{
 
-    const res=
+    const res =
       await fetch(
         `https://inv.nadeko.net/api/v1/search?q=${encodeURIComponent(q)}&type=video`
       );
 
 
-    const data=
+    const data =
       await res.json();
 
 
-    const items=
+    const items =
       (
         Array.isArray(data)
-          ?data
-          :[]
+        ? data
+        : []
       ).slice(0,10);
 
 
     if(!items.length){
 
-      list.innerHTML=
-        '<div style="color:#777;text-align:center;padding:20px">Ничего не найдено</div>';
+      list.innerHTML =
+        `
+        <div style="
+          color:#777;
+          text-align:center;
+          padding:20px">
+          Ничего не найдено
+        </div>
+        `;
 
       return;
 
     }
 
 
-    list.innerHTML='';
+    list.innerHTML = "";
 
 
     items.forEach(
-      item=>{
+      item => {
 
-        const id=
+        const id =
           item.videoId;
 
-        const title=
+        const title =
           item.title ||
-          'Без названия';
+          "Без названия";
 
-        const channel=
+        const channel =
           item.author ||
-          '';
+          "";
 
 
-        const thumb=
+        const thumb =
           item.videoThumbnails?.[3]?.url ||
           item.videoThumbnails?.[0]?.url ||
           `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
 
 
-        const div=
+        const div =
           document.createElement(
-            'div'
+            "div"
           );
 
 
-        div.className='song';
+        div.className =
+          "song";
 
 
-        div.innerHTML=
-          `<img class="song-cover" src="${thumb}">
-           <div class="song-info">
-             <div class="song-title">${title}</div>
-             <div class="song-artist">${channel}</div>
-           </div>
-           <button
-             class="song-play"
-             onclick="playVideo(
-               '${id}',
-               '${title.replace(/'/g,"\\'")}',
-               '${channel.replace(/'/g,"\\'")}',
-               '${thumb}'
-             )"
-           >
-             ▶
-           </button>`;
+        div.innerHTML =
+          `
+          <img
+            class="song-cover"
+            src="${thumb}"
+            alt="">
+
+          <div class="song-info">
+
+            <div class="song-title">
+              ${escapeHtml(title)}
+            </div>
+
+            <div class="song-artist">
+              ${escapeHtml(channel)}
+            </div>
+
+          </div>
+
+          <button
+            class="song-play"
+            onclick="
+              playVideo(
+                '${id}',
+                '${escapeJs(title)}',
+                '${escapeJs(channel)}',
+                '${escapeJs(thumb)}'
+              )
+            ">
+            ▶
+          </button>
+          `;
 
 
         list.appendChild(
@@ -2552,16 +3868,76 @@ async function searchMusic(){
     );
 
 
-  }
-  catch(e){
+  }catch(e){
 
-    list.innerHTML=
-      '<div style="color:#777;text-align:center;padding:20px">Ошибка поиска</div>';
+    list.innerHTML =
+      `
+      <div style="
+        color:#777;
+        text-align:center;
+        padding:20px">
+        Ошибка поиска
+      </div>
+      `;
 
   }
 
 }
 
+
+/* =========================================================
+   SAFE TEXT
+========================================================= */
+
+function escapeHtml(str){
+
+  return String(str)
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
+
+}
+
+
+function escapeJs(str){
+
+  return String(str)
+    .replace(
+      /\\/g,
+      "\\\\"
+    )
+    .replace(
+      /'/g,
+      "\\'"
+    )
+    .replace(
+      /\n/g,
+      " "
+    );
+
+}
+
+
+/* =========================================================
+   PLAY VIDEO
+========================================================= */
 
 function playVideo(
   id,
@@ -2576,105 +3952,120 @@ function playVideo(
 
   document
     .getElementById(
-      'playerTitle'
+      "playerTitle"
     )
-    .textContent=title;
+    .textContent = title;
 
 
   document
     .getElementById(
-      'playerArtist'
+      "playerArtist"
     )
-    .textContent=artist;
+    .textContent = artist;
+
+
+  const image =
+    thumb ||
+    `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
 
 
   document
     .getElementById(
-      'playerCover'
+      "playerCover"
     )
-    .src=
-      thumb ||
-      `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
+    .src = image;
 
 
   document
     .getElementById(
-      'player'
+      "player"
     )
-    .classList.add(
-      'show'
-    );
+    .classList
+    .add("show");
 
 
   document
     .getElementById(
-      'playPauseBtn'
+      "playPauseBtn"
     )
-    .textContent='❚❚';
+    .textContent = "❚❚";
 
 
-  const mini=
-    document.getElementById(
-      'musicMiniBtn'
-    );
-
-
-  mini.innerHTML=
-    `<img src="${
-      thumb ||
-      `https://img.youtube.com/vi/${id}/mqdefault.jpg`
-    }" alt="">`;
+  document
+    .getElementById(
+      "musicMiniBtn"
+    )
+    .innerHTML =
+    `<img src="${image}" alt="">`;
 
 
   if(ytPlayer){
 
-    ytPlayer.loadVideoById(id);
+    ytPlayer.loadVideoById(
+      id
+    );
 
     ytPlayer.playVideo();
 
-  }
-  else{
+  }else{
 
-    ytPlayer=
+    ytPlayer =
       new YT.Player(
-        'youtubePlayer',
+        "youtubePlayer",
         {
 
-          height:'0',
-
-          width:'0',
+          height:"0",
+          width:"0",
 
           videoId:id,
 
           playerVars:{
-            autoplay:1
+            autoplay:1,
+            playsinline:1
           },
 
           events:{
 
             onStateChange:e=>{
 
-              if(e.data===1){
+              if(
+                e.data===1
+              ){
 
                 document
                   .getElementById(
-                    'playPauseBtn'
+                    "playPauseBtn"
                   )
-                  .textContent='❚❚';
+                  .textContent =
+                  "❚❚";
 
               }
 
 
               if(
-                e.data===2 ||
+                e.data===2
+              ){
+
+                document
+                  .getElementById(
+                    "playPauseBtn"
+                  )
+                  .textContent =
+                  "▶";
+
+              }
+
+
+              if(
                 e.data===0
               ){
 
                 document
                   .getElementById(
-                    'playPauseBtn'
+                    "playPauseBtn"
                   )
-                  .textContent='▶';
+                  .textContent =
+                  "▶";
 
               }
 
@@ -2690,69 +4081,83 @@ function playVideo(
 }
 
 
+/* =========================================================
+   TOGGLE MUSIC
+========================================================= */
+
 function togglePlay(){
 
   if(!ytPlayer)
     return;
 
 
-  const s=
+  const state =
     ytPlayer.getPlayerState();
 
 
-  if(s===1){
+  if(state===1){
 
     ytPlayer.pauseVideo();
 
     document
       .getElementById(
-        'playPauseBtn'
+        "playPauseBtn"
       )
-      .textContent='▶';
+      .textContent = "▶";
 
-  }
-  else{
+  }else{
 
     ytPlayer.playVideo();
 
     document
       .getElementById(
-        'playPauseBtn'
+        "playPauseBtn"
       )
-      .textContent='❚❚';
+      .textContent = "❚❚";
 
   }
 
 }
 
 
+/* =========================================================
+   STOP MUSIC
+========================================================= */
+
 function stopMusic(){
 
-  if(ytPlayer)
+  if(ytPlayer){
+
     ytPlayer.stopVideo();
 
-
-  document
-    .getElementById(
-      'player'
-    )
-    .classList.remove(
-      'show'
-    );
+  }
 
 
   document
     .getElementById(
-      'musicMiniBtn'
+      "player"
     )
-    .innerHTML='<span>🎵</span>';
+    .classList
+    .remove("show");
+
+
+  document
+    .getElementById(
+      "musicMiniBtn"
+    )
+    .innerHTML =
+    "<span>🎵</span>";
 
 }
 
 
-/* ===== START ===== */
+/* =========================================================
+   INIT
+========================================================= */
 
 initBoard();
+
+updateToggles();
 
 </script>
 
