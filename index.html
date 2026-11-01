@@ -1,4369 +1,547 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width,initial-scale=1.0,
-      maximum-scale=1.0,user-scalable=no,
-      viewport-fit=cover">
-
-<title>Block Rush</title>
-<meta name="theme-color" content="#D4AF37">
-
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#090909">
+<title>Block Rush 2 — Black Gold</title>
 <style>
-
-*{
-  box-sizing:border-box;
+:root{
+  --gold:#e5bd52;
+  --gold2:#ffdf82;
+  --bg:#090909;
+  --panel:#151515;
+  --muted:#858585;
+  --cell:#202020;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:radial-gradient(ellipse at 50% 0%,#282012 0%,#101010 38%,#070707 100%);
+  color:#fff;font-family:Inter,system-ui,-apple-system,Arial,sans-serif;
+  min-height:100vh;overflow-x:hidden;user-select:none;
   -webkit-tap-highlight-color:transparent;
-  user-select:none;
-  -webkit-user-select:none;
-  margin:0;
-  padding:0;
 }
-
-html,body{
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background:#090909;
-  color:#fff;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+button{font:inherit;color:inherit;cursor:pointer;border:0}
+.app{max-width:520px;margin:auto;padding:env(safe-area-inset-top) 17px calc(22px + env(safe-area-inset-bottom))}
+header{height:66px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:1.5px}
+.logo{
+ width:39px;height:39px;border-radius:13px;display:grid;place-items:center;
+ background:linear-gradient(145deg,#ffe69b,#b88724);
+ color:#17110a;font-size:23px;font-weight:1000;
+ box-shadow:0 0 25px #d6a83b44;
 }
-
-button,input{
-  font:inherit;
+.brand small{display:block;color:var(--gold);font-size:9px;letter-spacing:3px;margin-top:2px}
+.header-actions{display:flex;gap:8px}
+.icon-btn{
+ width:40px;height:40px;border-radius:13px;background:#ffffff0c;
+ border:1px solid #ffffff12;font-size:18px;
 }
-
-button{
-  cursor:pointer;
+.icon-btn:active,.action:active{transform:scale(.94)}
+.hero{text-align:center;padding:15px 0 16px}
+.eyebrow{font-size:10px;letter-spacing:4px;color:var(--gold);font-weight:800}
+h1{font-size:clamp(30px,9vw,43px);margin:7px 0 3px;letter-spacing:-1.5px}
+h1 span{color:var(--gold)}
+.subtitle{font-size:12px;color:#999}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin:14px 0}
+.stat{
+ background:linear-gradient(145deg,#1c1b18,#121212);
+ border:1px solid #ffffff12;border-radius:15px;padding:12px 7px;text-align:center;
 }
-
-.screen{
-  display:none;
-  width:100%;
-  height:100%;
-  flex-direction:column;
-}
-
-.screen.active{
-  display:flex;
-}
-
-/* ================= MENU ================= */
-
-#menuScreen{
-  align-items:center;
-  justify-content:center;
-  background:
-    radial-gradient(circle at 50% 25%,rgba(212,175,55,.15),transparent 35%),
-    radial-gradient(circle at 50% 100%,rgba(212,175,55,.06),transparent 45%),
-    #090909;
-  padding:20px;
-  position:relative;
-  overflow:hidden;
-}
-
-#menuScreen:after{
-  content:"";
-  position:absolute;
-  width:420px;
-  height:420px;
-  border-radius:50%;
-  border:1px solid rgba(212,175,55,.08);
-  box-shadow:
-    0 0 100px rgba(212,175,55,.08),
-    inset 0 0 100px rgba(212,175,55,.03);
-  pointer-events:none;
-}
-
-.menu-logo{
-  width:140px;
-  height:140px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  background:
-    radial-gradient(circle at 35% 25%,#444,#171717 60%,#0b0b0b);
-
-  border:3px solid #D4AF37;
-
-  color:#D4AF37;
-  font-family:Georgia,serif;
-  font-size:90px;
-  font-weight:900;
-
-  text-shadow:0 0 25px rgba(212,175,55,.65);
-
-  box-shadow:
-    0 0 0 10px rgba(212,175,55,.05),
-    0 0 60px rgba(212,175,55,.18),
-    inset 0 0 30px rgba(212,175,55,.08);
-
-  margin-bottom:22px;
-  z-index:1;
-}
-
-.menu-title{
-  font-size:46px;
-  font-weight:900;
-  letter-spacing:1px;
-
-  background:linear-gradient(
-    90deg,
-    #fff8d0,
-    #D4AF37,
-    #b8870b
-  );
-
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-
-  margin-bottom:5px;
-  z-index:1;
-}
-
-.menu-sub{
-  color:#8d8d8d;
-  font-size:14px;
-  margin-bottom:42px;
-  z-index:1;
-}
-
-.menu-buttons{
-  width:100%;
-  max-width:310px;
-  display:flex;
-  flex-direction:column;
-  gap:11px;
-  z-index:1;
-}
-
-.menu-btn{
-  width:100%;
-  min-height:58px;
-  border:none;
-  border-radius:17px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-
-  font-size:16px;
-  font-weight:800;
-
-  transition:
-    transform .12s,
-    filter .12s;
-}
-
-.menu-btn:active{
-  transform:scale(.96);
-}
-
-.menu-btn.primary{
-  color:#111;
-  background:
-    linear-gradient(
-      145deg,
-      #f6df78,
-      #D4AF37,
-      #aa7908
-    );
-
-  box-shadow:
-    0 8px 28px rgba(212,175,55,.3);
-}
-
-.menu-btn.secondary{
-  color:#D4AF37;
-  background:#151515;
-  border:1px solid rgba(212,175,55,.38);
-}
-
-/* ================= GAME ================= */
-
-#gameScreen{
-  padding:
-    max(5px,env(safe-area-inset-top))
-    8px
-    max(4px,env(safe-area-inset-bottom));
-
-  max-width:500px;
-  margin:0 auto;
-  width:100%;
-  height:100%;
-}
-
-.top-bar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:4px 2px 7px;
-  min-height:57px;
-}
-
-.left-side,
-.right-side{
-  display:flex;
-  align-items:center;
-  gap:7px;
-}
-
-.home-btn,
-.btn-icon,
-.music-mini{
-  width:40px;
-  height:40px;
-
-  border-radius:12px;
-  border:1px solid #2d2d2d;
-
-  background:#151515;
-  color:#fff;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:18px;
-}
-
-.home-btn:active,
-.btn-icon:active,
-.music-mini:active{
-  transform:scale(.92);
-}
-
-.record-box{
-  min-width:65px;
-  text-align:center;
-}
-
-.record-label{
-  color:#666;
-  font-size:9px;
-  text-transform:uppercase;
-  letter-spacing:.5px;
-}
-
-.record-value{
-  color:#D4AF37;
-  font-size:17px;
-  font-weight:900;
-  margin-top:1px;
-}
-
-.center-score{
-  text-align:center;
-}
-
-.current-score{
-  color:#fff;
-  font-size:29px;
-  font-weight:900;
-  line-height:28px;
-}
-
-.score-sub{
-  color:#666;
-  font-size:9px;
-  margin-top:2px;
-}
-
-.music-mini{
-  overflow:hidden;
-  padding:0;
-}
-
-.music-mini img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-/* BOARD */
-
+.stat label{display:block;color:#888;font-size:9px;letter-spacing:1.4px;text-transform:uppercase}
+.stat strong{display:block;font-size:21px;margin-top:4px;color:#fff;font-variant-numeric:tabular-nums}
+.stat:first-child strong{color:var(--gold)}
 .board-wrap{
-  position:relative;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-
-  width:100%;
-  flex:1;
-
-  min-height:0;
-  margin-top:3px;
+ position:relative;padding:9px;border-radius:20px;
+ background:linear-gradient(145deg,#373020,#15130e 35%,#242016);
+ border:1px solid #a9873b66;
+ box-shadow:0 14px 45px #0009,0 0 28px #d4a83b12;
 }
-
-#board{
-  width:min(96vw,430px);
-  aspect-ratio:1;
-
-  display:grid;
-  grid-template-columns:repeat(8,1fr);
-
-  gap:3.5px;
-  padding:5px;
-
-  background:
-    linear-gradient(
-      160deg,
-      #202020,
-      #0d0d0d
-    );
-
-  border:2px solid #292929;
-  border-radius:18px;
-
-  touch-action:none;
-
-  box-shadow:
-    0 12px 40px rgba(0,0,0,.55),
-    inset 0 1px 0 rgba(255,255,255,.04);
+.board{
+ display:grid;grid-template-columns:repeat(8,1fr);gap:4px;
+ width:100%;aspect-ratio:1;background:#0b0b0b;padding:5px;border-radius:13px;
+ touch-action:none;
 }
-
 .cell{
-  position:relative;
-
-  background:
-    linear-gradient(
-      160deg,
-      #171717,
-      #0a0a0a
-    );
-
-  border-radius:6px;
-
-  box-shadow:
-    inset 0 1px 2px rgba(0,0,0,.65);
-
-  transition:
-    background .12s,
-    transform .12s,
-    box-shadow .12s;
-}
-
-.cell.gold,
-.piece-cell.gold,
-#dragGhost .piece-cell.gold{
-
-  background:
-    linear-gradient(
-      145deg,
-      #fff9d3 0%,
-      #f7e5a6 10%,
-      #D4AF37 43%,
-      #b8870b 74%,
-      #6b3f00 100%
-    );
-
-  border:1px solid #f0d878;
-
-  box-shadow:
-    inset 2px 2px 4px rgba(255,255,255,.55),
-    inset -2px -3px 5px rgba(60,35,0,.45),
-    0 3px 0 #593700,
-    0 6px 12px rgba(0,0,0,.42);
-}
-
-.cell.gold:before,
-.piece-cell.gold:before,
-#dragGhost .piece-cell.gold:before{
-  content:"";
-
-  position:absolute;
-  top:2px;
-  left:3px;
-
-  width:48%;
-  height:30%;
-
-  border-radius:50%;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.8),
-      transparent
-    );
-
-  pointer-events:none;
-}
-
-/* PREVIEW */
-
-.cell.preview{
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,248,190,.55),
-      rgba(212,175,55,.32)
-    ) !important;
-
-  border:1.5px solid rgba(255,232,115,.9);
-
-  box-shadow:
-    inset 0 0 0 2px rgba(212,175,55,.2),
-    0 0 10px rgba(212,175,55,.25);
-
-  transform:scale(.96);
-}
-
-.cell.preview.invalid{
-  background:rgba(229,57,53,.14)!important;
-  border-color:rgba(229,57,53,.65)!important;
-}
-
-.cell.placing{
-  animation:
-    placePop
-    .24s
-    cubic-bezier(.2,.9,.3,1.2);
-}
-
-@keyframes placePop{
-  0%{
-    transform:scale(.45);
-    opacity:.25;
-  }
-
-  65%{
-    transform:scale(1.09);
-    opacity:1;
-  }
-
-  100%{
-    transform:scale(1);
-    opacity:1;
-  }
-}
-
-/* CLEAR ANIMATION */
-
-.cell.clearing{
-  animation:
-    clearPop
-    .48s
-    cubic-bezier(.2,.8,.2,1)
-    forwards;
-}
-
-@keyframes clearPop{
-  0%{
-    transform:scale(1);
-    opacity:1;
-    filter:brightness(1);
-  }
-
-  25%{
-    transform:scale(1.16);
-    opacity:1;
-    filter:brightness(1.8);
-  }
-
-  60%{
-    transform:scale(.92);
-    opacity:.85;
-    filter:brightness(2.4);
-  }
-
-  100%{
-    transform:scale(.05) rotate(12deg);
-    opacity:0;
-    filter:brightness(3);
-  }
-}
-
-/* PIECES */
-
-.pieces-area{
-  flex-shrink:0;
-  padding:
-    7px
-    0
-    max(12px,env(safe-area-inset-bottom));
-}
-
-.pieces-title{
-  text-align:center;
-  color:#666;
-  font-size:12px;
-  margin-bottom:4px;
-}
-
-#pieces{
-  display:flex;
-  justify-content:space-evenly;
-  align-items:center;
-
-  gap:4px;
-  min-height:112px;
-}
-
-.piece{
-  display:grid;
-  gap:3px;
-  padding:8px;
-
-  cursor:grab;
-  touch-action:none;
-
-  transition:
-    opacity .15s,
-    transform .15s;
-
-  filter:
-    drop-shadow(
-      0 8px 10px rgba(0,0,0,.55)
-    );
-}
-
-.piece:active{
-  cursor:grabbing;
-}
-
-.piece.dragging{
-  opacity:.12;
-  transform:scale(.78);
-}
-
-.piece-cell{
-  width:23px;
-  height:23px;
-  border-radius:5px;
-  position:relative;
-}
-
-.piece-cell.empty{
-  visibility:hidden;
-}
-
-/* DRAG GHOST */
-
-#dragGhost{
-  position:fixed;
-
-  pointer-events:none;
-
-  z-index:9999;
-
-  display:none;
-
-  filter:
-    drop-shadow(
-      0 16px 25px rgba(0,0,0,.75)
-    );
-
-  transform:
-    translate(-50%,-100%)
-    scale(1.18);
-
-  opacity:.96;
-
-  transition:
-    left .055s linear,
-    top .055s linear;
-}
-
-#dragGhost .piece-cell{
-  width:27px;
-  height:27px;
-  border-radius:6px;
-}
-
-/* ================= CLEAR EFFECT ================= */
-
-#clearFX{
-  position:fixed;
-  inset:0;
-
-  pointer-events:none;
-
-  z-index:5000;
-
-  opacity:0;
-}
-
-#clearFX.flash{
-  animation:screenFlash .55s ease-out;
-}
-
-@keyframes screenFlash{
-  0%{
-    opacity:0;
-    background:rgba(255,215,70,0);
-  }
-
-  18%{
-    opacity:1;
-    background:rgba(255,232,110,.23);
-  }
-
-  42%{
-    opacity:.75;
-    background:rgba(212,175,55,.12);
-  }
-
-  100%{
-    opacity:0;
-    background:rgba(212,175,55,0);
-  }
-}
-
-.success-text{
-  position:absolute;
-  left:50%;
-  top:42%;
-
-  transform:
-    translate(-50%,-50%)
-    scale(.55);
-
-  color:#fff8c4;
-
-  font-size:36px;
-  font-weight:1000;
-
-  white-space:nowrap;
-
-  text-shadow:
-    0 0 8px #D4AF37,
-    0 0 22px #D4AF37,
-    0 0 45px rgba(212,175,55,.8);
-
-  opacity:0;
-}
-
-.success-text.show{
-  animation:
-    successText
-    .72s
-    cubic-bezier(.15,.9,.2,1);
-}
-
-@keyframes successText{
-  0%{
-    opacity:0;
-    transform:
-      translate(-50%,-50%)
-      scale(.55);
-  }
-
-  25%{
-    opacity:1;
-    transform:
-      translate(-50%,-50%)
-      scale(1.18);
-  }
-
-  45%{
-    transform:
-      translate(-50%,-50%)
-      scale(.98);
-  }
-
-  75%{
-    opacity:1;
-    transform:
-      translate(-50%,-50%)
-      scale(1);
-  }
-
-  100%{
-    opacity:0;
-    transform:
-      translate(-50%,-50%)
-      scale(1.08);
-  }
-}
-
-.spark{
-  position:absolute;
-
-  width:7px;
-  height:7px;
-
-  border-radius:50%;
-
-  background:#D4AF37;
-
-  box-shadow:
-    0 0 8px #D4AF37,
-    0 0 16px rgba(255,230,100,.9);
-
-  left:50%;
-  top:44%;
-
-  animation:
-    sparkFly
-    .65s
-    ease-out
-    forwards;
-}
-
-@keyframes sparkFly{
-  0%{
-    transform:
-      translate(-50%,-50%)
-      scale(1.2);
-    opacity:1;
-  }
-
-  100%{
-    transform:
-      translate(
-        calc(-50% + var(--x)),
-        calc(-50% + var(--y))
-      )
-      scale(.05);
-    opacity:0;
-  }
-}
-
-/* COMBO */
-
-.combo-text{
-  position:absolute;
-
-  top:38%;
-  left:50%;
-
-  transform:
-    translate(-50%,-50%)
-    scale(.7);
-
-  font-size:30px;
-  font-weight:1000;
-
-  color:#D4AF37;
-
-  text-shadow:
-    0 0 20px rgba(212,175,55,.85);
-
-  pointer-events:none;
-
-  opacity:0;
-}
-
-.combo-text.show{
-  animation:
-    comboShow
-    .75s
-    ease-out;
-}
-
-@keyframes comboShow{
-  0%{
-    opacity:0;
-    transform:
-      translate(-50%,-50%)
-      scale(.65);
-  }
-
-  25%{
-    opacity:1;
-    transform:
-      translate(-50%,-50%)
-      scale(1.18);
-  }
-
-  65%{
-    opacity:1;
-    transform:
-      translate(-50%,-50%)
-      scale(1);
-  }
-
-  100%{
-    opacity:0;
-    transform:
-      translate(-50%,-50%)
-      scale(1.08);
-  }
-}
-
-/* ================= OTHER SCREENS ================= */
-
-.page{
-  padding:16px;
-  overflow-y:auto;
-}
-
-.topbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  margin-bottom:22px;
-}
-
-.topbar h2{
-  font-size:19px;
-}
-
-.record-card{
-  background:#161616;
-
-  border:1px solid #292929;
-
-  border-radius:16px;
-
-  padding:18px;
-
-  margin-bottom:11px;
-
-  text-align:center;
-}
-
-.record-card .label{
-  color:#888;
-  font-size:13px;
-  margin-bottom:5px;
-}
-
-.record-card .value{
-  color:#D4AF37;
-  font-size:30px;
-  font-weight:900;
-}
-
-.setting-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-
-  padding:15px;
-
-  background:#161616;
-
-  border:1px solid #292929;
-
-  border-radius:14px;
-
-  margin-bottom:10px;
-}
-
-.setting-item span{
-  font-size:15px;
-}
-
-.toggle{
-  width:50px;
-  height:28px;
-
-  background:#333;
-
-  border-radius:20px;
-
-  position:relative;
-
-  cursor:pointer;
-
-  transition:.2s;
-}
-
-.toggle.on{
-  background:#D4AF37;
-}
-
-.toggle:after{
-  content:"";
-
-  position:absolute;
-
-  width:22px;
-  height:22px;
-
-  background:#fff;
-
-  border-radius:50%;
-
-  top:3px;
-  left:3px;
-
-  transition:.2s;
-}
-
-.toggle.on:after{
-  left:25px;
-}
-
-/* MUSIC */
-
-#musicScreen{
-  padding:16px;
-  overflow-y:auto;
-}
-
-.music-search{
-  display:flex;
-  gap:8px;
-  margin-bottom:18px;
-}
-
-.music-search input{
-  flex:1;
-
-  min-width:0;
-
-  padding:13px;
-
-  background:#1a1a1a;
-
-  color:#fff;
-
-  border:1px solid #333;
-
-  border-radius:12px;
-
-  outline:none;
-
-  font-size:15px;
-
-  user-select:text;
-  -webkit-user-select:text;
-}
-
-.music-search input:focus{
-  border-color:#D4AF37;
-}
-
-.search-btn{
-  width:50px;
-
-  border:none;
-
-  border-radius:12px;
-
-  background:#D4AF37;
-
-  color:#111;
-
-  font-weight:900;
-
-  font-size:17px;
-}
-
-.music-section-title{
-  color:#D4AF37;
-  margin:16px 0 10px;
-  font-size:14px;
-}
-
-.song-list{
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-
-  padding-bottom:90px;
-}
-
-.song{
-  display:flex;
-  align-items:center;
-
-  gap:10px;
-
-  padding:9px;
-
-  background:#161616;
-
-  border:1px solid #2a2a2a;
-
-  border-radius:13px;
-}
-
-.song-cover{
-  width:48px;
-  height:48px;
-
-  border-radius:8px;
-
-  object-fit:cover;
-
-  background:#222;
-}
-
-.song-info{
-  flex:1;
-  min-width:0;
-}
-
-.song-title{
-  font-weight:700;
-
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-
-  font-size:13px;
-}
-
-.song-artist{
-  color:#888;
-
-  font-size:11px;
-
-  margin-top:2px;
-
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.song-play{
-  width:38px;
-  height:38px;
-
-  border:none;
-
-  border-radius:50%;
-
-  background:#D4AF37;
-
-  color:#111;
-
-  font-weight:900;
-
-  font-size:15px;
-}
-
-#player{
-  position:fixed;
-
-  bottom:0;
-  left:0;
-  right:0;
-
-  background:#141414;
-
-  border-top:1px solid #2a2a2a;
-
-  padding:
-    10px
-    12px
-    max(10px,env(safe-area-inset-bottom));
-
-  display:none;
-
-  align-items:center;
-
-  gap:10px;
-
-  z-index:50;
-}
-
-#player.show{
-  display:flex;
-}
-
-.player-cover{
-  width:44px;
-  height:44px;
-
-  border-radius:8px;
-
-  object-fit:cover;
-
-  background:#222;
-}
-
-.player-main{
-  flex:1;
-  min-width:0;
-}
-
-.player-title{
-  font-weight:700;
-
-  font-size:13px;
-
-  white-space:nowrap;
-
-  overflow:hidden;
-
-  text-overflow:ellipsis;
-}
-
-.player-artist{
-  color:#888;
-  font-size:11px;
-}
-
-.player-buttons{
-  display:flex;
-  gap:5px;
-}
-
-.player-btn{
-  width:34px;
-  height:34px;
-
-  border:none;
-
-  border-radius:50%;
-
-  background:#2a2a2a;
-
-  color:#fff;
-
-  font-size:13px;
-}
-
-.player-btn.main{
-  background:#D4AF37;
-  color:#111;
-}
-
-/* MODAL */
-
+ min-width:0;min-height:0;border-radius:5px;background:#1b1b1b;
+ border:1px solid #ffffff05;position:relative;transition:background .09s,transform .09s;
+}
+.cell.filled{
+ background:linear-gradient(145deg,#ffe18a 0%,#d5a638 45%,#966719 100%);
+ border:1px solid #ffe7a2a8;
+ box-shadow:inset 1px 1px 3px #fff7, inset -2px -3px 4px #69430a66,0 1px 5px #d6a52d44;
+}
+.cell.ghost{
+ background:#e5bd5280;border:1px solid #ffe69b;
+ box-shadow:0 0 9px #e5bd5266;
+}
+.cell.invalid{background:#a8323277;border:1px solid #ff7777}
+.cell.clearing{animation:clearCell .28s ease forwards}
+@keyframes clearCell{50%{transform:scale(1.2);filter:brightness(2)}100%{transform:scale(.1);opacity:0}}
+.cell.pop{animation:pop .18s ease}
+@keyframes pop{50%{transform:scale(.82)}}
+.board-hint{text-align:center;font-size:10px;color:#777;margin:10px 0 0}
+.board-hint b{color:var(--gold);font-weight:700}
+.power-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin:15px 0}
+.power{
+ background:#171717;border:1px solid #ffffff13;border-radius:14px;
+ padding:10px 4px;text-align:center;position:relative;
+}
+.power .emoji{font-size:21px;display:block}
+.power strong{font-size:11px;display:block;margin-top:4px}
+.power small{font-size:9px;color:#999}
+.power.active{border-color:var(--gold);background:#332816}
+.power:disabled{opacity:.35}
+.tray-title{display:flex;justify-content:space-between;align-items:center;margin:19px 2px 10px}
+.tray-title strong{font-size:13px;letter-spacing:.5px}
+.tray-title span{font-size:10px;color:#888}
+.tray{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;min-height:105px}
+.piece-slot{
+ height:105px;border-radius:15px;background:#151515a8;border:1px solid #ffffff0d;
+ display:grid;place-items:center;touch-action:none;position:relative;
+}
+.piece-slot.used{opacity:.12;pointer-events:none}
+.piece{display:grid;gap:4px;pointer-events:none}
+.mini-cell{
+ width:clamp(15px,4.8vw,22px);height:clamp(15px,4.8vw,22px);border-radius:4px;
+ background:linear-gradient(145deg,#ffe18a,#c6952d 60%,#805716);
+ border:1px solid #ffe6a0a8;box-shadow:inset 1px 1px 2px #fff7,inset -1px -2px 3px #6b470b77;
+}
+.drag-piece{
+ position:fixed;z-index:1000;pointer-events:none;display:grid;gap:4px;
+ filter:drop-shadow(0 8px 12px #000b);
+ transform:translate(-50%,-115%);
+}
+.drag-piece .mini-cell{width:clamp(25px,7vw,34px);height:clamp(25px,7vw,34px);border-radius:6px}
+.bottom-note{text-align:center;color:#626262;font-size:9px;letter-spacing:1px;margin-top:19px}
+.toast{
+ position:fixed;left:50%;top:calc(env(safe-area-inset-top) + 75px);transform:translate(-50%,-15px);
+ background:#242018;border:1px solid #d5a83b77;color:#ffe29a;
+ padding:11px 18px;border-radius:30px;font-size:12px;font-weight:800;
+ opacity:0;pointer-events:none;transition:.25s;z-index:200;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.overlay{
+ position:fixed;inset:0;z-index:300;background:#000c;backdrop-filter:blur(12px);
+ display:none;align-items:center;justify-content:center;padding:22px;
+}
+.overlay.show{display:flex}
 .modal{
-  position:fixed;
-  inset:0;
-
-  background:rgba(0,0,0,.88);
-
-  display:none;
-
-  align-items:center;
-  justify-content:center;
-
-  z-index:100;
-
-  padding:20px;
+ width:100%;max-width:360px;background:linear-gradient(145deg,#252116,#111);
+ border:1px solid #b58d3c77;border-radius:24px;padding:27px 22px;text-align:center;
+ box-shadow:0 20px 70px #000;
 }
-
-.modal.show{
-  display:flex;
+.modal-icon{font-size:43px}
+.modal h2{margin:10px 0;color:var(--gold2)}
+.modal p{font-size:12px;color:#aaa;line-height:1.6}
+.action{
+ width:100%;padding:14px;border-radius:13px;font-weight:900;margin-top:10px;
+ background:linear-gradient(135deg,#ffe69b,#c18c24);color:#171108;
 }
-
-.modal-box{
-  background:#161616;
-
-  border:1px solid #2a2a2a;
-
-  border-radius:20px;
-
-  padding:28px 24px;
-
-  width:100%;
-  max-width:320px;
-
-  text-align:center;
-}
-
-.modal-box h2{
-  margin-bottom:8px;
-  font-size:24px;
-}
-
-.modal-box p{
-  color:#aaa;
-  margin-bottom:20px;
-}
-
-.modal-btn{
-  width:100%;
-
-  padding:14px;
-
-  border:none;
-
-  border-radius:14px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #D4AF37,
-      #b8870b
-    );
-
-  color:#111;
-
-  font-weight:800;
-
-  font-size:16px;
-
-  margin-top:8px;
-}
-
-.modal-btn.dark{
-  background:#222;
-  color:#fff;
-}
-
+.secondary{background:#ffffff0c;color:#eee;border:1px solid #ffffff19}
+.setting-line{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid #ffffff12;font-size:13px}
+.switch{accent-color:#d5a83b;width:19px;height:19px}
+.particles{position:fixed;inset:0;pointer-events:none;z-index:150;overflow:hidden}
+.particle{position:absolute;width:6px;height:6px;border-radius:2px;background:#ffdf82;animation:fly .65s ease-out forwards}
+@keyframes fly{to{transform:translate(var(--x),var(--y)) rotate(220deg) scale(0);opacity:0}}
+@media(min-width:600px){.app{padding-top:15px}.hero{padding-top:25px}.board-wrap{max-width:460px;margin:auto}.power-row,.tray-title,.tray{max-width:460px;margin-left:auto;margin-right:auto}}
 </style>
 </head>
-
 <body>
+<div class="app">
+<header>
+ <div class="brand"><div class="logo">B</div><div>BLOCK RUSH<small>BLACK GOLD EDITION</small></div></div>
+ <div class="header-actions">
+  <button class="icon-btn" id="musicBtn" aria-label="Музыка">♫</button>
+  <button class="icon-btn" id="settingsBtn" aria-label="Настройки">⚙</button>
+ </div>
+</header>
 
-<!-- ================= MENU ================= -->
+<section class="hero">
+ <div class="eyebrow">THE GOLDEN CHALLENGE</div>
+ <h1>BLOCK <span>RUSH</span></h1>
+ <div class="subtitle">Собери линии. Создай комбо. Побей рекорд.</div>
+</section>
 
-<div id="menuScreen" class="screen active">
+<section class="stats">
+ <div class="stat"><label>Очки</label><strong id="score">0</strong></div>
+ <div class="stat"><label>Рекорд</label><strong id="best">0</strong></div>
+ <div class="stat"><label>Комбо</label><strong id="combo">×0</strong></div>
+</section>
 
-  <div class="menu-logo">R</div>
-
-  <div class="menu-title">
-    Block Rush
-  </div>
-
-  <div class="menu-sub">
-    Играй. Собирай. Побеждай.
-  </div>
-
-  <div class="menu-buttons">
-
-    <button class="menu-btn primary"
-            onclick="startGame()">
-      🎮 Начать игру
-    </button>
-
-    <button class="menu-btn secondary"
-            onclick="openMusic()">
-      🎵 Музыка
-    </button>
-
-    <button class="menu-btn secondary"
-            onclick="openRecords()">
-      🏆 Рекорды
-    </button>
-
-    <button class="menu-btn secondary"
-            onclick="openSettings()">
-      ⚙️ Настройки
-    </button>
-
-  </div>
-
+<div class="board-wrap">
+ <div class="board" id="board"></div>
+ <div class="board-hint" id="hint">Перетащи фигуру на поле <b>↓</b></div>
 </div>
 
-
-<!-- ================= GAME ================= -->
-
-<div id="gameScreen" class="screen">
-
-  <div class="top-bar">
-
-    <div class="left-side">
-
-      <button class="home-btn"
-              onclick="openMenu()">
-        🏠
-      </button>
-
-      <div class="record-box">
-
-        <div class="record-label">
-          Рекорд
-        </div>
-
-        <div class="record-value"
-             id="gameBest">
-          0
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="center-score">
-
-      <div class="current-score"
-           id="score">
-        0
-      </div>
-
-      <div class="score-sub">
-        счёт
-      </div>
-
-    </div>
-
-
-    <div class="right-side">
-
-      <button class="music-mini"
-              id="musicMiniBtn"
-              onclick="openMusic()">
-        <span>🎵</span>
-      </button>
-
-      <button class="btn-icon"
-              onclick="openSettings()">
-        ⚙️
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <div class="board-wrap">
-
-    <div id="board"></div>
-
-    <div id="comboText"
-         class="combo-text">
-    </div>
-
-  </div>
-
-
-  <div class="pieces-area">
-
-    <div class="pieces-title">
-      Перетащи фигуру
-    </div>
-
-    <div id="pieces"></div>
-
-  </div>
-
+<div class="power-row">
+ <button class="power" id="bombBtn"><span class="emoji">💣</span><strong>Бомба</strong><small id="bombCount">×2</small></button>
+ <button class="power" id="hammerBtn"><span class="emoji">🔨</span><strong>Молоток</strong><small id="hammerCount">×2</small></button>
+ <button class="power" id="shuffleBtn"><span class="emoji">🔄</span><strong>Замена</strong><small id="shuffleCount">×1</small></button>
 </div>
 
-
-<!-- DRAG GHOST -->
-
-<div id="dragGhost"></div>
-
-
-<!-- SUCCESS EFFECT -->
-
-<div id="clearFX">
-
-  <div id="successText"
-       class="success-text">
-    ПРАВИЛЬНО!
-  </div>
-
+<div class="tray-title"><strong>ТВОИ ФИГУРЫ</strong><span>Выбери и перетащи</span></div>
+<div class="tray" id="tray"></div>
+<div class="bottom-note">BLOCK RUSH 2 · PLAY YOUR WAY</div>
 </div>
 
+<div class="toast" id="toast"></div>
+<div class="particles" id="particles"></div>
 
-<!-- ================= RECORDS ================= -->
-
-<div id="recordsScreen"
-     class="screen page">
-
-  <div class="topbar">
-
-    <button class="btn-icon"
-            onclick="openMenu()">
-      ‹
-    </button>
-
-    <h2>
-      🏆 Рекорды
-    </h2>
-
-    <div style="width:40px"></div>
-
-  </div>
-
-
-  <div class="record-card">
-
-    <div class="label">
-      Лучший результат
-    </div>
-
-    <div class="value"
-         id="bestScore">
-      0
-    </div>
-
-  </div>
-
-
-  <div class="record-card">
-
-    <div class="label">
-      Последняя игра
-    </div>
-
-    <div class="value"
-         id="lastScore">
-      0
-    </div>
-
-  </div>
-
-
-  <div class="record-card">
-
-    <div class="label">
-      Всего игр
-    </div>
-
-    <div class="value"
-         id="gamesPlayed">
-      0
-    </div>
-
-  </div>
-
+<div class="overlay" id="gameOver">
+ <div class="modal">
+  <div class="modal-icon">🏆</div>
+  <h2>ИГРА ОКОНЧЕНА</h2>
+  <p>Больше нет места для новых фигур.<br>Попробуй побить свой рекорд!</p>
+  <h1 id="finalScore">0</h1>
+  <p>ТВОЙ РЕЗУЛЬТАТ</p>
+  <button class="action" id="restartBtn">ИГРАТЬ СНОВА</button>
+ </div>
 </div>
 
-
-<!-- ================= SETTINGS ================= -->
-
-<div id="settingsScreen"
-     class="screen page">
-
-  <div class="topbar">
-
-    <button class="btn-icon"
-            onclick="openMenu()">
-      ‹
-    </button>
-
-    <h2>
-      ⚙️ Настройки
-    </h2>
-
-    <div style="width:40px"></div>
-
-  </div>
-
-
-  <div class="setting-item">
-
-    <span>
-      Вибрация
-    </span>
-
-    <div class="toggle on"
-         id="vibroToggle"
-         onclick="toggleSetting('vibro')">
-    </div>
-
-  </div>
-
-
-  <div class="setting-item">
-
-    <span>
-      Звуки
-    </span>
-
-    <div class="toggle on"
-         id="soundToggle"
-         onclick="toggleSetting('sound')">
-    </div>
-
-  </div>
-
-
-  <div class="setting-item">
-
-    <span>
-      Музыка
-    </span>
-
-    <div class="toggle on"
-         id="musicToggle"
-         onclick="toggleSetting('music')">
-    </div>
-
-  </div>
-
-
-  <button class="menu-btn secondary"
-          style="margin-top:30px"
-          onclick="resetRecords()">
-
-    Сбросить рекорды
-
-  </button>
-
+<div class="overlay" id="settings">
+ <div class="modal">
+  <div class="modal-icon">⚙️</div><h2>НАСТРОЙКИ</h2>
+  <div class="setting-line"><span>🎵 Музыка</span><input class="switch" type="checkbox" id="musicToggle" checked></div>
+  <div class="setting-line"><span>🔊 Звуковые эффекты</span><input class="switch" type="checkbox" id="soundToggle" checked></div>
+  <div class="setting-line"><span>Вибрация</span><input class="switch" type="checkbox" id="vibrateToggle" checked></div>
+  <button class="action" id="closeSettings">ГОТОВО</button>
+ </div>
 </div>
-
-
-<!-- ================= MUSIC ================= -->
-
-<div id="musicScreen"
-     class="screen page">
-
-  <div class="topbar">
-
-    <button class="btn-icon"
-            onclick="openMenu()">
-      ‹
-    </button>
-
-    <h2>
-      🎵 Музыка
-    </h2>
-
-    <div style="width:40px"></div>
-
-  </div>
-
-
-  <div class="music-search">
-
-    <input
-      id="musicSearch"
-      type="text"
-      placeholder="Найти песню..."
-      onkeydown="if(event.key==='Enter')searchMusic()"
-    >
-
-    <button class="search-btn"
-            onclick="searchMusic()">
-      🔎
-    </button>
-
-  </div>
-
-
-  <h3 class="music-section-title">
-    Результаты
-  </h3>
-
-
-  <div id="songList"
-       class="song-list">
-
-    <div style="color:#777;text-align:center;padding:30px">
-      Введите название песни
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- PLAYER -->
-
-<div id="player">
-
-  <img id="playerCover"
-       class="player-cover"
-       src=""
-       alt="">
-
-  <div class="player-main">
-
-    <div id="playerTitle"
-         class="player-title">
-      Музыка
-    </div>
-
-    <div id="playerArtist"
-         class="player-artist">
-      —
-    </div>
-
-  </div>
-
-
-  <div class="player-buttons">
-
-    <button class="player-btn main"
-            id="playPauseBtn"
-            onclick="togglePlay()">
-      ▶
-    </button>
-
-    <button class="player-btn"
-            onclick="stopMusic()">
-      ✕
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- GAME OVER -->
-
-<div id="gameOver"
-     class="modal">
-
-  <div class="modal-box">
-
-    <h2>
-      Игра окончена
-    </h2>
-
-    <p>
-      Счёт:
-      <span id="finalScore">0</span>
-    </p>
-
-    <button class="modal-btn"
-            onclick="newGame()">
-      Играть снова
-    </button>
-
-    <button class="modal-btn dark"
-            onclick="openMenu()">
-      В меню
-    </button>
-
-  </div>
-
-</div>
-
-
-<div id="youtubePlayer"
-     style="display:none">
-</div>
-
-
-<script src="https://www.youtube.com/iframe_api"></script>
-
 
 <script>
+(() => {
+"use strict";
 
-/* =========================================================
-   BLOCK RUSH
-========================================================= */
-
-const SIZE = 8;
-
-let board = [];
-let score = 0;
-
-let pieces = [];
-
-let selected = null;
-let dragging = false;
-
-let combo = 0;
-
-let ytPlayer = null;
-
-let dragPointerId = null;
-
-let snapRow = null;
-let snapCol = null;
-let snapValid = false;
-
-let lastPointer = {
-  x:0,
-  y:0
-};
-
-
-let settings = JSON.parse(
-  localStorage.getItem("br_settings") ||
-  '{"vibro":true,"sound":true,"music":true}'
-);
-
-
-/* =========================================================
-   SHAPES
-========================================================= */
-
-const SHAPES = [
-
-  [[1]],
-
-  [[1,1]],
-
-  [[1,1,1]],
-
-  [[1,1,1,1]],
-
-
-  [[1],[1]],
-
-  [[1],[1],[1]],
-
-  [[1],[1],[1],[1]],
-
-
-  [[1,1],
-   [1,1]],
-
-
-  [[1,1,1],
-   [1,1,1]],
-
-
-  [[1,1],
-   [1,1],
-   [1,1]],
-
-
-  [[1,1,1],
-   [1,1,1],
-   [1,1,1]],
-
-
-  [[1,0],
-   [1,1]],
-
-  [[0,1],
-   [1,1]],
-
-  [[1,1],
-   [1,0]],
-
-  [[1,1],
-   [0,1]],
-
-
-  [[1,0,0],
-   [1,1,1]],
-
-  [[0,0,1],
-   [1,1,1]],
-
-  [[1,1,1],
-   [1,0,0]],
-
-  [[1,1,1],
-   [0,0,1]],
-
-
-  [[1,0],
-   [1,0],
-   [1,1]],
-
-  [[0,1],
-   [0,1],
-   [1,1]],
-
-  [[1,1],
-   [1,0],
-   [1,0]],
-
-  [[1,1],
-   [0,1],
-   [0,1]],
-
-
-  [[1,1,1],
-   [0,1,0]],
-
-  [[0,1,0],
-   [1,1,1]],
-
-  [[1,0,1],
-   [1,1,1]],
-
-  [[1,1,1],
-   [1,0,1]]
-
+const SIZE=8;
+const SHAPES=[
+ [[0,0]],[[0,0],[0,1]],[[0,0],[1,0]],[[0,0],[0,1],[0,2]],
+ [[0,0],[1,0],[2,0]],[[0,0],[0,1],[0,2],[0,3]],
+ [[0,0],[1,0],[2,0],[3,0]],[[0,0],[0,1],[1,0],[1,1]],
+ [[0,0],[0,1],[0,2],[1,1]],[[0,0],[1,0],[1,1],[2,1]],
+ [[0,1],[1,0],[1,1],[1,2]],[[0,0],[1,0],[2,0],[2,1]],
+ [[0,1],[1,0],[1,1],[2,0]],[[0,0],[0,1],[1,1],[1,2]],
+ [[0,0],[1,0],[2,0],[1,1],[1,2]],
+ [[0,0],[0,1],[0,2],[1,0],[1,1],[1,2]],
+ [[0,0],[1,0],[2,0],[0,1],[1,1],[2,1]],
+ [[0,0],[1,0],[2,0],[3,0],[4,0]]
 ];
 
+let grid=Array.from({length:SIZE},()=>Array(SIZE).fill(0));
+let score=0,best=Number(localStorage.getItem("br2_best")||0);
+let combo=0, pieces=[],selected=null,dragEl=null;
+let powers={bomb:2,hammer:2,shuffle:1},powerMode=null;
+let musicOn=true,soundOn=true,vibrateOn=true;
+let audio=null,musicTimer=null,musicStep=0;
+let gameEnded=false;
 
-/* =========================================================
-   SCREENS
-========================================================= */
+const $=id=>document.getElementById(id);
+const board=$("board"),tray=$("tray");
 
-function showScreen(id){
+$("best").textContent=best;
 
-  document
-    .querySelectorAll(".screen")
-    .forEach(s =>
-      s.classList.remove("active")
-    );
-
-  const screen =
-    document.getElementById(id);
-
-  if(screen){
-    screen.classList.add("active");
-  }
-
+function toast(msg){
+ const el=$("toast");el.textContent=msg;el.classList.add("show");
+ clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove("show"),1600);
 }
-
-
-function openMenu(){
-
-  showScreen("menuScreen");
-
-  document
-    .getElementById("gameOver")
-    .classList.remove("show");
-
-  cancelDrag();
-
+function buzz(ms=18){if(vibrateOn&&navigator.vibrate)navigator.vibrate(ms)}
+function audioReady(){
+ if(!audio)audio=new (window.AudioContext||window.webkitAudioContext)();
+ if(audio.state==="suspended")audio.resume();
 }
-
-
-function startGame(){
-
-  showScreen("gameScreen");
-
-  document
-    .getElementById("gameBest")
-    .textContent =
-      localStorage.getItem("br_best") || 0;
-
-  newGame();
-
+function tone(freq,duration=.12,type="sine",volume=.07,delay=0){
+ if(!soundOn)return;
+ audioReady();
+ const o=audio.createOscillator(),g=audio.createGain();
+ o.type=type;o.frequency.setValueAtTime(freq,audio.currentTime+delay);
+ g.gain.setValueAtTime(.001,audio.currentTime+delay);
+ g.gain.exponentialRampToValueAtTime(volume,audio.currentTime+delay+.015);
+ g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+delay+duration);
+ o.connect(g);g.connect(audio.destination);o.start(audio.currentTime+delay);o.stop(audio.currentTime+delay+duration+.03);
 }
-
-
-function openMusic(){
-
-  showScreen("musicScreen");
-
+function sfx(name){
+ if(name==="place"){tone(240,.09,"triangle",.09);tone(410,.12,"sine",.05,.04)}
+ if(name==="clear"){tone(520,.16,"triangle",.08);tone(780,.22,"sine",.07,.08);tone(1040,.25,"sine",.04,.15)}
+ if(name==="combo"){tone(660,.13,"sine",.07);tone(880,.16,"sine",.07,.1);tone(1175,.24,"sine",.08,.2)}
+ if(name==="bad")tone(130,.18,"sawtooth",.035);
+ if(name==="power"){tone(300,.12,"triangle",.08);tone(600,.22,"sine",.06,.08)}
 }
-
-
-function openRecords(){
-
-  showScreen("recordsScreen");
-
-  document
-    .getElementById("bestScore")
-    .textContent =
-      localStorage.getItem("br_best") || 0;
-
-  document
-    .getElementById("lastScore")
-    .textContent =
-      localStorage.getItem("br_last") || 0;
-
-  document
-    .getElementById("gamesPlayed")
-    .textContent =
-      localStorage.getItem("br_games") || 0;
-
+const notes=[261.63,329.63,392,493.88,392,329.63,293.66,349.23,440,523.25,440,349.23];
+function startMusic(){
+ if(!musicOn)return;
+ audioReady();stopMusic();
+ // Оригинальная короткая мелодия, синтезируемая прямо в браузере.
+ musicStep=0;
+ musicTimer=setInterval(()=>{
+  if(!musicOn||!audio)return;
+  const n=notes[musicStep%notes.length];
+  const bass=[65.4,73.4,82.4,73.4][Math.floor(musicStep/3)%4];
+  musicTone(n,.34,.035,"triangle");
+  if(musicStep%3===0)musicTone(bass,.48,.045,"sine");
+  if(musicStep%6===0)musicTone(n*2,.2,.012,"sine");
+  musicStep++;
+ },360);
 }
-
-
-function openSettings(){
-
-  showScreen("settingsScreen");
-
-  updateToggles();
-
+function musicTone(freq,dur,vol,type){
+ if(!audio||audio.state!=="running")return;
+ const o=audio.createOscillator(),g=audio.createGain();
+ o.type=type;o.frequency.value=freq;
+ g.gain.setValueAtTime(.001,audio.currentTime);
+ g.gain.exponentialRampToValueAtTime(vol,audio.currentTime+.04);
+ g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+dur);
+ o.connect(g);g.connect(audio.destination);o.start();o.stop(audio.currentTime+dur+.03);
 }
-
-
-function updateToggles(){
-
-  document
-    .getElementById("vibroToggle")
-    .classList.toggle(
-      "on",
-      settings.vibro
-    );
-
-  document
-    .getElementById("soundToggle")
-    .classList.toggle(
-      "on",
-      settings.sound
-    );
-
-  document
-    .getElementById("musicToggle")
-    .classList.toggle(
-      "on",
-      settings.music
-    );
-
+function stopMusic(){if(musicTimer){clearInterval(musicTimer);musicTimer=null}}
+function setMusic(on){
+ musicOn=on;$("musicToggle").checked=on;
+ $("musicBtn").textContent=on?"♫":"♪";
+ if(on)startMusic();else stopMusic();
 }
-
-
-function toggleSetting(key){
-
-  settings[key] = !settings[key];
-
-  localStorage.setItem(
-    "br_settings",
-    JSON.stringify(settings)
-  );
-
-  updateToggles();
-
-}
-
-
-/* =========================================================
-   RECORDS
-========================================================= */
-
-function resetRecords(){
-
-  if(!confirm("Сбросить все рекорды?")){
-    return;
-  }
-
-  localStorage.removeItem("br_best");
-  localStorage.removeItem("br_last");
-  localStorage.removeItem("br_games");
-
-  document
-    .getElementById("bestScore")
-    .textContent = "0";
-
-  document
-    .getElementById("lastScore")
-    .textContent = "0";
-
-  document
-    .getElementById("gamesPlayed")
-    .textContent = "0";
-
-  alert("Рекорды сброшены");
-
-}
-
-
-/* =========================================================
-   BOARD
-========================================================= */
-
-function initBoard(){
-
-  const el =
-    document.getElementById("board");
-
-  el.innerHTML = "";
-
-  for(
-    let i=0;
-    i<SIZE*SIZE;
-    i++
-  ){
-
-    const cell =
-      document.createElement("div");
-
-    cell.className = "cell";
-
-    el.appendChild(cell);
-
-  }
-
-}
-
-
-function newGame(){
-
-  cancelDrag();
-
-  board =
-    Array.from(
-      {length:SIZE},
-      () => Array(SIZE).fill(null)
-    );
-
-  score = 0;
-  combo = 0;
-
-  document
-    .getElementById("score")
-    .textContent = "0";
-
-  document
-    .getElementById("gameOver")
-    .classList.remove("show");
-
-  createPieces();
-
-  renderBoard();
-
-}
-
 
 function renderBoard(){
-
-  const cells =
-    document.querySelectorAll(
-      "#board .cell"
-    );
-
-  cells.forEach(
-    (cell,i)=>{
-
-      const r =
-        Math.floor(i/SIZE);
-
-      const c =
-        i%SIZE;
-
-      cell.className = "cell";
-
-      if(board[r][c]){
-        cell.classList.add(
-          board[r][c]
-        );
-      }
-
-    }
-  );
-
+ board.innerHTML="";
+ for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++){
+  const el=document.createElement("div");el.className="cell";
+  el.dataset.r=r;el.dataset.c=c;
+  if(grid[r][c])el.classList.add("filled");
+  board.appendChild(el);
+ }
 }
-
-
-/* =========================================================
-   PIECES
-========================================================= */
-
-function createPieces(){
-
-  pieces = [];
-
-  for(
-    let i=0;
-    i<3;
-    i++
-  ){
-
-    const shape =
-      SHAPES[
-        Math.floor(
-          Math.random()*SHAPES.length
-        )
-      ];
-
-    pieces.push({
-
-      shape:
-        shape.map(
-          row => [...row]
-        ),
-
-      color:"gold"
-
-    });
-
-  }
-
-  renderPieces();
-
+function randomShape(){
+ return SHAPES[Math.floor(Math.random()*SHAPES.length)].map(p=>[...p]);
 }
-
-
-function renderPieces(){
-
-  const container =
-    document.getElementById("pieces");
-
-  container.innerHTML = "";
-
-
-  pieces.forEach(
-    (piece,index)=>{
-
-      if(!piece){
-
-        const empty =
-          document.createElement("div");
-
-        empty.style.width = "70px";
-
-        container.appendChild(empty);
-
-        return;
-
-      }
-
-
-      const div =
-        document.createElement("div");
-
-      div.className = "piece";
-
-      div.dataset.index = index;
-
-
-      const rows =
-        piece.shape.length;
-
-      const cols =
-        piece.shape[0].length;
-
-
-      div.style.gridTemplateColumns =
-        `repeat(${cols},23px)`;
-
-
-      for(
-        let r=0;
-        r<rows;
-        r++
-      ){
-
-        for(
-          let c=0;
-          c<cols;
-          c++
-        ){
-
-          const cell =
-            document.createElement("div");
-
-          cell.className =
-            "piece-cell " +
-            (
-              piece.shape[r][c]
-              ? "gold"
-              : "empty"
-            );
-
-          div.appendChild(cell);
-
-        }
-
-      }
-
-
-      div.addEventListener(
-        "pointerdown",
-        e => startDrag(e,index)
-      );
-
-
-      container.appendChild(div);
-
-    }
-  );
-
+function newPieces(){
+ pieces=[randomShape(),randomShape(),randomShape()];
+ renderTray();
 }
-
-
-/* =========================================================
-   POINTER / DRAG
-========================================================= */
-
-function getPointer(e){
-
-  return {
-
-    x:e.clientX,
-    y:e.clientY
-
-  };
-
+function renderTray(){
+ tray.innerHTML="";
+ pieces.forEach((shape,i)=>{
+  const slot=document.createElement("div");slot.className="piece-slot";
+  if(!shape)slot.classList.add("used");
+  slot.dataset.index=i;
+  if(shape){
+   const maxR=Math.max(...shape.map(p=>p[0]))+1;
+   const maxC=Math.max(...shape.map(p=>p[1]))+1;
+   const piece=document.createElement("div");piece.className="piece";
+   piece.style.gridTemplateColumns=`repeat(${maxC},var(--mini,20px))`;
+   for(let r=0;r<maxR;r++)for(let c=0;c<maxC;c++){
+    const cell=document.createElement("div");
+    if(shape.some(p=>p[0]===r&&p[1]===c))cell.className="mini-cell";
+    else cell.style.visibility="hidden";
+    piece.appendChild(cell);
+   }
+   slot.appendChild(piece);
+   slot.addEventListener("pointerdown",e=>beginDrag(e,i));
+  }
+  tray.appendChild(slot);
+ });
 }
-
-
-function createGhost(piece){
-
-  const ghost =
-    document.getElementById(
-      "dragGhost"
-    );
-
-  ghost.innerHTML = "";
-
-  ghost.style.display = "grid";
-
-  const rows =
-    piece.shape.length;
-
-  const cols =
-    piece.shape[0].length;
-
-
-  ghost.style.gridTemplateColumns =
-    `repeat(${cols},27px)`;
-
-  ghost.style.gap = "3px";
-
-
-  for(
-    let r=0;
-    r<rows;
-    r++
-  ){
-
-    for(
-      let c=0;
-      c<cols;
-      c++
-    ){
-
-      const cell =
-        document.createElement("div");
-
-      cell.className =
-        "piece-cell " +
-        (
-          piece.shape[r][c]
-          ? "gold"
-          : "empty"
-        );
-
-      ghost.appendChild(cell);
-
-    }
-
-  }
-
+function updateStats(){
+ $("score").textContent=score;
+ $("best").textContent=best;
+ $("combo").textContent="×"+combo;
+ $("bombCount").textContent="×"+powers.bomb;
+ $("hammerCount").textContent="×"+powers.hammer;
+ $("shuffleCount").textContent="×"+powers.shuffle;
+ $("bombBtn").disabled=powers.bomb<=0;
+ $("hammerBtn").disabled=powers.hammer<=0;
+ $("shuffleBtn").disabled=powers.shuffle<=0;
 }
-
-
-/*
-  Ищем НЕ точку пальца,
-  а ближайшее удобное валидное
-  положение фигуры.
-
-  Это и делает управление
-  похожим на Block Blast.
-*/
-
-function findBestSnap(
-  piece,
-  pointer,
-  rect,
-  cellSize
-){
-
-  const rows =
-    piece.shape.length;
-
-  const cols =
-    piece.shape[0].length;
-
-
-  /*
-    Палец находится ниже фигуры.
-    Поэтому для расчёта доски
-    поднимаем точку примерно
-    на 1.2 клетки.
-  */
-
-  const liftedY =
-    pointer.y -
-    cellSize*1.25;
-
-
-  const rawCol =
-    Math.round(
-      (
-        pointer.x -
-        rect.left
-      ) /
-      cellSize -
-      cols/2
-    );
-
-
-  const rawRow =
-    Math.round(
-      (
-        liftedY -
-        rect.top
-      ) /
-      cellSize -
-      rows/2
-    );
-
-
-  let best = null;
-
-
-  /*
-    Ищем вокруг пальца
-    довольно большой диапазон.
-
-    Благодаря этому фигура
-    легко "прилипает".
-  */
-
-  for(
-    let dr=-4;
-    dr<=4;
-    dr++
-  ){
-
-    for(
-      let dc=-4;
-      dc<=4;
-      dc++
-    ){
-
-      const row =
-        rawRow + dr;
-
-      const col =
-        rawCol + dc;
-
-
-      if(
-        row<0 ||
-        col<0 ||
-        row>SIZE-rows ||
-        col>SIZE-cols
-      ){
-        continue;
-      }
-
-
-      if(
-        !isValidPosition(
-          piece,
-          row,
-          col
-        )
-      ){
-        continue;
-      }
-
-
-      const centerX =
-        rect.left +
-        (
-          col +
-          cols/2
-        ) *
-        cellSize;
-
-
-      const centerY =
-        rect.top +
-        (
-          row +
-          rows/2
-        ) *
-        cellSize;
-
-
-      const dx =
-        pointer.x-centerX;
-
-      const dy =
-        liftedY-centerY;
-
-
-      const distance =
-        dx*dx + dy*dy;
-
-
-      if(
-        !best ||
-        distance<best.distance
-      ){
-
-        best = {
-
-          row,
-          col,
-          distance
-
-        };
-
-      }
-
-    }
-
-  }
-
-
-  /*
-    Разрешаем достаточно
-    большой радиус прилипания.
-
-    Если ближайшая клетка
-    находится в пределах
-    примерно 2.8 клеток —
-    считаем её удобной.
-  */
-
-  const maxDistance =
-    Math.pow(
-      cellSize*2.8,
-      2
-    );
-
-
-  if(
-    best &&
-    best.distance<=maxDistance
-  ){
-
-    return best;
-
-  }
-
-
-  return null;
-
+function addScore(n){
+ score+=n;
+ if(score>best){best=score;localStorage.setItem("br2_best",best)}
+ updateStats();
 }
-
-
-/* =========================================================
-   START DRAG
-========================================================= */
-
-function startDrag(e,index){
-
-  if(
-    e.pointerType === "mouse" &&
-    e.button !== 0
-  ){
-    return;
-  }
-
-
-  if(!pieces[index]){
-    return;
-  }
-
-
-  e.preventDefault();
-
-
-  selected = index;
-
-  dragging = true;
-
-  dragPointerId = e.pointerId;
-
-
-  const element =
-    document.querySelector(
-      `.piece[data-index="${index}"]`
-    );
-
-
-  if(element){
-
-    element.classList.add(
-      "dragging"
-    );
-
-  }
-
-
-  createGhost(
-    pieces[index]
-  );
-
-
-  try{
-
-    element?.setPointerCapture(
-      e.pointerId
-    );
-
-  }catch(_){}
-
-
-  document.addEventListener(
-    "pointermove",
-    moveDrag,
-    {passive:false}
-  );
-
-
-  document.addEventListener(
-    "pointerup",
-    endDrag,
-    {passive:false}
-  );
-
-
-  document.addEventListener(
-    "pointercancel",
-    endDrag,
-    {passive:false}
-  );
-
-
-  moveDrag(e);
-
+function canPlace(shape,r,c){
+ return shape.every(([dr,dc])=>{
+  const y=r+dr,x=c+dc;
+  return y>=0&&y<SIZE&&x>=0&&x<SIZE&&!grid[y][x];
+ });
 }
-
-
-/* =========================================================
-   MOVE DRAG
-========================================================= */
-
-function moveDrag(e){
-
-  if(
-    !dragging ||
-    selected===null
-  ){
-    return;
-  }
-
-
-  e.preventDefault();
-
-
-  const pointer =
-    getPointer(e);
-
-
-  lastPointer = pointer;
-
-
-  const ghost =
-    document.getElementById(
-      "dragGhost"
-    );
-
-
-  /*
-    Сама фигура находится
-    над пальцем.
-  */
-
-  ghost.style.left =
-    pointer.x + "px";
-
-  ghost.style.top =
-    (
-      pointer.y -
-      20
-    ) + "px";
-
-
-  const boardEl =
-    document.getElementById(
-      "board"
-    );
-
-
-  const rect =
-    boardEl.getBoundingClientRect();
-
-
-  const cellSize =
-    rect.width / SIZE;
-
-
-  const piece =
-    pieces[selected];
-
-
-  if(!piece){
-    return;
-  }
-
-
-  const best =
-    findBestSnap(
-      piece,
-      pointer,
-      rect,
-      cellSize
-    );
-
-
-  clearPreview();
-
-
-  if(best){
-
-    snapRow = best.row;
-    snapCol = best.col;
-    snapValid = true;
-
-
-    showPreview(
-      piece,
-      snapRow,
-      snapCol,
-      true
-    );
-
-  }else{
-
-    snapRow = null;
-    snapCol = null;
-    snapValid = false;
-
-
-    /*
-      Если подходящего места
-      рядом нет — показываем
-      красную подсказку
-      в ближайшей позиции.
-    */
-
-    const rows =
-      piece.shape.length;
-
-    const cols =
-      piece.shape[0].length;
-
-
-    let rawCol =
-      Math.round(
-        (
-          pointer.x -
-          rect.left
-        ) /
-        cellSize -
-        cols/2
-      );
-
-
-    let rawRow =
-      Math.round(
-        (
-          pointer.y -
-          cellSize*1.25 -
-          rect.top
-        ) /
-        cellSize -
-        rows/2
-      );
-
-
-    rawCol =
-      Math.max(
-        0,
-        Math.min(
-          SIZE-cols,
-          rawCol
-        )
-      );
-
-
-    rawRow =
-      Math.max(
-        0,
-        Math.min(
-          SIZE-rows,
-          rawRow
-        )
-      );
-
-
-    showPreview(
-      piece,
-      rawRow,
-      rawCol,
-      false
-    );
-
-  }
-
+function getBoardCell(x,y){
+ const el=document.elementFromPoint(x,y);
+ if(!el)return null;
+ const cell=el.closest(".cell");
+ if(!cell||!board.contains(cell))return null;
+ return {r:+cell.dataset.r,c:+cell.dataset.c};
 }
-
-
-/* =========================================================
-   VALID POSITION
-========================================================= */
-
-function isValidPosition(
-  piece,
-  row,
-  col
-){
-
-  for(
-    let r=0;
-    r<piece.shape.length;
-    r++
-  ){
-
-    for(
-      let c=0;
-      c<piece.shape[r].length;
-      c++
-    ){
-
-      if(!piece.shape[r][c]){
-        continue;
-      }
-
-
-      const rr =
-        row+r;
-
-      const cc =
-        col+c;
-
-
-      if(
-        rr<0 ||
-        rr>=SIZE ||
-        cc<0 ||
-        cc>=SIZE ||
-        board[rr][cc]!==null
-      ){
-
-        return false;
-
-      }
-
-    }
-
-  }
-
-  return true;
-
+function beginDrag(e,index){
+ if(gameEnded||powerMode||!pieces[index])return;
+ e.preventDefault();audioReady();
+ selected=index;
+ const shape=pieces[index];
+ dragEl=document.createElement("div");dragEl.className="drag-piece";
+ const maxR=Math.max(...shape.map(p=>p[0]))+1;
+ const maxC=Math.max(...shape.map(p=>p[1]))+1;
+ dragEl.style.gridTemplateColumns=`repeat(${maxC},clamp(25px,7vw,34px))`;
+ for(let r=0;r<maxR;r++)for(let c=0;c<maxC;c++){
+  const d=document.createElement("div");
+  if(shape.some(p=>p[0]===r&&p[1]===c))d.className="mini-cell";
+  else d.style.visibility="hidden";
+  dragEl.appendChild(d);
+ }
+ document.body.appendChild(dragEl);
+ moveDrag(e.clientX,e.clientY);
+ window.addEventListener("pointermove",onDragMove);
+ window.addEventListener("pointerup",endDrag,{once:true});
 }
-
-
-/* =========================================================
-   PREVIEW
-========================================================= */
-
-function showPreview(
-  piece,
-  row,
-  col,
-  valid
-){
-
-  const cells =
-    document.querySelectorAll(
-      "#board .cell"
-    );
-
-
-  for(
-    let r=0;
-    r<piece.shape.length;
-    r++
-  ){
-
-    for(
-      let c=0;
-      c<piece.shape[r].length;
-      c++
-    ){
-
-      if(!piece.shape[r][c]){
-        continue;
-      }
-
-
-      const rr =
-        row+r;
-
-      const cc =
-        col+c;
-
-
-      if(
-        rr>=0 &&
-        rr<SIZE &&
-        cc>=0 &&
-        cc<SIZE
-      ){
-
-        const cell =
-          cells[
-            rr*SIZE+cc
-          ];
-
-
-        if(cell){
-
-          cell.classList.add(
-            "preview"
-          );
-
-
-          if(!valid){
-
-            cell.classList.add(
-              "invalid"
-            );
-
-          }
-
-        }
-
-      }
-
-    }
-
-  }
-
+function moveDrag(x,y){
+ if(!dragEl)return;
+ dragEl.style.left=x+"px";dragEl.style.top=y+"px";
+ clearGhost();
+ const pos=getBoardCell(x,y);
+ if(!pos)return;
+ const shape=pieces[selected],valid=canPlace(shape,pos.r,pos.c);
+ shape.forEach(([dr,dc])=>{
+  const cell=board.querySelector(`[data-r="${pos.r+dr}"][data-c="${pos.c+dc}"]`);
+  if(cell)cell.classList.add(valid?"ghost":"invalid");
+ });
 }
-
-
-function clearPreview(){
-
-  document
-    .querySelectorAll(
-      "#board .preview"
-    )
-    .forEach(
-      cell =>
-        cell.classList.remove(
-          "preview",
-          "invalid"
-        )
-    );
-
+function clearGhost(){
+ board.querySelectorAll(".ghost,.invalid").forEach(el=>el.classList.remove("ghost","invalid"));
 }
-
-
-/* =========================================================
-   END DRAG
-========================================================= */
-
+function onDragMove(e){moveDrag(e.clientX,e.clientY)}
 function endDrag(e){
-
-  if(!dragging){
-    return;
-  }
-
-
-  /*
-    Если пришёл pointerup
-    не нашего пальца —
-    игнорируем.
-  */
-
-  if(
-    e &&
-    dragPointerId!==null &&
-    e.pointerId!==dragPointerId
-  ){
-    return;
-  }
-
-
-  dragging = false;
-
-
-  document.removeEventListener(
-    "pointermove",
-    moveDrag
-  );
-
-
-  document.removeEventListener(
-    "pointerup",
-    endDrag
-  );
-
-
-  document.removeEventListener(
-    "pointercancel",
-    endDrag
-  );
-
-
-  const ghost =
-    document.getElementById(
-      "dragGhost"
-    );
-
-  ghost.style.display = "none";
-
-
-  document
-    .querySelectorAll(
-      ".piece.dragging"
-    )
-    .forEach(
-      el =>
-        el.classList.remove(
-          "dragging"
-        )
-    );
-
-
-  clearPreview();
-
-
-  /*
-    Самое главное:
-
-    ставим фигуру только
-    в последний SNAP-позиции.
-
-    Поэтому пользователю
-    не нужно попадать пальцем
-    прямо в клетку.
-  */
-
-  if(
-    selected!==null &&
-    snapValid &&
-    snapRow!==null &&
-    snapCol!==null
-  ){
-
-    const piece =
-      pieces[selected];
-
-
-    if(
-      piece &&
-      isValidPosition(
-        piece,
-        snapRow,
-        snapCol
-      )
-    ){
-
-      const usedIndex =
-        selected;
-
-
-      placePiece(
-        piece,
-        snapRow,
-        snapCol
-      );
-
-
-      pieces[usedIndex] = null;
-
-
-      renderPieces();
-
-
-      if(
-        pieces.every(
-          p=>p===null
-        )
-      ){
-
-        setTimeout(
-          ()=>{
-            createPieces();
-            checkGameOver();
-          },
-          300
-        );
-
-      }else{
-
-        setTimeout(
-          checkGameOver,
-          60
-        );
-
-      }
-
-    }
-
-  }
-
-
-  selected = null;
-
-  dragPointerId = null;
-
-  snapRow = null;
-  snapCol = null;
-  snapValid = false;
-
+ window.removeEventListener("pointermove",onDragMove);
+ if(dragEl){dragEl.remove();dragEl=null}
+ clearGhost();
+ const pos=getBoardCell(e.clientX,e.clientY);
+ if(pos&&selected!==null&&pieces[selected]){
+  if(canPlace(pieces[selected],pos.r,pos.c))placePiece(selected,pos.r,pos.c);
+  else{sfx("bad");toast("Сюда нельзя поставить фигуру")}
+ }
+ selected=null;
 }
-
-
-/* =========================================================
-   CANCEL DRAG
-========================================================= */
-
-function cancelDrag(){
-
-  dragging = false;
-
-  selected = null;
-
-  dragPointerId = null;
-
-  snapRow = null;
-  snapCol = null;
-  snapValid = false;
-
-
-  document.removeEventListener(
-    "pointermove",
-    moveDrag
-  );
-
-  document.removeEventListener(
-    "pointerup",
-    endDrag
-  );
-
-  document.removeEventListener(
-    "pointercancel",
-    endDrag
-  );
-
-
-  const ghost =
-    document.getElementById(
-      "dragGhost"
-    );
-
-  if(ghost){
-    ghost.style.display = "none";
-  }
-
-
-  clearPreview();
-
-
-  document
-    .querySelectorAll(
-      ".piece.dragging"
-    )
-    .forEach(
-      el =>
-        el.classList.remove(
-          "dragging"
-        )
-    );
-
-}
-
-
-/* =========================================================
-   PLACE PIECE
-========================================================= */
-
-function placePiece(
-  piece,
-  row,
-  col
-){
-
-  if(
-    !isValidPosition(
-      piece,
-      row,
-      col
-    )
-  ){
-    return;
-  }
-
-
-  let cellsCount = 0;
-
-  const toAnimate = [];
-
-
-  for(
-    let r=0;
-    r<piece.shape.length;
-    r++
-  ){
-
-    for(
-      let c=0;
-      c<piece.shape[r].length;
-      c++
-    ){
-
-      if(!piece.shape[r][c]){
-        continue;
-      }
-
-
-      board[
-        row+r
-      ][
-        col+c
-      ] = "gold";
-
-
-      toAnimate.push(
-        (row+r)*SIZE +
-        (col+c)
-      );
-
-
-      cellsCount++;
-
-    }
-
-  }
-
-
-  /*
-    За обычную постановку
-    просто даём очки.
-
-    НИКАКИХ искр.
-    НИКАКОЙ вспышки.
-    НИКАКОГО ПРАВИЛЬНО.
-  */
-
-  score += cellsCount;
-
-
-  document
-    .getElementById("score")
-    .textContent = score;
-
-
-  renderBoard();
-
-
-  const all =
-    document.querySelectorAll(
-      "#board .cell"
-    );
-
-
-  toAnimate.forEach(
-    (index,i)=>{
-
-      setTimeout(
-        ()=>{
-
-          if(all[index]){
-
-            all[index]
-              .classList
-              .add("placing");
-
-
-            setTimeout(
-              ()=>{
-
-                all[index]
-                  .classList
-                  .remove("placing");
-
-              },
-              250
-            );
-
-          }
-
-        },
-        i*18
-      );
-
-    }
-  );
-
-
-  if(
-    settings.vibro &&
-    navigator.vibrate
-  ){
-
-    navigator.vibrate(8);
-
-  }
-
-
-  playPlaceSound();
-
-
-  /*
-    Проверяем линии
-    только после постановки.
-  */
-
-  setTimeout(
-    clearLines,
-    70
-  );
-
-}
-
-
-/* =========================================================
-   CLEAR LINES
-========================================================= */
-
-function clearLines(){
-
-  const toClear =
-    new Set();
-
-  const fullRows = [];
-  const fullCols = [];
-
-
-  /*
-    РЯДЫ
-  */
-
-  for(
-    let r=0;
-    r<SIZE;
-    r++
-  ){
-
-    if(
-      board[r].every(
-        c=>c!==null
-      )
-    ){
-
-      fullRows.push(r);
-
-      for(
-        let c=0;
-        c<SIZE;
-        c++
-      ){
-
-        toClear.add(
-          r*SIZE+c
-        );
-
-      }
-
-    }
-
-  }
-
-
-  /*
-    СТОЛБЦЫ
-  */
-
-  for(
-    let c=0;
-    c<SIZE;
-    c++
-  ){
-
-    let full = true;
-
-
-    for(
-      let r=0;
-      r<SIZE;
-      r++
-    ){
-
-      if(
-        board[r][c]===null
-      ){
-
-        full = false;
-        break;
-
-      }
-
-    }
-
-
-    if(full){
-
-      fullCols.push(c);
-
-
-      for(
-        let r=0;
-        r<SIZE;
-        r++
-      ){
-
-        toClear.add(
-          r*SIZE+c
-        );
-
-      }
-
-    }
-
-  }
-
-
-  /*
-    Если ничего не закрыли —
-    просто сбрасываем комбо.
-
-    Никаких эффектов.
-  */
-
-  if(toClear.size===0){
-
-    combo = 0;
-
-    return;
-
-  }
-
-
+function placePiece(index,r,c){
+ const shape=pieces[index];
+ shape.forEach(([dr,dc])=>grid[r+dr][c+dc]=1);
+ pieces[index]=null;
+ sfx("place");buzz();
+ addScore(shape.length);
+ const cells=board.querySelectorAll(".cell");
+ shape.forEach(([dr,dc])=>{
+  const cell=board.querySelector(`[data-r="${r+dr}"][data-c="${c+dc}"]`);
+  if(cell){cell.classList.add("pop");}
+ });
+ const cleared=clearLines();
+ if(cleared){
   combo++;
-
-
-  const cells =
-    document.querySelectorAll(
-      "#board .cell"
-    );
-
-
-  /*
-    Запускаем красивую
-    анимацию только здесь.
-  */
-
-  toClear.forEach(
-    index => {
-
-      if(cells[index]){
-
-        cells[index]
-          .classList
-          .add("clearing");
-
-      }
-
-    }
-  );
-
-
-  /*
-    Количество линий —
-    именно рядов + столбцов.
-  */
-
-  const lines =
-    fullRows.length +
-    fullCols.length;
-
-
-  /*
-    Очки за очистку.
-  */
-
-  score +=
-    lines *
-    10 *
-    combo;
-
-
-  document
-    .getElementById("score")
-    .textContent = score;
-
-
-  /*
-    ВОТ ЗДЕСЬ:
-    ПРАВИЛЬНО + ВСПЫШКА + ИСКРЫ.
-  */
-
-  successEffect(
-    lines,
-    combo
-  );
-
-
-  if(combo>1){
-
-    const comboText =
-      document.getElementById(
-        "comboText"
-      );
-
-
-    comboText.textContent =
-      `COMBO x${combo}`;
-
-
-    comboText.classList
-      .remove("show");
-
-
-    void comboText.offsetWidth;
-
-
-    comboText.classList
-      .add("show");
-
-
-    setTimeout(
-      ()=>{
-        comboText.classList
-          .remove("show");
-      },
-      800
-    );
-
-  }
-
-
-  if(
-    settings.vibro &&
-    navigator.vibrate
-  ){
-
-    if(lines>=2){
-
-      navigator.vibrate([
-        20,30,20,30,40
-      ]);
-
-    }else{
-
-      navigator.vibrate([
-        15,25,15
-      ]);
-
-    }
-
-  }
-
-
-  playClearSound(lines);
-
-
-  /*
-    После анимации
-    реально очищаем клетки.
-  */
-
-  setTimeout(
-    ()=>{
-
-      toClear.forEach(
-        index=>{
-
-          const r =
-            Math.floor(
-              index/SIZE
-            );
-
-          const c =
-            index%SIZE;
-
-
-          board[r][c] = null;
-
-        }
-      );
-
-
-      renderBoard();
-
-    },
-    480
-  );
-
+  const bonus=cleared*cleared*10+Math.max(0,combo-1)*25;
+  addScore(bonus);
+  if(combo>1){sfx("combo");toast("🔥 КОМБО ×"+combo+"  +"+bonus)}
+  else{sfx("clear");toast("ЛИНИЯ ОЧИЩЕНА  +"+bonus)}
+ }else combo=0;
+ renderBoard();renderTray();updateStats();
+ if(pieces.every(p=>p===null))newPieces();
+ checkGameOver();
 }
-
-
-/* =========================================================
-   SUCCESS EFFECT
-========================================================= */
-
-function successEffect(
-  lines,
-  currentCombo
-){
-
-  const fx =
-    document.getElementById(
-      "clearFX"
-    );
-
-
-  const text =
-    document.getElementById(
-      "successText"
-    );
-
-
-  /*
-    Экранная вспышка.
-  */
-
-  fx.classList.remove(
-    "flash"
-  );
-
-  void fx.offsetWidth;
-
-  fx.classList.add(
-    "flash"
-  );
-
-
-  /*
-    Надпись.
-  */
-
-  text.textContent =
-    lines>=2
-      ? "ПРАВИЛЬНО! x"+lines
-      : "ПРАВИЛЬНО!";
-
-
-  text.classList.remove(
-    "show"
-  );
-
-  void text.offsetWidth;
-
-  text.classList.add(
-    "show"
-  );
-
-
-  /*
-    Удаляем старые искры.
-  */
-
-  fx
-    .querySelectorAll(".spark")
-    .forEach(
-      spark=>spark.remove()
-    );
-
-
-  /*
-    Создаём новые.
-  */
-
-  const amount =
-    Math.min(
-      55,
-      26 +
-      lines*7 +
-      currentCombo*4
-    );
-
-
-  for(
-    let i=0;
-    i<amount;
-    i++
-  ){
-
-    const spark =
-      document.createElement(
-        "div"
-      );
-
-
-    spark.className =
-      "spark";
-
-
-    const angle =
-      Math.random() *
-      Math.PI *
-      2;
-
-
-    const distance =
-      90 +
-      Math.random()*230;
-
-
-    const x =
-      Math.cos(angle) *
-      distance;
-
-
-    const y =
-      Math.sin(angle) *
-      distance;
-
-
-    spark.style.setProperty(
-      "--x",
-      x+"px"
-    );
-
-
-    spark.style.setProperty(
-      "--y",
-      y+"px"
-    );
-
-
-    const size =
-      4 +
-      Math.random()*7;
-
-
-    spark.style.width =
-      size+"px";
-
-    spark.style.height =
-      size+"px";
-
-
-    spark.style.animationDelay =
-      (
-        Math.random()*.16
-      )+"s";
-
-
-    fx.appendChild(
-      spark
-    );
-
-
-    setTimeout(
-      ()=>{
-        spark.remove();
-      },
-      900
-    );
-
-  }
-
-
-  setTimeout(
-    ()=>{
-      fx.classList.remove(
-        "flash"
-      );
-    },
-    650
-  );
-
+function clearLines(){
+ const rows=[],cols=[];
+ for(let r=0;r<SIZE;r++)if(grid[r].every(Boolean))rows.push(r);
+ for(let c=0;c<SIZE;c++)if(grid.every(row=>row[c]))cols.push(c);
+ const cells=new Set();
+ rows.forEach(r=>{for(let c=0;c<SIZE;c++)cells.add(r+","+c)});
+ cols.forEach(c=>{for(let r=0;r<SIZE;r++)cells.add(r+","+c)});
+ if(!cells.size)return 0;
+ cells.forEach(key=>{
+  const [r,c]=key.split(",").map(Number);
+  const el=board.querySelector(`[data-r="${r}"][data-c="${c}"]`);
+  if(el)el.classList.add("clearing");
+ });
+ particles();
+ setTimeout(()=>{
+  cells.forEach(key=>{
+   const [r,c]=key.split(",").map(Number);grid[r][c]=0;
+  });
+  renderBoard();
+ },210);
+ return rows.length+cols.length;
 }
-
-
-/* =========================================================
-   GAME OVER
-========================================================= */
-
-function canPlace(piece){
-
-  if(!piece){
-    return false;
-  }
-
-
-  const rows =
-    piece.shape.length;
-
-  const cols =
-    piece.shape[0].length;
-
-
-  for(
-    let r=0;
-    r<=SIZE-rows;
-    r++
-  ){
-
-    for(
-      let c=0;
-      c<=SIZE-cols;
-      c++
-    ){
-
-      if(
-        isValidPosition(
-          piece,
-          r,
-          c
-        )
-      ){
-
-        return true;
-
-      }
-
-    }
-
-  }
-
-
-  return false;
-
+function particles(){
+ const host=$("particles");
+ for(let i=0;i<22;i++){
+  const p=document.createElement("div");p.className="particle";
+  p.style.left=(30+Math.random()*40)+"%";p.style.top=(30+Math.random()*40)+"%";
+  p.style.setProperty("--x",(Math.random()*180-90)+"px");
+  p.style.setProperty("--y",(Math.random()*180-90)+"px");
+  host.appendChild(p);setTimeout(()=>p.remove(),700);
+ }
 }
-
-
 function checkGameOver(){
-
-  const available =
-    pieces.filter(
-      p=>p!==null
-    );
-
-
-  if(
-    available.length===0
-  ){
-
-    return;
-
-  }
-
-
-  if(
-    !available.some(
-      p=>canPlace(p)
-    )
-  ){
-
-    const best =
-      parseInt(
-        localStorage.getItem(
-          "br_best"
-        ) || "0"
-      );
-
-
-    if(score>best){
-
-      localStorage.setItem(
-        "br_best",
-        score
-      );
-
-    }
-
-
-    localStorage.setItem(
-      "br_last",
-      score
-    );
-
-
-    localStorage.setItem(
-      "br_games",
-      (
-        parseInt(
-          localStorage.getItem(
-            "br_games"
-          ) || "0"
-        ) + 1
-      )
-    );
-
-
-    document
-      .getElementById(
-        "finalScore"
-      )
-      .textContent = score;
-
-
-    document
-      .getElementById(
-        "gameOver"
-      )
-      .classList
-      .add("show");
-
-  }
-
+ if(gameEnded)return;
+ const available=pieces.filter(Boolean);
+ if(available.length&&available.every(shape=>!hasMove(shape))){
+  gameEnded=true;
+  setTimeout(()=>{
+   $("finalScore").textContent=score;
+   $("gameOver").classList.add("show");
+  },350);
+ }
 }
-
-
-/* =========================================================
-   SIMPLE SOUND
-========================================================= */
-
-let audioCtx = null;
-
-
-function getAudio(){
-
-  if(!settings.sound){
-    return null;
-  }
-
-
-  try{
-
-    if(!audioCtx){
-
-      audioCtx =
-        new (
-          window.AudioContext ||
-          window.webkitAudioContext
-        )();
-
-    }
-
-
-    if(
-      audioCtx.state ===
-      "suspended"
-    ){
-
-      audioCtx.resume();
-
-    }
-
-
-    return audioCtx;
-
-  }catch(e){
-
-    return null;
-
-  }
-
+function hasMove(shape){
+ for(let r=0;r<SIZE;r++)for(let c=0;c<SIZE;c++)if(canPlace(shape,r,c))return true;
+ return false;
 }
-
-
-function beep(
-  frequency,
-  duration,
-  volume
-){
-
-  const ctx =
-    getAudio();
-
-
-  if(!ctx){
-    return;
-  }
-
-
-  const osc =
-    ctx.createOscillator();
-
-  const gain =
-    ctx.createGain();
-
-
-  osc.type = "sine";
-
-  osc.frequency.value =
-    frequency;
-
-
-  gain.gain.setValueAtTime(
-    0.0001,
-    ctx.currentTime
-  );
-
-
-  gain.gain.exponentialRampToValueAtTime(
-    volume,
-    ctx.currentTime+.015
-  );
-
-
-  gain.gain.exponentialRampToValueAtTime(
-    0.0001,
-    ctx.currentTime+duration
-  );
-
-
-  osc.connect(gain);
-
-  gain.connect(
-    ctx.destination
-  );
-
-
-  osc.start();
-
-  osc.stop(
-    ctx.currentTime+duration+.02
-  );
-
+function restart(){
+ grid=Array.from({length:SIZE},()=>Array(SIZE).fill(0));
+ score=0;combo=0;gameEnded=false;powerMode=null;
+ powers={bomb:2,hammer:2,shuffle:1};
+ $("gameOver").classList.remove("show");
+ document.querySelectorAll(".power").forEach(b=>b.classList.remove("active"));
+ newPieces();renderBoard();updateStats();toast("НОВАЯ ИГРА!");
 }
-
-
-function playPlaceSound(){
-
-  beep(
-    300,
-    .08,
-    .035
-  );
-
+function usePower(type){
+ if(gameEnded)return;
+ if(powerMode===type){powerMode=null;$("hint").innerHTML='Перетащи фигуру на поле <b>↓</b>';$(`${type}Btn`).classList.remove("active");return}
+ if(powers[type]<=0){toast("Бонусы закончились");return}
+ powerMode=type;
+ document.querySelectorAll(".power").forEach(b=>b.classList.remove("active"));
+ $(type+"Btn").classList.add("active");
+ $("hint").textContent=type==="bomb"?"Нажми на клетку для взрыва":type==="hammer"?"Нажми на блок, который хочешь убрать":"Нажми «Замена» ещё раз для отмены";
+ toast(type==="bomb"?"ВЫБЕРИ ЦЕНТР ВЗРЫВА":type==="hammer"?"ВЫБЕРИ БЛОК":"Нажми ещё раз для замены");
 }
-
-
-function playClearSound(lines){
-
-  beep(
-    520,
-    .1,
-    .045
-  );
-
-
-  setTimeout(
-    ()=>{
-      beep(
-        760 + lines*80,
-        .16,
-        .055
-      );
-    },
-    70
-  );
-
-}
-
-
-/* =========================================================
-   MUSIC
-========================================================= */
-
-async function searchMusic(){
-
-  const input =
-    document.getElementById(
-      "musicSearch"
-    );
-
-
-  const q =
-    input.value.trim();
-
-
-  if(!q){
-    return;
+board.addEventListener("pointerdown",e=>{
+ if(!powerMode)return;
+ const pos=getBoardCell(e.clientX,e.clientY);if(!pos)return;
+ const type=powerMode;powerMode=null;
+ document.querySelectorAll(".power").forEach(b=>b.classList.remove("active"));
+ if(type==="bomb"){
+  powers.bomb--;
+  let removed=0;
+  for(let r=pos.r-1;r<=pos.r+1;r++)for(let c=pos.c-1;c<=pos.c+1;c++){
+   if(r>=0&&r<SIZE&&c>=0&&c<SIZE&&grid[r][c]){grid[r][c]=0;removed++}
   }
-
-
-  const list =
-    document.getElementById(
-      "songList"
-    );
-
-
-  list.innerHTML =
-    `
-      <div style="
-        color:#777;
-        text-align:center;
-        padding:20px
-      ">
-        Ищу...
-      </div>
-    `;
-
-
-  try{
-
-    const res =
-      await fetch(
-        "https://inv.nadeko.net/api/v1/search?q="+
-        encodeURIComponent(q)+
-        "&type=video"
-      );
-
-
-    const data =
-      await res.json();
-
-
-    const items =
-      (
-        Array.isArray(data)
-        ? data
-        : []
-      ).slice(0,10);
-
-
-    if(!items.length){
-
-      list.innerHTML =
-        `
-          <div style="
-            color:#777;
-            text-align:center;
-            padding:20px
-          ">
-            Ничего не найдено
-          </div>
-        `;
-
-      return;
-
-    }
-
-
-    list.innerHTML = "";
-
-
-    items.forEach(
-      item=>{
-
-        const id =
-          item.videoId;
-
-
-        const title =
-          item.title ||
-          "Без названия";
-
-
-        const channel =
-          item.author ||
-          "";
-
-
-        const thumb =
-          item.videoThumbnails?.[3]?.url ||
-          item.videoThumbnails?.[0]?.url ||
-          (
-            "https://img.youtube.com/vi/"+
-            id+
-            "/mqdefault.jpg"
-          );
-
-
-        const div =
-          document.createElement(
-            "div"
-          );
-
-
-        div.className =
-          "song";
-
-
-        const img =
-          document.createElement(
-            "img"
-          );
-
-        img.className =
-          "song-cover";
-
-        img.src = thumb;
-
-        img.alt = "";
-
-
-        const info =
-          document.createElement(
-            "div"
-          );
-
-        info.className =
-          "song-info";
-
-
-        const titleEl =
-          document.createElement(
-            "div"
-          );
-
-        titleEl.className =
-          "song-title";
-
-        titleEl.textContent =
-          title;
-
-
-        const artistEl =
-          document.createElement(
-            "div"
-          );
-
-        artistEl.className =
-          "song-artist";
-
-        artistEl.textContent =
-          channel;
-
-
-        info.appendChild(
-          titleEl
-        );
-
-        info.appendChild(
-          artistEl
-        );
-
-
-        const btn =
-          document.createElement(
-            "button"
-          );
-
-
-        btn.className =
-          "song-play";
-
-        btn.textContent =
-          "▶";
-
-
-        btn.addEventListener(
-          "click",
-          ()=>{
-            playVideo(
-              id,
-              title,
-              channel,
-              thumb
-            );
-          }
-        );
-
-
-        div.appendChild(
-          img
-        );
-
-        div.appendChild(
-          info
-        );
-
-        div.appendChild(
-          btn
-        );
-
-
-        list.appendChild(
-          div
-        );
-
-      }
-    );
-
-
-  }catch(e){
-
-    list.innerHTML =
-      `
-        <div style="
-          color:#777;
-          text-align:center;
-          padding:20px
-        ">
-          Ошибка поиска
-        </div>
-      `;
-
-  }
-
-}
-
-
-/* =========================================================
-   PLAY VIDEO
-========================================================= */
-
-function playVideo(
-  id,
-  title,
-  artist,
-  thumb
-){
-
-  if(!settings.music){
-
-    return;
-
-  }
-
-
-  document
-    .getElementById(
-      "playerTitle"
-    )
-    .textContent = title;
-
-
-  document
-    .getElementById(
-      "playerArtist"
-    )
-    .textContent = artist;
-
-
-  document
-    .getElementById(
-      "playerCover"
-    )
-    .src =
-      thumb ||
-      (
-        "https://img.youtube.com/vi/"+
-        id+
-        "/mqdefault.jpg"
-      );
-
-
-  document
-    .getElementById(
-      "player"
-    )
-    .classList
-    .add("show");
-
-
-  document
-    .getElementById(
-      "playPauseBtn"
-    )
-    .textContent = "❚❚";
-
-
-  const mini =
-    document.getElementById(
-      "musicMiniBtn"
-    );
-
-
-  mini.innerHTML =
-    `
-      <img
-        src="${
-          thumb ||
-          (
-            "https://img.youtube.com/vi/"+
-            id+
-            "/mqdefault.jpg"
-          )
-        }"
-        alt=""
-      >
-    `;
-
-
-  if(ytPlayer){
-
-    try{
-
-      ytPlayer.loadVideoById(
-        id
-      );
-
-      ytPlayer.playVideo();
-
-    }catch(e){}
-
-  }else{
-
-    ytPlayer =
-      new YT.Player(
-        "youtubePlayer",
-        {
-
-          height:"0",
-
-          width:"0",
-
-          videoId:id,
-
-          playerVars:{
-            autoplay:1,
-            playsinline:1
-          },
-
-          events:{
-
-            onStateChange:e=>{
-
-              if(
-                e.data === 1
-              ){
-
-                document
-                  .getElementById(
-                    "playPauseBtn"
-                  )
-                  .textContent =
-                    "❚❚";
-
-              }
-
-
-              if(
-                e.data === 2 ||
-                e.data === 0
-              ){
-
-                document
-                  .getElementById(
-                    "playPauseBtn"
-                  )
-                  .textContent =
-                    "▶";
-
-              }
-
-            }
-
-          }
-
-        }
-      );
-
-  }
-
-}
-
-
-/* =========================================================
-   MUSIC CONTROLS
-========================================================= */
-
-function togglePlay(){
-
-  if(!ytPlayer){
-    return;
-  }
-
-
-  const state =
-    ytPlayer.getPlayerState();
-
-
-  if(state===1){
-
-    ytPlayer.pauseVideo();
-
-
-    document
-      .getElementById(
-        "playPauseBtn"
-      )
-      .textContent =
-        "▶";
-
-  }else{
-
-    ytPlayer.playVideo();
-
-
-    document
-      .getElementById(
-        "playPauseBtn"
-      )
-      .textContent =
-        "❚❚";
-
-  }
-
-}
-
-
-function stopMusic(){
-
-  if(ytPlayer){
-
-    try{
-
-      ytPlayer.stopVideo();
-
-    }catch(e){}
-
-  }
-
-
-  document
-    .getElementById(
-      "player"
-    )
-    .classList
-    .remove("show");
-
-
-  document
-    .getElementById(
-      "musicMiniBtn"
-    )
-    .innerHTML =
-      "<span>🎵</span>";
-
-}
-
-
-/* =========================================================
-   INIT
-========================================================= */
-
-initBoard();
-
-updateToggles();
-
+  if(removed){addScore(removed*5);particles();sfx("power");toast("БА-БАХ! +"+removed*5)}
+  else toast("Здесь нечего взрывать");
+ }else if(type==="hammer"){
+  if(grid[pos.r][pos.c]){grid[pos.r][pos.c]=0;powers.hammer--;addScore(5);sfx("power");toast("БЛОК УДАЛЁН")}
+  else toast("Здесь нет блока");
+ }
+ $("hint").innerHTML='Перетащи фигуру на поле <b>↓</b>';
+ renderBoard();updateStats();checkGameOver();
+});
+$("bombBtn").onclick=()=>usePower("bomb");
+$("hammerBtn").onclick=()=>usePower("hammer");
+$("shuffleBtn").onclick=()=>{
+ if(powers.shuffle<=0){toast("Замены закончились");return}
+ powers.shuffle--;newPieces();updateStats();sfx("power");toast("ФИГУРЫ ОБНОВЛЕНЫ");
+};
+$("restartBtn").onclick=restart;
+$("settingsBtn").onclick=()=>$("settings").classList.add("show");
+$("closeSettings").onclick=()=>$("settings").classList.remove("show");
+$("musicBtn").onclick=()=>{audioReady();setMusic(!musicOn)};
+$("musicToggle").onchange=e=>{audioReady();setMusic(e.target.checked)};
+$("soundToggle").onchange=e=>soundOn=e.target.checked;
+$("vibrateToggle").onchange=e=>vibrateOn=e.target.checked;
+
+document.addEventListener("visibilitychange",()=>{
+ if(document.hidden)stopMusic();
+ else if(musicOn&&audio)startMusic();
+});
+renderBoard();newPieces();updateStats();
+})();
 </script>
-
 </body>
 </html>
